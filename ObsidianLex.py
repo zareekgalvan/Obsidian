@@ -71,7 +71,7 @@ def t_newline(t):
 # Manejo de errores de lexico
 
 def t_error(t):
-	print("Error de lexico %s" % t.value[0])
+	print("Error de lexico %s en la linea %s" % (t.value[0], t.lexer.lineno))
 	exit(-1)
 	t.lexer.skip(1)
 
