@@ -21,10 +21,10 @@ reserved = {
 # Lista de tokens
 
 tokens = ['PLUS', 'MINUS', 'MULTIPLICATION', 'DIVISION', 'MOD', 'EQUALS', 
-			'EQUALEQUALS', 'DIFFERENT', 'GREATER', 'LESS', 
-			'GREATEROREQUAL', 'LESSOREQUAL', 'AND', 'OR', 'LPAR', 'RPAR', 
-			'LBRACKET', 'RBRACKET','LSQRTBRACKET', 'RSQRTBRACKET', 'COMMA', 'SEMICOLON', 'CTEINT', 
-			'CTEDOUBLE', 'CTEBOOL', 'ID'] + list(reserved.values())
+			'EQUALEQUALS', 'DIFFERENT', 'GREATER', 'LESS', 'GREATEROREQUAL', 
+			'LESSOREQUAL', 'AND', 'OR', 'LPAR', 'RPAR', 'LBRACKET', 
+			'RBRACKET','LSQRTBRACKET', 'RSQRTBRACKET', 'COMMA', 'SEMICOLON', 
+			'CTEINT', 'CTEDOUBLE', 'CTEBOOL', 'ID'] + list(reserved.values())
 
 # Expresiones regulares
 
@@ -51,9 +51,27 @@ t_LSQRTBRACKET = r'\['
 t_RSQRTBRACKET = r'\]'
 t_COMMA = r','
 t_SEMICOLON = r';'
-t_CTEINT = r'-?[0-9]+'
-t_CTEDOUBLE = r'-?[0-9]+\.[0-9]+'
-t_CTEBOOL = r'true|false'
+
+# Expresion regular para las constantes double
+
+def t_CTEDOUBLE(t):
+	r'-?[0-9]+\.[0-9]+'
+	t.value = float(t.value)
+	return t
+
+# Expresion regular para las constantes enteras
+
+def t_CTEINT(t):
+	r'-?[0-9]+'
+	t.value = int(t.value)
+	return t
+
+# Expresion regular para las constantes booleanas
+
+def t_CTEBOOL(t):
+	r'true|false'
+	t.value = bool(t.value)
+	return t
 
 # Expresion regular para los IDs
 

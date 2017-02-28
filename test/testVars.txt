@@ -1,4 +1,4 @@
-
+int x;
 int x = 9;
 int x = 9.0;
 int x = true;

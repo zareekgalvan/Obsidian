@@ -36,20 +36,18 @@ def p_more_vars_aux(p):
 def p_arr(p):
 	'''arr : LSQRTBRACKET const RSQRTBRACKET arr
 			|'''
+			
 def p_var_cte(p):
 	'''var_cte : CTEINT
 			| CTEDOUBLE
-			| ctebool
+			| CTEBOOL
 			| ID arr
 			| func_call'''
 
 def p_const(p):
 	'''const : CTEINT
 			| CTEDOUBLE
-			| ctebool'''
-def p_ctebool(p):
-	'''ctebool : TRUE
-			| FALSE'''
+			| CTEBOOL'''
 
 def p_more_func(p):
 	'''more_func : func
