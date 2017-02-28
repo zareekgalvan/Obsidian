@@ -1,0 +1,51 @@
+PROGRAM  ::= VARS* FUNC* MAIN
+
+VARS ::= VAR_TYPE 'id' ('[' 'cte' ']')* (('=' VAR_CTE) | ) (',' 'id' ('[' 'cte' ']')* (('=' VAR_CTE) | ))* ';'
+
+VAR_TYPE ::= ('bool' | ' int' | 'double')
+
+VAR_CTE ::= ('cte_int' | 'cte_double' | ' cte_bool' | 'id' ('[' 'cte' ']')* | FUNC_CALL)
+
+FUNC ::= 'func' FUNC_TYPE id '(' ( VAR_TYPE 'id' (',' VAR_TYPE 'id')*)? ')' FUNC_BLOCK
+
+FUNC_TYPE ::= ('void' | 'bool' | ' int' | 'double')
+
+FUNC_BLOCK ::= '{' VARS* STATEMENT* ('return' EXP ';')? '}'
+
+STATEMENT ::= ( READ | WRITE | CICLE | CONDITION | ASSIGNATION | FUNC_CALL )
+
+READ ::= 'read' '(' 'id' ('[' EXP ']')* ')' ';'
+
+WRITE ::= 'write' '(' EXP ')' ';'
+
+CICLE ::= 'while' '(' EXPRESSION ')' BLOCK
+
+CONDITION ::= 'if' '(' EXPRESSION ')' BLOCK "else" BLOCK
+
+ASSIGNATION ::= 'id' ('[' EXP ']')* '=' (EXPRESSION | FUNC_CALL) ';'
+
+FUNC_CALL ::= 'id' '(' (EXP (',' EXP)*)? ')' ';'
+
+BLOCK ::= '{' STATEMENT* '}'
+
+EXPRESSION ::= CONC ( (AO CONC)+)?
+
+CONC ::= EXP (COMP EXP)?
+
+EXP ::= TERM (PL TERM)*
+
+TERM ::= FACTOR (DM FACTOR)*
+
+FACTOR ::= ( '(' EXPRESSION ')' ) | VAR_CTE
+
+AO ::= '&&' | '||'
+
+COMP ::= ('<' | '>' | '<=' | '>=' | '==' | '!=')
+
+PL ::= '+' | '-'
+
+DM ::= '*' | '/'
+
+MAIN ::= 'main' MAIN_BLOCK
+
+MAIN_BLOCK ::= '{' VARS* STATEMENT* '}'
