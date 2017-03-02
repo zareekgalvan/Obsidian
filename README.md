@@ -7,3 +7,4 @@ Luis Mario Díaz Rincón			A00343755
 
 
 To run the compiler simply run
+$ test/Obsidian.sh
