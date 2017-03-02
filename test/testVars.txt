@@ -1,5 +1,5 @@
-int x;
-int x = 9;
+int x, y, x, y=x, y;
+int x = 9, x = 9.0, x[1][1][1][1];
 int x = 9.0;
 int x = true;
 int x = x;

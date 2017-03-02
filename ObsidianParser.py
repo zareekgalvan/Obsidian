@@ -36,7 +36,7 @@ def p_more_vars_aux(p):
 def p_arr(p):
 	'''arr : LSQRTBRACKET const RSQRTBRACKET arr
 			|'''
-			
+
 def p_var_cte(p):
 	'''var_cte : CTEINT
 			| CTEDOUBLE
