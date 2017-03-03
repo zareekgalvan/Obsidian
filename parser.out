@@ -2,14 +2,7 @@ Created by PLY version 3.10 (http://www.dabeaz.com/ply)
 
 Unused terminals:
 
-    LPAR
-    RETURN
     LESS
-    READ
-    VOID
-    RPAR
-    LBRACKET
-    WHILE
     MULTIPLICATION
     TRUE
     MINUS
@@ -18,15 +11,11 @@ Unused terminals:
     DIFFERENT
     LESSOREQUAL
     EQUALEQUALS
-    WRITE
-    FUNC
-    IF
     AND
     MAIN
     FALSE
     GREATER
     GREATEROREQUAL
-    RBRACKET
     OR
     MOD
 
@@ -57,69 +46,127 @@ Rule 21    const -> CTEDOUBLE
 Rule 22    const -> CTEBOOL
 Rule 23    more_func -> func
 Rule 24    more_func -> <empty>
-Rule 25    func -> <empty>
-Rule 26    func_call -> <empty>
-Rule 27    main -> <empty>
+Rule 25    func -> FUNC func_type ID LPAR arguments RPAR func_block more_func
+Rule 26    func_type -> VOID
+Rule 27    func_type -> BOOL
+Rule 28    func_type -> INT
+Rule 29    func_type -> DOUBLE
+Rule 30    arguments -> var_type ID more_args
+Rule 31    arguments -> <empty>
+Rule 32    more_args -> COMMA var_type ID more_args
+Rule 33    more_args -> <empty>
+Rule 34    func_block -> LBRACKET more_vars more_statement optional_return RBRACKET
+Rule 35    optional_return -> RETURN exp SEMICOLON
+Rule 36    optional_return -> <empty>
+Rule 37    more_statement -> statement more_statement
+Rule 38    more_statement -> <empty>
+Rule 39    statement -> read
+Rule 40    statement -> write
+Rule 41    statement -> cicle
+Rule 42    statement -> condition
+Rule 43    statement -> assignation
+Rule 44    statement -> func_call
+Rule 45    read -> READ LPAR ID arr_par RPAR SEMICOLON
+Rule 46    write -> WRITE LPAR exp RPAR SEMICOLON
+Rule 47    cicle -> WHILE LPAR expression RPAR block
+Rule 48    condition -> IF LPAR expression RPAR block else_posible
+Rule 49    else_posible -> ELSE block
+Rule 50    else_posible -> <empty>
+Rule 51    assignation -> ID arr_par EQUALS assign SEMICOLON
+Rule 52    assign -> expression
+Rule 53    assign -> func_call
+Rule 54    func_call -> ID LPAR params RPAR SEMICOLON
+Rule 55    params -> exp more_params
+Rule 56    params -> <empty>
+Rule 57    more_params -> COMMA exp more_params
+Rule 58    more_params -> <empty>
+Rule 59    block -> LBRACKET more_statement RBRACKET
+Rule 60    arr_par -> LSQRTBRACKET exp RSQRTBRACKET arr_par
+Rule 61    arr_par -> <empty>
+Rule 62    expression -> <empty>
+Rule 63    exp -> <empty>
+Rule 64    main -> <empty>
 
 Terminals, with rules where they appear
 
 AND                  : 
-BOOL                 : 5
-COMMA                : 11
+BOOL                 : 5 27
+COMMA                : 11 32 57
 CTEBOOL              : 17 22
 CTEDOUBLE            : 16 21
 CTEINT               : 15 20
 DIFFERENT            : 
 DIVISION             : 
-DOUBLE               : 7
+DOUBLE               : 7 29
+ELSE                 : 49
 EQUALEQUALS          : 
-EQUALS               : 9
+EQUALS               : 9 51
 FALSE                : 
-FUNC                 : 
+FUNC                 : 25
 GREATER              : 
 GREATEROREQUAL       : 
-ID                   : 8 18
-IF                   : 
-INT                  : 6
-LBRACKET             : 
+ID                   : 8 18 25 30 32 45 51 54
+IF                   : 48
+INT                  : 6 28
+LBRACKET             : 34 59
 LESS                 : 
 LESSOREQUAL          : 
-LPAR                 : 
-LSQRTBRACKET         : 13
+LPAR                 : 25 45 46 47 48 54
+LSQRTBRACKET         : 13 60
 MAIN                 : 
 MINUS                : 
 MOD                  : 
 MULTIPLICATION       : 
 OR                   : 
 PLUS                 : 
-RBRACKET             : 
-READ                 : 
-RETURN               : 
-RPAR                 : 
-RSQRTBRACKET         : 13
-SEMICOLON            : 4
+RBRACKET             : 34 59
+READ                 : 45
+RETURN               : 35
+RPAR                 : 25 45 46 47 48 54
+RSQRTBRACKET         : 13 60
+SEMICOLON            : 4 35 45 46 51 54
 TRUE                 : 
-VOID                 : 
-WHILE                : 
-WRITE                : 
+VOID                 : 26
+WHILE                : 47
+WRITE                : 46
 error                : 
 
 Nonterminals, with rules where they appear
 
+arguments            : 25
 arr                  : 8 13 18
+arr_par              : 45 51 60
+assign               : 51
+assignation          : 43
+block                : 47 48 49
+cicle                : 41
+condition            : 42
 const                : 13
+else_posible         : 48
+exp                  : 35 46 55 57 60
+expression           : 47 48 52
 func                 : 23
-func_call            : 19
+func_block           : 25
+func_call            : 19 44 53
+func_type            : 25
 main                 : 1
-more_func            : 1
-more_vars            : 1 4
+more_args            : 30 32
+more_func            : 1 25
+more_params          : 55 57
+more_statement       : 34 37 59
+more_vars            : 1 4 34
 more_vars_aux        : 8
+optional_return      : 34
+params               : 54
 program              : 0
+read                 : 39
+statement            : 37
 var_assign           : 8
 var_cte              : 9
-var_type             : 4
+var_type             : 4 30 32
 vars                 : 2
 vars_aux             : 4 11
+write                : 40
 
 Parsing method: LALR
 
@@ -134,6 +181,7 @@ state 0
     (6) var_type -> . INT
     (7) var_type -> . DOUBLE
 
+    FUNC            reduce using rule 3 (more_vars -> .)
     $end            reduce using rule 3 (more_vars -> .)
     BOOL            shift and go to state 6
     INT             shift and go to state 3
@@ -148,6 +196,14 @@ state 1
 
     (2) more_vars -> vars .
 
+    READ            reduce using rule 2 (more_vars -> vars .)
+    WRITE           reduce using rule 2 (more_vars -> vars .)
+    WHILE           reduce using rule 2 (more_vars -> vars .)
+    IF              reduce using rule 2 (more_vars -> vars .)
+    ID              reduce using rule 2 (more_vars -> vars .)
+    RETURN          reduce using rule 2 (more_vars -> vars .)
+    RBRACKET        reduce using rule 2 (more_vars -> vars .)
+    FUNC            reduce using rule 2 (more_vars -> vars .)
     $end            reduce using rule 2 (more_vars -> vars .)
 
 
@@ -192,21 +248,19 @@ state 7
     (1) program -> more_vars . more_func main
     (23) more_func -> . func
     (24) more_func -> .
-    (25) func -> .
+    (25) func -> . FUNC func_type ID LPAR arguments RPAR func_block more_func
 
-  ! reduce/reduce conflict for $end resolved using rule 24 (more_func -> .)
     $end            reduce using rule 24 (more_func -> .)
+    FUNC            shift and go to state 12
 
-  ! $end            [ reduce using rule 25 (func -> .) ]
-
-    func                           shift and go to state 10
     more_func                      shift and go to state 11
+    func                           shift and go to state 10
 
 state 8
 
     (4) vars -> var_type vars_aux . SEMICOLON more_vars
 
-    SEMICOLON       shift and go to state 12
+    SEMICOLON       shift and go to state 13
 
 
 state 9
@@ -215,12 +269,12 @@ state 9
     (13) arr -> . LSQRTBRACKET const RSQRTBRACKET arr
     (14) arr -> .
 
-    LSQRTBRACKET    shift and go to state 14
+    LSQRTBRACKET    shift and go to state 15
     EQUALS          reduce using rule 14 (arr -> .)
     COMMA           reduce using rule 14 (arr -> .)
     SEMICOLON       reduce using rule 14 (arr -> .)
 
-    arr                            shift and go to state 13
+    arr                            shift and go to state 14
 
 state 10
 
@@ -232,13 +286,28 @@ state 10
 state 11
 
     (1) program -> more_vars more_func . main
-    (27) main -> .
+    (64) main -> .
 
-    $end            reduce using rule 27 (main -> .)
+    $end            reduce using rule 64 (main -> .)
 
-    main                           shift and go to state 15
+    main                           shift and go to state 16
 
 state 12
+
+    (25) func -> FUNC . func_type ID LPAR arguments RPAR func_block more_func
+    (26) func_type -> . VOID
+    (27) func_type -> . BOOL
+    (28) func_type -> . INT
+    (29) func_type -> . DOUBLE
+
+    VOID            shift and go to state 19
+    BOOL            shift and go to state 21
+    INT             shift and go to state 20
+    DOUBLE          shift and go to state 18
+
+    func_type                      shift and go to state 17
+
+state 13
 
     (4) vars -> var_type vars_aux SEMICOLON . more_vars
     (2) more_vars -> . vars
@@ -248,55 +317,106 @@ state 12
     (6) var_type -> . INT
     (7) var_type -> . DOUBLE
 
+    FUNC            reduce using rule 3 (more_vars -> .)
     $end            reduce using rule 3 (more_vars -> .)
+    READ            reduce using rule 3 (more_vars -> .)
+    WRITE           reduce using rule 3 (more_vars -> .)
+    WHILE           reduce using rule 3 (more_vars -> .)
+    IF              reduce using rule 3 (more_vars -> .)
+    ID              reduce using rule 3 (more_vars -> .)
+    RETURN          reduce using rule 3 (more_vars -> .)
+    RBRACKET        reduce using rule 3 (more_vars -> .)
     BOOL            shift and go to state 6
     INT             shift and go to state 3
     DOUBLE          shift and go to state 4
 
     vars                           shift and go to state 1
-    more_vars                      shift and go to state 16
+    more_vars                      shift and go to state 22
     var_type                       shift and go to state 2
 
-state 13
+state 14
 
     (8) vars_aux -> ID arr . var_assign more_vars_aux
     (9) var_assign -> . EQUALS var_cte
     (10) var_assign -> .
 
-    EQUALS          shift and go to state 17
+    EQUALS          shift and go to state 23
     COMMA           reduce using rule 10 (var_assign -> .)
     SEMICOLON       reduce using rule 10 (var_assign -> .)
 
-    var_assign                     shift and go to state 18
+    var_assign                     shift and go to state 24
 
-state 14
+state 15
 
     (13) arr -> LSQRTBRACKET . const RSQRTBRACKET arr
     (20) const -> . CTEINT
     (21) const -> . CTEDOUBLE
     (22) const -> . CTEBOOL
 
-    CTEINT          shift and go to state 22
-    CTEDOUBLE       shift and go to state 19
-    CTEBOOL         shift and go to state 21
+    CTEINT          shift and go to state 28
+    CTEDOUBLE       shift and go to state 25
+    CTEBOOL         shift and go to state 27
 
-    const                          shift and go to state 20
+    const                          shift and go to state 26
 
-state 15
+state 16
 
     (1) program -> more_vars more_func main .
 
     $end            reduce using rule 1 (program -> more_vars more_func main .)
 
 
-state 16
+state 17
+
+    (25) func -> FUNC func_type . ID LPAR arguments RPAR func_block more_func
+
+    ID              shift and go to state 29
+
+
+state 18
+
+    (29) func_type -> DOUBLE .
+
+    ID              reduce using rule 29 (func_type -> DOUBLE .)
+
+
+state 19
+
+    (26) func_type -> VOID .
+
+    ID              reduce using rule 26 (func_type -> VOID .)
+
+
+state 20
+
+    (28) func_type -> INT .
+
+    ID              reduce using rule 28 (func_type -> INT .)
+
+
+state 21
+
+    (27) func_type -> BOOL .
+
+    ID              reduce using rule 27 (func_type -> BOOL .)
+
+
+state 22
 
     (4) vars -> var_type vars_aux SEMICOLON more_vars .
 
+    FUNC            reduce using rule 4 (vars -> var_type vars_aux SEMICOLON more_vars .)
     $end            reduce using rule 4 (vars -> var_type vars_aux SEMICOLON more_vars .)
+    READ            reduce using rule 4 (vars -> var_type vars_aux SEMICOLON more_vars .)
+    WRITE           reduce using rule 4 (vars -> var_type vars_aux SEMICOLON more_vars .)
+    WHILE           reduce using rule 4 (vars -> var_type vars_aux SEMICOLON more_vars .)
+    IF              reduce using rule 4 (vars -> var_type vars_aux SEMICOLON more_vars .)
+    ID              reduce using rule 4 (vars -> var_type vars_aux SEMICOLON more_vars .)
+    RETURN          reduce using rule 4 (vars -> var_type vars_aux SEMICOLON more_vars .)
+    RBRACKET        reduce using rule 4 (vars -> var_type vars_aux SEMICOLON more_vars .)
 
 
-state 17
+state 23
 
     (9) var_assign -> EQUALS . var_cte
     (15) var_cte -> . CTEINT
@@ -304,58 +424,63 @@ state 17
     (17) var_cte -> . CTEBOOL
     (18) var_cte -> . ID arr
     (19) var_cte -> . func_call
-    (26) func_call -> .
+    (54) func_call -> . ID LPAR params RPAR SEMICOLON
 
-    CTEINT          shift and go to state 26
-    CTEDOUBLE       shift and go to state 23
-    CTEBOOL         shift and go to state 25
-    ID              shift and go to state 28
-    COMMA           reduce using rule 26 (func_call -> .)
-    SEMICOLON       reduce using rule 26 (func_call -> .)
+    CTEINT          shift and go to state 33
+    CTEDOUBLE       shift and go to state 30
+    CTEBOOL         shift and go to state 32
+    ID              shift and go to state 35
 
-    func_call                      shift and go to state 24
-    var_cte                        shift and go to state 27
+    func_call                      shift and go to state 31
+    var_cte                        shift and go to state 34
 
-state 18
+state 24
 
     (8) vars_aux -> ID arr var_assign . more_vars_aux
     (11) more_vars_aux -> . COMMA vars_aux
     (12) more_vars_aux -> .
 
-    COMMA           shift and go to state 30
+    COMMA           shift and go to state 37
     SEMICOLON       reduce using rule 12 (more_vars_aux -> .)
 
-    more_vars_aux                  shift and go to state 29
+    more_vars_aux                  shift and go to state 36
 
-state 19
+state 25
 
     (21) const -> CTEDOUBLE .
 
     RSQRTBRACKET    reduce using rule 21 (const -> CTEDOUBLE .)
 
 
-state 20
+state 26
 
     (13) arr -> LSQRTBRACKET const . RSQRTBRACKET arr
 
-    RSQRTBRACKET    shift and go to state 31
+    RSQRTBRACKET    shift and go to state 38
 
 
-state 21
+state 27
 
     (22) const -> CTEBOOL .
 
     RSQRTBRACKET    reduce using rule 22 (const -> CTEBOOL .)
 
 
-state 22
+state 28
 
     (20) const -> CTEINT .
 
     RSQRTBRACKET    reduce using rule 20 (const -> CTEINT .)
 
 
-state 23
+state 29
+
+    (25) func -> FUNC func_type ID . LPAR arguments RPAR func_block more_func
+
+    LPAR            shift and go to state 39
+
+
+state 30
 
     (16) var_cte -> CTEDOUBLE .
 
@@ -363,7 +488,7 @@ state 23
     SEMICOLON       reduce using rule 16 (var_cte -> CTEDOUBLE .)
 
 
-state 24
+state 31
 
     (19) var_cte -> func_call .
 
@@ -371,7 +496,7 @@ state 24
     SEMICOLON       reduce using rule 19 (var_cte -> func_call .)
 
 
-state 25
+state 32
 
     (17) var_cte -> CTEBOOL .
 
@@ -379,7 +504,7 @@ state 25
     SEMICOLON       reduce using rule 17 (var_cte -> CTEBOOL .)
 
 
-state 26
+state 33
 
     (15) var_cte -> CTEINT .
 
@@ -387,7 +512,7 @@ state 26
     SEMICOLON       reduce using rule 15 (var_cte -> CTEINT .)
 
 
-state 27
+state 34
 
     (9) var_assign -> EQUALS var_cte .
 
@@ -395,48 +520,83 @@ state 27
     SEMICOLON       reduce using rule 9 (var_assign -> EQUALS var_cte .)
 
 
-state 28
+state 35
 
     (18) var_cte -> ID . arr
+    (54) func_call -> ID . LPAR params RPAR SEMICOLON
     (13) arr -> . LSQRTBRACKET const RSQRTBRACKET arr
     (14) arr -> .
 
-    LSQRTBRACKET    shift and go to state 14
+    LPAR            shift and go to state 40
+    LSQRTBRACKET    shift and go to state 15
     COMMA           reduce using rule 14 (arr -> .)
     SEMICOLON       reduce using rule 14 (arr -> .)
 
-    arr                            shift and go to state 32
+    arr                            shift and go to state 41
 
-state 29
+state 36
 
     (8) vars_aux -> ID arr var_assign more_vars_aux .
 
     SEMICOLON       reduce using rule 8 (vars_aux -> ID arr var_assign more_vars_aux .)
 
 
-state 30
+state 37
 
     (11) more_vars_aux -> COMMA . vars_aux
     (8) vars_aux -> . ID arr var_assign more_vars_aux
 
     ID              shift and go to state 9
 
-    vars_aux                       shift and go to state 33
+    vars_aux                       shift and go to state 42
 
-state 31
+state 38
 
     (13) arr -> LSQRTBRACKET const RSQRTBRACKET . arr
     (13) arr -> . LSQRTBRACKET const RSQRTBRACKET arr
     (14) arr -> .
 
-    LSQRTBRACKET    shift and go to state 14
+    LSQRTBRACKET    shift and go to state 15
     EQUALS          reduce using rule 14 (arr -> .)
     COMMA           reduce using rule 14 (arr -> .)
     SEMICOLON       reduce using rule 14 (arr -> .)
 
-    arr                            shift and go to state 34
+    arr                            shift and go to state 43
 
-state 32
+state 39
+
+    (25) func -> FUNC func_type ID LPAR . arguments RPAR func_block more_func
+    (30) arguments -> . var_type ID more_args
+    (31) arguments -> .
+    (5) var_type -> . BOOL
+    (6) var_type -> . INT
+    (7) var_type -> . DOUBLE
+
+    RPAR            reduce using rule 31 (arguments -> .)
+    BOOL            shift and go to state 6
+    INT             shift and go to state 3
+    DOUBLE          shift and go to state 4
+
+    var_type                       shift and go to state 44
+    arguments                      shift and go to state 45
+
+state 40
+
+    (54) func_call -> ID LPAR . params RPAR SEMICOLON
+    (55) params -> . exp more_params
+    (56) params -> .
+    (63) exp -> .
+
+  ! reduce/reduce conflict for RPAR resolved using rule 56 (params -> .)
+    RPAR            reduce using rule 56 (params -> .)
+    COMMA           reduce using rule 63 (exp -> .)
+
+  ! RPAR            [ reduce using rule 63 (exp -> .) ]
+
+    params                         shift and go to state 46
+    exp                            shift and go to state 47
+
+state 41
 
     (18) var_cte -> ID arr .
 
@@ -444,24 +604,818 @@ state 32
     SEMICOLON       reduce using rule 18 (var_cte -> ID arr .)
 
 
-state 33
+state 42
 
     (11) more_vars_aux -> COMMA vars_aux .
 
     SEMICOLON       reduce using rule 11 (more_vars_aux -> COMMA vars_aux .)
 
 
-state 34
+state 43
 
     (13) arr -> LSQRTBRACKET const RSQRTBRACKET arr .
 
+    EQUALS          reduce using rule 13 (arr -> LSQRTBRACKET const RSQRTBRACKET arr .)
     COMMA           reduce using rule 13 (arr -> LSQRTBRACKET const RSQRTBRACKET arr .)
     SEMICOLON       reduce using rule 13 (arr -> LSQRTBRACKET const RSQRTBRACKET arr .)
-    EQUALS          reduce using rule 13 (arr -> LSQRTBRACKET const RSQRTBRACKET arr .)
+
+
+state 44
+
+    (30) arguments -> var_type . ID more_args
+
+    ID              shift and go to state 48
+
+
+state 45
+
+    (25) func -> FUNC func_type ID LPAR arguments . RPAR func_block more_func
+
+    RPAR            shift and go to state 49
+
+
+state 46
+
+    (54) func_call -> ID LPAR params . RPAR SEMICOLON
+
+    RPAR            shift and go to state 50
+
+
+state 47
+
+    (55) params -> exp . more_params
+    (57) more_params -> . COMMA exp more_params
+    (58) more_params -> .
+
+    COMMA           shift and go to state 52
+    RPAR            reduce using rule 58 (more_params -> .)
+
+    more_params                    shift and go to state 51
+
+state 48
+
+    (30) arguments -> var_type ID . more_args
+    (32) more_args -> . COMMA var_type ID more_args
+    (33) more_args -> .
+
+    COMMA           shift and go to state 54
+    RPAR            reduce using rule 33 (more_args -> .)
+
+    more_args                      shift and go to state 53
+
+state 49
+
+    (25) func -> FUNC func_type ID LPAR arguments RPAR . func_block more_func
+    (34) func_block -> . LBRACKET more_vars more_statement optional_return RBRACKET
+
+    LBRACKET        shift and go to state 56
+
+    func_block                     shift and go to state 55
+
+state 50
+
+    (54) func_call -> ID LPAR params RPAR . SEMICOLON
+
+    SEMICOLON       shift and go to state 57
+
+
+state 51
+
+    (55) params -> exp more_params .
+
+    RPAR            reduce using rule 55 (params -> exp more_params .)
+
+
+state 52
+
+    (57) more_params -> COMMA . exp more_params
+    (63) exp -> .
+
+    COMMA           reduce using rule 63 (exp -> .)
+    RPAR            reduce using rule 63 (exp -> .)
+
+    exp                            shift and go to state 58
+
+state 53
+
+    (30) arguments -> var_type ID more_args .
+
+    RPAR            reduce using rule 30 (arguments -> var_type ID more_args .)
+
+
+state 54
+
+    (32) more_args -> COMMA . var_type ID more_args
+    (5) var_type -> . BOOL
+    (6) var_type -> . INT
+    (7) var_type -> . DOUBLE
+
+    BOOL            shift and go to state 6
+    INT             shift and go to state 3
+    DOUBLE          shift and go to state 4
+
+    var_type                       shift and go to state 59
+
+state 55
+
+    (25) func -> FUNC func_type ID LPAR arguments RPAR func_block . more_func
+    (23) more_func -> . func
+    (24) more_func -> .
+    (25) func -> . FUNC func_type ID LPAR arguments RPAR func_block more_func
+
+    $end            reduce using rule 24 (more_func -> .)
+    FUNC            shift and go to state 12
+
+    func                           shift and go to state 10
+    more_func                      shift and go to state 60
+
+state 56
+
+    (34) func_block -> LBRACKET . more_vars more_statement optional_return RBRACKET
+    (2) more_vars -> . vars
+    (3) more_vars -> .
+    (4) vars -> . var_type vars_aux SEMICOLON more_vars
+    (5) var_type -> . BOOL
+    (6) var_type -> . INT
+    (7) var_type -> . DOUBLE
+
+    READ            reduce using rule 3 (more_vars -> .)
+    WRITE           reduce using rule 3 (more_vars -> .)
+    WHILE           reduce using rule 3 (more_vars -> .)
+    IF              reduce using rule 3 (more_vars -> .)
+    ID              reduce using rule 3 (more_vars -> .)
+    RETURN          reduce using rule 3 (more_vars -> .)
+    RBRACKET        reduce using rule 3 (more_vars -> .)
+    BOOL            shift and go to state 6
+    INT             shift and go to state 3
+    DOUBLE          shift and go to state 4
+
+    var_type                       shift and go to state 2
+    vars                           shift and go to state 1
+    more_vars                      shift and go to state 61
+
+state 57
+
+    (54) func_call -> ID LPAR params RPAR SEMICOLON .
+
+    READ            reduce using rule 54 (func_call -> ID LPAR params RPAR SEMICOLON .)
+    WRITE           reduce using rule 54 (func_call -> ID LPAR params RPAR SEMICOLON .)
+    WHILE           reduce using rule 54 (func_call -> ID LPAR params RPAR SEMICOLON .)
+    IF              reduce using rule 54 (func_call -> ID LPAR params RPAR SEMICOLON .)
+    ID              reduce using rule 54 (func_call -> ID LPAR params RPAR SEMICOLON .)
+    RETURN          reduce using rule 54 (func_call -> ID LPAR params RPAR SEMICOLON .)
+    RBRACKET        reduce using rule 54 (func_call -> ID LPAR params RPAR SEMICOLON .)
+    SEMICOLON       reduce using rule 54 (func_call -> ID LPAR params RPAR SEMICOLON .)
+    COMMA           reduce using rule 54 (func_call -> ID LPAR params RPAR SEMICOLON .)
+
+
+state 58
+
+    (57) more_params -> COMMA exp . more_params
+    (57) more_params -> . COMMA exp more_params
+    (58) more_params -> .
+
+    COMMA           shift and go to state 52
+    RPAR            reduce using rule 58 (more_params -> .)
+
+    more_params                    shift and go to state 62
+
+state 59
+
+    (32) more_args -> COMMA var_type . ID more_args
+
+    ID              shift and go to state 63
+
+
+state 60
+
+    (25) func -> FUNC func_type ID LPAR arguments RPAR func_block more_func .
+
+    $end            reduce using rule 25 (func -> FUNC func_type ID LPAR arguments RPAR func_block more_func .)
+
+
+state 61
+
+    (34) func_block -> LBRACKET more_vars . more_statement optional_return RBRACKET
+    (37) more_statement -> . statement more_statement
+    (38) more_statement -> .
+    (39) statement -> . read
+    (40) statement -> . write
+    (41) statement -> . cicle
+    (42) statement -> . condition
+    (43) statement -> . assignation
+    (44) statement -> . func_call
+    (45) read -> . READ LPAR ID arr_par RPAR SEMICOLON
+    (46) write -> . WRITE LPAR exp RPAR SEMICOLON
+    (47) cicle -> . WHILE LPAR expression RPAR block
+    (48) condition -> . IF LPAR expression RPAR block else_posible
+    (51) assignation -> . ID arr_par EQUALS assign SEMICOLON
+    (54) func_call -> . ID LPAR params RPAR SEMICOLON
+
+    RETURN          reduce using rule 38 (more_statement -> .)
+    RBRACKET        reduce using rule 38 (more_statement -> .)
+    READ            shift and go to state 64
+    WRITE           shift and go to state 70
+    WHILE           shift and go to state 65
+    IF              shift and go to state 73
+    ID              shift and go to state 71
+
+    func_call                      shift and go to state 74
+    assignation                    shift and go to state 75
+    read                           shift and go to state 69
+    more_statement                 shift and go to state 76
+    write                          shift and go to state 67
+    condition                      shift and go to state 72
+    statement                      shift and go to state 68
+    cicle                          shift and go to state 66
+
+state 62
+
+    (57) more_params -> COMMA exp more_params .
+
+    RPAR            reduce using rule 57 (more_params -> COMMA exp more_params .)
+
+
+state 63
+
+    (32) more_args -> COMMA var_type ID . more_args
+    (32) more_args -> . COMMA var_type ID more_args
+    (33) more_args -> .
+
+    COMMA           shift and go to state 54
+    RPAR            reduce using rule 33 (more_args -> .)
+
+    more_args                      shift and go to state 77
+
+state 64
+
+    (45) read -> READ . LPAR ID arr_par RPAR SEMICOLON
+
+    LPAR            shift and go to state 78
+
+
+state 65
+
+    (47) cicle -> WHILE . LPAR expression RPAR block
+
+    LPAR            shift and go to state 79
+
+
+state 66
+
+    (41) statement -> cicle .
+
+    READ            reduce using rule 41 (statement -> cicle .)
+    WRITE           reduce using rule 41 (statement -> cicle .)
+    WHILE           reduce using rule 41 (statement -> cicle .)
+    IF              reduce using rule 41 (statement -> cicle .)
+    ID              reduce using rule 41 (statement -> cicle .)
+    RETURN          reduce using rule 41 (statement -> cicle .)
+    RBRACKET        reduce using rule 41 (statement -> cicle .)
+
+
+state 67
+
+    (40) statement -> write .
+
+    READ            reduce using rule 40 (statement -> write .)
+    WRITE           reduce using rule 40 (statement -> write .)
+    WHILE           reduce using rule 40 (statement -> write .)
+    IF              reduce using rule 40 (statement -> write .)
+    ID              reduce using rule 40 (statement -> write .)
+    RETURN          reduce using rule 40 (statement -> write .)
+    RBRACKET        reduce using rule 40 (statement -> write .)
+
+
+state 68
+
+    (37) more_statement -> statement . more_statement
+    (37) more_statement -> . statement more_statement
+    (38) more_statement -> .
+    (39) statement -> . read
+    (40) statement -> . write
+    (41) statement -> . cicle
+    (42) statement -> . condition
+    (43) statement -> . assignation
+    (44) statement -> . func_call
+    (45) read -> . READ LPAR ID arr_par RPAR SEMICOLON
+    (46) write -> . WRITE LPAR exp RPAR SEMICOLON
+    (47) cicle -> . WHILE LPAR expression RPAR block
+    (48) condition -> . IF LPAR expression RPAR block else_posible
+    (51) assignation -> . ID arr_par EQUALS assign SEMICOLON
+    (54) func_call -> . ID LPAR params RPAR SEMICOLON
+
+    RETURN          reduce using rule 38 (more_statement -> .)
+    RBRACKET        reduce using rule 38 (more_statement -> .)
+    READ            shift and go to state 64
+    WRITE           shift and go to state 70
+    WHILE           shift and go to state 65
+    IF              shift and go to state 73
+    ID              shift and go to state 71
+
+    func_call                      shift and go to state 74
+    assignation                    shift and go to state 75
+    read                           shift and go to state 69
+    cicle                          shift and go to state 66
+    write                          shift and go to state 67
+    statement                      shift and go to state 68
+    more_statement                 shift and go to state 80
+    condition                      shift and go to state 72
+
+state 69
+
+    (39) statement -> read .
+
+    READ            reduce using rule 39 (statement -> read .)
+    WRITE           reduce using rule 39 (statement -> read .)
+    WHILE           reduce using rule 39 (statement -> read .)
+    IF              reduce using rule 39 (statement -> read .)
+    ID              reduce using rule 39 (statement -> read .)
+    RETURN          reduce using rule 39 (statement -> read .)
+    RBRACKET        reduce using rule 39 (statement -> read .)
+
+
+state 70
+
+    (46) write -> WRITE . LPAR exp RPAR SEMICOLON
+
+    LPAR            shift and go to state 81
+
+
+state 71
+
+    (51) assignation -> ID . arr_par EQUALS assign SEMICOLON
+    (54) func_call -> ID . LPAR params RPAR SEMICOLON
+    (60) arr_par -> . LSQRTBRACKET exp RSQRTBRACKET arr_par
+    (61) arr_par -> .
+
+    LPAR            shift and go to state 40
+    LSQRTBRACKET    shift and go to state 82
+    EQUALS          reduce using rule 61 (arr_par -> .)
+
+    arr_par                        shift and go to state 83
+
+state 72
+
+    (42) statement -> condition .
+
+    READ            reduce using rule 42 (statement -> condition .)
+    WRITE           reduce using rule 42 (statement -> condition .)
+    WHILE           reduce using rule 42 (statement -> condition .)
+    IF              reduce using rule 42 (statement -> condition .)
+    ID              reduce using rule 42 (statement -> condition .)
+    RETURN          reduce using rule 42 (statement -> condition .)
+    RBRACKET        reduce using rule 42 (statement -> condition .)
+
+
+state 73
+
+    (48) condition -> IF . LPAR expression RPAR block else_posible
+
+    LPAR            shift and go to state 84
+
+
+state 74
+
+    (44) statement -> func_call .
+
+    READ            reduce using rule 44 (statement -> func_call .)
+    WRITE           reduce using rule 44 (statement -> func_call .)
+    WHILE           reduce using rule 44 (statement -> func_call .)
+    IF              reduce using rule 44 (statement -> func_call .)
+    ID              reduce using rule 44 (statement -> func_call .)
+    RETURN          reduce using rule 44 (statement -> func_call .)
+    RBRACKET        reduce using rule 44 (statement -> func_call .)
+
+
+state 75
+
+    (43) statement -> assignation .
+
+    READ            reduce using rule 43 (statement -> assignation .)
+    WRITE           reduce using rule 43 (statement -> assignation .)
+    WHILE           reduce using rule 43 (statement -> assignation .)
+    IF              reduce using rule 43 (statement -> assignation .)
+    ID              reduce using rule 43 (statement -> assignation .)
+    RETURN          reduce using rule 43 (statement -> assignation .)
+    RBRACKET        reduce using rule 43 (statement -> assignation .)
+
+
+state 76
+
+    (34) func_block -> LBRACKET more_vars more_statement . optional_return RBRACKET
+    (35) optional_return -> . RETURN exp SEMICOLON
+    (36) optional_return -> .
+
+    RETURN          shift and go to state 85
+    RBRACKET        reduce using rule 36 (optional_return -> .)
+
+    optional_return                shift and go to state 86
+
+state 77
+
+    (32) more_args -> COMMA var_type ID more_args .
+
+    RPAR            reduce using rule 32 (more_args -> COMMA var_type ID more_args .)
+
+
+state 78
+
+    (45) read -> READ LPAR . ID arr_par RPAR SEMICOLON
+
+    ID              shift and go to state 87
+
+
+state 79
+
+    (47) cicle -> WHILE LPAR . expression RPAR block
+    (62) expression -> .
+
+    RPAR            reduce using rule 62 (expression -> .)
+
+    expression                     shift and go to state 88
+
+state 80
+
+    (37) more_statement -> statement more_statement .
+
+    RBRACKET        reduce using rule 37 (more_statement -> statement more_statement .)
+    RETURN          reduce using rule 37 (more_statement -> statement more_statement .)
+
+
+state 81
+
+    (46) write -> WRITE LPAR . exp RPAR SEMICOLON
+    (63) exp -> .
+
+    RPAR            reduce using rule 63 (exp -> .)
+
+    exp                            shift and go to state 89
+
+state 82
+
+    (60) arr_par -> LSQRTBRACKET . exp RSQRTBRACKET arr_par
+    (63) exp -> .
+
+    RSQRTBRACKET    reduce using rule 63 (exp -> .)
+
+    exp                            shift and go to state 90
+
+state 83
+
+    (51) assignation -> ID arr_par . EQUALS assign SEMICOLON
+
+    EQUALS          shift and go to state 91
+
+
+state 84
+
+    (48) condition -> IF LPAR . expression RPAR block else_posible
+    (62) expression -> .
+
+    RPAR            reduce using rule 62 (expression -> .)
+
+    expression                     shift and go to state 92
+
+state 85
+
+    (35) optional_return -> RETURN . exp SEMICOLON
+    (63) exp -> .
+
+    SEMICOLON       reduce using rule 63 (exp -> .)
+
+    exp                            shift and go to state 93
+
+state 86
+
+    (34) func_block -> LBRACKET more_vars more_statement optional_return . RBRACKET
+
+    RBRACKET        shift and go to state 94
+
+
+state 87
+
+    (45) read -> READ LPAR ID . arr_par RPAR SEMICOLON
+    (60) arr_par -> . LSQRTBRACKET exp RSQRTBRACKET arr_par
+    (61) arr_par -> .
+
+    LSQRTBRACKET    shift and go to state 82
+    RPAR            reduce using rule 61 (arr_par -> .)
+
+    arr_par                        shift and go to state 95
+
+state 88
+
+    (47) cicle -> WHILE LPAR expression . RPAR block
+
+    RPAR            shift and go to state 96
+
+
+state 89
+
+    (46) write -> WRITE LPAR exp . RPAR SEMICOLON
+
+    RPAR            shift and go to state 97
+
+
+state 90
+
+    (60) arr_par -> LSQRTBRACKET exp . RSQRTBRACKET arr_par
+
+    RSQRTBRACKET    shift and go to state 98
+
+
+state 91
+
+    (51) assignation -> ID arr_par EQUALS . assign SEMICOLON
+    (52) assign -> . expression
+    (53) assign -> . func_call
+    (62) expression -> .
+    (54) func_call -> . ID LPAR params RPAR SEMICOLON
+
+    SEMICOLON       reduce using rule 62 (expression -> .)
+    ID              shift and go to state 100
+
+    func_call                      shift and go to state 99
+    expression                     shift and go to state 101
+    assign                         shift and go to state 102
+
+state 92
+
+    (48) condition -> IF LPAR expression . RPAR block else_posible
+
+    RPAR            shift and go to state 103
+
+
+state 93
+
+    (35) optional_return -> RETURN exp . SEMICOLON
+
+    SEMICOLON       shift and go to state 104
+
+
+state 94
+
+    (34) func_block -> LBRACKET more_vars more_statement optional_return RBRACKET .
+
+    FUNC            reduce using rule 34 (func_block -> LBRACKET more_vars more_statement optional_return RBRACKET .)
+    $end            reduce using rule 34 (func_block -> LBRACKET more_vars more_statement optional_return RBRACKET .)
+
+
+state 95
+
+    (45) read -> READ LPAR ID arr_par . RPAR SEMICOLON
+
+    RPAR            shift and go to state 105
+
+
+state 96
+
+    (47) cicle -> WHILE LPAR expression RPAR . block
+    (59) block -> . LBRACKET more_statement RBRACKET
+
+    LBRACKET        shift and go to state 106
+
+    block                          shift and go to state 107
+
+state 97
+
+    (46) write -> WRITE LPAR exp RPAR . SEMICOLON
+
+    SEMICOLON       shift and go to state 108
+
+
+state 98
+
+    (60) arr_par -> LSQRTBRACKET exp RSQRTBRACKET . arr_par
+    (60) arr_par -> . LSQRTBRACKET exp RSQRTBRACKET arr_par
+    (61) arr_par -> .
+
+    LSQRTBRACKET    shift and go to state 82
+    EQUALS          reduce using rule 61 (arr_par -> .)
+    RPAR            reduce using rule 61 (arr_par -> .)
+
+    arr_par                        shift and go to state 109
+
+state 99
+
+    (53) assign -> func_call .
+
+    SEMICOLON       reduce using rule 53 (assign -> func_call .)
+
+
+state 100
+
+    (54) func_call -> ID . LPAR params RPAR SEMICOLON
+
+    LPAR            shift and go to state 40
+
+
+state 101
+
+    (52) assign -> expression .
+
+    SEMICOLON       reduce using rule 52 (assign -> expression .)
+
+
+state 102
+
+    (51) assignation -> ID arr_par EQUALS assign . SEMICOLON
+
+    SEMICOLON       shift and go to state 110
+
+
+state 103
+
+    (48) condition -> IF LPAR expression RPAR . block else_posible
+    (59) block -> . LBRACKET more_statement RBRACKET
+
+    LBRACKET        shift and go to state 106
+
+    block                          shift and go to state 111
+
+state 104
+
+    (35) optional_return -> RETURN exp SEMICOLON .
+
+    RBRACKET        reduce using rule 35 (optional_return -> RETURN exp SEMICOLON .)
+
+
+state 105
+
+    (45) read -> READ LPAR ID arr_par RPAR . SEMICOLON
+
+    SEMICOLON       shift and go to state 112
+
+
+state 106
+
+    (59) block -> LBRACKET . more_statement RBRACKET
+    (37) more_statement -> . statement more_statement
+    (38) more_statement -> .
+    (39) statement -> . read
+    (40) statement -> . write
+    (41) statement -> . cicle
+    (42) statement -> . condition
+    (43) statement -> . assignation
+    (44) statement -> . func_call
+    (45) read -> . READ LPAR ID arr_par RPAR SEMICOLON
+    (46) write -> . WRITE LPAR exp RPAR SEMICOLON
+    (47) cicle -> . WHILE LPAR expression RPAR block
+    (48) condition -> . IF LPAR expression RPAR block else_posible
+    (51) assignation -> . ID arr_par EQUALS assign SEMICOLON
+    (54) func_call -> . ID LPAR params RPAR SEMICOLON
+
+    RBRACKET        reduce using rule 38 (more_statement -> .)
+    READ            shift and go to state 64
+    WRITE           shift and go to state 70
+    WHILE           shift and go to state 65
+    IF              shift and go to state 73
+    ID              shift and go to state 71
+
+    func_call                      shift and go to state 74
+    assignation                    shift and go to state 75
+    read                           shift and go to state 69
+    cicle                          shift and go to state 66
+    write                          shift and go to state 67
+    statement                      shift and go to state 68
+    more_statement                 shift and go to state 113
+    condition                      shift and go to state 72
+
+state 107
+
+    (47) cicle -> WHILE LPAR expression RPAR block .
+
+    READ            reduce using rule 47 (cicle -> WHILE LPAR expression RPAR block .)
+    WRITE           reduce using rule 47 (cicle -> WHILE LPAR expression RPAR block .)
+    WHILE           reduce using rule 47 (cicle -> WHILE LPAR expression RPAR block .)
+    IF              reduce using rule 47 (cicle -> WHILE LPAR expression RPAR block .)
+    ID              reduce using rule 47 (cicle -> WHILE LPAR expression RPAR block .)
+    RETURN          reduce using rule 47 (cicle -> WHILE LPAR expression RPAR block .)
+    RBRACKET        reduce using rule 47 (cicle -> WHILE LPAR expression RPAR block .)
+
+
+state 108
+
+    (46) write -> WRITE LPAR exp RPAR SEMICOLON .
+
+    READ            reduce using rule 46 (write -> WRITE LPAR exp RPAR SEMICOLON .)
+    WRITE           reduce using rule 46 (write -> WRITE LPAR exp RPAR SEMICOLON .)
+    WHILE           reduce using rule 46 (write -> WRITE LPAR exp RPAR SEMICOLON .)
+    IF              reduce using rule 46 (write -> WRITE LPAR exp RPAR SEMICOLON .)
+    ID              reduce using rule 46 (write -> WRITE LPAR exp RPAR SEMICOLON .)
+    RETURN          reduce using rule 46 (write -> WRITE LPAR exp RPAR SEMICOLON .)
+    RBRACKET        reduce using rule 46 (write -> WRITE LPAR exp RPAR SEMICOLON .)
+
+
+state 109
+
+    (60) arr_par -> LSQRTBRACKET exp RSQRTBRACKET arr_par .
+
+    EQUALS          reduce using rule 60 (arr_par -> LSQRTBRACKET exp RSQRTBRACKET arr_par .)
+    RPAR            reduce using rule 60 (arr_par -> LSQRTBRACKET exp RSQRTBRACKET arr_par .)
+
+
+state 110
+
+    (51) assignation -> ID arr_par EQUALS assign SEMICOLON .
+
+    READ            reduce using rule 51 (assignation -> ID arr_par EQUALS assign SEMICOLON .)
+    WRITE           reduce using rule 51 (assignation -> ID arr_par EQUALS assign SEMICOLON .)
+    WHILE           reduce using rule 51 (assignation -> ID arr_par EQUALS assign SEMICOLON .)
+    IF              reduce using rule 51 (assignation -> ID arr_par EQUALS assign SEMICOLON .)
+    ID              reduce using rule 51 (assignation -> ID arr_par EQUALS assign SEMICOLON .)
+    RETURN          reduce using rule 51 (assignation -> ID arr_par EQUALS assign SEMICOLON .)
+    RBRACKET        reduce using rule 51 (assignation -> ID arr_par EQUALS assign SEMICOLON .)
+
+
+state 111
+
+    (48) condition -> IF LPAR expression RPAR block . else_posible
+    (49) else_posible -> . ELSE block
+    (50) else_posible -> .
+
+    ELSE            shift and go to state 115
+    READ            reduce using rule 50 (else_posible -> .)
+    WRITE           reduce using rule 50 (else_posible -> .)
+    WHILE           reduce using rule 50 (else_posible -> .)
+    IF              reduce using rule 50 (else_posible -> .)
+    ID              reduce using rule 50 (else_posible -> .)
+    RETURN          reduce using rule 50 (else_posible -> .)
+    RBRACKET        reduce using rule 50 (else_posible -> .)
+
+    else_posible                   shift and go to state 114
+
+state 112
+
+    (45) read -> READ LPAR ID arr_par RPAR SEMICOLON .
+
+    READ            reduce using rule 45 (read -> READ LPAR ID arr_par RPAR SEMICOLON .)
+    WRITE           reduce using rule 45 (read -> READ LPAR ID arr_par RPAR SEMICOLON .)
+    WHILE           reduce using rule 45 (read -> READ LPAR ID arr_par RPAR SEMICOLON .)
+    IF              reduce using rule 45 (read -> READ LPAR ID arr_par RPAR SEMICOLON .)
+    ID              reduce using rule 45 (read -> READ LPAR ID arr_par RPAR SEMICOLON .)
+    RETURN          reduce using rule 45 (read -> READ LPAR ID arr_par RPAR SEMICOLON .)
+    RBRACKET        reduce using rule 45 (read -> READ LPAR ID arr_par RPAR SEMICOLON .)
+
+
+state 113
+
+    (59) block -> LBRACKET more_statement . RBRACKET
+
+    RBRACKET        shift and go to state 116
+
+
+state 114
+
+    (48) condition -> IF LPAR expression RPAR block else_posible .
+
+    READ            reduce using rule 48 (condition -> IF LPAR expression RPAR block else_posible .)
+    WRITE           reduce using rule 48 (condition -> IF LPAR expression RPAR block else_posible .)
+    WHILE           reduce using rule 48 (condition -> IF LPAR expression RPAR block else_posible .)
+    IF              reduce using rule 48 (condition -> IF LPAR expression RPAR block else_posible .)
+    ID              reduce using rule 48 (condition -> IF LPAR expression RPAR block else_posible .)
+    RBRACKET        reduce using rule 48 (condition -> IF LPAR expression RPAR block else_posible .)
+    RETURN          reduce using rule 48 (condition -> IF LPAR expression RPAR block else_posible .)
+
+
+state 115
+
+    (49) else_posible -> ELSE . block
+    (59) block -> . LBRACKET more_statement RBRACKET
+
+    LBRACKET        shift and go to state 106
+
+    block                          shift and go to state 117
+
+state 116
+
+    (59) block -> LBRACKET more_statement RBRACKET .
+
+    ELSE            reduce using rule 59 (block -> LBRACKET more_statement RBRACKET .)
+    READ            reduce using rule 59 (block -> LBRACKET more_statement RBRACKET .)
+    WRITE           reduce using rule 59 (block -> LBRACKET more_statement RBRACKET .)
+    WHILE           reduce using rule 59 (block -> LBRACKET more_statement RBRACKET .)
+    IF              reduce using rule 59 (block -> LBRACKET more_statement RBRACKET .)
+    ID              reduce using rule 59 (block -> LBRACKET more_statement RBRACKET .)
+    RETURN          reduce using rule 59 (block -> LBRACKET more_statement RBRACKET .)
+    RBRACKET        reduce using rule 59 (block -> LBRACKET more_statement RBRACKET .)
+
+
+state 117
+
+    (49) else_posible -> ELSE block .
+
+    READ            reduce using rule 49 (else_posible -> ELSE block .)
+    WRITE           reduce using rule 49 (else_posible -> ELSE block .)
+    WHILE           reduce using rule 49 (else_posible -> ELSE block .)
+    IF              reduce using rule 49 (else_posible -> ELSE block .)
+    ID              reduce using rule 49 (else_posible -> ELSE block .)
+    RETURN          reduce using rule 49 (else_posible -> ELSE block .)
+    RBRACKET        reduce using rule 49 (else_posible -> ELSE block .)
 
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: reduce/reduce conflict in state 7 resolved using rule (more_func -> <empty>)
-WARNING: rejected rule (func -> <empty>) in state 7
-WARNING: Rule (func -> <empty>) is never reduced
+WARNING: reduce/reduce conflict in state 40 resolved using rule (params -> <empty>)
+WARNING: rejected rule (exp -> <empty>) in state 40

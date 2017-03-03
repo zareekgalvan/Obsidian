@@ -1,2 +1,6 @@
 1. Variables Test:
 Valid syntax
+2. Functions Test:
+Valid syntax
+3. Statements Test:
+Valid syntax

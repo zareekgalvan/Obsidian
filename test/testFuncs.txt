@@ -1,0 +1,39 @@
+func void x()
+{
+	
+}
+
+func bool x()
+{
+	
+}
+
+func int x()
+{
+	
+}
+
+func double x()
+{
+	
+}
+
+func int x(int x)
+{
+	
+}
+
+func double x(int x, double x)
+{
+	
+}
+
+func void x(int x, double x, bool x)
+{
+	
+}
+
+func bool x(int x, double x, bool x, int x)
+{
+	
+}

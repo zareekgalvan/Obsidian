@@ -1,0 +1,43 @@
+func bool x(int x, double x, bool x, int x)
+{
+	read(x);
+}
+
+func bool x(int x, double x, bool x, int x)
+{
+	read(x[]);
+}
+
+func bool x(int x, double x, bool x, int x)
+{
+	read(x[][]);
+}
+
+func bool x(int x, double x, bool x, int x)
+{
+	write();
+}
+
+func bool x(int x, double x, bool x, int x)
+{
+	while()
+	{
+		while()
+		{
+			if()
+			{
+				x = ;
+				y();
+			}
+		}
+	}
+}
+
+func bool x(int x, double x, bool x, int x)
+{
+	if()
+	{
+		write();
+		y(,);
+	}
+}

@@ -20,7 +20,7 @@ WRITE ::= 'write' '(' EXP ')' ';'
 
 CICLE ::= 'while' '(' EXPRESSION ')' BLOCK
 
-CONDITION ::= 'if' '(' EXPRESSION ')' BLOCK "else" BLOCK
+CONDITION ::= 'if' '(' EXPRESSION ')' BLOCK ("else" BLOCK)?
 
 ASSIGNATION ::= 'id' ('[' EXP ']')* '=' (EXPRESSION | FUNC_CALL) ';'
 

@@ -54,10 +54,87 @@ def p_more_func(p):
 			|'''
 
 def p_func(p):
-	'''func : '''
+	'''func : FUNC func_type ID LPAR arguments RPAR func_block more_func'''
+
+def p_func_type(p):
+	'''func_type : VOID 
+			| BOOL
+			| INT
+			| DOUBLE'''
+
+def p_arguments(p):
+	'''arguments : var_type ID more_args
+			|'''
+
+def p_more_args(p):
+	'''more_args : COMMA var_type ID more_args
+			|'''
+
+def p_func_block(p):
+	'''func_block : LBRACKET more_vars more_statement optional_return RBRACKET'''
+
+def p_optional_return(p):
+	'''optional_return : RETURN exp SEMICOLON
+			|'''
+
+def p_more_statement(p):
+	'''more_statement : statement more_statement
+			|'''
+
+def p_statement(p):
+	'''statement : read
+		| write
+		| cicle
+		| condition
+		| assignation
+		| func_call'''
+
+def p_read(p):
+	'''read : READ LPAR ID arr_par RPAR SEMICOLON'''
+
+def p_write(p):
+	'''write : WRITE LPAR exp RPAR SEMICOLON'''
+
+def p_cicle(p):
+	'''cicle : WHILE LPAR expression RPAR block'''
+
+def p_condition(p):
+	'''condition : IF LPAR expression RPAR block else_posible'''
+
+def p_else_posible(p):
+	'''else_posible : ELSE block
+			|'''
+
+def p_assignation(p):
+	'''assignation : ID arr_par EQUALS assign SEMICOLON'''
+
+def p_assign(p):
+	'''assign : expression
+			| func_call'''
 
 def p_func_call(p):
-	'''func_call : '''
+	'''func_call : ID LPAR params RPAR SEMICOLON'''
+
+def p_params(p):
+	'''params : exp more_params
+			|'''
+
+def p_more_params(p):
+	'''more_params : COMMA exp more_params
+			|'''
+
+def p_block(p):
+	'''block : LBRACKET more_statement RBRACKET'''
+
+def p_arr_par(p):
+	'''arr_par : LSQRTBRACKET exp RSQRTBRACKET arr_par
+			|'''
+
+def p_expression(p):
+	'''expression :'''
+
+def p_exp(p):
+	'''exp :'''
 
 def p_main(p):
 	'''main : '''

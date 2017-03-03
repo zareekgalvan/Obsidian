@@ -9,6 +9,7 @@ reserved = {
 	'func' : 'FUNC',
 	'void' : 'VOID',
 	'if' : 'IF',
+	'else' : 'ELSE',
 	'main' : 'MAIN',
 	'while' : 'WHILE',
 	'read' : 'READ',

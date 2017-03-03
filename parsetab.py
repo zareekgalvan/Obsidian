@@ -5,9 +5,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'PLUS MINUS MULTIPLICATION DIVISION MOD EQUALS EQUALEQUALS DIFFERENT GREATER LESS GREATEROREQUAL LESSOREQUAL AND OR LPAR RPAR LBRACKET RBRACKET LSQRTBRACKET RSQRTBRACKET COMMA SEMICOLON CTEINT CTEDOUBLE CTEBOOL ID FALSE READ VOID FUNC RETURN TRUE IF DOUBLE WRITE INT WHILE BOOL MAINprogram : more_vars more_func mainmore_vars : vars\n\t\t\t|vars : var_type vars_aux SEMICOLON more_varsvar_type : BOOL\n\t\t\t| INT\n\t\t\t| DOUBLEvars_aux : ID arr var_assign more_vars_auxvar_assign : EQUALS var_cte\n\t\t\t|more_vars_aux : COMMA vars_aux\n\t\t\t|arr : LSQRTBRACKET const RSQRTBRACKET arr\n\t\t\t|var_cte : CTEINT\n\t\t\t| CTEDOUBLE\n\t\t\t| CTEBOOL\n\t\t\t| ID arr\n\t\t\t| func_callconst : CTEINT\n\t\t\t| CTEDOUBLE\n\t\t\t| CTEBOOLmore_func : func\n\t\t\t|func : func_call : main : '
+_lr_signature = 'PLUS MINUS MULTIPLICATION DIVISION MOD EQUALS EQUALEQUALS DIFFERENT GREATER LESS GREATEROREQUAL LESSOREQUAL AND OR LPAR RPAR LBRACKET RBRACKET LSQRTBRACKET RSQRTBRACKET COMMA SEMICOLON CTEINT CTEDOUBLE CTEBOOL ID FALSE READ VOID ELSE FUNC RETURN TRUE IF DOUBLE WRITE INT WHILE BOOL MAINprogram : more_vars more_func mainmore_vars : vars\n\t\t\t|vars : var_type vars_aux SEMICOLON more_varsvar_type : BOOL\n\t\t\t| INT\n\t\t\t| DOUBLEvars_aux : ID arr var_assign more_vars_auxvar_assign : EQUALS var_cte\n\t\t\t|more_vars_aux : COMMA vars_aux\n\t\t\t|arr : LSQRTBRACKET const RSQRTBRACKET arr\n\t\t\t|var_cte : CTEINT\n\t\t\t| CTEDOUBLE\n\t\t\t| CTEBOOL\n\t\t\t| ID arr\n\t\t\t| func_callconst : CTEINT\n\t\t\t| CTEDOUBLE\n\t\t\t| CTEBOOLmore_func : func\n\t\t\t|func : FUNC func_type ID LPAR arguments RPAR func_block more_funcfunc_type : VOID \n\t\t\t| BOOL\n\t\t\t| INT\n\t\t\t| DOUBLEarguments : var_type ID more_args\n\t\t\t|more_args : COMMA var_type ID more_args\n\t\t\t|func_block : LBRACKET more_vars more_statement optional_return RBRACKEToptional_return : RETURN exp SEMICOLON\n\t\t\t|more_statement : statement more_statement\n\t\t\t|statement : read\n\t\t| write\n\t\t| cicle\n\t\t| condition\n\t\t| assignation\n\t\t| func_callread : READ LPAR ID arr_par RPAR SEMICOLONwrite : WRITE LPAR exp RPAR SEMICOLONcicle : WHILE LPAR expression RPAR blockcondition : IF LPAR expression RPAR block else_posibleelse_posible : ELSE block\n\t\t\t|assignation : ID arr_par EQUALS assign SEMICOLONassign : expression\n\t\t\t| func_callfunc_call : ID LPAR params RPAR SEMICOLONparams : exp more_params\n\t\t\t|more_params : COMMA exp more_params\n\t\t\t|block : LBRACKET more_statement RBRACKETarr_par : LSQRTBRACKET exp RSQRTBRACKET arr_par\n\t\t\t|expression :exp :main : '
     
-_lr_action_items = {'CTEDOUBLE':([14,17,],[19,23,]),'RSQRTBRACKET':([19,20,21,22,],[-21,31,-22,-20,]),'SEMICOLON':([8,9,13,17,18,23,24,25,26,27,28,29,31,32,33,34,],[12,-14,-10,-26,-12,-16,-19,-17,-15,-9,-14,-8,-14,-18,-11,-13,]),'INT':([0,12,],[3,3,]),'DOUBLE':([0,12,],[4,4,]),'LSQRTBRACKET':([9,28,31,],[14,14,14,]),'CTEINT':([14,17,],[22,26,]),'EQUALS':([9,13,31,34,],[-14,17,-14,-13,]),'BOOL':([0,12,],[6,6,]),'CTEBOOL':([14,17,],[21,25,]),'COMMA':([9,13,17,18,23,24,25,26,27,28,31,32,34,],[-14,-10,-26,30,-16,-19,-17,-15,-9,-14,-14,-18,-13,]),'ID':([2,3,4,6,17,30,],[9,-6,-7,-5,28,9,]),'$end':([0,1,5,7,10,11,12,15,16,],[-3,-2,0,-24,-23,-27,-3,-1,-4,]),}
+_lr_action_items = {'CTEDOUBLE':([15,23,],[25,30,]),'LPAR':([29,35,64,65,70,71,73,100,],[39,40,78,79,81,40,84,40,]),'RETURN':([1,13,22,56,57,61,66,67,68,69,72,74,75,76,80,107,108,110,111,112,114,116,117,],[-2,-3,-4,-3,-54,-38,-41,-40,-38,-39,-42,-44,-43,85,-37,-47,-46,-51,-50,-45,-48,-59,-49,]),'READ':([1,13,22,56,57,61,66,67,68,69,72,74,75,106,107,108,110,111,112,114,116,117,],[-2,-3,-4,-3,-54,64,-41,-40,64,-39,-42,-44,-43,64,-47,-46,-51,-50,-45,-48,-59,-49,]),'VOID':([12,],[19,]),'RPAR':([39,40,45,46,47,48,51,52,53,58,62,63,77,79,81,84,87,88,89,92,95,98,109,],[-31,-56,49,50,-58,-33,-55,-63,-30,-58,-57,-33,-32,-62,-63,-62,-61,96,97,103,105,-61,-60,]),'LBRACKET':([49,96,103,115,],[56,106,106,106,]),'WHILE':([1,13,22,56,57,61,66,67,68,69,72,74,75,106,107,108,110,111,112,114,116,117,],[-2,-3,-4,-3,-54,65,-41,-40,65,-39,-42,-44,-43,65,-47,-46,-51,-50,-45,-48,-59,-49,]),'SEMICOLON':([8,9,14,24,30,31,32,33,34,35,36,38,41,42,43,50,57,85,91,93,97,99,101,102,105,],[13,-14,-10,-12,-16,-19,-17,-15,-9,-14,-8,-14,-18,-11,-13,57,-54,-63,-62,104,108,-53,-52,110,112,]),'RSQRTBRACKET':([25,26,27,28,82,90,],[-21,38,-22,-20,-63,98,]),'COMMA':([9,14,24,30,31,32,33,34,35,38,40,41,43,47,48,52,57,58,63,],[-14,-10,37,-16,-19,-17,-15,-9,-14,-14,-63,-18,-13,52,54,-63,-54,52,54,]),'$end':([0,1,5,7,10,11,13,16,22,55,60,94,],[-3,-2,0,-24,-23,-64,-3,-1,-4,-24,-25,-34,]),'CTEINT':([15,23,],[28,33,]),'EQUALS':([9,14,38,43,71,83,98,109,],[-14,23,-14,-13,-61,91,-61,-60,]),'ELSE':([111,116,],[115,-59,]),'WRITE':([1,13,22,56,57,61,66,67,68,69,72,74,75,106,107,108,110,111,112,114,116,117,],[-2,-3,-4,-3,-54,70,-41,-40,70,-39,-42,-44,-43,70,-47,-46,-51,-50,-45,-48,-59,-49,]),'FUNC':([0,1,7,13,22,55,94,],[-3,-2,12,-3,-4,12,-34,]),'ID':([1,2,3,4,6,13,17,18,19,20,21,22,23,37,44,56,57,59,61,66,67,68,69,72,74,75,78,91,106,107,108,110,111,112,114,116,117,],[-2,9,-6,-7,-5,-3,29,-29,-26,-28,-27,-4,35,9,48,-3,-54,63,71,-41,-40,71,-39,-42,-44,-43,87,100,71,-47,-46,-51,-50,-45,-48,-59,-49,]),'IF':([1,13,22,56,57,61,66,67,68,69,72,74,75,106,107,108,110,111,112,114,116,117,],[-2,-3,-4,-3,-54,73,-41,-40,73,-39,-42,-44,-43,73,-47,-46,-51,-50,-45,-48,-59,-49,]),'INT':([0,12,13,39,54,56,],[3,20,3,3,3,3,]),'DOUBLE':([0,12,13,39,54,56,],[4,18,4,4,4,4,]),'LSQRTBRACKET':([9,35,38,71,87,98,],[15,15,15,82,82,82,]),'BOOL':([0,12,13,39,54,56,],[6,21,6,6,6,6,]),'CTEBOOL':([15,23,],[27,32,]),'RBRACKET':([1,13,22,56,57,61,66,67,68,69,72,74,75,76,80,86,104,106,107,108,110,111,112,113,114,116,117,],[-2,-3,-4,-3,-54,-38,-41,-40,-38,-39,-42,-44,-43,-36,-37,94,-35,-38,-47,-46,-51,-50,-45,116,-48,-59,-49,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'func_call':([17,],[24,]),'arr':([9,28,31,],[13,32,34,]),'var_assign':([13,],[18,]),'const':([14,],[20,]),'var_type':([0,12,],[2,2,]),'vars':([0,12,],[1,1,]),'more_vars':([0,12,],[7,16,]),'vars_aux':([2,30,],[8,33,]),'more_vars_aux':([18,],[29,]),'program':([0,],[5,]),'func':([7,],[10,]),'main':([11,],[15,]),'var_cte':([17,],[27,]),'more_func':([7,],[11,]),}
+_lr_goto_items = {'more_args':([48,63,],[53,77,]),'arr':([9,35,38,],[14,41,43,]),'optional_return':([76,],[86,]),'var_type':([0,13,39,54,56,],[2,2,44,59,2,]),'var_cte':([23,],[34,]),'vars_aux':([2,37,],[8,42,]),'arr_par':([71,87,98,],[83,95,109,]),'cicle':([61,68,106,],[66,66,66,]),'more_vars':([0,13,56,],[7,22,61,]),'const':([15,],[26,]),'vars':([0,13,56,],[1,1,1,]),'more_func':([7,55,],[11,60,]),'write':([61,68,106,],[67,67,67,]),'read':([61,68,106,],[69,69,69,]),'program':([0,],[5,]),'params':([40,],[46,]),'arguments':([39,],[45,]),'statement':([61,68,106,],[68,68,68,]),'var_assign':([14,],[24,]),'func_type':([12,],[17,]),'func':([7,55,],[10,10,]),'condition':([61,68,106,],[72,72,72,]),'func_call':([23,61,68,91,106,],[31,74,74,99,74,]),'main':([11,],[16,]),'assignation':([61,68,106,],[75,75,75,]),'func_block':([49,],[55,]),'else_posible':([111,],[114,]),'more_statement':([61,68,106,],[76,80,113,]),'more_vars_aux':([24,],[36,]),'more_params':([47,58,],[51,62,]),'exp':([40,52,81,82,85,],[47,58,89,90,93,]),'expression':([79,84,91,],[88,92,101,]),'assign':([91,],[102,]),'block':([96,103,115,],[107,111,117,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -50,7 +50,44 @@ _lr_productions = [
   ('const -> CTEBOOL','const',1,'p_const','ObsidianParser.py',50),
   ('more_func -> func','more_func',1,'p_more_func','ObsidianParser.py',53),
   ('more_func -> <empty>','more_func',0,'p_more_func','ObsidianParser.py',54),
-  ('func -> <empty>','func',0,'p_func','ObsidianParser.py',57),
-  ('func_call -> <empty>','func_call',0,'p_func_call','ObsidianParser.py',60),
-  ('main -> <empty>','main',0,'p_main','ObsidianParser.py',63),
+  ('func -> FUNC func_type ID LPAR arguments RPAR func_block more_func','func',8,'p_func','ObsidianParser.py',57),
+  ('func_type -> VOID','func_type',1,'p_func_type','ObsidianParser.py',60),
+  ('func_type -> BOOL','func_type',1,'p_func_type','ObsidianParser.py',61),
+  ('func_type -> INT','func_type',1,'p_func_type','ObsidianParser.py',62),
+  ('func_type -> DOUBLE','func_type',1,'p_func_type','ObsidianParser.py',63),
+  ('arguments -> var_type ID more_args','arguments',3,'p_arguments','ObsidianParser.py',66),
+  ('arguments -> <empty>','arguments',0,'p_arguments','ObsidianParser.py',67),
+  ('more_args -> COMMA var_type ID more_args','more_args',4,'p_more_args','ObsidianParser.py',70),
+  ('more_args -> <empty>','more_args',0,'p_more_args','ObsidianParser.py',71),
+  ('func_block -> LBRACKET more_vars more_statement optional_return RBRACKET','func_block',5,'p_func_block','ObsidianParser.py',74),
+  ('optional_return -> RETURN exp SEMICOLON','optional_return',3,'p_optional_return','ObsidianParser.py',77),
+  ('optional_return -> <empty>','optional_return',0,'p_optional_return','ObsidianParser.py',78),
+  ('more_statement -> statement more_statement','more_statement',2,'p_more_statement','ObsidianParser.py',81),
+  ('more_statement -> <empty>','more_statement',0,'p_more_statement','ObsidianParser.py',82),
+  ('statement -> read','statement',1,'p_statement','ObsidianParser.py',85),
+  ('statement -> write','statement',1,'p_statement','ObsidianParser.py',86),
+  ('statement -> cicle','statement',1,'p_statement','ObsidianParser.py',87),
+  ('statement -> condition','statement',1,'p_statement','ObsidianParser.py',88),
+  ('statement -> assignation','statement',1,'p_statement','ObsidianParser.py',89),
+  ('statement -> func_call','statement',1,'p_statement','ObsidianParser.py',90),
+  ('read -> READ LPAR ID arr_par RPAR SEMICOLON','read',6,'p_read','ObsidianParser.py',93),
+  ('write -> WRITE LPAR exp RPAR SEMICOLON','write',5,'p_write','ObsidianParser.py',96),
+  ('cicle -> WHILE LPAR expression RPAR block','cicle',5,'p_cicle','ObsidianParser.py',99),
+  ('condition -> IF LPAR expression RPAR block else_posible','condition',6,'p_condition','ObsidianParser.py',102),
+  ('else_posible -> ELSE block','else_posible',2,'p_else_posible','ObsidianParser.py',105),
+  ('else_posible -> <empty>','else_posible',0,'p_else_posible','ObsidianParser.py',106),
+  ('assignation -> ID arr_par EQUALS assign SEMICOLON','assignation',5,'p_assignation','ObsidianParser.py',109),
+  ('assign -> expression','assign',1,'p_assign','ObsidianParser.py',112),
+  ('assign -> func_call','assign',1,'p_assign','ObsidianParser.py',113),
+  ('func_call -> ID LPAR params RPAR SEMICOLON','func_call',5,'p_func_call','ObsidianParser.py',116),
+  ('params -> exp more_params','params',2,'p_params','ObsidianParser.py',119),
+  ('params -> <empty>','params',0,'p_params','ObsidianParser.py',120),
+  ('more_params -> COMMA exp more_params','more_params',3,'p_more_params','ObsidianParser.py',123),
+  ('more_params -> <empty>','more_params',0,'p_more_params','ObsidianParser.py',124),
+  ('block -> LBRACKET more_statement RBRACKET','block',3,'p_block','ObsidianParser.py',127),
+  ('arr_par -> LSQRTBRACKET exp RSQRTBRACKET arr_par','arr_par',4,'p_arr_par','ObsidianParser.py',130),
+  ('arr_par -> <empty>','arr_par',0,'p_arr_par','ObsidianParser.py',131),
+  ('expression -> <empty>','expression',0,'p_expression','ObsidianParser.py',134),
+  ('exp -> <empty>','exp',0,'p_exp','ObsidianParser.py',137),
+  ('main -> <empty>','main',0,'p_main','ObsidianParser.py',140),
 ]
