@@ -87,7 +87,7 @@ def p_statement(p):
 		| cicle
 		| condition
 		| assignation
-		| func_call'''
+		| func_call SEMICOLON'''
 
 def p_read(p):
 	'''read : READ LPAR ID arr_par RPAR SEMICOLON'''
@@ -113,7 +113,7 @@ def p_assign(p):
 			| func_call'''
 
 def p_func_call(p):
-	'''func_call : ID LPAR params RPAR SEMICOLON'''
+	'''func_call : ID LPAR params RPAR'''
 
 def p_params(p):
 	'''params : exp more_params
@@ -131,13 +131,65 @@ def p_arr_par(p):
 			|'''
 
 def p_expression(p):
-	'''expression :'''
+	'''expression : conc expression_aux'''
+
+def p_expression_aux(p):
+	'''expression_aux : ao conc expression_aux
+			|'''
+
+def p_conc(p):
+	'''conc : exp conc_aux'''
+
+def p_conc_aux(p):
+	'''conc_aux : comp exp
+				|'''
 
 def p_exp(p):
-	'''exp :'''
+	'''exp : term exp_aux'''
+
+def p_exp_aux(p):
+	'''exp_aux : pl term exp_aux
+			|'''
+
+def p_term(p):
+	'''term : factor term_aux'''
+
+def p_term_aux(p):
+	'''term_aux : dm factor term_aux
+			|'''
+
+def p_factor(p):
+	'''factor : LPAR expression RPAR
+			| var_cte'''
+
+def p_ao(p):
+	'''ao : AND
+			| OR'''
+
+def p_comp(p):
+	'''comp : GREATER
+			| LESS
+			| GREATEROREQUAL
+			| LESSOREQUAL
+			| EQUALEQUALS
+			| DIFFERENT'''
+
+def p_pl(p):
+	'''pl : PLUS
+			| MINUS'''
+
+def p_dm(p):
+	'''dm : MULTIPLICATION
+			| DIVISION
+			| MOD'''
+
+
 
 def p_main(p):
-	'''main : '''
+	'''main : MAIN main_block'''
+
+def p_main_block(p):
+	'''main_block : LBRACKET more_vars more_statement RBRACKET'''
 
 
 

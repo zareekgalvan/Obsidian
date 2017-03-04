@@ -20,12 +20,14 @@ func double x()
 
 func int x(int x)
 {
-	
+	int x = 5;
+	int x, y, x, y=x, y;
 }
 
 func double x(int x, double x)
 {
-	
+	int x;
+	int x = true;
 }
 
 func void x(int x, double x, bool x)
@@ -35,5 +37,9 @@ func void x(int x, double x, bool x)
 
 func bool x(int x, double x, bool x, int x)
 {
+	
+}
+
+main {
 	
 }

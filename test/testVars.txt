@@ -30,3 +30,8 @@ bool x = x[true];
 bool x = x[1.0];
 bool x = x[1][1];
 bool x = x[1][1][1][1];
+
+main 
+{
+	
+}

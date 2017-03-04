@@ -5,28 +5,28 @@ func bool x(int x, double x, bool x, int x)
 
 func bool x(int x, double x, bool x, int x)
 {
-	read(x[]);
+	read(x[9]);
 }
 
 func bool x(int x, double x, bool x, int x)
 {
-	read(x[][]);
+	read(x[0][true]);
 }
 
 func bool x(int x, double x, bool x, int x)
 {
-	write();
+	write(x);
 }
 
 func bool x(int x, double x, bool x, int x)
 {
-	while()
+	while(x + y)
 	{
-		while()
+		while(5)
 		{
-			if()
+			if(false)
 			{
-				x = ;
+				x = 5;
 				y();
 			}
 		}
@@ -35,9 +35,16 @@ func bool x(int x, double x, bool x, int x)
 
 func bool x(int x, double x, bool x, int x)
 {
-	if()
+	if(5%5)
 	{
-		write();
-		y(,);
+		write(x);
+		y(8,y());
 	}
+	else {
+		x = 4 * 6;
+	}
+}
+
+main {
+	
 }
