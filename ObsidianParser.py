@@ -208,8 +208,8 @@ if __name__ == '__main__':
 		try:
 			f = open(file,'r')
 			data = f.read()
-			# print data
 			f.close()
+			
 			# Parsear el contenido
 			
 			if (drawyparser.parse(data, tracking=True) == 'PROGRAM COMPILED'):

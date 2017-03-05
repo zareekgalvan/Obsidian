@@ -28,11 +28,13 @@ func double x(int x, double x)
 {
 	int x;
 	int x = true;
+	read(x);
+	return i;
 }
 
 func void x(int x, double x, bool x)
 {
-	
+	return hi;
 }
 
 func bool x(int x, double x, bool x, int x)

@@ -25,7 +25,7 @@ tokens = ['PLUS', 'MINUS', 'MULTIPLICATION', 'DIVISION', 'MOD', 'EQUALS',
 			'EQUALEQUALS', 'DIFFERENT', 'GREATER', 'LESS', 'GREATEROREQUAL', 
 			'LESSOREQUAL', 'AND', 'OR', 'LPAR', 'RPAR', 'LBRACKET', 
 			'RBRACKET','LSQRTBRACKET', 'RSQRTBRACKET', 'COMMA', 'SEMICOLON', 
-			'CTEINT', 'CTEDOUBLE', 'CTEBOOL', 'ID'] + list(reserved.values())
+			'CTEINT', 'CTEDOUBLE', 'CTEBOOL', 'ID', 'COMMENT'] + list(reserved.values())
 
 # Expresiones regulares
 
@@ -96,7 +96,7 @@ def t_error(t):
 
 # Comentarios estilo C++
 
-def t_comment(t):
+def t_COMMENT(t):
     r'//.*\n'
     t.lexer.lineno += 1
     return t

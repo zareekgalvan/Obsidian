@@ -1,0 +1,160 @@
+int x, y, x, y=x, y;
+int x = 9, x = 9.0, x[1][1][1][1];
+int x = 9.0;
+int x = true;
+int x = x;
+int x = x[1];
+int x = x[true];
+int x = x[1.0];
+int x = x[1][1];
+int x = x[1][1][1][1];
+
+double x;
+double x = 9;
+double x = 9.0;
+double x = true;
+double x = x;
+double x = x[1];
+double x = x[true];
+double x = x[1.0];
+double x = x[1][1];
+double x = x[1][1][1][1];
+
+bool x;
+bool x = 9;
+bool x = 9.0;
+bool x = true;
+bool x = x;
+bool x = x[1];
+bool x = x[true];
+bool x = x[1.0];
+bool x = x[1][1];
+bool x = x[1][1][1][1];
+
+func void x()
+{
+	
+}
+
+func bool x()
+{
+	
+}
+
+func int x()
+{
+	
+}
+
+func double x()
+{
+	
+}
+
+func int x(int x)
+{
+	int x = 5;
+	int x, y, x, y=x, y;
+}
+
+func double x(int x, double x)
+{
+	int x;
+	int x = true;
+	read(x);
+	return i;
+}
+
+func void x(int x, double x, bool x)
+{
+	return hi;
+}
+
+func bool x(int x, double x, bool x, int x)
+{
+	
+}
+
+func bool x(int x, double x, bool x, int x)
+{
+	while(x + y)
+	{
+		while(5)
+		{
+			if(false)
+			{
+				x = 5;
+				y();
+			}
+		}
+	}
+}
+
+func bool x(int x, double x, bool x, int x)
+{
+	if(5%5)
+	{
+		write(x);
+		y(8,y(x,x,x));
+	}
+	else {
+		x = 4 * 6;
+		x = (5+6+6)/8 - 6 > 6*e*(r/t/k)-r(i) && true;
+	}
+}
+
+main {
+	int x, y, x, y=x, y;
+	int x = 9, x = 9.0, x[1][1][1][1];
+	int x = 9.0;
+	int x = true;
+	int x = x;
+	int x = x[1];
+	int x = x[true];
+	int x = x[1.0];
+	int x = x[1][1];
+	int x = x[1][1][1][1];
+
+	double x;
+	double x = 9;
+	double x = 9.0;
+	double x = true;
+	double x = x;
+	double x = x[1];
+	double x = x[true];
+	double x = x[1.0];
+	double x = x[1][1];
+	double x = x[1][1][1][1];
+
+	bool x;
+	bool x = 9;
+	bool x = 9.0;
+	bool x = true;
+	bool x = x;
+	bool x = x[1];
+	bool x = x[true];
+	bool x = x[1.0];
+	bool x = x[1][1];
+	bool x = x[1][1][1][1];
+
+	while(x + y)
+	{
+		while(5)
+		{
+			if(false)
+			{
+				x = 5;
+				y();
+				if(5%5)
+				{
+					write(x);
+					y(8,y(x,x,x));
+				}
+				else {
+					x = 4 * 6;
+					x = (5+6+6)/8 - 6 > 6*e*(r/t/k)-r(i) && true;
+				}
+			}
+		}
+	}
+}

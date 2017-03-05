@@ -12,6 +12,9 @@ echo "4. Expressions Test:" >> test/output.txt
 python ObsidianParser.py test/testExpressions.txt >> test/output.txt 
 
 echo "5. Main Test:" >> test/output.txt 
-python ObsidianParser.py test/testMain.txt >> test/output.txt 
+python ObsidianParser.py test/testMain.txt >> test/output.txt
+
+echo "6. Complete Test:" >> test/output.txt 
+python ObsidianParser.py test/testComplete.txt >> test/output.txt  
 
 more test/output.txt
