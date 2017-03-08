@@ -4,6 +4,15 @@ import sys
 # Importar tokens del lexer
 from ObsidianLex import tokens
 
+# Tabla de Variables
+scope = ['global']
+lastType = []
+varTable = {}
+varTable[scope[len(scope)-1]] = {}
+# Directorio de procedimientos
+dirProcedures = {}
+
+
 # Definicion de las reglas
 
 def p_program(p):
@@ -21,9 +30,18 @@ def p_var_type(p):
 	'''var_type : BOOL
 			| INT
 			| DOUBLE'''
+	p[0] = p[1]
+	lastType.append(p[1])
 
 def p_vars_aux(p):
-	'''vars_aux : ID arr var_assign more_vars_aux'''
+	'''vars_aux : ID arr to_var_table var_assign more_vars_aux'''
+	p[0] = p[-1]
+
+def p_to_var_table(p):
+	'''to_var_table :'''
+	varid = p[-2]
+	if varid not in varTable['global'] and varid not in varTable[scope[len(scope)-1]]:
+		varTable[scope[len(scope)-1]][varid] =  lastType[len(lastType)-1]
 
 def p_var_assign(p):
 	'''var_assign : EQUALS var_cte
@@ -54,21 +72,40 @@ def p_more_func(p):
 			|'''
 
 def p_func(p):
-	'''func : FUNC func_type ID LPAR arguments RPAR func_block more_func'''
+	'''func : FUNC func_type ID to_proc_dir LPAR arguments RPAR func_block more_func'''
+
+def p_to_proc_dir(p):
+	'''to_proc_dir :'''
+	procname = p[-1]
+	scope.append(procname)
+	varTable[procname] = {}
+	dirProcedures[procname] = {}
+	dirProcedures[procname]['func_type'] = p[-2]
+	dirProcedures[procname]['args'] = []
 
 def p_func_type(p):
 	'''func_type : VOID 
 			| BOOL
 			| INT
 			| DOUBLE'''
+	p[0] = p[1]
 
 def p_arguments(p):
-	'''arguments : var_type ID more_args
+	'''arguments : var_type ID to_args more_args
 			|'''
+	
 
 def p_more_args(p):
-	'''more_args : COMMA var_type ID more_args
+	'''more_args : COMMA var_type ID to_args more_args
 			|'''
+
+def p_to_args(p):
+	'''to_args :'''
+	dirProcedures[scope[len(scope)-1]]['args'].append(p[-2])
+	varid = p[-1]
+	vartype = p[-2]
+	if varid not in varTable['global'] and varid not in varTable[scope[len(scope)-1]]:
+		varTable[scope[len(scope)-1]][varid] =  vartype
 
 def p_func_block(p):
 	'''func_block : LBRACKET more_vars more_statement optional_return RBRACKET'''
@@ -213,6 +250,8 @@ if __name__ == '__main__':
 			# Parsear el contenido
 			
 			if (drawyparser.parse(data, tracking=True) == 'PROGRAM COMPILED'):
+				print varTable
+				#print dirProcedures
 				print "Valid syntax"
 
 		except EOFError:

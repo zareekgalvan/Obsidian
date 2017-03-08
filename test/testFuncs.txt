@@ -3,41 +3,41 @@ func void x()
 	
 }
 
-func bool x()
+func bool y()
 {
 	
 }
 
-func int x()
+func int z()
 {
 	
 }
 
-func double x()
+func double g()
 {
 	
 }
 
-func int x(int x)
+func int f(int z)
 {
 	int x = 5;
-	int x, y, x, y=x, y;
+	int f, y, g, h=x, e;
 }
 
-func double x(int x, double x)
+func double c(int x, double y)
 {
-	int x;
-	int x = true;
+	int z;
+	int f = true;
 	read(x);
 	return i;
 }
 
-func void x(int x, double x, bool x)
+func void w(int x, double x, bool x)
 {
 	return hi;
 }
 
-func bool x(int x, double x, bool x, int x)
+func bool s(int x, double x, bool x, int x)
 {
 	
 }
