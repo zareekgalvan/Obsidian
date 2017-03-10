@@ -3,18 +3,23 @@ import sys
 
 # Importar tokens del lexer
 from ObsidianLex import tokens
+# Importar el cubo semantico
+from Other.SemanticCube import *
+# Importar los codigos de operaciones
+from Other.OperationCodes import *
+
 
 # Tabla de Variables
 scope = ['global']
 lastType = []
 varTable = {}
 varTable[scope[len(scope)-1]] = {}
+
 # Directorio de procedimientos
 dirProcedures = {}
 
 
 # Definicion de las reglas
-
 def p_program(p):
 	'''program : more_vars more_func main'''
 	p[0] = "PROGRAM COMPILED"
@@ -40,10 +45,11 @@ def p_vars_aux(p):
 def p_to_var_table(p):
 	'''to_var_table :'''
 	varid = p[-2]
+	line = p.lineno(0)
 	if varid not in varTable['global'] and varid not in varTable[scope[len(scope)-1]]:
 		varTable[scope[len(scope)-1]][varid] =  lastType[len(lastType)-1]
 	else:
-		print('Variable "%s" already registered' % (varid))
+		print('Variable "%s" in line %s already registered' % (varid, line))
 		sys.exit() 
 
 def p_var_assign(p):
@@ -64,6 +70,7 @@ def p_var_cte(p):
 			| CTEBOOL
 			| ID arr
 			| func_call'''
+	p[0] = p[1]
 
 def p_const(p):
 	'''const : CTEINT
@@ -80,14 +87,17 @@ def p_func(p):
 def p_to_proc_dir(p):
 	'''to_proc_dir :'''
 	procname = p[-1]
-	if procname not in scope:
+	functype = p[-2]
+	line = p.lineno(0)
+	if procname not in scope and procname not in varTable['global']:
 		scope.append(procname)
+		varTable['global'][procname] = functype
 		varTable[procname] = {}
 		dirProcedures[procname] = {}
-		dirProcedures[procname]['func_type'] = p[-2]
+		dirProcedures[procname]['func_type'] = functype
 		dirProcedures[procname]['args'] = []
 	else:
-		print('Function "%s" already registered' % (procname))
+		print('Function "%s" already registered in line %s' % (procname, line))
 		sys.exit() 
 
 def p_func_type(p):
@@ -111,10 +121,11 @@ def p_to_args(p):
 	dirProcedures[scope[len(scope)-1]]['args'].append(p[-2])
 	varid = p[-1]
 	vartype = p[-2]
+	line = p.lineno(0)
 	if varid not in varTable['global'] and varid not in varTable[scope[len(scope)-1]]:
 		varTable[scope[len(scope)-1]][varid] =  vartype
 	else:
-		print('Variable "%s" already registered' % (varid))
+		print('Variable "%s" in line %s already registered' % (varid, line))
 		sys.exit() 
 
 def p_func_block(p):
@@ -230,15 +241,11 @@ def p_dm(p):
 			| DIVISION
 			| MOD'''
 
-
-
 def p_main(p):
 	'''main : MAIN main_block'''
 
 def p_main_block(p):
 	'''main_block : LBRACKET more_vars more_statement RBRACKET'''
-
-
 
 def p_error(p):
     print('Syntax error in token %s with value \"%s\" in line %s' % (p.type, p.value, p.lineno))

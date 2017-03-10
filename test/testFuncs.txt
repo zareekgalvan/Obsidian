@@ -1,3 +1,5 @@
+int x;
+
 func void x()
 {
 	
@@ -18,15 +20,15 @@ func double g()
 	
 }
 
-func int f(int z)
+func int f(int i)
 {
-	int x = 5;
-	int f, y, g, h=x, e;
+	int xg = 5;
+	int fn, yg, gg, h=x, e;
 }
 
-func double c(int x, double y)
+func double c(int xj, double yf)
 {
-	int z;
+	int zp;
 	int f = true;
 	read(x);
 	return i;

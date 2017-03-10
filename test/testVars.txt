@@ -1,37 +1,37 @@
 //hii
 int x, y, z, k=x, f;
-int x = 9, x = 9.0, x[1][1][1][1];
-int x = 9.0;
-int x = true;
-int x = x;
+int v = 9, xx = 9.0, xd[1][1][1][1];
+int xs = 9.0;
+int xdd = true;
+int xf = x;
 //hi
-int x = x[1];
-int x = x[true];
-int x = x[1.0];
-int x = x[1][1];
-int x = x[1][1][1][1];
+int xa = x[1];
+int xq = x[true];
+int xw = x[1.0];
+int xe = x[1][1];
+int xr = x[1][1][1][1];
 
-double x;
-double x = 9;
-double x = 9.0;
-double x = true;
-double x = x;
-double x = x[1];
-double x = x[true];
-double x = x[1.0];
-double x = x[1][1];
-double x = x[1][1][1][1];
+double xt;
+double xu = 9;
+double xy = 9.0;
+double xi = true;
+double xo = x;
+double xp = x[1];
+double xpp = x[true];
+double xoo = x[1.0];
+double xii = x[1][1];
+double xuu = x[1][1][1][1];
 
-bool x;
-bool x = 9;
-bool x = 9.0;
-bool x = true;
-bool x = x;
-bool x = x[1];
-bool x = x[true];
-bool x = x[1.0];
-bool x = x[1][1];
-bool x = x[1][1][1][1];
+bool xz;
+bool xxxx = 9;
+bool xc = 9.0;
+bool xcc = true;
+bool xvv = x;
+bool xbb = x[1];
+bool nn = x[true];
+bool mm = x[1.0];
+bool xhh = x[1][1];
+bool xgg = x[1][1][1][1];
 
 //hii
 main 
