@@ -1,0 +1,14 @@
+* 611dd9e : Add Var Table rules Add Procedure Directory rules Add Arguments to Var Table rules
+* 90e6d45 : Finish First Sprint Add missing test for main and expressions
+* 7423861 : Correct statement rules Add more tests Add main rules Missing testing full statement combinations and main rules
+* 95c2cd6 : mend
+* ccf206e : Changed diagrams code Added func and statement parser rules Added func and statement tests
+* 6961bc9 : mend
+* 2102562 : mend
+* b5e75a4 : mend
+* f83f0dc : Add test script and modify README.md
+* a0fc01c : Minor changes to lex and parser, test changed
+* d1b611e : Add regular expresions to use in the generation of diagrams in http://www.bottlecaps.de/rr/ui
+* d7fe314 : Add parser with rules for vars, missing func and main
+* 43a4e15 : Add lex file with tokens
+* 5cceb94 : Initial commit
