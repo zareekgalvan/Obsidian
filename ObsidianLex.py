@@ -99,7 +99,7 @@ def t_error(t):
 def t_COMMENT(t):
     r'//.*\n'
     t.lexer.lineno += 1
-    return t
+    pass
 
 
 # Crear el analizador de lexico

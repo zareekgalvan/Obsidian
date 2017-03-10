@@ -1,12 +1,12 @@
 1. Variables Test:
-Valid syntax
+Variable "x" already registered
 2. Functions Test:
-Valid syntax
+Variable "x" already registered
 3. Statements Test:
-Valid syntax
+Variable "x" already registered
 4. Expressions Test:
-Valid syntax
+Variable "x" already registered
 5. Main Test:
-Valid syntax
+Variable "x" already registered
 6. Complete Test:
-Valid syntax
+Variable "x" already registered

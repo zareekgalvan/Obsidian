@@ -1,8 +1,10 @@
+//hii
 int x, y, z, k=x, f;
 int x = 9, x = 9.0, x[1][1][1][1];
 int x = 9.0;
 int x = true;
 int x = x;
+//hi
 int x = x[1];
 int x = x[true];
 int x = x[1.0];
@@ -31,6 +33,7 @@ bool x = x[1.0];
 bool x = x[1][1];
 bool x = x[1][1][1][1];
 
+//hii
 main 
 {
 	

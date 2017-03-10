@@ -42,6 +42,9 @@ def p_to_var_table(p):
 	varid = p[-2]
 	if varid not in varTable['global'] and varid not in varTable[scope[len(scope)-1]]:
 		varTable[scope[len(scope)-1]][varid] =  lastType[len(lastType)-1]
+	else:
+		print('Variable "%s" already registered' % (varid))
+		sys.exit() 
 
 def p_var_assign(p):
 	'''var_assign : EQUALS var_cte
@@ -77,11 +80,15 @@ def p_func(p):
 def p_to_proc_dir(p):
 	'''to_proc_dir :'''
 	procname = p[-1]
-	scope.append(procname)
-	varTable[procname] = {}
-	dirProcedures[procname] = {}
-	dirProcedures[procname]['func_type'] = p[-2]
-	dirProcedures[procname]['args'] = []
+	if procname not in scope:
+		scope.append(procname)
+		varTable[procname] = {}
+		dirProcedures[procname] = {}
+		dirProcedures[procname]['func_type'] = p[-2]
+		dirProcedures[procname]['args'] = []
+	else:
+		print('Function "%s" already registered' % (procname))
+		sys.exit() 
 
 def p_func_type(p):
 	'''func_type : VOID 
@@ -106,6 +113,9 @@ def p_to_args(p):
 	vartype = p[-2]
 	if varid not in varTable['global'] and varid not in varTable[scope[len(scope)-1]]:
 		varTable[scope[len(scope)-1]][varid] =  vartype
+	else:
+		print('Variable "%s" already registered' % (varid))
+		sys.exit() 
 
 def p_func_block(p):
 	'''func_block : LBRACKET more_vars more_statement optional_return RBRACKET'''
@@ -250,7 +260,7 @@ if __name__ == '__main__':
 			# Parsear el contenido
 			
 			if (drawyparser.parse(data, tracking=True) == 'PROGRAM COMPILED'):
-				print varTable
+				#print varTable
 				#print dirProcedures
 				print "Valid syntax"
 
