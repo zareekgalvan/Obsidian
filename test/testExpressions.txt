@@ -1,4 +1,4 @@
-func bool x(int x, double x, bool x, int x)
+func bool x(int x2, double x3, bool x4, int x5)
 {
 	while(x + y)
 	{
@@ -13,7 +13,7 @@ func bool x(int x, double x, bool x, int x)
 	}
 }
 
-func bool x(int x, double x, bool x, int x)
+func bool x6(int x7, double x8, bool x9, int x10)
 {
 	if(5%5)
 	{
@@ -27,5 +27,5 @@ func bool x(int x, double x, bool x, int x)
 }
 
 main {
-	int x;
+	int x11;
 }

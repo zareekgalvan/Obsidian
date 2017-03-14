@@ -1,3 +1,6 @@
+* 7548152 : Procedure name now in varTable[global] Add Semantic Cube Add Operation Codes Add validation for var types and constants Modify variable and function names error message
+* cab1392 : Comments now allowed in code Parser now tells when a variable is already declared
+* 062a859 : Add commit history Modify readme.md
 * 611dd9e : Add Var Table rules Add Procedure Directory rules Add Arguments to Var Table rules
 * 90e6d45 : Finish First Sprint Add missing test for main and expressions
 * 7423861 : Correct statement rules Add more tests Add main rules Missing testing full statement combinations and main rules

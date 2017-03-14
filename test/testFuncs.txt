@@ -1,6 +1,6 @@
 int x;
 
-func void x()
+func void t()
 {
 	
 }
@@ -29,17 +29,17 @@ func int f(int i)
 func double c(int xj, double yf)
 {
 	int zp;
-	int f = true;
+	int tt = true;
 	read(x);
 	return i;
 }
 
-func void w(int x, double x, bool x)
+func void w(int dd, double dx, bool xs)
 {
 	return hi;
 }
 
-func bool s(int x, double x, bool x, int x)
+func bool s(int xt, double ax, bool hx, int vx)
 {
 	
 }

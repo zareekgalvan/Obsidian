@@ -3,10 +3,8 @@ import sys
 
 # Importar tokens del lexer
 from ObsidianLex import tokens
-# Importar el cubo semantico
-from Other.SemanticCube import *
-# Importar los codigos de operaciones
-from Other.OperationCodes import *
+# Importar la clase cuadruplos y sus operaciones
+from Other.Quadruples import *
 
 
 # Tabla de Variables
@@ -164,11 +162,7 @@ def p_else_posible(p):
 			|'''
 
 def p_assignation(p):
-	'''assignation : ID arr_par EQUALS assign SEMICOLON'''
-
-def p_assign(p):
-	'''assign : expression
-			| func_call'''
+	'''assignation : ID arr_par EQUALS expression SEMICOLON'''
 
 def p_func_call(p):
 	'''func_call : ID LPAR params RPAR'''
@@ -192,37 +186,38 @@ def p_expression(p):
 	'''expression : conc expression_aux'''
 
 def p_expression_aux(p):
-	'''expression_aux : ao conc expression_aux
+	'''expression_aux : ao add_to_pilaOptr conc expression_aux
 			|'''
 
 def p_conc(p):
 	'''conc : exp conc_aux'''
 
 def p_conc_aux(p):
-	'''conc_aux : comp exp
+	'''conc_aux : comp add_to_pilaOptr exp
 				|'''
 
 def p_exp(p):
 	'''exp : term exp_aux'''
 
 def p_exp_aux(p):
-	'''exp_aux : pl term exp_aux
+	'''exp_aux : pl add_to_pilaOptr term exp_aux
 			|'''
 
 def p_term(p):
 	'''term : factor term_aux'''
 
 def p_term_aux(p):
-	'''term_aux : dm factor term_aux
+	'''term_aux : dm add_to_pilaOptr factor term_aux
 			|'''
 
 def p_factor(p):
-	'''factor : LPAR expression RPAR
+	'''factor : LPAR add_to_pilaOptr expression RPAR
 			| var_cte'''
 
 def p_ao(p):
 	'''ao : AND
 			| OR'''
+	p[0] = p[1]
 
 def p_comp(p):
 	'''comp : GREATER
@@ -231,18 +226,31 @@ def p_comp(p):
 			| LESSOREQUAL
 			| EQUALEQUALS
 			| DIFFERENT'''
+	p[0] = p[1]
 
 def p_pl(p):
 	'''pl : PLUS
 			| MINUS'''
+	p[0] = p[1]
+
+def p_add_to_pilaOptr(p):
+	'''add_to_pilaOptr :'''
+	pilaOptr.push(p[-1])
 
 def p_dm(p):
 	'''dm : MULTIPLICATION
 			| DIVISION
 			| MOD'''
+	p[0] = p[1]
 
 def p_main(p):
-	'''main : MAIN main_block'''
+	'''main : MAIN main_to_proc_dir main_block'''
+
+def p_main_to_proc_dir(p):
+	'''main_to_proc_dir :'''
+	procname = p[-1]
+	scope.append(procname)
+	varTable[procname] = {}
 
 def p_main_block(p):
 	'''main_block : LBRACKET more_vars more_statement RBRACKET'''
@@ -269,6 +277,8 @@ if __name__ == '__main__':
 			if (drawyparser.parse(data, tracking=True) == 'PROGRAM COMPILED'):
 				#print varTable
 				#print dirProcedures
+				print("===Pila Operadores===")
+				printStack(pilaOptr)
 				print "Valid syntax"
 
 		except EOFError:

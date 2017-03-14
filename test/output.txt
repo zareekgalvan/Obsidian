@@ -1,12 +1,68 @@
+----------------------------------------------
 1. Variables Test:
+===Pila Operadores===
+-------------------
+-------------------
 Valid syntax
+----------------------------------------------
 2. Functions Test:
-Function "x" already registered in line 3
+===Pila Operadores===
+-------------------
+-------------------
+Valid syntax
+----------------------------------------------
 3. Statements Test:
-Variable "x" in line 1 already registered
+===Pila Operadores===
+-------------------
+*
+%
++
+-------------------
+Valid syntax
+----------------------------------------------
 4. Expressions Test:
-Variable "x" in line 1 already registered
+===Pila Operadores===
+-------------------
+&&
+-
+/
+/
+(
+*
+*
+>
+-
+/
++
++
+(
+*
+%
++
+-------------------
+Valid syntax
+----------------------------------------------
 5. Main Test:
-Variable "x" in line 2 already registered
+===Pila Operadores===
+-------------------
+&&
+-
+/
+/
+(
+*
+*
+>
+-
+/
++
++
+(
+*
+%
++
+-------------------
+Valid syntax
+----------------------------------------------
 6. Complete Test:
-Variable "x" in line 1 already registered
+Function "x" already registered in line 70

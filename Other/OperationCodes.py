@@ -13,7 +13,10 @@ operationCodes = {
 	'<=' : 11,
 	'>=' : 12,
 	'&&' : 13,
-	'||' : 14
+	'||' : 14,
+	'read' : 15,
+	'write' : 16,
+	'return' : 17
 }
 
 # Obtener el codigo de operacion

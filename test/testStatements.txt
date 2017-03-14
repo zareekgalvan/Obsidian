@@ -1,24 +1,9 @@
-func bool x(int x, double x, bool x, int x)
+func bool x(int xx, double xxx, bool xs, int xxs)
 {
 	read(x);
 }
 
-func bool x(int x, double x, bool x, int x)
-{
-	read(x[9]);
-}
-
-func bool x(int x, double x, bool x, int x)
-{
-	read(x[0][true]);
-}
-
-func bool x(int x, double x, bool x, int x)
-{
-	write(x);
-}
-
-func bool x(int x, double x, bool x, int x)
+func bool xz(int xy, double bx, bool hx, int jx)
 {
 	while(x + y)
 	{
@@ -33,7 +18,7 @@ func bool x(int x, double x, bool x, int x)
 	}
 }
 
-func bool x(int x, double x, bool x, int x)
+func bool x3(int x33, double d3x, bool f3x, int xf3)
 {
 	if(5%5)
 	{
