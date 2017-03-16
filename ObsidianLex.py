@@ -15,7 +15,6 @@ reserved = {
 	'read' : 'READ',
 	'write' : 'WRITE',
 	'true' : 'TRUE',
-	'false' : 'FALSE',
 	'return' : 'RETURN'
 }
 
@@ -70,8 +69,8 @@ def t_CTEINT(t):
 # Expresion regular para las constantes booleanas
 
 def t_CTEBOOL(t):
-	r'true|false'
-	t.value = bool(t.value)
+	r'false|true'
+	t.value = t.value
 	return t
 
 # Expresion regular para los IDs

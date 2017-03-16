@@ -6,17 +6,6 @@ from ObsidianLex import tokens
 # Importar la clase cuadruplos y sus operaciones
 from Other.Quadruples import *
 
-
-# Tabla de Variables
-scope = ['global']
-lastType = []
-varTable = {}
-varTable[scope[len(scope)-1]] = {}
-
-# Directorio de procedimientos
-dirProcedures = {}
-
-
 # Definicion de las reglas
 def p_program(p):
 	'''program : more_vars more_func main'''
@@ -63,9 +52,7 @@ def p_arr(p):
 			|'''
 
 def p_var_cte(p):
-	'''var_cte : CTEINT
-			| CTEDOUBLE
-			| CTEBOOL
+	'''var_cte : const
 			| ID arr
 			| func_call'''
 	p[0] = p[1]
@@ -74,6 +61,7 @@ def p_const(p):
 	'''const : CTEINT
 			| CTEDOUBLE
 			| CTEBOOL'''
+	p[0] = p[1]
 
 def p_more_func(p):
 	'''more_func : func
@@ -211,8 +199,8 @@ def p_term_aux(p):
 			|'''
 
 def p_factor(p):
-	'''factor : LPAR add_to_pilaOptr expression RPAR
-			| var_cte'''
+	'''factor : LPAR add_to_pilaOptr expression RPAR pop_false_bottom
+			| var_cte to_pilaOp'''
 
 def p_ao(p):
 	'''ao : AND
@@ -233,9 +221,50 @@ def p_pl(p):
 			| MINUS'''
 	p[0] = p[1]
 
+def p_to_pilaOp(p):
+	'''to_pilaOp :'''
+	#hacer validaciones de tipo
+	line = p.lineno(0)
+	var = p[-1]
+	if type(var) is int:
+		#print var, "is int in line %s" %(line)
+		pilaOp.push(var)
+		pTypes.push('int')
+	elif type(var) is float:
+		#print var, "is double in line %s" %(line)
+		pilaOp.push(var)
+		pTypes.push('double')
+	elif var == "true" or p[-1] == "false":
+		#print var, "is bool in line %s" %(line)
+		pilaOp.push(var)
+		pTypes.push('bool')
+	elif var in dirProcedures:
+		#print var, "is function of type %s in line %s" % (dirProcedures[var]['func_type'], line)
+		pilaOp.push(var)
+		pTypes.push(dirProcedures[var]['func_type'])
+	elif var in varTable[scope[len(scope)-1]]:
+		#print p[-1], "is %s in line %s" %(varTable[scope[len(scope)-1]][p[-1]], line)
+		pilaOp.push(var)
+		pTypes.push(varTable[scope[len(scope)-1]][p[-1]])
+	elif var in varTable['global']:
+		#print p[-1], "is %s in line %s" %(varTable['global'][p[-1]], line)
+		pilaOp.push(var)
+		pTypes.push(varTable['global'][p[-1]])
+	else:
+		print p[-1], 'in line %s is not declared' % line
+		#sys.exit()
+
 def p_add_to_pilaOptr(p):
 	'''add_to_pilaOptr :'''
 	pilaOptr.push(p[-1])
+
+def p_pop_false_bottom(p):
+	'''pop_false_bottom :'''
+	if pilaOptr.peek() == '(':
+		pilaOptr.pop()
+	'''else:
+		print "No es un '(' al top del pilaOptr"
+		sys.exit()'''
 
 def p_dm(p):
 	'''dm : MULTIPLICATION
@@ -275,10 +304,7 @@ if __name__ == '__main__':
 			# Parsear el contenido
 			
 			if (drawyparser.parse(data, tracking=True) == 'PROGRAM COMPILED'):
-				#print varTable
-				#print dirProcedures
-				print("===Pila Operadores===")
-				printStack(pilaOptr)
+				#printAll()
 				print "Valid syntax"
 
 		except EOFError:

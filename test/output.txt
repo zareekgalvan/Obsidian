@@ -1,68 +1,45 @@
 ----------------------------------------------
 1. Variables Test:
-===Pila Operadores===
--------------------
--------------------
 Valid syntax
 ----------------------------------------------
 2. Functions Test:
-===Pila Operadores===
--------------------
--------------------
+i in line 34 is not declared
+hi in line 39 is not declared
 Valid syntax
 ----------------------------------------------
 3. Statements Test:
-===Pila Operadores===
--------------------
-*
-%
-+
--------------------
+y in line 8 is not declared
+None in line 26 is not declared
 Valid syntax
 ----------------------------------------------
 4. Expressions Test:
-===Pila Operadores===
--------------------
-&&
--
-/
-/
-(
-*
-*
->
--
-/
-+
-+
-(
-*
-%
-+
--------------------
+y in line 3 is not declared
+None in line 21 is not declared
+e in line 25 is not declared
+r in line 25 is not declared
+t in line 25 is not declared
+k in line 25 is not declared
+i in line 25 is not declared
+None in line 25 is not declared
 Valid syntax
 ----------------------------------------------
 5. Main Test:
-===Pila Operadores===
--------------------
-&&
--
-/
-/
-(
-*
-*
->
--
-/
-+
-+
-(
-*
-%
-+
--------------------
+None in line 47 is not declared
+e in line 51 is not declared
+r in line 51 is not declared
+t in line 51 is not declared
+i in line 51 is not declared
+None in line 51 is not declared
 Valid syntax
 ----------------------------------------------
 6. Complete Test:
-Function "x" already registered in line 70
+i in line 67 is not declared
+i in line 81 is not declared
+hi in line 86 is not declared
+None in line 117 is not declared
+e in line 121 is not declared
+r in line 121 is not declared
+t in line 121 is not declared
+i in line 121 is not declared
+None in line 121 is not declared
+Valid syntax

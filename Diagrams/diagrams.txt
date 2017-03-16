@@ -22,7 +22,7 @@ CICLE ::= 'while' '(' EXPRESSION ')' BLOCK
 
 CONDITION ::= 'if' '(' EXPRESSION ')' BLOCK ("else" BLOCK)?
 
-ASSIGNATION ::= 'id' ('[' EXP ']')* '=' (EXPRESSION | FUNC_CALL) ';'
+ASSIGNATION ::= 'id' ('[' EXP ']')* '=' EXPRESSION ';'
 
 FUNC_CALL ::= 'id' '(' (EXP (',' EXP)*)? ')' ';'
 

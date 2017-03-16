@@ -1,11 +1,6 @@
 from OperationCodes import *
 from SemanticCube import *
-from Structs import *
-
-pilaOp = Stack()
-pilaOptr = Stack()
-pSaltos = Stack()
-pTypes = Stack()
+from Declarations import *
 
 # Clase cuadruplo para la generacion de codigo intermedio
 class Quadruple:

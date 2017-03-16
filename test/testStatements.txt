@@ -11,7 +11,7 @@ func bool xz(int xy, double bx, bool hx, int jx)
 		{
 			if(false)
 			{
-				x = 5;
+				x = 5.6;
 				y();
 			}
 		}
@@ -22,7 +22,7 @@ func bool x3(int x33, double d3x, bool f3x, int xf3)
 {
 	if(5%5)
 	{
-		write(x);
+		write(x3);
 		y(8,y());
 	}
 	else {

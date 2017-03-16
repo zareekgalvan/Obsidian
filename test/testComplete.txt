@@ -67,77 +67,41 @@ func double x14(int x15, double x16)
 	return i;
 }
 
-func void x(int x, double x, bool x)
+func int f2(int i)
+{
+	int xg = 5;
+	int fn, yg, gg, h=x, e;
+}
+
+func double c(int xj, double yf)
+{
+	int zp;
+	int tt = true;
+	read(x);
+	return i;
+}
+
+func void w(int dd, double dx, bool xss)
 {
 	return hi;
 }
 
-func bool x(int x, double x, bool x, int x)
+func bool s(int xts, double ax, bool hx, int vx)
 {
 	
 }
 
-func bool x(int x, double x, bool x, int x)
-{
-	while(x + y)
-	{
-		while(5)
-		{
-			if(false)
-			{
-				x = 5;
-				y();
-			}
-		}
-	}
-}
-
-func bool x(int x, double x, bool x, int x)
-{
-	if(5%5)
-	{
-		write(x);
-		y(8,y(x,x,x));
-	}
-	else {
-		x = 4 * 6;
-		x = (5+6+6)/8 - 6 > 6*e*(r/t/k)-r(i) && true;
-	}
-}
-
 main {
-	int x, y, x, y=x, y;
-	int x = 9, x = 9.0, x[1][1][1][1];
-	int x = 9.0;
-	int x = true;
-	int x = x;
-	int x = x[1];
-	int x = x[true];
-	int x = x[1.0];
-	int x = x[1][1];
-	int x = x[1][1][1][1];
-
-	double x;
-	double x = 9;
-	double x = 9.0;
-	double x = true;
-	double x = x;
-	double x = x[1];
-	double x = x[true];
-	double x = x[1.0];
-	double x = x[1][1];
-	double x = x[1][1][1][1];
-
-	bool x;
-	bool x = 9;
-	bool x = 9.0;
-	bool x = true;
-	bool x = x;
-	bool x = x[1];
-	bool x = x[true];
-	bool x = x[1.0];
-	bool x = x[1][1];
-	bool x = x[1][1][1][1];
+	bool xzs;
+	bool xxsxx = 9;
+	bool xsc = 9.0;
+	bool xcsc = true;
+	bool xvsv = x;
+	bool xbsb = x[1];
+	bool nsn = x[true];
+	bool msm = x[1.0];
+	bool xshh = x[1][1];
+	bool xgsg = x[1][1][1][1];
 
 	while(x + y)
 	{

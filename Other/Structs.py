@@ -67,6 +67,6 @@ class Stack():
 def printStack(stack):
     print "-------------------"
     while not stack.isEmpty():
-        print stack.peek()
+        print stack.peek(), ",",
         stack.pop()
-    print "-------------------"
+    print "\n-------------------"

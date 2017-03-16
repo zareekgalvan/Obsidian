@@ -16,7 +16,13 @@ operationCodes = {
 	'||' : 14,
 	'read' : 15,
 	'write' : 16,
-	'return' : 17
+	'return' : 17,
+	'endproc' : 18,
+	'gosub' : 19,
+	'era' : 20,
+	'gotof' : 21,
+	'gotot' : 22,
+	'goto' : 23
 }
 
 # Obtener el codigo de operacion
