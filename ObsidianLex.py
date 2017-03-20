@@ -14,7 +14,6 @@ reserved = {
 	'while' : 'WHILE',
 	'read' : 'READ',
 	'write' : 'WRITE',
-	'true' : 'TRUE',
 	'return' : 'RETURN'
 }
 

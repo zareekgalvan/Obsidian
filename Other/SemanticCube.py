@@ -154,8 +154,8 @@ semanticCube = {
 }
 
 # Obtener el tipo de la operacion realizada
-def getType(op1, op2, oper):
-	return semanticCube[op1][op2][oper]
+def getType(ltype, rtype, oper):
+	return semanticCube[ltype][rtype][oper]
 
 # Probar que este declarado correctamente el cubo semantico
 def printSemanticCube():

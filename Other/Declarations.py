@@ -16,17 +16,12 @@ pilaOptr = Stack()
 pSaltos = Stack()
 pTypes = Stack()
 
-def printAll():
-	#print "===Var Table==="
-	#pprint.pprint(varTable)
-	#print "===Dir Proc==="
-	#pprint.pprint(dirProcedures)
-	print("===Pila Operadores===")
-	print(pilaOptr.size())
-	printStack(pilaOptr)
-	print("===Pila Operandos===")
-	print(pilaOp.size())
-	printStack(pilaOp)
-	print("===Pila tipos===")
-	print(pTypes.size())
-	printStack(pTypes)
+# Temporales
+iTempCount = 1
+tempTable = {}
+
+# Lista de operandos
+ands = ['&&', '||']
+comps = ['<', '>', '>=', '<=', '==', '!=']
+sums = ['+', '-']
+mults = ['*', '/', '%']
