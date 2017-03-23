@@ -62,11 +62,3 @@ class Stack():
     # Regresa el tamano ( numero de elementos) del stack
     def size(self):
         return len(self.items)
-
-
-def printStack(stack):
-    print "-------------------"
-    while not stack.isEmpty():
-        print stack.peek(), ",",
-        stack.pop()
-    print "\n-------------------"

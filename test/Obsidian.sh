@@ -23,4 +23,6 @@ echo "----------------------------------------------" >> test/output.txt
 echo "6. Complete Test:" >> test/output.txt 
 python ObsidianParser.py test/testComplete.txt >> test/output.txt  
 
+git log --pretty=format:'%h : %s' --graph > Other/commits.log
+
 more test/output.txt

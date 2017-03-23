@@ -1,5 +1,7 @@
 from Structs import *
 import pprint
+from SemanticCube import *
+from Quadruples import *
 
 # Tabla de Variables
 scope = ['global']
@@ -25,3 +27,9 @@ ands = ['&&', '||']
 comps = ['<', '>', '>=', '<=', '==', '!=']
 sums = ['+', '-']
 mults = ['*', '/', '%']
+
+# Cuadruplos
+quadruples = Quadruples()
+
+# Debbuging mode
+debug = 'off'

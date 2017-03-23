@@ -1,3 +1,6 @@
+* 5e0a054 : 3rd delivery: Generate quadruples for exps Vars and constants types implementation Reorganization of files Declarations file created Corrected test 6 Edit diagrams
+* 75eb1b6 : 3rd delivery: Vars and Constants type verification implementation Add Declartion file Reorganization of files Edited RR Diagrams Test 6 correction
+* 3919fab : Add Structs Add more operation codes Add class quadruple and stacks items Verify test 1-5 (test 6 pending) Add operators to pilaOptr
 * 7548152 : Procedure name now in varTable[global] Add Semantic Cube Add Operation Codes Add validation for var types and constants Modify variable and function names error message
 * cab1392 : Comments now allowed in code Parser now tells when a variable is already declared
 * 062a859 : Add commit history Modify readme.md

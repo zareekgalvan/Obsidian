@@ -1,3 +1,5 @@
+import sys
+
 # Cubo semantico que define las operaciones que pueden realizarse 
 # y el valor de retorno que generan
 semanticCube = {
@@ -152,13 +154,3 @@ semanticCube = {
 		}
 	}
 }
-
-# Obtener el tipo de la operacion realizada
-def getType(ltype, rtype, oper):
-	return semanticCube[ltype][rtype][oper]
-
-# Probar que este declarado correctamente el cubo semantico
-def printSemanticCube():
-	for key in semanticCube:
-		for  key2 in semanticCube[key]:
-			print semanticCube[key][key2]

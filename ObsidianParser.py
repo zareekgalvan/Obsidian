@@ -1,10 +1,9 @@
 import ply.yacc as yacc
-import sys
 
 # Importar tokens del lexer
 from ObsidianLex import tokens
 # Importar la clase cuadruplos y sus operaciones
-from Other.Quadruples import *
+from Other.Functions import *
 
 # Definicion de las reglas
 def p_program(p):
@@ -134,13 +133,28 @@ def p_statement(p):
 		| func_call SEMICOLON'''
 
 def p_read(p):
-	'''read : READ LPAR ID arr_par RPAR SEMICOLON'''
+	'''read : READ LPAR ID arr_par RPAR gen_read_quad SEMICOLON'''
+
+def p_gen_red_quad(p):
+	'''gen_read_quad :'''
+	line = p.lineno(0)
+	gen_est_quad(line, 'read')
 
 def p_write(p):
-	'''write : WRITE LPAR exp RPAR SEMICOLON'''
+	'''write : WRITE LPAR exp RPAR gen_write_quad SEMICOLON'''
+
+def p_gen_write_quad(p):
+	'''gen_write_quad :'''
+	line = p.lineno(0)
+	gen_est_quad(line, 'write')
 
 def p_cicle(p):
 	'''cicle : WHILE LPAR expression RPAR block'''
+
+def p_gen_cicle_quad(p):
+	'''gen_cicle_quad :'''
+	line = p.lineno(0)
+	gen_est_quad(line, 'cicle')
 
 def p_condition(p):
 	'''condition : IF LPAR expression RPAR block else_posible'''
@@ -150,7 +164,12 @@ def p_else_posible(p):
 			|'''
 
 def p_assignation(p):
-	'''assignation : ID arr_par EQUALS expression SEMICOLON'''
+	'''assignation : ID arr_par EQUALS expression gen_assignation_quad SEMICOLON'''
+
+def p_gen_assignation_quad(p):
+	'''gen_assignation_quad :'''
+	line = p.lineno(0)
+	gen_est_quad(line, 'assignation')
 
 def p_func_call(p):
 	'''func_call : ID LPAR params RPAR'''
@@ -172,44 +191,19 @@ def p_arr_par(p):
 
 def p_expression(p):
 	'''expression : conc gen_conc_quad expression_aux'''
+	p[0] = p[1]
 
 def p_expression_aux(p):
 	'''expression_aux : ao add_to_pilaOptr conc gen_conc_quad expression_aux
 			|'''
-
 def p_gen_conc_quad(p):
 	'''gen_conc_quad :'''
 	line = p.lineno(0)
-	if pilaOptr.isEmpty():
-		return
-	elif pilaOptr.peek() in ands and pilaOptr.size() > 1:
-		rOperand = pilaOp.peek()
-		pilaOp.pop()
-		rType = pTypes.peek()
-		pTypes.pop()
-		lOperand = pilaOp.peek()
-		pilaOp.pop()
-		lType = pTypes.peek()
-		pTypes.pop()
-		oper = pilaOptr.peek()
-		pilaOptr.pop()
-		res = getType(lType, rType, oper)
-		if res != 'ERROR':
-			global iTempCount
-			temp = "t" + str(iTempCount)
-			iTempCount += 1 
-			quad = Quadruple(oper, lOperand, rOperand, temp)
-			quadruples.append(quad)
-			pTypes.push(res)
-			pilaOp.push(temp)
-		else:
-			print "Type mismatch in line %s" % line
-	'''else:
-		print "Not enough operands in stack"
-		#sys.exit()'''
+	gen_exp_quad(line, 'conc')
 
 def p_conc(p):
 	'''conc : exp gen_comp_quad conc_aux'''
+	p[0] = p[1]
 
 def p_conc_aux(p):
 	'''conc_aux : comp add_to_pilaOptr exp gen_comp_quad
@@ -218,36 +212,11 @@ def p_conc_aux(p):
 def p_gen_comp_quad(p):
 	'''gen_comp_quad :'''
 	line = p.lineno(0)
-	if pilaOptr.isEmpty():
-		return
-	elif pilaOptr.peek() in comps and pilaOptr.size() > 1:
-		rOperand = pilaOp.peek()
-		pilaOp.pop()
-		rType = pTypes.peek()
-		pTypes.pop()
-		lOperand = pilaOp.peek()
-		pilaOp.pop()
-		lType = pTypes.peek()
-		pTypes.pop()
-		oper = pilaOptr.peek()
-		pilaOptr.pop()
-		res = getType(lType, rType, oper)
-		if res != 'ERROR':
-			global iTempCount
-			temp = "t" + str(iTempCount)
-			iTempCount += 1 
-			quad = Quadruple(oper, lOperand, rOperand, temp)
-			quadruples.append(quad)
-			pTypes.push(res)
-			pilaOp.push(temp)
-		else:
-			print "Type mismatch in line %s" % line
-	'''else:
-		print "Not enough operands in stack"
-		#sys.exit()'''
+	gen_exp_quad(line, 'comp')
 
 def p_exp(p):
 	'''exp : term gen_term_quad exp_aux'''
+	p[0] = p[1]
 
 def p_exp_aux(p):
 	'''exp_aux : pl add_to_pilaOptr term gen_term_quad exp_aux
@@ -256,36 +225,11 @@ def p_exp_aux(p):
 def p_gen_term_quad(p):
 	'''gen_term_quad :'''
 	line = p.lineno(0)
-	if pilaOptr.isEmpty():
-		return
-	elif pilaOptr.peek() in sums and pilaOptr.size() > 1:
-		rOperand = pilaOp.peek()
-		pilaOp.pop()
-		rType = pTypes.peek()
-		pTypes.pop()
-		lOperand = pilaOp.peek()
-		pilaOp.pop()
-		lType = pTypes.peek()
-		pTypes.pop()
-		oper = pilaOptr.peek()
-		pilaOptr.pop()
-		res = getType(lType, rType, oper)
-		if res != 'ERROR':
-			global iTempCount
-			temp = "t" + str(iTempCount)
-			iTempCount += 1 
-			quad = Quadruple(oper, lOperand, rOperand, temp)
-			quadruples.append(quad)
-			pTypes.push(res)
-			pilaOp.push(temp)
-		else:
-			print "Type mismatch in line %s" % line
-	'''else:
-		print "Not enough operands in stack"
-		#sys.exit()'''
+	gen_exp_quad(line, 'term')
 
 def p_term(p):
 	'''term : factor gen_factor_quad term_aux'''
+	p[0] = p[1]
 
 def p_term_aux(p):
 	'''term_aux : dm add_to_pilaOptr factor gen_factor_quad term_aux
@@ -294,37 +238,15 @@ def p_term_aux(p):
 def p_gen_factor_quad(p):
 	'''gen_factor_quad :'''
 	line = p.lineno(0)
-	if pilaOptr.isEmpty():
-		return
-	elif pilaOptr.peek() in mults and pilaOptr.size() > 1:
-		rOperand = pilaOp.peek()
-		pilaOp.pop()
-		rType = pTypes.peek()
-		pTypes.pop()
-		lOperand = pilaOp.peek()
-		pilaOp.pop()
-		lType = pTypes.peek()
-		pTypes.pop()
-		oper = pilaOptr.peek()
-		pilaOptr.pop()
-		res = getType(lType, rType, oper)
-		if res != 'ERROR':
-			global iTempCount
-			temp = "t" + str(iTempCount)
-			iTempCount += 1 
-			quad = Quadruple(oper, lOperand, rOperand, temp)
-			quadruples.append(quad)
-			pTypes.push(res)
-			pilaOp.push(temp)
-		else:
-			print "Type mismatch in line %s" % line
-	'''else:
-		print "Not enough operands in stack"
-		#sys.exit()'''
+	gen_exp_quad(line, 'factor')
 
 def p_factor(p):
 	'''factor : LPAR add_to_pilaOptr expression RPAR pop_false_bottom
 			| var_cte to_pilaOp'''
+	if p[1] != '(':
+		p[0] = p[1]
+	else:
+		p[0] = p[3]
 
 def p_ao(p):
 	'''ao : AND
@@ -350,33 +272,7 @@ def p_to_pilaOp(p):
 	#hacer validaciones de tipo
 	line = p.lineno(0)
 	var = p[-1]
-	if type(var) is int:
-		#print var, "is int in line %s" %(line)
-		pilaOp.push(var)
-		pTypes.push('int')
-	elif type(var) is float:
-		#print var, "is double in line %s" %(line)
-		pilaOp.push(var)
-		pTypes.push('double')
-	elif var == "true" or p[-1] == "false":
-		#print var, "is bool in line %s" %(line)
-		pilaOp.push(var)
-		pTypes.push('bool')
-	elif var in dirProcedures:
-		#print var, "is function of type %s in line %s" % (dirProcedures[var]['func_type'], line)
-		pilaOp.push(var)
-		pTypes.push(dirProcedures[var]['func_type'])
-	elif var in varTable[scope[len(scope)-1]]:
-		#print p[-1], "is %s in line %s" %(varTable[scope[len(scope)-1]][p[-1]], line)
-		pilaOp.push(var)
-		pTypes.push(varTable[scope[len(scope)-1]][p[-1]])
-	elif var in varTable['global']:
-		#print p[-1], "is %s in line %s" %(varTable['global'][p[-1]], line)
-		pilaOp.push(var)
-		pTypes.push(varTable['global'][p[-1]])
-	#else:
-		#print p[-1], 'in line %s is not declared' % line
-		#sys.exit()
+	to_pilaOp(var, line, p)
 
 def p_add_to_pilaOptr(p):
 	'''add_to_pilaOptr :'''
@@ -386,9 +282,9 @@ def p_pop_false_bottom(p):
 	'''pop_false_bottom :'''
 	if pilaOptr.peek() == '(':
 		pilaOptr.pop()
-	'''else:
-		print "No es un '(' al top del pilaOptr"
-		sys.exit()'''
+	else:
+		print "No es un '(' al top de la pilaOptr"
+		sys.exit()
 
 def p_dm(p):
 	'''dm : MULTIPLICATION
@@ -428,7 +324,9 @@ if __name__ == '__main__':
 			# Parsear el contenido
 			
 			if (drawyparser.parse(data, tracking=True) == 'PROGRAM COMPILED'):
-				printAll()
+				if debug == 'on':
+					printAll()
+
 				print "Valid syntax"
 
 		except EOFError:

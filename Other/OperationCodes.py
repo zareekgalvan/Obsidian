@@ -24,12 +24,3 @@ operationCodes = {
 	'gotot' : 22,
 	'goto' : 23
 }
-
-# Obtener el codigo de operacion
-def getOperationCode(oper):
-	return operationCodes[oper]
-
-# Probar que este declarado correctamente el diccionario de operaciones
-def printOperationCodes():
-	for key in operationCodes:
-		print operationCodes[key]
