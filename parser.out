@@ -48,7 +48,7 @@ Rule 42    statement -> cicle
 Rule 43    statement -> condition
 Rule 44    statement -> assignation
 Rule 45    statement -> func_call SEMICOLON
-Rule 46    read -> READ LPAR ID arr_par RPAR gen_read_quad SEMICOLON
+Rule 46    read -> READ LPAR ID to_pilaOp arr_par RPAR gen_read_quad SEMICOLON
 Rule 47    gen_read_quad -> <empty>
 Rule 48    write -> WRITE LPAR exp RPAR gen_write_quad SEMICOLON
 Rule 49    gen_write_quad -> <empty>
@@ -200,7 +200,7 @@ statement            : 38
 term                 : 73 74
 term_aux             : 77 78
 to_args              : 30 32
-to_pilaOp            : 82
+to_pilaOp            : 46 82
 to_proc_dir          : 24
 to_var_table         : 8
 var_assign           : 8
@@ -489,6 +489,7 @@ state 25
     MINUS           reduce using rule 20 (const -> CTEDOUBLE .)
     COMMA           reduce using rule 20 (const -> CTEDOUBLE .)
     RPAR            reduce using rule 20 (const -> CTEDOUBLE .)
+    RSQRTBRACKET    reduce using rule 20 (const -> CTEDOUBLE .)
     GREATER         reduce using rule 20 (const -> CTEDOUBLE .)
     LESS            reduce using rule 20 (const -> CTEDOUBLE .)
     GREATEROREQUAL  reduce using rule 20 (const -> CTEDOUBLE .)
@@ -497,7 +498,6 @@ state 25
     DIFFERENT       reduce using rule 20 (const -> CTEDOUBLE .)
     AND             reduce using rule 20 (const -> CTEDOUBLE .)
     OR              reduce using rule 20 (const -> CTEDOUBLE .)
-    RSQRTBRACKET    reduce using rule 20 (const -> CTEDOUBLE .)
     SEMICOLON       reduce using rule 20 (const -> CTEDOUBLE .)
 
 
@@ -519,6 +519,7 @@ state 27
     MINUS           reduce using rule 21 (const -> CTEBOOL .)
     COMMA           reduce using rule 21 (const -> CTEBOOL .)
     RPAR            reduce using rule 21 (const -> CTEBOOL .)
+    RSQRTBRACKET    reduce using rule 21 (const -> CTEBOOL .)
     GREATER         reduce using rule 21 (const -> CTEBOOL .)
     LESS            reduce using rule 21 (const -> CTEBOOL .)
     GREATEROREQUAL  reduce using rule 21 (const -> CTEBOOL .)
@@ -527,7 +528,6 @@ state 27
     DIFFERENT       reduce using rule 21 (const -> CTEBOOL .)
     AND             reduce using rule 21 (const -> CTEBOOL .)
     OR              reduce using rule 21 (const -> CTEBOOL .)
-    RSQRTBRACKET    reduce using rule 21 (const -> CTEBOOL .)
     SEMICOLON       reduce using rule 21 (const -> CTEBOOL .)
 
 
@@ -542,6 +542,7 @@ state 28
     MINUS           reduce using rule 19 (const -> CTEINT .)
     COMMA           reduce using rule 19 (const -> CTEINT .)
     RPAR            reduce using rule 19 (const -> CTEINT .)
+    RSQRTBRACKET    reduce using rule 19 (const -> CTEINT .)
     GREATER         reduce using rule 19 (const -> CTEINT .)
     LESS            reduce using rule 19 (const -> CTEINT .)
     GREATEROREQUAL  reduce using rule 19 (const -> CTEINT .)
@@ -550,7 +551,6 @@ state 28
     DIFFERENT       reduce using rule 19 (const -> CTEINT .)
     AND             reduce using rule 19 (const -> CTEINT .)
     OR              reduce using rule 19 (const -> CTEINT .)
-    RSQRTBRACKET    reduce using rule 19 (const -> CTEINT .)
     SEMICOLON       reduce using rule 19 (const -> CTEINT .)
 
 
@@ -619,6 +619,7 @@ state 33
     PLUS            reduce using rule 15 (arr -> .)
     MINUS           reduce using rule 15 (arr -> .)
     RPAR            reduce using rule 15 (arr -> .)
+    RSQRTBRACKET    reduce using rule 15 (arr -> .)
     GREATER         reduce using rule 15 (arr -> .)
     LESS            reduce using rule 15 (arr -> .)
     GREATEROREQUAL  reduce using rule 15 (arr -> .)
@@ -627,7 +628,6 @@ state 33
     DIFFERENT       reduce using rule 15 (arr -> .)
     AND             reduce using rule 15 (arr -> .)
     OR              reduce using rule 15 (arr -> .)
-    RSQRTBRACKET    reduce using rule 15 (arr -> .)
 
     arr                            shift and go to state 43
 
@@ -678,6 +678,9 @@ state 37
     MOD             reduce using rule 18 (var_cte -> func_call .)
     PLUS            reduce using rule 18 (var_cte -> func_call .)
     MINUS           reduce using rule 18 (var_cte -> func_call .)
+    COMMA           reduce using rule 18 (var_cte -> func_call .)
+    RPAR            reduce using rule 18 (var_cte -> func_call .)
+    RSQRTBRACKET    reduce using rule 18 (var_cte -> func_call .)
     GREATER         reduce using rule 18 (var_cte -> func_call .)
     LESS            reduce using rule 18 (var_cte -> func_call .)
     GREATEROREQUAL  reduce using rule 18 (var_cte -> func_call .)
@@ -686,10 +689,7 @@ state 37
     DIFFERENT       reduce using rule 18 (var_cte -> func_call .)
     AND             reduce using rule 18 (var_cte -> func_call .)
     OR              reduce using rule 18 (var_cte -> func_call .)
-    RPAR            reduce using rule 18 (var_cte -> func_call .)
     SEMICOLON       reduce using rule 18 (var_cte -> func_call .)
-    COMMA           reduce using rule 18 (var_cte -> func_call .)
-    RSQRTBRACKET    reduce using rule 18 (var_cte -> func_call .)
 
 
 state 38
@@ -701,6 +701,9 @@ state 38
     MOD             reduce using rule 16 (var_cte -> const .)
     PLUS            reduce using rule 16 (var_cte -> const .)
     MINUS           reduce using rule 16 (var_cte -> const .)
+    COMMA           reduce using rule 16 (var_cte -> const .)
+    RPAR            reduce using rule 16 (var_cte -> const .)
+    RSQRTBRACKET    reduce using rule 16 (var_cte -> const .)
     GREATER         reduce using rule 16 (var_cte -> const .)
     LESS            reduce using rule 16 (var_cte -> const .)
     GREATEROREQUAL  reduce using rule 16 (var_cte -> const .)
@@ -709,10 +712,7 @@ state 38
     DIFFERENT       reduce using rule 16 (var_cte -> const .)
     AND             reduce using rule 16 (var_cte -> const .)
     OR              reduce using rule 16 (var_cte -> const .)
-    RPAR            reduce using rule 16 (var_cte -> const .)
     SEMICOLON       reduce using rule 16 (var_cte -> const .)
-    COMMA           reduce using rule 16 (var_cte -> const .)
-    RSQRTBRACKET    reduce using rule 16 (var_cte -> const .)
 
 
 state 39
@@ -740,6 +740,7 @@ state 40
     PLUS            reduce using rule 15 (arr -> .)
     MINUS           reduce using rule 15 (arr -> .)
     RPAR            reduce using rule 15 (arr -> .)
+    RSQRTBRACKET    reduce using rule 15 (arr -> .)
     GREATER         reduce using rule 15 (arr -> .)
     LESS            reduce using rule 15 (arr -> .)
     GREATEROREQUAL  reduce using rule 15 (arr -> .)
@@ -748,7 +749,6 @@ state 40
     DIFFERENT       reduce using rule 15 (arr -> .)
     AND             reduce using rule 15 (arr -> .)
     OR              reduce using rule 15 (arr -> .)
-    RSQRTBRACKET    reduce using rule 15 (arr -> .)
 
     arr                            shift and go to state 47
 
@@ -781,6 +781,7 @@ state 43
     PLUS            reduce using rule 14 (arr -> LSQRTBRACKET const RSQRTBRACKET arr .)
     MINUS           reduce using rule 14 (arr -> LSQRTBRACKET const RSQRTBRACKET arr .)
     RPAR            reduce using rule 14 (arr -> LSQRTBRACKET const RSQRTBRACKET arr .)
+    RSQRTBRACKET    reduce using rule 14 (arr -> LSQRTBRACKET const RSQRTBRACKET arr .)
     GREATER         reduce using rule 14 (arr -> LSQRTBRACKET const RSQRTBRACKET arr .)
     LESS            reduce using rule 14 (arr -> LSQRTBRACKET const RSQRTBRACKET arr .)
     GREATEROREQUAL  reduce using rule 14 (arr -> LSQRTBRACKET const RSQRTBRACKET arr .)
@@ -789,7 +790,6 @@ state 43
     DIFFERENT       reduce using rule 14 (arr -> LSQRTBRACKET const RSQRTBRACKET arr .)
     AND             reduce using rule 14 (arr -> LSQRTBRACKET const RSQRTBRACKET arr .)
     OR              reduce using rule 14 (arr -> LSQRTBRACKET const RSQRTBRACKET arr .)
-    RSQRTBRACKET    reduce using rule 14 (arr -> LSQRTBRACKET const RSQRTBRACKET arr .)
 
 
 state 44
@@ -803,7 +803,7 @@ state 44
     (43) statement -> . condition
     (44) statement -> . assignation
     (45) statement -> . func_call SEMICOLON
-    (46) read -> . READ LPAR ID arr_par RPAR gen_read_quad SEMICOLON
+    (46) read -> . READ LPAR ID to_pilaOp arr_par RPAR gen_read_quad SEMICOLON
     (48) write -> . WRITE LPAR exp RPAR gen_write_quad SEMICOLON
     (50) cicle -> . WHILE LPAR expression RPAR block
     (52) condition -> . IF LPAR expression RPAR block else_posible
@@ -812,19 +812,19 @@ state 44
 
     RBRACKET        reduce using rule 39 (more_statement -> .)
     READ            shift and go to state 49
-    WRITE           shift and go to state 55
-    WHILE           shift and go to state 50
-    IF              shift and go to state 58
-    ID              shift and go to state 56
+    WRITE           shift and go to state 54
+    WHILE           shift and go to state 60
+    IF              shift and go to state 57
+    ID              shift and go to state 55
 
-    func_call                      shift and go to state 59
-    assignation                    shift and go to state 60
-    read                           shift and go to state 54
-    cicle                          shift and go to state 51
-    write                          shift and go to state 52
-    statement                      shift and go to state 53
+    func_call                      shift and go to state 58
+    assignation                    shift and go to state 59
+    read                           shift and go to state 53
+    cicle                          shift and go to state 50
+    write                          shift and go to state 51
+    statement                      shift and go to state 52
     more_statement                 shift and go to state 61
-    condition                      shift and go to state 57
+    condition                      shift and go to state 56
 
 state 45
 
@@ -884,6 +884,9 @@ state 47
     MOD             reduce using rule 17 (var_cte -> ID arr .)
     PLUS            reduce using rule 17 (var_cte -> ID arr .)
     MINUS           reduce using rule 17 (var_cte -> ID arr .)
+    COMMA           reduce using rule 17 (var_cte -> ID arr .)
+    RPAR            reduce using rule 17 (var_cte -> ID arr .)
+    RSQRTBRACKET    reduce using rule 17 (var_cte -> ID arr .)
     GREATER         reduce using rule 17 (var_cte -> ID arr .)
     LESS            reduce using rule 17 (var_cte -> ID arr .)
     GREATEROREQUAL  reduce using rule 17 (var_cte -> ID arr .)
@@ -892,10 +895,7 @@ state 47
     DIFFERENT       reduce using rule 17 (var_cte -> ID arr .)
     AND             reduce using rule 17 (var_cte -> ID arr .)
     OR              reduce using rule 17 (var_cte -> ID arr .)
-    RPAR            reduce using rule 17 (var_cte -> ID arr .)
     SEMICOLON       reduce using rule 17 (var_cte -> ID arr .)
-    COMMA           reduce using rule 17 (var_cte -> ID arr .)
-    RSQRTBRACKET    reduce using rule 17 (var_cte -> ID arr .)
 
 
 state 48
@@ -907,19 +907,12 @@ state 48
 
 state 49
 
-    (46) read -> READ . LPAR ID arr_par RPAR gen_read_quad SEMICOLON
+    (46) read -> READ . LPAR ID to_pilaOp arr_par RPAR gen_read_quad SEMICOLON
 
     LPAR            shift and go to state 70
 
 
 state 50
-
-    (50) cicle -> WHILE . LPAR expression RPAR block
-
-    LPAR            shift and go to state 71
-
-
-state 51
 
     (42) statement -> cicle .
 
@@ -928,11 +921,11 @@ state 51
     WHILE           reduce using rule 42 (statement -> cicle .)
     IF              reduce using rule 42 (statement -> cicle .)
     ID              reduce using rule 42 (statement -> cicle .)
-    RBRACKET        reduce using rule 42 (statement -> cicle .)
     RETURN          reduce using rule 42 (statement -> cicle .)
+    RBRACKET        reduce using rule 42 (statement -> cicle .)
 
 
-state 52
+state 51
 
     (41) statement -> write .
 
@@ -941,11 +934,11 @@ state 52
     WHILE           reduce using rule 41 (statement -> write .)
     IF              reduce using rule 41 (statement -> write .)
     ID              reduce using rule 41 (statement -> write .)
-    RBRACKET        reduce using rule 41 (statement -> write .)
     RETURN          reduce using rule 41 (statement -> write .)
+    RBRACKET        reduce using rule 41 (statement -> write .)
 
 
-state 53
+state 52
 
     (38) more_statement -> statement . more_statement
     (38) more_statement -> . statement more_statement
@@ -956,7 +949,7 @@ state 53
     (43) statement -> . condition
     (44) statement -> . assignation
     (45) statement -> . func_call SEMICOLON
-    (46) read -> . READ LPAR ID arr_par RPAR gen_read_quad SEMICOLON
+    (46) read -> . READ LPAR ID to_pilaOp arr_par RPAR gen_read_quad SEMICOLON
     (48) write -> . WRITE LPAR exp RPAR gen_write_quad SEMICOLON
     (50) cicle -> . WHILE LPAR expression RPAR block
     (52) condition -> . IF LPAR expression RPAR block else_posible
@@ -966,21 +959,21 @@ state 53
     RBRACKET        reduce using rule 39 (more_statement -> .)
     RETURN          reduce using rule 39 (more_statement -> .)
     READ            shift and go to state 49
-    WRITE           shift and go to state 55
-    WHILE           shift and go to state 50
-    IF              shift and go to state 58
-    ID              shift and go to state 56
+    WRITE           shift and go to state 54
+    WHILE           shift and go to state 60
+    IF              shift and go to state 57
+    ID              shift and go to state 55
 
-    func_call                      shift and go to state 59
-    assignation                    shift and go to state 60
-    read                           shift and go to state 54
-    cicle                          shift and go to state 51
-    write                          shift and go to state 52
-    statement                      shift and go to state 53
-    more_statement                 shift and go to state 72
-    condition                      shift and go to state 57
+    func_call                      shift and go to state 58
+    assignation                    shift and go to state 59
+    read                           shift and go to state 53
+    cicle                          shift and go to state 50
+    write                          shift and go to state 51
+    statement                      shift and go to state 52
+    more_statement                 shift and go to state 71
+    condition                      shift and go to state 56
 
-state 54
+state 53
 
     (40) statement -> read .
 
@@ -989,18 +982,18 @@ state 54
     WHILE           reduce using rule 40 (statement -> read .)
     IF              reduce using rule 40 (statement -> read .)
     ID              reduce using rule 40 (statement -> read .)
-    RBRACKET        reduce using rule 40 (statement -> read .)
     RETURN          reduce using rule 40 (statement -> read .)
+    RBRACKET        reduce using rule 40 (statement -> read .)
 
 
-state 55
+state 54
 
     (48) write -> WRITE . LPAR exp RPAR gen_write_quad SEMICOLON
 
-    LPAR            shift and go to state 73
+    LPAR            shift and go to state 72
 
 
-state 56
+state 55
 
     (55) assignation -> ID . arr_par EQUALS expression gen_assignation_quad SEMICOLON
     (57) func_call -> ID . LPAR params RPAR
@@ -1008,12 +1001,12 @@ state 56
     (64) arr_par -> .
 
     LPAR            shift and go to state 46
-    LSQRTBRACKET    shift and go to state 74
+    LSQRTBRACKET    shift and go to state 73
     EQUALS          reduce using rule 64 (arr_par -> .)
 
-    arr_par                        shift and go to state 75
+    arr_par                        shift and go to state 74
 
-state 57
+state 56
 
     (43) statement -> condition .
 
@@ -1022,25 +1015,25 @@ state 57
     WHILE           reduce using rule 43 (statement -> condition .)
     IF              reduce using rule 43 (statement -> condition .)
     ID              reduce using rule 43 (statement -> condition .)
-    RBRACKET        reduce using rule 43 (statement -> condition .)
     RETURN          reduce using rule 43 (statement -> condition .)
+    RBRACKET        reduce using rule 43 (statement -> condition .)
+
+
+state 57
+
+    (52) condition -> IF . LPAR expression RPAR block else_posible
+
+    LPAR            shift and go to state 75
 
 
 state 58
 
-    (52) condition -> IF . LPAR expression RPAR block else_posible
+    (45) statement -> func_call . SEMICOLON
 
-    LPAR            shift and go to state 76
+    SEMICOLON       shift and go to state 76
 
 
 state 59
-
-    (45) statement -> func_call . SEMICOLON
-
-    SEMICOLON       shift and go to state 77
-
-
-state 60
 
     (44) statement -> assignation .
 
@@ -1049,8 +1042,15 @@ state 60
     WHILE           reduce using rule 44 (statement -> assignation .)
     IF              reduce using rule 44 (statement -> assignation .)
     ID              reduce using rule 44 (statement -> assignation .)
-    RBRACKET        reduce using rule 44 (statement -> assignation .)
     RETURN          reduce using rule 44 (statement -> assignation .)
+    RBRACKET        reduce using rule 44 (statement -> assignation .)
+
+
+state 60
+
+    (50) cicle -> WHILE . LPAR expression RPAR block
+
+    LPAR            shift and go to state 77
 
 
 state 61
@@ -1106,6 +1106,7 @@ state 66
     MINUS           reduce using rule 80 (gen_factor_quad -> .)
     COMMA           reduce using rule 80 (gen_factor_quad -> .)
     RPAR            reduce using rule 80 (gen_factor_quad -> .)
+    RSQRTBRACKET    reduce using rule 80 (gen_factor_quad -> .)
     GREATER         reduce using rule 80 (gen_factor_quad -> .)
     LESS            reduce using rule 80 (gen_factor_quad -> .)
     GREATEROREQUAL  reduce using rule 80 (gen_factor_quad -> .)
@@ -1114,7 +1115,6 @@ state 66
     DIFFERENT       reduce using rule 80 (gen_factor_quad -> .)
     AND             reduce using rule 80 (gen_factor_quad -> .)
     OR              reduce using rule 80 (gen_factor_quad -> .)
-    RSQRTBRACKET    reduce using rule 80 (gen_factor_quad -> .)
     SEMICOLON       reduce using rule 80 (gen_factor_quad -> .)
 
     gen_factor_quad                shift and go to state 83
@@ -1131,6 +1131,7 @@ state 67
     MINUS           reduce using rule 93 (to_pilaOp -> .)
     COMMA           reduce using rule 93 (to_pilaOp -> .)
     RPAR            reduce using rule 93 (to_pilaOp -> .)
+    RSQRTBRACKET    reduce using rule 93 (to_pilaOp -> .)
     GREATER         reduce using rule 93 (to_pilaOp -> .)
     LESS            reduce using rule 93 (to_pilaOp -> .)
     GREATEROREQUAL  reduce using rule 93 (to_pilaOp -> .)
@@ -1139,7 +1140,6 @@ state 67
     DIFFERENT       reduce using rule 93 (to_pilaOp -> .)
     AND             reduce using rule 93 (to_pilaOp -> .)
     OR              reduce using rule 93 (to_pilaOp -> .)
-    RSQRTBRACKET    reduce using rule 93 (to_pilaOp -> .)
     SEMICOLON       reduce using rule 93 (to_pilaOp -> .)
 
     to_pilaOp                      shift and go to state 84
@@ -1153,6 +1153,7 @@ state 68
     MINUS           reduce using rule 76 (gen_term_quad -> .)
     COMMA           reduce using rule 76 (gen_term_quad -> .)
     RPAR            reduce using rule 76 (gen_term_quad -> .)
+    RSQRTBRACKET    reduce using rule 76 (gen_term_quad -> .)
     GREATER         reduce using rule 76 (gen_term_quad -> .)
     LESS            reduce using rule 76 (gen_term_quad -> .)
     GREATEROREQUAL  reduce using rule 76 (gen_term_quad -> .)
@@ -1161,7 +1162,6 @@ state 68
     DIFFERENT       reduce using rule 76 (gen_term_quad -> .)
     AND             reduce using rule 76 (gen_term_quad -> .)
     OR              reduce using rule 76 (gen_term_quad -> .)
-    RSQRTBRACKET    reduce using rule 76 (gen_term_quad -> .)
     SEMICOLON       reduce using rule 76 (gen_term_quad -> .)
 
     gen_term_quad                  shift and go to state 85
@@ -1179,44 +1179,12 @@ state 69
 
 state 70
 
-    (46) read -> READ LPAR . ID arr_par RPAR gen_read_quad SEMICOLON
+    (46) read -> READ LPAR . ID to_pilaOp arr_par RPAR gen_read_quad SEMICOLON
 
     ID              shift and go to state 88
 
 
 state 71
-
-    (50) cicle -> WHILE LPAR . expression RPAR block
-    (65) expression -> . conc gen_conc_quad expression_aux
-    (69) conc -> . exp gen_comp_quad conc_aux
-    (73) exp -> . term gen_term_quad exp_aux
-    (77) term -> . factor gen_factor_quad term_aux
-    (81) factor -> . LPAR add_to_pilaOptr expression RPAR pop_false_bottom
-    (82) factor -> . var_cte to_pilaOp
-    (16) var_cte -> . const
-    (17) var_cte -> . ID arr
-    (18) var_cte -> . func_call
-    (19) const -> . CTEINT
-    (20) const -> . CTEDOUBLE
-    (21) const -> . CTEBOOL
-    (57) func_call -> . ID LPAR params RPAR
-
-    LPAR            shift and go to state 64
-    ID              shift and go to state 40
-    CTEINT          shift and go to state 28
-    CTEDOUBLE       shift and go to state 25
-    CTEBOOL         shift and go to state 27
-
-    var_cte                        shift and go to state 67
-    conc                           shift and go to state 89
-    const                          shift and go to state 38
-    factor                         shift and go to state 66
-    func_call                      shift and go to state 37
-    term                           shift and go to state 68
-    exp                            shift and go to state 90
-    expression                     shift and go to state 91
-
-state 72
 
     (38) more_statement -> statement more_statement .
 
@@ -1224,7 +1192,7 @@ state 72
     RETURN          reduce using rule 38 (more_statement -> statement more_statement .)
 
 
-state 73
+state 72
 
     (48) write -> WRITE LPAR . exp RPAR gen_write_quad SEMICOLON
     (73) exp -> . term gen_term_quad exp_aux
@@ -1248,11 +1216,11 @@ state 73
     func_call                      shift and go to state 37
     term                           shift and go to state 68
     const                          shift and go to state 38
-    exp                            shift and go to state 92
+    exp                            shift and go to state 89
     factor                         shift and go to state 66
     var_cte                        shift and go to state 67
 
-state 74
+state 73
 
     (63) arr_par -> LSQRTBRACKET . exp RSQRTBRACKET arr_par
     (73) exp -> . term gen_term_quad exp_aux
@@ -1276,18 +1244,18 @@ state 74
     func_call                      shift and go to state 37
     term                           shift and go to state 68
     const                          shift and go to state 38
-    exp                            shift and go to state 93
+    exp                            shift and go to state 90
     factor                         shift and go to state 66
     var_cte                        shift and go to state 67
 
-state 75
+state 74
 
     (55) assignation -> ID arr_par . EQUALS expression gen_assignation_quad SEMICOLON
 
-    EQUALS          shift and go to state 94
+    EQUALS          shift and go to state 91
 
 
-state 76
+state 75
 
     (52) condition -> IF LPAR . expression RPAR block else_posible
     (65) expression -> . conc gen_conc_quad expression_aux
@@ -1311,15 +1279,15 @@ state 76
     CTEBOOL         shift and go to state 27
 
     var_cte                        shift and go to state 67
-    conc                           shift and go to state 89
+    conc                           shift and go to state 93
     const                          shift and go to state 38
     factor                         shift and go to state 66
     func_call                      shift and go to state 37
     term                           shift and go to state 68
-    exp                            shift and go to state 90
-    expression                     shift and go to state 95
+    exp                            shift and go to state 94
+    expression                     shift and go to state 92
 
-state 77
+state 76
 
     (45) statement -> func_call SEMICOLON .
 
@@ -1328,9 +1296,41 @@ state 77
     WHILE           reduce using rule 45 (statement -> func_call SEMICOLON .)
     IF              reduce using rule 45 (statement -> func_call SEMICOLON .)
     ID              reduce using rule 45 (statement -> func_call SEMICOLON .)
-    RBRACKET        reduce using rule 45 (statement -> func_call SEMICOLON .)
     RETURN          reduce using rule 45 (statement -> func_call SEMICOLON .)
+    RBRACKET        reduce using rule 45 (statement -> func_call SEMICOLON .)
 
+
+state 77
+
+    (50) cicle -> WHILE LPAR . expression RPAR block
+    (65) expression -> . conc gen_conc_quad expression_aux
+    (69) conc -> . exp gen_comp_quad conc_aux
+    (73) exp -> . term gen_term_quad exp_aux
+    (77) term -> . factor gen_factor_quad term_aux
+    (81) factor -> . LPAR add_to_pilaOptr expression RPAR pop_false_bottom
+    (82) factor -> . var_cte to_pilaOp
+    (16) var_cte -> . const
+    (17) var_cte -> . ID arr
+    (18) var_cte -> . func_call
+    (19) const -> . CTEINT
+    (20) const -> . CTEDOUBLE
+    (21) const -> . CTEBOOL
+    (57) func_call -> . ID LPAR params RPAR
+
+    LPAR            shift and go to state 64
+    ID              shift and go to state 40
+    CTEINT          shift and go to state 28
+    CTEDOUBLE       shift and go to state 25
+    CTEBOOL         shift and go to state 27
+
+    var_cte                        shift and go to state 67
+    conc                           shift and go to state 93
+    const                          shift and go to state 38
+    factor                         shift and go to state 66
+    func_call                      shift and go to state 37
+    term                           shift and go to state 68
+    exp                            shift and go to state 94
+    expression                     shift and go to state 95
 
 state 78
 
@@ -1384,8 +1384,8 @@ state 81
     func_call                      shift and go to state 37
     term                           shift and go to state 68
     const                          shift and go to state 38
-    conc                           shift and go to state 89
-    exp                            shift and go to state 90
+    conc                           shift and go to state 93
+    exp                            shift and go to state 94
     factor                         shift and go to state 66
     var_cte                        shift and go to state 67
     expression                     shift and go to state 99
@@ -1394,23 +1394,23 @@ state 82
 
     (57) func_call -> ID LPAR params RPAR .
 
+    SEMICOLON       reduce using rule 57 (func_call -> ID LPAR params RPAR .)
     MULTIPLICATION  reduce using rule 57 (func_call -> ID LPAR params RPAR .)
     DIVISION        reduce using rule 57 (func_call -> ID LPAR params RPAR .)
     MOD             reduce using rule 57 (func_call -> ID LPAR params RPAR .)
     PLUS            reduce using rule 57 (func_call -> ID LPAR params RPAR .)
     MINUS           reduce using rule 57 (func_call -> ID LPAR params RPAR .)
+    COMMA           reduce using rule 57 (func_call -> ID LPAR params RPAR .)
+    RPAR            reduce using rule 57 (func_call -> ID LPAR params RPAR .)
+    AND             reduce using rule 57 (func_call -> ID LPAR params RPAR .)
+    OR              reduce using rule 57 (func_call -> ID LPAR params RPAR .)
+    RSQRTBRACKET    reduce using rule 57 (func_call -> ID LPAR params RPAR .)
     GREATER         reduce using rule 57 (func_call -> ID LPAR params RPAR .)
     LESS            reduce using rule 57 (func_call -> ID LPAR params RPAR .)
     GREATEROREQUAL  reduce using rule 57 (func_call -> ID LPAR params RPAR .)
     LESSOREQUAL     reduce using rule 57 (func_call -> ID LPAR params RPAR .)
     EQUALEQUALS     reduce using rule 57 (func_call -> ID LPAR params RPAR .)
     DIFFERENT       reduce using rule 57 (func_call -> ID LPAR params RPAR .)
-    AND             reduce using rule 57 (func_call -> ID LPAR params RPAR .)
-    OR              reduce using rule 57 (func_call -> ID LPAR params RPAR .)
-    SEMICOLON       reduce using rule 57 (func_call -> ID LPAR params RPAR .)
-    COMMA           reduce using rule 57 (func_call -> ID LPAR params RPAR .)
-    RPAR            reduce using rule 57 (func_call -> ID LPAR params RPAR .)
-    RSQRTBRACKET    reduce using rule 57 (func_call -> ID LPAR params RPAR .)
 
 
 state 83
@@ -1426,6 +1426,7 @@ state 83
     MINUS           reduce using rule 79 (term_aux -> .)
     COMMA           reduce using rule 79 (term_aux -> .)
     RPAR            reduce using rule 79 (term_aux -> .)
+    RSQRTBRACKET    reduce using rule 79 (term_aux -> .)
     GREATER         reduce using rule 79 (term_aux -> .)
     LESS            reduce using rule 79 (term_aux -> .)
     GREATEROREQUAL  reduce using rule 79 (term_aux -> .)
@@ -1434,7 +1435,6 @@ state 83
     DIFFERENT       reduce using rule 79 (term_aux -> .)
     AND             reduce using rule 79 (term_aux -> .)
     OR              reduce using rule 79 (term_aux -> .)
-    RSQRTBRACKET    reduce using rule 79 (term_aux -> .)
     SEMICOLON       reduce using rule 79 (term_aux -> .)
     MULTIPLICATION  shift and go to state 103
     DIVISION        shift and go to state 100
@@ -1452,8 +1452,6 @@ state 84
     MOD             reduce using rule 82 (factor -> var_cte to_pilaOp .)
     PLUS            reduce using rule 82 (factor -> var_cte to_pilaOp .)
     MINUS           reduce using rule 82 (factor -> var_cte to_pilaOp .)
-    COMMA           reduce using rule 82 (factor -> var_cte to_pilaOp .)
-    RPAR            reduce using rule 82 (factor -> var_cte to_pilaOp .)
     GREATER         reduce using rule 82 (factor -> var_cte to_pilaOp .)
     LESS            reduce using rule 82 (factor -> var_cte to_pilaOp .)
     GREATEROREQUAL  reduce using rule 82 (factor -> var_cte to_pilaOp .)
@@ -1462,8 +1460,10 @@ state 84
     DIFFERENT       reduce using rule 82 (factor -> var_cte to_pilaOp .)
     AND             reduce using rule 82 (factor -> var_cte to_pilaOp .)
     OR              reduce using rule 82 (factor -> var_cte to_pilaOp .)
-    RSQRTBRACKET    reduce using rule 82 (factor -> var_cte to_pilaOp .)
+    RPAR            reduce using rule 82 (factor -> var_cte to_pilaOp .)
+    COMMA           reduce using rule 82 (factor -> var_cte to_pilaOp .)
     SEMICOLON       reduce using rule 82 (factor -> var_cte to_pilaOp .)
+    RSQRTBRACKET    reduce using rule 82 (factor -> var_cte to_pilaOp .)
 
 
 state 85
@@ -1476,6 +1476,7 @@ state 85
 
     COMMA           reduce using rule 75 (exp_aux -> .)
     RPAR            reduce using rule 75 (exp_aux -> .)
+    RSQRTBRACKET    reduce using rule 75 (exp_aux -> .)
     GREATER         reduce using rule 75 (exp_aux -> .)
     LESS            reduce using rule 75 (exp_aux -> .)
     GREATEROREQUAL  reduce using rule 75 (exp_aux -> .)
@@ -1484,7 +1485,6 @@ state 85
     DIFFERENT       reduce using rule 75 (exp_aux -> .)
     AND             reduce using rule 75 (exp_aux -> .)
     OR              reduce using rule 75 (exp_aux -> .)
-    RSQRTBRACKET    reduce using rule 75 (exp_aux -> .)
     SEMICOLON       reduce using rule 75 (exp_aux -> .)
     PLUS            shift and go to state 106
     MINUS           shift and go to state 105
@@ -1529,67 +1529,29 @@ state 87
 
 state 88
 
-    (46) read -> READ LPAR ID . arr_par RPAR gen_read_quad SEMICOLON
-    (63) arr_par -> . LSQRTBRACKET exp RSQRTBRACKET arr_par
-    (64) arr_par -> .
+    (46) read -> READ LPAR ID . to_pilaOp arr_par RPAR gen_read_quad SEMICOLON
+    (93) to_pilaOp -> .
 
-    LSQRTBRACKET    shift and go to state 74
-    RPAR            reduce using rule 64 (arr_par -> .)
+    LSQRTBRACKET    reduce using rule 93 (to_pilaOp -> .)
+    RPAR            reduce using rule 93 (to_pilaOp -> .)
 
-    arr_par                        shift and go to state 110
+    to_pilaOp                      shift and go to state 110
 
 state 89
 
-    (65) expression -> conc . gen_conc_quad expression_aux
-    (68) gen_conc_quad -> .
+    (48) write -> WRITE LPAR exp . RPAR gen_write_quad SEMICOLON
 
-    AND             reduce using rule 68 (gen_conc_quad -> .)
-    OR              reduce using rule 68 (gen_conc_quad -> .)
-    RPAR            reduce using rule 68 (gen_conc_quad -> .)
-    SEMICOLON       reduce using rule 68 (gen_conc_quad -> .)
+    RPAR            shift and go to state 111
 
-    gen_conc_quad                  shift and go to state 111
 
 state 90
 
-    (69) conc -> exp . gen_comp_quad conc_aux
-    (72) gen_comp_quad -> .
-
-    GREATER         reduce using rule 72 (gen_comp_quad -> .)
-    LESS            reduce using rule 72 (gen_comp_quad -> .)
-    GREATEROREQUAL  reduce using rule 72 (gen_comp_quad -> .)
-    LESSOREQUAL     reduce using rule 72 (gen_comp_quad -> .)
-    EQUALEQUALS     reduce using rule 72 (gen_comp_quad -> .)
-    DIFFERENT       reduce using rule 72 (gen_comp_quad -> .)
-    AND             reduce using rule 72 (gen_comp_quad -> .)
-    OR              reduce using rule 72 (gen_comp_quad -> .)
-    RPAR            reduce using rule 72 (gen_comp_quad -> .)
-    SEMICOLON       reduce using rule 72 (gen_comp_quad -> .)
-
-    gen_comp_quad                  shift and go to state 112
-
-state 91
-
-    (50) cicle -> WHILE LPAR expression . RPAR block
-
-    RPAR            shift and go to state 113
-
-
-state 92
-
-    (48) write -> WRITE LPAR exp . RPAR gen_write_quad SEMICOLON
-
-    RPAR            shift and go to state 114
-
-
-state 93
-
     (63) arr_par -> LSQRTBRACKET exp . RSQRTBRACKET arr_par
 
-    RSQRTBRACKET    shift and go to state 115
+    RSQRTBRACKET    shift and go to state 112
 
 
-state 94
+state 91
 
     (55) assignation -> ID arr_par EQUALS . expression gen_assignation_quad SEMICOLON
     (65) expression -> . conc gen_conc_quad expression_aux
@@ -1613,17 +1575,54 @@ state 94
     CTEBOOL         shift and go to state 27
 
     var_cte                        shift and go to state 67
-    conc                           shift and go to state 89
+    conc                           shift and go to state 93
     const                          shift and go to state 38
     factor                         shift and go to state 66
     func_call                      shift and go to state 37
     term                           shift and go to state 68
-    exp                            shift and go to state 90
-    expression                     shift and go to state 116
+    exp                            shift and go to state 94
+    expression                     shift and go to state 113
+
+state 92
+
+    (52) condition -> IF LPAR expression . RPAR block else_posible
+
+    RPAR            shift and go to state 114
+
+
+state 93
+
+    (65) expression -> conc . gen_conc_quad expression_aux
+    (68) gen_conc_quad -> .
+
+    AND             reduce using rule 68 (gen_conc_quad -> .)
+    OR              reduce using rule 68 (gen_conc_quad -> .)
+    RPAR            reduce using rule 68 (gen_conc_quad -> .)
+    SEMICOLON       reduce using rule 68 (gen_conc_quad -> .)
+
+    gen_conc_quad                  shift and go to state 115
+
+state 94
+
+    (69) conc -> exp . gen_comp_quad conc_aux
+    (72) gen_comp_quad -> .
+
+    GREATER         reduce using rule 72 (gen_comp_quad -> .)
+    LESS            reduce using rule 72 (gen_comp_quad -> .)
+    GREATEROREQUAL  reduce using rule 72 (gen_comp_quad -> .)
+    LESSOREQUAL     reduce using rule 72 (gen_comp_quad -> .)
+    EQUALEQUALS     reduce using rule 72 (gen_comp_quad -> .)
+    DIFFERENT       reduce using rule 72 (gen_comp_quad -> .)
+    AND             reduce using rule 72 (gen_comp_quad -> .)
+    OR              reduce using rule 72 (gen_comp_quad -> .)
+    RPAR            reduce using rule 72 (gen_comp_quad -> .)
+    SEMICOLON       reduce using rule 72 (gen_comp_quad -> .)
+
+    gen_comp_quad                  shift and go to state 116
 
 state 95
 
-    (52) condition -> IF LPAR expression . RPAR block else_posible
+    (50) cicle -> WHILE LPAR expression . RPAR block
 
     RPAR            shift and go to state 117
 
@@ -1723,8 +1722,8 @@ state 102
     AND             reduce using rule 77 (term -> factor gen_factor_quad term_aux .)
     OR              reduce using rule 77 (term -> factor gen_factor_quad term_aux .)
     RPAR            reduce using rule 77 (term -> factor gen_factor_quad term_aux .)
-    SEMICOLON       reduce using rule 77 (term -> factor gen_factor_quad term_aux .)
     COMMA           reduce using rule 77 (term -> factor gen_factor_quad term_aux .)
+    SEMICOLON       reduce using rule 77 (term -> factor gen_factor_quad term_aux .)
     RSQRTBRACKET    reduce using rule 77 (term -> factor gen_factor_quad term_aux .)
 
 
@@ -1789,18 +1788,18 @@ state 108
 
     (73) exp -> term gen_term_quad exp_aux .
 
-    RSQRTBRACKET    reduce using rule 73 (exp -> term gen_term_quad exp_aux .)
-    COMMA           reduce using rule 73 (exp -> term gen_term_quad exp_aux .)
-    RPAR            reduce using rule 73 (exp -> term gen_term_quad exp_aux .)
-    AND             reduce using rule 73 (exp -> term gen_term_quad exp_aux .)
-    OR              reduce using rule 73 (exp -> term gen_term_quad exp_aux .)
-    SEMICOLON       reduce using rule 73 (exp -> term gen_term_quad exp_aux .)
     GREATER         reduce using rule 73 (exp -> term gen_term_quad exp_aux .)
     LESS            reduce using rule 73 (exp -> term gen_term_quad exp_aux .)
     GREATEROREQUAL  reduce using rule 73 (exp -> term gen_term_quad exp_aux .)
     LESSOREQUAL     reduce using rule 73 (exp -> term gen_term_quad exp_aux .)
     EQUALEQUALS     reduce using rule 73 (exp -> term gen_term_quad exp_aux .)
     DIFFERENT       reduce using rule 73 (exp -> term gen_term_quad exp_aux .)
+    AND             reduce using rule 73 (exp -> term gen_term_quad exp_aux .)
+    OR              reduce using rule 73 (exp -> term gen_term_quad exp_aux .)
+    RPAR            reduce using rule 73 (exp -> term gen_term_quad exp_aux .)
+    SEMICOLON       reduce using rule 73 (exp -> term gen_term_quad exp_aux .)
+    COMMA           reduce using rule 73 (exp -> term gen_term_quad exp_aux .)
+    RSQRTBRACKET    reduce using rule 73 (exp -> term gen_term_quad exp_aux .)
 
 
 state 109
@@ -1816,12 +1815,55 @@ state 109
 
 state 110
 
-    (46) read -> READ LPAR ID arr_par . RPAR gen_read_quad SEMICOLON
+    (46) read -> READ LPAR ID to_pilaOp . arr_par RPAR gen_read_quad SEMICOLON
+    (63) arr_par -> . LSQRTBRACKET exp RSQRTBRACKET arr_par
+    (64) arr_par -> .
 
-    RPAR            shift and go to state 126
+    LSQRTBRACKET    shift and go to state 73
+    RPAR            reduce using rule 64 (arr_par -> .)
 
+    arr_par                        shift and go to state 126
 
 state 111
+
+    (48) write -> WRITE LPAR exp RPAR . gen_write_quad SEMICOLON
+    (49) gen_write_quad -> .
+
+    SEMICOLON       reduce using rule 49 (gen_write_quad -> .)
+
+    gen_write_quad                 shift and go to state 127
+
+state 112
+
+    (63) arr_par -> LSQRTBRACKET exp RSQRTBRACKET . arr_par
+    (63) arr_par -> . LSQRTBRACKET exp RSQRTBRACKET arr_par
+    (64) arr_par -> .
+
+    LSQRTBRACKET    shift and go to state 73
+    EQUALS          reduce using rule 64 (arr_par -> .)
+    RPAR            reduce using rule 64 (arr_par -> .)
+
+    arr_par                        shift and go to state 128
+
+state 113
+
+    (55) assignation -> ID arr_par EQUALS expression . gen_assignation_quad SEMICOLON
+    (56) gen_assignation_quad -> .
+
+    SEMICOLON       reduce using rule 56 (gen_assignation_quad -> .)
+
+    gen_assignation_quad           shift and go to state 129
+
+state 114
+
+    (52) condition -> IF LPAR expression RPAR . block else_posible
+    (62) block -> . LBRACKET more_statement RBRACKET
+
+    LBRACKET        shift and go to state 130
+
+    block                          shift and go to state 131
+
+state 115
 
     (65) expression -> conc gen_conc_quad . expression_aux
     (66) expression_aux -> . ao add_to_pilaOptr conc gen_conc_quad expression_aux
@@ -1831,13 +1873,13 @@ state 111
 
     RPAR            reduce using rule 67 (expression_aux -> .)
     SEMICOLON       reduce using rule 67 (expression_aux -> .)
-    AND             shift and go to state 127
-    OR              shift and go to state 129
+    AND             shift and go to state 132
+    OR              shift and go to state 134
 
-    expression_aux                 shift and go to state 130
-    ao                             shift and go to state 128
+    expression_aux                 shift and go to state 135
+    ao                             shift and go to state 133
 
-state 112
+state 116
 
     (69) conc -> exp gen_comp_quad . conc_aux
     (70) conc_aux -> . comp add_to_pilaOptr exp gen_comp_quad
@@ -1853,61 +1895,22 @@ state 112
     OR              reduce using rule 71 (conc_aux -> .)
     RPAR            reduce using rule 71 (conc_aux -> .)
     SEMICOLON       reduce using rule 71 (conc_aux -> .)
-    GREATER         shift and go to state 133
-    LESS            shift and go to state 134
-    GREATEROREQUAL  shift and go to state 137
-    LESSOREQUAL     shift and go to state 132
-    EQUALEQUALS     shift and go to state 135
-    DIFFERENT       shift and go to state 131
+    GREATER         shift and go to state 138
+    LESS            shift and go to state 139
+    GREATEROREQUAL  shift and go to state 142
+    LESSOREQUAL     shift and go to state 137
+    EQUALEQUALS     shift and go to state 140
+    DIFFERENT       shift and go to state 136
 
-    conc_aux                       shift and go to state 138
-    comp                           shift and go to state 136
+    conc_aux                       shift and go to state 143
+    comp                           shift and go to state 141
 
-state 113
+state 117
 
     (50) cicle -> WHILE LPAR expression RPAR . block
     (62) block -> . LBRACKET more_statement RBRACKET
 
-    LBRACKET        shift and go to state 139
-
-    block                          shift and go to state 140
-
-state 114
-
-    (48) write -> WRITE LPAR exp RPAR . gen_write_quad SEMICOLON
-    (49) gen_write_quad -> .
-
-    SEMICOLON       reduce using rule 49 (gen_write_quad -> .)
-
-    gen_write_quad                 shift and go to state 141
-
-state 115
-
-    (63) arr_par -> LSQRTBRACKET exp RSQRTBRACKET . arr_par
-    (63) arr_par -> . LSQRTBRACKET exp RSQRTBRACKET arr_par
-    (64) arr_par -> .
-
-    LSQRTBRACKET    shift and go to state 74
-    EQUALS          reduce using rule 64 (arr_par -> .)
-    RPAR            reduce using rule 64 (arr_par -> .)
-
-    arr_par                        shift and go to state 142
-
-state 116
-
-    (55) assignation -> ID arr_par EQUALS expression . gen_assignation_quad SEMICOLON
-    (56) gen_assignation_quad -> .
-
-    SEMICOLON       reduce using rule 56 (gen_assignation_quad -> .)
-
-    gen_assignation_quad           shift and go to state 143
-
-state 117
-
-    (52) condition -> IF LPAR expression RPAR . block else_posible
-    (62) block -> . LBRACKET more_statement RBRACKET
-
-    LBRACKET        shift and go to state 139
+    LBRACKET        shift and go to state 130
 
     block                          shift and go to state 144
 
@@ -1949,7 +1952,7 @@ state 121
     (43) statement -> . condition
     (44) statement -> . assignation
     (45) statement -> . func_call SEMICOLON
-    (46) read -> . READ LPAR ID arr_par RPAR gen_read_quad SEMICOLON
+    (46) read -> . READ LPAR ID to_pilaOp arr_par RPAR gen_read_quad SEMICOLON
     (48) write -> . WRITE LPAR exp RPAR gen_write_quad SEMICOLON
     (50) cicle -> . WHILE LPAR expression RPAR block
     (52) condition -> . IF LPAR expression RPAR block else_posible
@@ -1959,19 +1962,19 @@ state 121
     RETURN          reduce using rule 39 (more_statement -> .)
     RBRACKET        reduce using rule 39 (more_statement -> .)
     READ            shift and go to state 49
-    WRITE           shift and go to state 55
-    WHILE           shift and go to state 50
-    IF              shift and go to state 58
-    ID              shift and go to state 56
+    WRITE           shift and go to state 54
+    WHILE           shift and go to state 60
+    IF              shift and go to state 57
+    ID              shift and go to state 55
 
-    func_call                      shift and go to state 59
-    assignation                    shift and go to state 60
-    read                           shift and go to state 54
+    func_call                      shift and go to state 58
+    assignation                    shift and go to state 59
+    read                           shift and go to state 53
     more_statement                 shift and go to state 146
-    write                          shift and go to state 52
-    condition                      shift and go to state 57
-    statement                      shift and go to state 53
-    cicle                          shift and go to state 51
+    write                          shift and go to state 51
+    condition                      shift and go to state 56
+    statement                      shift and go to state 52
+    cicle                          shift and go to state 50
 
 state 122
 
@@ -1985,6 +1988,7 @@ state 122
     MINUS           reduce using rule 95 (pop_false_bottom -> .)
     COMMA           reduce using rule 95 (pop_false_bottom -> .)
     RPAR            reduce using rule 95 (pop_false_bottom -> .)
+    RSQRTBRACKET    reduce using rule 95 (pop_false_bottom -> .)
     GREATER         reduce using rule 95 (pop_false_bottom -> .)
     LESS            reduce using rule 95 (pop_false_bottom -> .)
     GREATEROREQUAL  reduce using rule 95 (pop_false_bottom -> .)
@@ -1993,7 +1997,6 @@ state 122
     DIFFERENT       reduce using rule 95 (pop_false_bottom -> .)
     AND             reduce using rule 95 (pop_false_bottom -> .)
     OR              reduce using rule 95 (pop_false_bottom -> .)
-    RSQRTBRACKET    reduce using rule 95 (pop_false_bottom -> .)
     SEMICOLON       reduce using rule 95 (pop_false_bottom -> .)
 
     pop_false_bottom               shift and go to state 147
@@ -2057,146 +2060,34 @@ state 125
 
 state 126
 
-    (46) read -> READ LPAR ID arr_par RPAR . gen_read_quad SEMICOLON
-    (47) gen_read_quad -> .
+    (46) read -> READ LPAR ID to_pilaOp arr_par . RPAR gen_read_quad SEMICOLON
 
-    SEMICOLON       reduce using rule 47 (gen_read_quad -> .)
+    RPAR            shift and go to state 150
 
-    gen_read_quad                  shift and go to state 150
 
 state 127
 
-    (83) ao -> AND .
+    (48) write -> WRITE LPAR exp RPAR gen_write_quad . SEMICOLON
 
-    LPAR            reduce using rule 83 (ao -> AND .)
-    ID              reduce using rule 83 (ao -> AND .)
-    CTEINT          reduce using rule 83 (ao -> AND .)
-    CTEDOUBLE       reduce using rule 83 (ao -> AND .)
-    CTEBOOL         reduce using rule 83 (ao -> AND .)
+    SEMICOLON       shift and go to state 151
 
 
 state 128
 
-    (66) expression_aux -> ao . add_to_pilaOptr conc gen_conc_quad expression_aux
-    (94) add_to_pilaOptr -> .
+    (63) arr_par -> LSQRTBRACKET exp RSQRTBRACKET arr_par .
 
-    LPAR            reduce using rule 94 (add_to_pilaOptr -> .)
-    ID              reduce using rule 94 (add_to_pilaOptr -> .)
-    CTEINT          reduce using rule 94 (add_to_pilaOptr -> .)
-    CTEDOUBLE       reduce using rule 94 (add_to_pilaOptr -> .)
-    CTEBOOL         reduce using rule 94 (add_to_pilaOptr -> .)
+    RPAR            reduce using rule 63 (arr_par -> LSQRTBRACKET exp RSQRTBRACKET arr_par .)
+    EQUALS          reduce using rule 63 (arr_par -> LSQRTBRACKET exp RSQRTBRACKET arr_par .)
 
-    add_to_pilaOptr                shift and go to state 151
 
 state 129
 
-    (84) ao -> OR .
+    (55) assignation -> ID arr_par EQUALS expression gen_assignation_quad . SEMICOLON
 
-    LPAR            reduce using rule 84 (ao -> OR .)
-    ID              reduce using rule 84 (ao -> OR .)
-    CTEINT          reduce using rule 84 (ao -> OR .)
-    CTEDOUBLE       reduce using rule 84 (ao -> OR .)
-    CTEBOOL         reduce using rule 84 (ao -> OR .)
+    SEMICOLON       shift and go to state 152
 
 
 state 130
-
-    (65) expression -> conc gen_conc_quad expression_aux .
-
-    RPAR            reduce using rule 65 (expression -> conc gen_conc_quad expression_aux .)
-    SEMICOLON       reduce using rule 65 (expression -> conc gen_conc_quad expression_aux .)
-
-
-state 131
-
-    (90) comp -> DIFFERENT .
-
-    LPAR            reduce using rule 90 (comp -> DIFFERENT .)
-    ID              reduce using rule 90 (comp -> DIFFERENT .)
-    CTEINT          reduce using rule 90 (comp -> DIFFERENT .)
-    CTEDOUBLE       reduce using rule 90 (comp -> DIFFERENT .)
-    CTEBOOL         reduce using rule 90 (comp -> DIFFERENT .)
-
-
-state 132
-
-    (88) comp -> LESSOREQUAL .
-
-    LPAR            reduce using rule 88 (comp -> LESSOREQUAL .)
-    ID              reduce using rule 88 (comp -> LESSOREQUAL .)
-    CTEINT          reduce using rule 88 (comp -> LESSOREQUAL .)
-    CTEDOUBLE       reduce using rule 88 (comp -> LESSOREQUAL .)
-    CTEBOOL         reduce using rule 88 (comp -> LESSOREQUAL .)
-
-
-state 133
-
-    (85) comp -> GREATER .
-
-    LPAR            reduce using rule 85 (comp -> GREATER .)
-    ID              reduce using rule 85 (comp -> GREATER .)
-    CTEINT          reduce using rule 85 (comp -> GREATER .)
-    CTEDOUBLE       reduce using rule 85 (comp -> GREATER .)
-    CTEBOOL         reduce using rule 85 (comp -> GREATER .)
-
-
-state 134
-
-    (86) comp -> LESS .
-
-    LPAR            reduce using rule 86 (comp -> LESS .)
-    ID              reduce using rule 86 (comp -> LESS .)
-    CTEINT          reduce using rule 86 (comp -> LESS .)
-    CTEDOUBLE       reduce using rule 86 (comp -> LESS .)
-    CTEBOOL         reduce using rule 86 (comp -> LESS .)
-
-
-state 135
-
-    (89) comp -> EQUALEQUALS .
-
-    LPAR            reduce using rule 89 (comp -> EQUALEQUALS .)
-    ID              reduce using rule 89 (comp -> EQUALEQUALS .)
-    CTEINT          reduce using rule 89 (comp -> EQUALEQUALS .)
-    CTEDOUBLE       reduce using rule 89 (comp -> EQUALEQUALS .)
-    CTEBOOL         reduce using rule 89 (comp -> EQUALEQUALS .)
-
-
-state 136
-
-    (70) conc_aux -> comp . add_to_pilaOptr exp gen_comp_quad
-    (94) add_to_pilaOptr -> .
-
-    LPAR            reduce using rule 94 (add_to_pilaOptr -> .)
-    ID              reduce using rule 94 (add_to_pilaOptr -> .)
-    CTEINT          reduce using rule 94 (add_to_pilaOptr -> .)
-    CTEDOUBLE       reduce using rule 94 (add_to_pilaOptr -> .)
-    CTEBOOL         reduce using rule 94 (add_to_pilaOptr -> .)
-
-    add_to_pilaOptr                shift and go to state 152
-
-state 137
-
-    (87) comp -> GREATEROREQUAL .
-
-    LPAR            reduce using rule 87 (comp -> GREATEROREQUAL .)
-    ID              reduce using rule 87 (comp -> GREATEROREQUAL .)
-    CTEINT          reduce using rule 87 (comp -> GREATEROREQUAL .)
-    CTEDOUBLE       reduce using rule 87 (comp -> GREATEROREQUAL .)
-    CTEBOOL         reduce using rule 87 (comp -> GREATEROREQUAL .)
-
-
-state 138
-
-    (69) conc -> exp gen_comp_quad conc_aux .
-
-    AND             reduce using rule 69 (conc -> exp gen_comp_quad conc_aux .)
-    OR              reduce using rule 69 (conc -> exp gen_comp_quad conc_aux .)
-    RPAR            reduce using rule 69 (conc -> exp gen_comp_quad conc_aux .)
-    SEMICOLON       reduce using rule 69 (conc -> exp gen_comp_quad conc_aux .)
-
-
-state 139
 
     (62) block -> LBRACKET . more_statement RBRACKET
     (38) more_statement -> . statement more_statement
@@ -2207,7 +2098,7 @@ state 139
     (43) statement -> . condition
     (44) statement -> . assignation
     (45) statement -> . func_call SEMICOLON
-    (46) read -> . READ LPAR ID arr_par RPAR gen_read_quad SEMICOLON
+    (46) read -> . READ LPAR ID to_pilaOp arr_par RPAR gen_read_quad SEMICOLON
     (48) write -> . WRITE LPAR exp RPAR gen_write_quad SEMICOLON
     (50) cicle -> . WHILE LPAR expression RPAR block
     (52) condition -> . IF LPAR expression RPAR block else_posible
@@ -2216,21 +2107,170 @@ state 139
 
     RBRACKET        reduce using rule 39 (more_statement -> .)
     READ            shift and go to state 49
-    WRITE           shift and go to state 55
-    WHILE           shift and go to state 50
-    IF              shift and go to state 58
-    ID              shift and go to state 56
+    WRITE           shift and go to state 54
+    WHILE           shift and go to state 60
+    IF              shift and go to state 57
+    ID              shift and go to state 55
 
-    func_call                      shift and go to state 59
-    assignation                    shift and go to state 60
-    read                           shift and go to state 54
-    cicle                          shift and go to state 51
-    write                          shift and go to state 52
-    statement                      shift and go to state 53
+    func_call                      shift and go to state 58
+    assignation                    shift and go to state 59
+    read                           shift and go to state 53
+    cicle                          shift and go to state 50
+    write                          shift and go to state 51
+    statement                      shift and go to state 52
     more_statement                 shift and go to state 153
-    condition                      shift and go to state 57
+    condition                      shift and go to state 56
+
+state 131
+
+    (52) condition -> IF LPAR expression RPAR block . else_posible
+    (53) else_posible -> . ELSE block
+    (54) else_posible -> .
+
+    ELSE            shift and go to state 155
+    READ            reduce using rule 54 (else_posible -> .)
+    WRITE           reduce using rule 54 (else_posible -> .)
+    WHILE           reduce using rule 54 (else_posible -> .)
+    IF              reduce using rule 54 (else_posible -> .)
+    ID              reduce using rule 54 (else_posible -> .)
+    RBRACKET        reduce using rule 54 (else_posible -> .)
+    RETURN          reduce using rule 54 (else_posible -> .)
+
+    else_posible                   shift and go to state 154
+
+state 132
+
+    (83) ao -> AND .
+
+    LPAR            reduce using rule 83 (ao -> AND .)
+    ID              reduce using rule 83 (ao -> AND .)
+    CTEINT          reduce using rule 83 (ao -> AND .)
+    CTEDOUBLE       reduce using rule 83 (ao -> AND .)
+    CTEBOOL         reduce using rule 83 (ao -> AND .)
+
+
+state 133
+
+    (66) expression_aux -> ao . add_to_pilaOptr conc gen_conc_quad expression_aux
+    (94) add_to_pilaOptr -> .
+
+    LPAR            reduce using rule 94 (add_to_pilaOptr -> .)
+    ID              reduce using rule 94 (add_to_pilaOptr -> .)
+    CTEINT          reduce using rule 94 (add_to_pilaOptr -> .)
+    CTEDOUBLE       reduce using rule 94 (add_to_pilaOptr -> .)
+    CTEBOOL         reduce using rule 94 (add_to_pilaOptr -> .)
+
+    add_to_pilaOptr                shift and go to state 156
+
+state 134
+
+    (84) ao -> OR .
+
+    LPAR            reduce using rule 84 (ao -> OR .)
+    ID              reduce using rule 84 (ao -> OR .)
+    CTEINT          reduce using rule 84 (ao -> OR .)
+    CTEDOUBLE       reduce using rule 84 (ao -> OR .)
+    CTEBOOL         reduce using rule 84 (ao -> OR .)
+
+
+state 135
+
+    (65) expression -> conc gen_conc_quad expression_aux .
+
+    RPAR            reduce using rule 65 (expression -> conc gen_conc_quad expression_aux .)
+    SEMICOLON       reduce using rule 65 (expression -> conc gen_conc_quad expression_aux .)
+
+
+state 136
+
+    (90) comp -> DIFFERENT .
+
+    LPAR            reduce using rule 90 (comp -> DIFFERENT .)
+    ID              reduce using rule 90 (comp -> DIFFERENT .)
+    CTEINT          reduce using rule 90 (comp -> DIFFERENT .)
+    CTEDOUBLE       reduce using rule 90 (comp -> DIFFERENT .)
+    CTEBOOL         reduce using rule 90 (comp -> DIFFERENT .)
+
+
+state 137
+
+    (88) comp -> LESSOREQUAL .
+
+    LPAR            reduce using rule 88 (comp -> LESSOREQUAL .)
+    ID              reduce using rule 88 (comp -> LESSOREQUAL .)
+    CTEINT          reduce using rule 88 (comp -> LESSOREQUAL .)
+    CTEDOUBLE       reduce using rule 88 (comp -> LESSOREQUAL .)
+    CTEBOOL         reduce using rule 88 (comp -> LESSOREQUAL .)
+
+
+state 138
+
+    (85) comp -> GREATER .
+
+    LPAR            reduce using rule 85 (comp -> GREATER .)
+    ID              reduce using rule 85 (comp -> GREATER .)
+    CTEINT          reduce using rule 85 (comp -> GREATER .)
+    CTEDOUBLE       reduce using rule 85 (comp -> GREATER .)
+    CTEBOOL         reduce using rule 85 (comp -> GREATER .)
+
+
+state 139
+
+    (86) comp -> LESS .
+
+    LPAR            reduce using rule 86 (comp -> LESS .)
+    ID              reduce using rule 86 (comp -> LESS .)
+    CTEINT          reduce using rule 86 (comp -> LESS .)
+    CTEDOUBLE       reduce using rule 86 (comp -> LESS .)
+    CTEBOOL         reduce using rule 86 (comp -> LESS .)
+
 
 state 140
+
+    (89) comp -> EQUALEQUALS .
+
+    LPAR            reduce using rule 89 (comp -> EQUALEQUALS .)
+    ID              reduce using rule 89 (comp -> EQUALEQUALS .)
+    CTEINT          reduce using rule 89 (comp -> EQUALEQUALS .)
+    CTEDOUBLE       reduce using rule 89 (comp -> EQUALEQUALS .)
+    CTEBOOL         reduce using rule 89 (comp -> EQUALEQUALS .)
+
+
+state 141
+
+    (70) conc_aux -> comp . add_to_pilaOptr exp gen_comp_quad
+    (94) add_to_pilaOptr -> .
+
+    LPAR            reduce using rule 94 (add_to_pilaOptr -> .)
+    ID              reduce using rule 94 (add_to_pilaOptr -> .)
+    CTEINT          reduce using rule 94 (add_to_pilaOptr -> .)
+    CTEDOUBLE       reduce using rule 94 (add_to_pilaOptr -> .)
+    CTEBOOL         reduce using rule 94 (add_to_pilaOptr -> .)
+
+    add_to_pilaOptr                shift and go to state 157
+
+state 142
+
+    (87) comp -> GREATEROREQUAL .
+
+    LPAR            reduce using rule 87 (comp -> GREATEROREQUAL .)
+    ID              reduce using rule 87 (comp -> GREATEROREQUAL .)
+    CTEINT          reduce using rule 87 (comp -> GREATEROREQUAL .)
+    CTEDOUBLE       reduce using rule 87 (comp -> GREATEROREQUAL .)
+    CTEBOOL         reduce using rule 87 (comp -> GREATEROREQUAL .)
+
+
+state 143
+
+    (69) conc -> exp gen_comp_quad conc_aux .
+
+    AND             reduce using rule 69 (conc -> exp gen_comp_quad conc_aux .)
+    OR              reduce using rule 69 (conc -> exp gen_comp_quad conc_aux .)
+    RPAR            reduce using rule 69 (conc -> exp gen_comp_quad conc_aux .)
+    SEMICOLON       reduce using rule 69 (conc -> exp gen_comp_quad conc_aux .)
+
+
+state 144
 
     (50) cicle -> WHILE LPAR expression RPAR block .
 
@@ -2242,45 +2282,6 @@ state 140
     RBRACKET        reduce using rule 50 (cicle -> WHILE LPAR expression RPAR block .)
     RETURN          reduce using rule 50 (cicle -> WHILE LPAR expression RPAR block .)
 
-
-state 141
-
-    (48) write -> WRITE LPAR exp RPAR gen_write_quad . SEMICOLON
-
-    SEMICOLON       shift and go to state 154
-
-
-state 142
-
-    (63) arr_par -> LSQRTBRACKET exp RSQRTBRACKET arr_par .
-
-    EQUALS          reduce using rule 63 (arr_par -> LSQRTBRACKET exp RSQRTBRACKET arr_par .)
-    RPAR            reduce using rule 63 (arr_par -> LSQRTBRACKET exp RSQRTBRACKET arr_par .)
-
-
-state 143
-
-    (55) assignation -> ID arr_par EQUALS expression gen_assignation_quad . SEMICOLON
-
-    SEMICOLON       shift and go to state 155
-
-
-state 144
-
-    (52) condition -> IF LPAR expression RPAR block . else_posible
-    (53) else_posible -> . ELSE block
-    (54) else_posible -> .
-
-    ELSE            shift and go to state 157
-    READ            reduce using rule 54 (else_posible -> .)
-    WRITE           reduce using rule 54 (else_posible -> .)
-    WHILE           reduce using rule 54 (else_posible -> .)
-    IF              reduce using rule 54 (else_posible -> .)
-    ID              reduce using rule 54 (else_posible -> .)
-    RBRACKET        reduce using rule 54 (else_posible -> .)
-    RETURN          reduce using rule 54 (else_posible -> .)
-
-    else_posible                   shift and go to state 156
 
 state 145
 
@@ -2309,8 +2310,6 @@ state 147
     MOD             reduce using rule 81 (factor -> LPAR add_to_pilaOptr expression RPAR pop_false_bottom .)
     PLUS            reduce using rule 81 (factor -> LPAR add_to_pilaOptr expression RPAR pop_false_bottom .)
     MINUS           reduce using rule 81 (factor -> LPAR add_to_pilaOptr expression RPAR pop_false_bottom .)
-    COMMA           reduce using rule 81 (factor -> LPAR add_to_pilaOptr expression RPAR pop_false_bottom .)
-    RPAR            reduce using rule 81 (factor -> LPAR add_to_pilaOptr expression RPAR pop_false_bottom .)
     GREATER         reduce using rule 81 (factor -> LPAR add_to_pilaOptr expression RPAR pop_false_bottom .)
     LESS            reduce using rule 81 (factor -> LPAR add_to_pilaOptr expression RPAR pop_false_bottom .)
     GREATEROREQUAL  reduce using rule 81 (factor -> LPAR add_to_pilaOptr expression RPAR pop_false_bottom .)
@@ -2319,8 +2318,10 @@ state 147
     DIFFERENT       reduce using rule 81 (factor -> LPAR add_to_pilaOptr expression RPAR pop_false_bottom .)
     AND             reduce using rule 81 (factor -> LPAR add_to_pilaOptr expression RPAR pop_false_bottom .)
     OR              reduce using rule 81 (factor -> LPAR add_to_pilaOptr expression RPAR pop_false_bottom .)
-    RSQRTBRACKET    reduce using rule 81 (factor -> LPAR add_to_pilaOptr expression RPAR pop_false_bottom .)
+    RPAR            reduce using rule 81 (factor -> LPAR add_to_pilaOptr expression RPAR pop_false_bottom .)
+    COMMA           reduce using rule 81 (factor -> LPAR add_to_pilaOptr expression RPAR pop_false_bottom .)
     SEMICOLON       reduce using rule 81 (factor -> LPAR add_to_pilaOptr expression RPAR pop_false_bottom .)
+    RSQRTBRACKET    reduce using rule 81 (factor -> LPAR add_to_pilaOptr expression RPAR pop_false_bottom .)
 
 
 state 148
@@ -2335,6 +2336,7 @@ state 148
     MINUS           reduce using rule 80 (gen_factor_quad -> .)
     COMMA           reduce using rule 80 (gen_factor_quad -> .)
     RPAR            reduce using rule 80 (gen_factor_quad -> .)
+    RSQRTBRACKET    reduce using rule 80 (gen_factor_quad -> .)
     GREATER         reduce using rule 80 (gen_factor_quad -> .)
     LESS            reduce using rule 80 (gen_factor_quad -> .)
     GREATEROREQUAL  reduce using rule 80 (gen_factor_quad -> .)
@@ -2343,7 +2345,6 @@ state 148
     DIFFERENT       reduce using rule 80 (gen_factor_quad -> .)
     AND             reduce using rule 80 (gen_factor_quad -> .)
     OR              reduce using rule 80 (gen_factor_quad -> .)
-    RSQRTBRACKET    reduce using rule 80 (gen_factor_quad -> .)
     SEMICOLON       reduce using rule 80 (gen_factor_quad -> .)
 
     gen_factor_quad                shift and go to state 161
@@ -2357,6 +2358,7 @@ state 149
     MINUS           reduce using rule 76 (gen_term_quad -> .)
     COMMA           reduce using rule 76 (gen_term_quad -> .)
     RPAR            reduce using rule 76 (gen_term_quad -> .)
+    RSQRTBRACKET    reduce using rule 76 (gen_term_quad -> .)
     GREATER         reduce using rule 76 (gen_term_quad -> .)
     LESS            reduce using rule 76 (gen_term_quad -> .)
     GREATEROREQUAL  reduce using rule 76 (gen_term_quad -> .)
@@ -2365,19 +2367,75 @@ state 149
     DIFFERENT       reduce using rule 76 (gen_term_quad -> .)
     AND             reduce using rule 76 (gen_term_quad -> .)
     OR              reduce using rule 76 (gen_term_quad -> .)
-    RSQRTBRACKET    reduce using rule 76 (gen_term_quad -> .)
     SEMICOLON       reduce using rule 76 (gen_term_quad -> .)
 
     gen_term_quad                  shift and go to state 162
 
 state 150
 
-    (46) read -> READ LPAR ID arr_par RPAR gen_read_quad . SEMICOLON
+    (46) read -> READ LPAR ID to_pilaOp arr_par RPAR . gen_read_quad SEMICOLON
+    (47) gen_read_quad -> .
 
-    SEMICOLON       shift and go to state 163
+    SEMICOLON       reduce using rule 47 (gen_read_quad -> .)
 
+    gen_read_quad                  shift and go to state 163
 
 state 151
+
+    (48) write -> WRITE LPAR exp RPAR gen_write_quad SEMICOLON .
+
+    READ            reduce using rule 48 (write -> WRITE LPAR exp RPAR gen_write_quad SEMICOLON .)
+    WRITE           reduce using rule 48 (write -> WRITE LPAR exp RPAR gen_write_quad SEMICOLON .)
+    WHILE           reduce using rule 48 (write -> WRITE LPAR exp RPAR gen_write_quad SEMICOLON .)
+    IF              reduce using rule 48 (write -> WRITE LPAR exp RPAR gen_write_quad SEMICOLON .)
+    ID              reduce using rule 48 (write -> WRITE LPAR exp RPAR gen_write_quad SEMICOLON .)
+    RBRACKET        reduce using rule 48 (write -> WRITE LPAR exp RPAR gen_write_quad SEMICOLON .)
+    RETURN          reduce using rule 48 (write -> WRITE LPAR exp RPAR gen_write_quad SEMICOLON .)
+
+
+state 152
+
+    (55) assignation -> ID arr_par EQUALS expression gen_assignation_quad SEMICOLON .
+
+    READ            reduce using rule 55 (assignation -> ID arr_par EQUALS expression gen_assignation_quad SEMICOLON .)
+    WRITE           reduce using rule 55 (assignation -> ID arr_par EQUALS expression gen_assignation_quad SEMICOLON .)
+    WHILE           reduce using rule 55 (assignation -> ID arr_par EQUALS expression gen_assignation_quad SEMICOLON .)
+    IF              reduce using rule 55 (assignation -> ID arr_par EQUALS expression gen_assignation_quad SEMICOLON .)
+    ID              reduce using rule 55 (assignation -> ID arr_par EQUALS expression gen_assignation_quad SEMICOLON .)
+    RETURN          reduce using rule 55 (assignation -> ID arr_par EQUALS expression gen_assignation_quad SEMICOLON .)
+    RBRACKET        reduce using rule 55 (assignation -> ID arr_par EQUALS expression gen_assignation_quad SEMICOLON .)
+
+
+state 153
+
+    (62) block -> LBRACKET more_statement . RBRACKET
+
+    RBRACKET        shift and go to state 164
+
+
+state 154
+
+    (52) condition -> IF LPAR expression RPAR block else_posible .
+
+    READ            reduce using rule 52 (condition -> IF LPAR expression RPAR block else_posible .)
+    WRITE           reduce using rule 52 (condition -> IF LPAR expression RPAR block else_posible .)
+    WHILE           reduce using rule 52 (condition -> IF LPAR expression RPAR block else_posible .)
+    IF              reduce using rule 52 (condition -> IF LPAR expression RPAR block else_posible .)
+    ID              reduce using rule 52 (condition -> IF LPAR expression RPAR block else_posible .)
+    RBRACKET        reduce using rule 52 (condition -> IF LPAR expression RPAR block else_posible .)
+    RETURN          reduce using rule 52 (condition -> IF LPAR expression RPAR block else_posible .)
+
+
+state 155
+
+    (53) else_posible -> ELSE . block
+    (62) block -> . LBRACKET more_statement RBRACKET
+
+    LBRACKET        shift and go to state 130
+
+    block                          shift and go to state 165
+
+state 156
 
     (66) expression_aux -> ao add_to_pilaOptr . conc gen_conc_quad expression_aux
     (69) conc -> . exp gen_comp_quad conc_aux
@@ -2400,14 +2458,14 @@ state 151
     CTEBOOL         shift and go to state 27
 
     var_cte                        shift and go to state 67
-    conc                           shift and go to state 164
+    conc                           shift and go to state 166
     const                          shift and go to state 38
     factor                         shift and go to state 66
     func_call                      shift and go to state 37
     term                           shift and go to state 68
-    exp                            shift and go to state 90
+    exp                            shift and go to state 94
 
-state 152
+state 157
 
     (70) conc_aux -> comp add_to_pilaOptr . exp gen_comp_quad
     (73) exp -> . term gen_term_quad exp_aux
@@ -2431,64 +2489,9 @@ state 152
     func_call                      shift and go to state 37
     term                           shift and go to state 68
     const                          shift and go to state 38
-    exp                            shift and go to state 165
+    exp                            shift and go to state 167
     factor                         shift and go to state 66
     var_cte                        shift and go to state 67
-
-state 153
-
-    (62) block -> LBRACKET more_statement . RBRACKET
-
-    RBRACKET        shift and go to state 166
-
-
-state 154
-
-    (48) write -> WRITE LPAR exp RPAR gen_write_quad SEMICOLON .
-
-    READ            reduce using rule 48 (write -> WRITE LPAR exp RPAR gen_write_quad SEMICOLON .)
-    WRITE           reduce using rule 48 (write -> WRITE LPAR exp RPAR gen_write_quad SEMICOLON .)
-    WHILE           reduce using rule 48 (write -> WRITE LPAR exp RPAR gen_write_quad SEMICOLON .)
-    IF              reduce using rule 48 (write -> WRITE LPAR exp RPAR gen_write_quad SEMICOLON .)
-    ID              reduce using rule 48 (write -> WRITE LPAR exp RPAR gen_write_quad SEMICOLON .)
-    RBRACKET        reduce using rule 48 (write -> WRITE LPAR exp RPAR gen_write_quad SEMICOLON .)
-    RETURN          reduce using rule 48 (write -> WRITE LPAR exp RPAR gen_write_quad SEMICOLON .)
-
-
-state 155
-
-    (55) assignation -> ID arr_par EQUALS expression gen_assignation_quad SEMICOLON .
-
-    READ            reduce using rule 55 (assignation -> ID arr_par EQUALS expression gen_assignation_quad SEMICOLON .)
-    WRITE           reduce using rule 55 (assignation -> ID arr_par EQUALS expression gen_assignation_quad SEMICOLON .)
-    WHILE           reduce using rule 55 (assignation -> ID arr_par EQUALS expression gen_assignation_quad SEMICOLON .)
-    IF              reduce using rule 55 (assignation -> ID arr_par EQUALS expression gen_assignation_quad SEMICOLON .)
-    ID              reduce using rule 55 (assignation -> ID arr_par EQUALS expression gen_assignation_quad SEMICOLON .)
-    RETURN          reduce using rule 55 (assignation -> ID arr_par EQUALS expression gen_assignation_quad SEMICOLON .)
-    RBRACKET        reduce using rule 55 (assignation -> ID arr_par EQUALS expression gen_assignation_quad SEMICOLON .)
-
-
-state 156
-
-    (52) condition -> IF LPAR expression RPAR block else_posible .
-
-    READ            reduce using rule 52 (condition -> IF LPAR expression RPAR block else_posible .)
-    WRITE           reduce using rule 52 (condition -> IF LPAR expression RPAR block else_posible .)
-    WHILE           reduce using rule 52 (condition -> IF LPAR expression RPAR block else_posible .)
-    IF              reduce using rule 52 (condition -> IF LPAR expression RPAR block else_posible .)
-    ID              reduce using rule 52 (condition -> IF LPAR expression RPAR block else_posible .)
-    RBRACKET        reduce using rule 52 (condition -> IF LPAR expression RPAR block else_posible .)
-    RETURN          reduce using rule 52 (condition -> IF LPAR expression RPAR block else_posible .)
-
-
-state 157
-
-    (53) else_posible -> ELSE . block
-    (62) block -> . LBRACKET more_statement RBRACKET
-
-    LBRACKET        shift and go to state 139
-
-    block                          shift and go to state 167
 
 state 158
 
@@ -2548,6 +2551,7 @@ state 161
     MINUS           reduce using rule 79 (term_aux -> .)
     COMMA           reduce using rule 79 (term_aux -> .)
     RPAR            reduce using rule 79 (term_aux -> .)
+    RSQRTBRACKET    reduce using rule 79 (term_aux -> .)
     GREATER         reduce using rule 79 (term_aux -> .)
     LESS            reduce using rule 79 (term_aux -> .)
     GREATEROREQUAL  reduce using rule 79 (term_aux -> .)
@@ -2556,7 +2560,6 @@ state 161
     DIFFERENT       reduce using rule 79 (term_aux -> .)
     AND             reduce using rule 79 (term_aux -> .)
     OR              reduce using rule 79 (term_aux -> .)
-    RSQRTBRACKET    reduce using rule 79 (term_aux -> .)
     SEMICOLON       reduce using rule 79 (term_aux -> .)
     MULTIPLICATION  shift and go to state 103
     DIVISION        shift and go to state 100
@@ -2575,6 +2578,7 @@ state 162
 
     COMMA           reduce using rule 75 (exp_aux -> .)
     RPAR            reduce using rule 75 (exp_aux -> .)
+    RSQRTBRACKET    reduce using rule 75 (exp_aux -> .)
     GREATER         reduce using rule 75 (exp_aux -> .)
     LESS            reduce using rule 75 (exp_aux -> .)
     GREATEROREQUAL  reduce using rule 75 (exp_aux -> .)
@@ -2583,7 +2587,6 @@ state 162
     DIFFERENT       reduce using rule 75 (exp_aux -> .)
     AND             reduce using rule 75 (exp_aux -> .)
     OR              reduce using rule 75 (exp_aux -> .)
-    RSQRTBRACKET    reduce using rule 75 (exp_aux -> .)
     SEMICOLON       reduce using rule 75 (exp_aux -> .)
     PLUS            shift and go to state 106
     MINUS           shift and go to state 105
@@ -2593,42 +2596,12 @@ state 162
 
 state 163
 
-    (46) read -> READ LPAR ID arr_par RPAR gen_read_quad SEMICOLON .
+    (46) read -> READ LPAR ID to_pilaOp arr_par RPAR gen_read_quad . SEMICOLON
 
-    READ            reduce using rule 46 (read -> READ LPAR ID arr_par RPAR gen_read_quad SEMICOLON .)
-    WRITE           reduce using rule 46 (read -> READ LPAR ID arr_par RPAR gen_read_quad SEMICOLON .)
-    WHILE           reduce using rule 46 (read -> READ LPAR ID arr_par RPAR gen_read_quad SEMICOLON .)
-    IF              reduce using rule 46 (read -> READ LPAR ID arr_par RPAR gen_read_quad SEMICOLON .)
-    ID              reduce using rule 46 (read -> READ LPAR ID arr_par RPAR gen_read_quad SEMICOLON .)
-    RBRACKET        reduce using rule 46 (read -> READ LPAR ID arr_par RPAR gen_read_quad SEMICOLON .)
-    RETURN          reduce using rule 46 (read -> READ LPAR ID arr_par RPAR gen_read_quad SEMICOLON .)
+    SEMICOLON       shift and go to state 173
 
 
 state 164
-
-    (66) expression_aux -> ao add_to_pilaOptr conc . gen_conc_quad expression_aux
-    (68) gen_conc_quad -> .
-
-    AND             reduce using rule 68 (gen_conc_quad -> .)
-    OR              reduce using rule 68 (gen_conc_quad -> .)
-    RPAR            reduce using rule 68 (gen_conc_quad -> .)
-    SEMICOLON       reduce using rule 68 (gen_conc_quad -> .)
-
-    gen_conc_quad                  shift and go to state 173
-
-state 165
-
-    (70) conc_aux -> comp add_to_pilaOptr exp . gen_comp_quad
-    (72) gen_comp_quad -> .
-
-    AND             reduce using rule 72 (gen_comp_quad -> .)
-    OR              reduce using rule 72 (gen_comp_quad -> .)
-    RPAR            reduce using rule 72 (gen_comp_quad -> .)
-    SEMICOLON       reduce using rule 72 (gen_comp_quad -> .)
-
-    gen_comp_quad                  shift and go to state 174
-
-state 166
 
     (62) block -> LBRACKET more_statement RBRACKET .
 
@@ -2642,7 +2615,7 @@ state 166
     ELSE            reduce using rule 62 (block -> LBRACKET more_statement RBRACKET .)
 
 
-state 167
+state 165
 
     (53) else_posible -> ELSE block .
 
@@ -2655,6 +2628,30 @@ state 167
     RETURN          reduce using rule 53 (else_posible -> ELSE block .)
 
 
+state 166
+
+    (66) expression_aux -> ao add_to_pilaOptr conc . gen_conc_quad expression_aux
+    (68) gen_conc_quad -> .
+
+    AND             reduce using rule 68 (gen_conc_quad -> .)
+    OR              reduce using rule 68 (gen_conc_quad -> .)
+    RPAR            reduce using rule 68 (gen_conc_quad -> .)
+    SEMICOLON       reduce using rule 68 (gen_conc_quad -> .)
+
+    gen_conc_quad                  shift and go to state 174
+
+state 167
+
+    (70) conc_aux -> comp add_to_pilaOptr exp . gen_comp_quad
+    (72) gen_comp_quad -> .
+
+    AND             reduce using rule 72 (gen_comp_quad -> .)
+    OR              reduce using rule 72 (gen_comp_quad -> .)
+    RPAR            reduce using rule 72 (gen_comp_quad -> .)
+    SEMICOLON       reduce using rule 72 (gen_comp_quad -> .)
+
+    gen_comp_quad                  shift and go to state 175
+
 state 168
 
     (32) more_args -> COMMA var_type ID to_args . more_args
@@ -2664,13 +2661,13 @@ state 168
     COMMA           shift and go to state 119
     RPAR            reduce using rule 33 (more_args -> .)
 
-    more_args                      shift and go to state 175
+    more_args                      shift and go to state 176
 
 state 169
 
     (36) optional_return -> RETURN exp . SEMICOLON
 
-    SEMICOLON       shift and go to state 176
+    SEMICOLON       shift and go to state 177
 
 
 state 170
@@ -2689,6 +2686,7 @@ state 171
     MINUS           reduce using rule 78 (term_aux -> dm add_to_pilaOptr factor gen_factor_quad term_aux .)
     COMMA           reduce using rule 78 (term_aux -> dm add_to_pilaOptr factor gen_factor_quad term_aux .)
     RPAR            reduce using rule 78 (term_aux -> dm add_to_pilaOptr factor gen_factor_quad term_aux .)
+    RSQRTBRACKET    reduce using rule 78 (term_aux -> dm add_to_pilaOptr factor gen_factor_quad term_aux .)
     GREATER         reduce using rule 78 (term_aux -> dm add_to_pilaOptr factor gen_factor_quad term_aux .)
     LESS            reduce using rule 78 (term_aux -> dm add_to_pilaOptr factor gen_factor_quad term_aux .)
     GREATEROREQUAL  reduce using rule 78 (term_aux -> dm add_to_pilaOptr factor gen_factor_quad term_aux .)
@@ -2697,7 +2695,6 @@ state 171
     DIFFERENT       reduce using rule 78 (term_aux -> dm add_to_pilaOptr factor gen_factor_quad term_aux .)
     AND             reduce using rule 78 (term_aux -> dm add_to_pilaOptr factor gen_factor_quad term_aux .)
     OR              reduce using rule 78 (term_aux -> dm add_to_pilaOptr factor gen_factor_quad term_aux .)
-    RSQRTBRACKET    reduce using rule 78 (term_aux -> dm add_to_pilaOptr factor gen_factor_quad term_aux .)
     SEMICOLON       reduce using rule 78 (term_aux -> dm add_to_pilaOptr factor gen_factor_quad term_aux .)
 
 
@@ -2707,6 +2704,7 @@ state 172
 
     COMMA           reduce using rule 74 (exp_aux -> pl add_to_pilaOptr term gen_term_quad exp_aux .)
     RPAR            reduce using rule 74 (exp_aux -> pl add_to_pilaOptr term gen_term_quad exp_aux .)
+    RSQRTBRACKET    reduce using rule 74 (exp_aux -> pl add_to_pilaOptr term gen_term_quad exp_aux .)
     GREATER         reduce using rule 74 (exp_aux -> pl add_to_pilaOptr term gen_term_quad exp_aux .)
     LESS            reduce using rule 74 (exp_aux -> pl add_to_pilaOptr term gen_term_quad exp_aux .)
     GREATEROREQUAL  reduce using rule 74 (exp_aux -> pl add_to_pilaOptr term gen_term_quad exp_aux .)
@@ -2715,11 +2713,23 @@ state 172
     DIFFERENT       reduce using rule 74 (exp_aux -> pl add_to_pilaOptr term gen_term_quad exp_aux .)
     AND             reduce using rule 74 (exp_aux -> pl add_to_pilaOptr term gen_term_quad exp_aux .)
     OR              reduce using rule 74 (exp_aux -> pl add_to_pilaOptr term gen_term_quad exp_aux .)
-    RSQRTBRACKET    reduce using rule 74 (exp_aux -> pl add_to_pilaOptr term gen_term_quad exp_aux .)
     SEMICOLON       reduce using rule 74 (exp_aux -> pl add_to_pilaOptr term gen_term_quad exp_aux .)
 
 
 state 173
+
+    (46) read -> READ LPAR ID to_pilaOp arr_par RPAR gen_read_quad SEMICOLON .
+
+    READ            reduce using rule 46 (read -> READ LPAR ID to_pilaOp arr_par RPAR gen_read_quad SEMICOLON .)
+    WRITE           reduce using rule 46 (read -> READ LPAR ID to_pilaOp arr_par RPAR gen_read_quad SEMICOLON .)
+    WHILE           reduce using rule 46 (read -> READ LPAR ID to_pilaOp arr_par RPAR gen_read_quad SEMICOLON .)
+    IF              reduce using rule 46 (read -> READ LPAR ID to_pilaOp arr_par RPAR gen_read_quad SEMICOLON .)
+    ID              reduce using rule 46 (read -> READ LPAR ID to_pilaOp arr_par RPAR gen_read_quad SEMICOLON .)
+    RBRACKET        reduce using rule 46 (read -> READ LPAR ID to_pilaOp arr_par RPAR gen_read_quad SEMICOLON .)
+    RETURN          reduce using rule 46 (read -> READ LPAR ID to_pilaOp arr_par RPAR gen_read_quad SEMICOLON .)
+
+
+state 174
 
     (66) expression_aux -> ao add_to_pilaOptr conc gen_conc_quad . expression_aux
     (66) expression_aux -> . ao add_to_pilaOptr conc gen_conc_quad expression_aux
@@ -2729,13 +2739,13 @@ state 173
 
     RPAR            reduce using rule 67 (expression_aux -> .)
     SEMICOLON       reduce using rule 67 (expression_aux -> .)
-    AND             shift and go to state 127
-    OR              shift and go to state 129
+    AND             shift and go to state 132
+    OR              shift and go to state 134
 
-    expression_aux                 shift and go to state 177
-    ao                             shift and go to state 128
+    expression_aux                 shift and go to state 178
+    ao                             shift and go to state 133
 
-state 174
+state 175
 
     (70) conc_aux -> comp add_to_pilaOptr exp gen_comp_quad .
 
@@ -2745,21 +2755,21 @@ state 174
     SEMICOLON       reduce using rule 70 (conc_aux -> comp add_to_pilaOptr exp gen_comp_quad .)
 
 
-state 175
+state 176
 
     (32) more_args -> COMMA var_type ID to_args more_args .
 
     RPAR            reduce using rule 32 (more_args -> COMMA var_type ID to_args more_args .)
 
 
-state 176
+state 177
 
     (36) optional_return -> RETURN exp SEMICOLON .
 
     RBRACKET        reduce using rule 36 (optional_return -> RETURN exp SEMICOLON .)
 
 
-state 177
+state 178
 
     (66) expression_aux -> ao add_to_pilaOptr conc gen_conc_quad expression_aux .
 

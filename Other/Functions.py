@@ -1,8 +1,48 @@
 from Declarations import *
 
-def to_pilaOp(var, line, p):
+def to_var_table(p):
+	varid = p[-2]
 	line = p.lineno(0)
-	var = p[-1]
+	if varid not in varTable['global'] and varid not in varTable[scope[len(scope)-1]]:
+		varTable[scope[len(scope)-1]][varid] =  lastType[len(lastType)-1]
+	else:
+		print('Variable "%s" in line %s already registered' % (varid, line))
+		sys.exit()
+
+def to_proc_dir(p):
+	procname = p[-1]
+	functype = p[-2]
+	line = p.lineno(0)
+	if procname not in scope and procname not in varTable['global']:
+		scope.append(procname)
+		varTable['global'][procname] = functype
+		varTable[procname] = {}
+		dirProcedures[procname] = {}
+		dirProcedures[procname]['func_type'] = functype
+		dirProcedures[procname]['args'] = []
+	else:
+		print('Function "%s" already registered in line %s' % (procname, line))
+		sys.exit()
+
+def to_args(p):
+	dirProcedures[scope[len(scope)-1]]['args'].append(p[-2])
+	varid = p[-1]
+	vartype = p[-2]
+	line = p.lineno(0)
+	if varid not in varTable['global'] and varid not in varTable[scope[len(scope)-1]]:
+		varTable[scope[len(scope)-1]][varid] =  vartype
+	else:
+		print('Variable "%s" in line %s already registered' % (varid, line))
+		sys.exit() 
+
+def pop_false_bottom():
+	if pilaOptr.peek() == '(':
+		pilaOptr.pop()
+	else:
+		print "No es un '(' al top de la pilaOptr"
+		sys.exit()
+
+def to_pilaOp(var, line, p):
 	if type(var) is int:
 		#print var, "is int in line %s" %(line)
 		pilaOp.push(var)
@@ -33,9 +73,9 @@ def to_pilaOp(var, line, p):
 
 def gen_est_quad(line, qtype):
 	if qtype == 'read':
-		print 1
+		gen_read_quad(line)
 	elif qtype == 'write':
-		print 2
+		gen_write_quad(line)
 	elif qtype == 'cicle':
 		print 3
 	elif qtype == 'condition':
@@ -47,6 +87,26 @@ def gen_est_quad(line, qtype):
 	else:
 		print 'Cant generate estatement quadruple in line %s' % line
 		sys.exit()
+
+def gen_read_quad(line):
+	if pilaOp.size() > 0:
+		temp = pilaOp.peek()
+		pilaOp.pop()
+		pTypes.pop()
+		quad = Quadruple('read', '', '', temp)
+		quadruples.addQuad(quad)
+	else:
+		print 'Cant generate read estatement quadruple in line %s' % line
+
+def gen_write_quad(line):
+	if pilaOp.size() > 0:
+		temp = pilaOp.peek()
+		pilaOp.pop()
+		pTypes.pop()
+		quad = Quadruple('write', '', '', temp)
+		quadruples.addQuad(quad)
+	else:
+		print 'Cant generate write estatement quadruple in line %s' % line
 
 def gen_exp_quad(line, qtype):
 	optype = None
@@ -123,19 +183,19 @@ def printOperationCodes():
 
 # DEsplegar las variables por motivos de debugging
 def printAll():
-	print "===Var Table==="
+	'''print "===\t\tVar Table\t\t==="
 	pprint.pprint(varTable)
-	print "===Dir Proc==="
+	print "===\t\tDir Proc\t\t==="
 	pprint.pprint(dirProcedures)
-	print "===Pila Operadores==="
+	print "===\t\tPila Operadores\t\t==="
 	print 'size', pilaOptr.size()
 	printStack(pilaOptr)
-	print "===Pila Operandos==="
+	print "===\t\tPila Operandos\t\t==="
 	print 'size', pilaOp.size()
 	printStack(pilaOp)
-	print "===Pila Tipos==="
+	print "===\t\tPila Tipos\t\t==="
 	print 'size', pTypes.size()
-	printStack(pTypes)
-	print "===Cuadruplos==="
+	printStack(pTypes)'''
+	print "===\t\tCuadruplos\t\t==="
 	print 'size', quadruples.size()
 	quadruples.printQuadruples()

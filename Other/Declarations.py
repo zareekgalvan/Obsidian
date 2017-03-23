@@ -32,4 +32,4 @@ mults = ['*', '/', '%']
 quadruples = Quadruples()
 
 # Debbuging mode
-debug = 'off'
+debug = 'on'

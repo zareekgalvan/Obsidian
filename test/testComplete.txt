@@ -119,6 +119,7 @@ main {
 				else {
 					x = 4 * 6;
 					x = (5+6+6)/8 - 6 > 6*e*(r/t/k)-r(i) && true;
+					read(x);
 				}
 			}
 		}

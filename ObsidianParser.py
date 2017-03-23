@@ -30,13 +30,7 @@ def p_vars_aux(p):
 
 def p_to_var_table(p):
 	'''to_var_table :'''
-	varid = p[-2]
-	line = p.lineno(0)
-	if varid not in varTable['global'] and varid not in varTable[scope[len(scope)-1]]:
-		varTable[scope[len(scope)-1]][varid] =  lastType[len(lastType)-1]
-	else:
-		print('Variable "%s" in line %s already registered' % (varid, line))
-		sys.exit() 
+	to_var_table(p) 
 
 def p_var_assign(p):
 	'''var_assign : EQUALS var_cte
@@ -71,19 +65,7 @@ def p_func(p):
 
 def p_to_proc_dir(p):
 	'''to_proc_dir :'''
-	procname = p[-1]
-	functype = p[-2]
-	line = p.lineno(0)
-	if procname not in scope and procname not in varTable['global']:
-		scope.append(procname)
-		varTable['global'][procname] = functype
-		varTable[procname] = {}
-		dirProcedures[procname] = {}
-		dirProcedures[procname]['func_type'] = functype
-		dirProcedures[procname]['args'] = []
-	else:
-		print('Function "%s" already registered in line %s' % (procname, line))
-		sys.exit() 
+	to_proc_dir(p) 
 
 def p_func_type(p):
 	'''func_type : VOID 
@@ -103,15 +85,7 @@ def p_more_args(p):
 
 def p_to_args(p):
 	'''to_args :'''
-	dirProcedures[scope[len(scope)-1]]['args'].append(p[-2])
-	varid = p[-1]
-	vartype = p[-2]
-	line = p.lineno(0)
-	if varid not in varTable['global'] and varid not in varTable[scope[len(scope)-1]]:
-		varTable[scope[len(scope)-1]][varid] =  vartype
-	else:
-		print('Variable "%s" in line %s already registered' % (varid, line))
-		sys.exit() 
+	to_args(p)
 
 def p_func_block(p):
 	'''func_block : LBRACKET more_vars more_statement optional_return RBRACKET'''
@@ -133,9 +107,9 @@ def p_statement(p):
 		| func_call SEMICOLON'''
 
 def p_read(p):
-	'''read : READ LPAR ID arr_par RPAR gen_read_quad SEMICOLON'''
+	'''read : READ LPAR ID to_pilaOp arr_par RPAR gen_read_quad SEMICOLON'''
 
-def p_gen_red_quad(p):
+def p_gen_read_quad(p):
 	'''gen_read_quad :'''
 	line = p.lineno(0)
 	gen_est_quad(line, 'read')
@@ -280,11 +254,7 @@ def p_add_to_pilaOptr(p):
 
 def p_pop_false_bottom(p):
 	'''pop_false_bottom :'''
-	if pilaOptr.peek() == '(':
-		pilaOptr.pop()
-	else:
-		print "No es un '(' al top de la pilaOptr"
-		sys.exit()
+	pop_false_bottom()
 
 def p_dm(p):
 	'''dm : MULTIPLICATION
