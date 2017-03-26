@@ -20,7 +20,8 @@ operationCodes = {
 	'endproc' : 18,
 	'gosub' : 19,
 	'era' : 20,
-	'gotof' : 21,
-	'gotot' : 22,
-	'goto' : 23
+	'GotoF' : 21,
+	'GotoT' : 22,
+	'Goto' : 23,
+	'END' : 24
 }

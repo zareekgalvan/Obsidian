@@ -1,118 +1,81 @@
 ----------------------------------------------
 1. Variables Test:
-===		Cuadruplos		===
-size 0
-Valid syntax
+Type mismatch in line 5
 ----------------------------------------------
 2. Functions Test:
-i in line 34 is not declared
-hi in line 39 is not declared
-===		Cuadruplos		===
-size 1
-[	read 	 	 	x 	]
-Valid syntax
+Type mismatch in line 32
 ----------------------------------------------
 3. Statements Test:
 y in line 8 is not declared
-5
-None in line 26 is not declared
-5
-===		Cuadruplos		===
-size 4
-[	read 	 	 	x 	]
-[	% 	5 	5 	t1 	]
-[	write 	 	 	x3 	]
-[	* 	4 	6 	t2 	]
-Valid syntax
+Type mismatch in line 14
 ----------------------------------------------
 4. Expressions Test:
 y in line 3 is not declared
-5
-None in line 21 is not declared
-5
-e in line 25 is not declared
-r in line 25 is not declared
-t in line 25 is not declared
-k in line 25 is not declared
-Type mismatch in line 25
-Type mismatch in line 25
-i in line 25 is not declared
-None in line 25 is not declared
-5
-===		Cuadruplos		===
-size 12
-[	% 	5 	5 	t1 	]
-[	write 	 	 	x 	]
-[	* 	4 	6 	t2 	]
-[	+ 	5 	6 	t3 	]
-[	+ 	t3 	6 	t4 	]
-[	/ 	t4 	8 	t5 	]
-[	- 	t5 	6 	t6 	]
-[	* 	t6 	6 	t7 	]
-[	/ 	t2 	t7 	t8 	]
-[	- 	t1 	8 	t9 	]
-[	> 	5 	t9 	t10 	]
-[	&& 	t10 	true 	t11 	]
-Valid syntax
+Type mismatch in line 9
 ----------------------------------------------
 5. Main Test:
-5
-None in line 47 is not declared
-5
-e in line 51 is not declared
-r in line 51 is not declared
-t in line 51 is not declared
-i in line 51 is not declared
-None in line 51 is not declared
-5
-===		Cuadruplos		===
-size 14
-[	% 	5 	5 	t1 	]
-[	write 	 	 	x 	]
-[	* 	4 	6 	t2 	]
-[	+ 	5 	6 	t3 	]
-[	+ 	t3 	6 	t4 	]
-[	/ 	t4 	8 	t5 	]
-[	- 	t5 	6 	t6 	]
-[	* 	t6 	6 	t7 	]
-[	/ 	t2 	t7 	t8 	]
-[	/ 	t8 	k 	t9 	]
-[	* 	x 	t9 	t10 	]
-[	- 	x 	t10 	t11 	]
-[	> 	x 	t11 	t12 	]
-[	&& 	t12 	true 	t13 	]
-Valid syntax
+Type mismatch in line 5
 ----------------------------------------------
 6. Complete Test:
-i in line 67 is not declared
-i in line 81 is not declared
-hi in line 86 is not declared
-5
-None in line 117 is not declared
-5
-e in line 121 is not declared
-r in line 121 is not declared
-t in line 121 is not declared
-i in line 121 is not declared
-None in line 121 is not declared
-5
+===		Pila Operadores		===
+size 1
+-------------------
++ , 
+-------------------
+===		Pila Operandos		===
+size 7
+-------------------
+t1 , false , 5 , y , x , i , i , 
+-------------------
+===		Pila Tipos		===
+size 7
+-------------------
+int , bool , int , int , int , int , int , 
+-------------------
+===		Pila Saltos		===
+size 0
+-------------------
+
+-------------------
 ===		Cuadruplos		===
-size 17
-[	read 	 	 	x 	]
-[	read 	 	 	x 	]
-[	% 	5 	5 	t1 	]
-[	write 	 	 	x 	]
-[	* 	4 	6 	t2 	]
-[	+ 	5 	6 	t3 	]
-[	+ 	t3 	6 	t4 	]
-[	/ 	t4 	8 	t5 	]
-[	- 	t5 	6 	t6 	]
-[	* 	t6 	6 	t7 	]
-[	/ 	t2 	t7 	t8 	]
-[	/ 	t8 	k 	t9 	]
-[	* 	x 	t9 	t10 	]
-[	- 	x 	t10 	t11 	]
-[	> 	x 	t11 	t12 	]
-[	&& 	t12 	true 	t13 	]
-[	read 	 	 	x 	]
+size 39
+1 	[	= 	x 	 	k 	]
+2 	[	= 	9 	 	v 	]
+3 	[	= 	9.0 	 	xx 	]
+4 	[	= 	9.0 	 	xs 	]
+5 	[	= 	1 	 	xdd 	]
+6 	[	= 	x 	 	xf 	]
+7 	[	= 	x 	 	xa 	]
+8 	[	= 	x 	 	xw 	]
+9 	[	= 	x 	 	xe 	]
+10 	[	= 	x 	 	xr 	]
+11 	[	= 	9 	 	xu 	]
+12 	[	= 	9.0 	 	xy 	]
+13 	[	= 	1 	 	xi 	]
+14 	[	= 	x 	 	xo 	]
+15 	[	= 	x 	 	xp 	]
+16 	[	= 	x 	 	xii 	]
+17 	[	= 	x 	 	xuu 	]
+18 	[	= 	5 	 	x9 	]
+19 	[	= 	x 	 	y12 	]
+20 	[	= 	1 	 	i 	]
+21 	[	read 	 	 	x 	]
+22 	[	= 	5 	 	xg 	]
+23 	[	= 	x 	 	h 	]
+24 	[	= 	1 	 	tt 	]
+25 	[	read 	 	 	x 	]
+26 	[	= 	false 	 	xxsxx 	]
+27 	[	= 	true 	 	xsc 	]
+28 	[	= 	true 	 	xcsc 	]
+29 	[	= 	xzs 	 	xvsv 	]
+30 	[	= 	5 	 	x 	]
+31 	[	% 	5 	5 	t1 	]
+32 	[	write 	 	 	x 	]
+33 	[	* 	4 	6 	t2 	]
+34 	[	= 	t2 	 	x 	]
+35 	[	* 	5 	5 	t3 	]
+36 	[	* 	t3 	5 	t4 	]
+37 	[	* 	t4 	5 	t5 	]
+38 	[	= 	t5 	 	x 	]
+39 	[	read 	 	 	x 	]
 Valid syntax

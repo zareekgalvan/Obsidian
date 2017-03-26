@@ -1,3 +1,4 @@
+* 7628510 : Generate Read and Write Quads Clean Parser file Generate new funtions in Functions file (result of cleaning Parser file)
 * 0b1c84d : Add Quadruples class Generate quad of statements declared, not implemented Missing while, condition and function quad declaration Add functions file Restructure add quad methods Restructure files again Add debug mode'
 * 5e0a054 : 3rd delivery: Generate quadruples for exps Vars and constants types implementation Reorganization of files Declarations file created Corrected test 6 Edit diagrams
 * 75eb1b6 : 3rd delivery: Vars and Constants type verification implementation Add Declartion file Reorganization of files Edited RR Diagrams Test 6 correction

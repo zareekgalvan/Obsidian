@@ -35,6 +35,7 @@ def p_to_var_table(p):
 def p_var_assign(p):
 	'''var_assign : EQUALS var_cte
 			|'''
+	var_assign(p)
 
 def p_more_vars_aux(p):
 	'''more_vars_aux : COMMA vars_aux
@@ -43,6 +44,7 @@ def p_more_vars_aux(p):
 def p_arr(p):
 	'''arr : LSQRTBRACKET const RSQRTBRACKET arr
 			|'''
+	check_arr_param(p)
 
 def p_var_cte(p):
 	'''var_cte : const
@@ -85,7 +87,10 @@ def p_more_args(p):
 
 def p_to_args(p):
 	'''to_args :'''
-	to_args(p)
+	varid = p[-1]
+	vartype = p[-2]
+	line = p.lineno(0)
+	to_args(varid, vartype, line, p)
 
 def p_func_block(p):
 	'''func_block : LBRACKET more_vars more_statement optional_return RBRACKET'''
@@ -101,7 +106,7 @@ def p_more_statement(p):
 def p_statement(p):
 	'''statement : read
 		| write
-		| cicle
+		| cycle
 		| condition
 		| assignation
 		| func_call SEMICOLON'''
@@ -122,23 +127,38 @@ def p_gen_write_quad(p):
 	line = p.lineno(0)
 	gen_est_quad(line, 'write')
 
-def p_cicle(p):
-	'''cicle : WHILE LPAR expression RPAR block'''
+def p_cycle(p):
+	'''cycle : WHILE cycle_start LPAR expression RPAR check_type block cycle_end'''
 
-def p_gen_cicle_quad(p):
-	'''gen_cicle_quad :'''
-	line = p.lineno(0)
-	gen_est_quad(line, 'cicle')
+def p_cycle_start(p):
+	'''cycle_start :'''
+	cycle_start()
+
+def p_cycle_end(p):
+	'''cycle_end :'''
+	cycle_end()
 
 def p_condition(p):
-	'''condition : IF LPAR expression RPAR block else_posible'''
+	'''condition : IF LPAR expression RPAR check_type block else_posible fill_end_condition'''
 
 def p_else_posible(p):
-	'''else_posible : ELSE block
+	'''else_posible : ELSE gen_goto block
 			|'''
 
+def p_gen_goto(p):
+	'''gen_goto :'''
+	gen_goto()
+
+def p_fill_end_condition(p):
+	'''fill_end_condition :'''
+	fill_end_condition()
+
+def p_check_type(p):
+	'''check_type :'''
+	check_type(p)
+
 def p_assignation(p):
-	'''assignation : ID arr_par EQUALS expression gen_assignation_quad SEMICOLON'''
+	'''assignation : ID to_pilaOp arr_par EQUALS expression gen_assignation_quad SEMICOLON'''
 
 def p_gen_assignation_quad(p):
 	'''gen_assignation_quad :'''
@@ -146,7 +166,7 @@ def p_gen_assignation_quad(p):
 	gen_est_quad(line, 'assignation')
 
 def p_func_call(p):
-	'''func_call : ID LPAR params RPAR'''
+	'''func_call : ID LPAR params RPAR gen_func_call_quad'''
 
 def p_params(p):
 	'''params : exp more_params
@@ -155,6 +175,10 @@ def p_params(p):
 def p_more_params(p):
 	'''more_params : COMMA exp more_params
 			|'''
+
+def p_gen_func_call_quad(p):
+	'''gen_func_call_quad :'''
+
 
 def p_block(p):
 	'''block : LBRACKET more_statement RBRACKET'''
@@ -272,7 +296,10 @@ def p_main_to_proc_dir(p):
 	varTable[procname] = {}
 
 def p_main_block(p):
-	'''main_block : LBRACKET more_vars more_statement RBRACKET'''
+	'''main_block : LBRACKET more_vars more_statement RBRACKET gen_end_quad'''
+def p_gen_end_quad(p):
+	'''gen_end_quad :'''
+	gen_end_quad()
 
 def p_error(p):
     print('Syntax error in token %s with value \"%s\" in line %s' % (p.type, p.value, p.lineno))
@@ -292,7 +319,6 @@ if __name__ == '__main__':
 			f.close()
 			
 			# Parsear el contenido
-			
 			if (drawyparser.parse(data, tracking=True) == 'PROGRAM COMPILED'):
 				if debug == 'on':
 					printAll()

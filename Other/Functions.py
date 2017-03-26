@@ -1,5 +1,13 @@
 from Declarations import *
 
+# SEMANTIC AND SINTAX VALIDATION FUNCTIONS
+# ===========================================================================
+def check_arr_param(p):
+	line = p.lineno(0)
+	if len(p) > 1 and type(p[2]) is not int:
+		print 'Type mismatch in line %s with value %s' % (line, p[2])
+		sys.exit()
+
 def to_var_table(p):
 	varid = p[-2]
 	line = p.lineno(0)
@@ -24,17 +32,17 @@ def to_proc_dir(p):
 		print('Function "%s" already registered in line %s' % (procname, line))
 		sys.exit()
 
-def to_args(p):
+def to_args(varid, vartype, line, p):
 	dirProcedures[scope[len(scope)-1]]['args'].append(p[-2])
-	varid = p[-1]
-	vartype = p[-2]
-	line = p.lineno(0)
 	if varid not in varTable['global'] and varid not in varTable[scope[len(scope)-1]]:
 		varTable[scope[len(scope)-1]][varid] =  vartype
 	else:
 		print('Variable "%s" in line %s already registered' % (varid, line))
 		sys.exit() 
 
+
+# QUAD GENERATION FUNCTIONS
+# ===========================================================================
 def pop_false_bottom():
 	if pilaOptr.peek() == '(':
 		pilaOptr.pop()
@@ -51,7 +59,7 @@ def to_pilaOp(var, line, p):
 		#print var, "is double in line %s" %(line)
 		pilaOp.push(var)
 		pTypes.push('double')
-	elif var == "true" or p[-1] == "false":
+	elif var == "true" or var == "false":
 		#print var, "is bool in line %s" %(line)
 		pilaOp.push(var)
 		pTypes.push('bool')
@@ -62,38 +70,67 @@ def to_pilaOp(var, line, p):
 	elif var in varTable[scope[len(scope)-1]]:
 		#print p[-1], "is %s in line %s" %(varTable[scope[len(scope)-1]][p[-1]], line)
 		pilaOp.push(var)
-		pTypes.push(varTable[scope[len(scope)-1]][p[-1]])
+		pTypes.push(varTable[scope[len(scope)-1]][var])
 	elif var in varTable['global']:
 		#print p[-1], "is %s in line %s" %(varTable['global'][p[-1]], line)
 		pilaOp.push(var)
-		pTypes.push(varTable['global'][p[-1]])
+		pTypes.push(varTable['global'][var])
 	else:
-		print p[-1], 'in line %s is not declared' % line
-		#sys.exit()
+		print var, 'in line %s is not declared' % line
+		sys.exit()
+
+def check_type(p):
+	line = p.lineno(0)
+	exp = pilaOp.peek()
+	expType = pTypes.peek()
+	if expType == 'bool':
+		res = pilaOp.peek()
+		pilaOp.pop()
+		gen_gotof_quad(res)
+	else:
+		print "Type mismatch in line %s with val %s" % (line, expType)
+		sys.exit()
 
 def gen_est_quad(line, qtype):
 	if qtype == 'read':
 		gen_read_quad(line)
 	elif qtype == 'write':
 		gen_write_quad(line)
-	elif qtype == 'cicle':
-		print 3
-	elif qtype == 'condition':
-		print 4
 	elif qtype == 'assignation':
-		print 5
+		gen_assignation_quad(line)
 	elif qtype == 'func_call':
 		print 6
+	elif qtype == 'declaration_assign':
+		gen_declaration_assign_quad(line)
 	else:
 		print 'Cant generate estatement quadruple in line %s' % line
 		sys.exit()
+
+def gen_declaration_assign_quad(line):
+	if pilaOp.size() > 1:
+		oper = pilaOp.peek()
+		pilaOp.pop()
+		operType = pTypes.peek()
+		pTypes.pop()
+		temp = pilaOp.peek()
+		pilaOp.pop()
+		tempType = pTypes.peek()
+		pTypes.pop()
+		if getType(operType, tempType, '=') != 'ERROR':
+			quad = Quadruple(Quadruples.cont, '=', oper, '', temp)
+			quadruples.addQuad(quad)
+		else:
+			print "Type mismatch in line %s" % line
+			sys.exit()
+	else:
+		print 'Cant generate declaration assignation estatement quadruple in line %s' % line
 
 def gen_read_quad(line):
 	if pilaOp.size() > 0:
 		temp = pilaOp.peek()
 		pilaOp.pop()
 		pTypes.pop()
-		quad = Quadruple('read', '', '', temp)
+		quad = Quadruple(Quadruples.cont, 'read', '', '', temp)
 		quadruples.addQuad(quad)
 	else:
 		print 'Cant generate read estatement quadruple in line %s' % line
@@ -103,10 +140,67 @@ def gen_write_quad(line):
 		temp = pilaOp.peek()
 		pilaOp.pop()
 		pTypes.pop()
-		quad = Quadruple('write', '', '', temp)
+		quad = Quadruple(Quadruples.cont, 'write', '', '', temp)
 		quadruples.addQuad(quad)
 	else:
 		print 'Cant generate write estatement quadruple in line %s' % line
+
+def var_assign(p):
+	if len(p) > 1:
+		line = p.lineno(0)
+		var = p[-3]
+		to_pilaOp(var, line, p)
+		var = p[2]
+		to_pilaOp(var, line, p)
+		line = p.lineno(0)
+		gen_est_quad(line, 'declaration_assign')
+
+def gen_assignation_quad(line):
+	if pilaOp.size() > 1:
+		oper = pilaOp.peek()
+		pilaOp.pop()
+		operType = pTypes.peek()
+		pTypes.pop()
+		temp = pilaOp.peek()
+		pilaOp.pop()
+		tempType = pTypes.peek()
+		pTypes.pop()
+		if getType(operType, tempType, '=') != 'ERROR':
+			quad = Quadruple(Quadruples.cont, '=', oper, '', temp)
+			quadruples.addQuad(quad)
+		else:
+			print "Type mismatch in line %s" % line
+			sys.exit()
+	else:
+		print 'Cant generate assignation estatement quadruple in line %s' % line
+
+def gen_gotof_quad(res):
+	quad = Quadruple(Quadruples.cont, 'GotoF', res, '', '')
+	quadruples.addQuad(quad)
+	pSaltos.push(Quadruples.cont-1)
+
+def gen_goto():
+	false = pSaltos.peek()
+	pSaltos.pop()
+	pSaltos.push(Quadruples.cont-1)
+	quadruples.fillQuad(false, Quadruples.cont)
+
+def fill_end_condition():
+	end = pSaltos.peek()
+	pSaltos.pop()
+	quadruples.fillQuad(end, Quadruples.cont)
+
+def cycle_start():
+	pSaltos.push(Quadruples.cont)
+
+def cycle_end():
+	end = pSaltos.peek()
+	pSaltos.pop()
+	ret = pSaltos.peek()
+	pSaltos.pop()
+	quad = Quadruple(Quadruples.cont, 'Goto', '', '', ret)
+	quadruples.addQuad(quad)
+	quadruples.fillQuad(end, Quadruples.cont)
 
 def gen_exp_quad(line, qtype):
 	optype = None
@@ -124,7 +218,7 @@ def gen_exp_quad(line, qtype):
 
 	if pilaOptr.isEmpty():
 		return
-	elif pilaOptr.peek() in optype and pilaOptr.size() > 1:
+	elif pilaOptr.peek() in optype and pilaOptr.size() >= 1:
 		rOperand = pilaOp.peek()
 		pilaOp.pop()
 		rType = pTypes.peek()
@@ -140,20 +234,24 @@ def gen_exp_quad(line, qtype):
 			global iTempCount
 			temp = "t" + str(iTempCount)
 			iTempCount += 1 
-			quad = Quadruple(oper, lOperand, rOperand, temp)
+			quad = Quadruple(Quadruples.cont, oper, lOperand, rOperand, temp)
 			quadruples.addQuad(quad)
 			pTypes.push(res)
 			pilaOp.push(temp)
 		else:
 			print "Type mismatch in line %s" % line
-	'''else:
-		print "Not enough operands in stack"
-		sys.exit()'''
+			sys.exit()
+	#else:
+	#	print "Not enough operands in stack in line %s" % line
+		#sys.exit()
 
 
+def gen_end_quad():
+	quad = Quadruple(Quadruples.cont, 'END', '', '','')
+	quadruples.addQuad(quad)
 
+# OTHER FUNCTIONS
 # ===========================================================================
-
 # Obtener el tipo de la operacion realizada
 def getType(ltype, rtype, oper):
 	return semanticCube[ltype][rtype][oper]
@@ -186,7 +284,7 @@ def printAll():
 	'''print "===\t\tVar Table\t\t==="
 	pprint.pprint(varTable)
 	print "===\t\tDir Proc\t\t==="
-	pprint.pprint(dirProcedures)
+	pprint.pprint(dirProcedures)'''
 	print "===\t\tPila Operadores\t\t==="
 	print 'size', pilaOptr.size()
 	printStack(pilaOptr)
@@ -195,7 +293,10 @@ def printAll():
 	printStack(pilaOp)
 	print "===\t\tPila Tipos\t\t==="
 	print 'size', pTypes.size()
-	printStack(pTypes)'''
+	printStack(pTypes)
+	print "===\t\tPila Saltos\t\t==="
+	print 'size', pSaltos.size()
+	printStack(pSaltos)
 	print "===\t\tCuadruplos\t\t==="
 	print 'size', quadruples.size()
 	quadruples.printQuadruples()

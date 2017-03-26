@@ -12,13 +12,13 @@ FUNC_TYPE ::= ('void' | 'bool' | ' int' | 'double')
 
 FUNC_BLOCK ::= '{' VARS* STATEMENT* ('return' EXP ';')? '}'
 
-STATEMENT ::= ( READ | WRITE | CICLE | CONDITION | ASSIGNATION | FUNC_CALL )
+STATEMENT ::= ( READ | WRITE | CYCLE | CONDITION | ASSIGNATION | FUNC_CALL )
 
 READ ::= 'read' '(' 'id' ('[' EXP ']')* ')' ';'
 
 WRITE ::= 'write' '(' EXP ')' ';'
 
-CICLE ::= 'while' '(' EXPRESSION ')' BLOCK
+CYCLE ::= 'while' '(' EXPRESSION ')' BLOCK
 
 CONDITION ::= 'if' '(' EXPRESSION ')' BLOCK ("else" BLOCK)?
 
