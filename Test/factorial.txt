@@ -1,0 +1,10 @@
+func int factorial (int n)
+ {
+ 	return n * factorial(n - 1);
+ }
+
+ main 
+ {
+ 	int i = 5;
+ 	write(factorial(5));
+ }

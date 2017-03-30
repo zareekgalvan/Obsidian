@@ -40,6 +40,17 @@ def to_args(varid, vartype, line, p):
 		print('Variable "%s" in line %s already registered' % (varid, line))
 		sys.exit() 
 
+def actual_quad_no(scope):
+	dirProcedures[scope]['params_no'] = len(dirProcedures[scope]['args'])
+	dirProcedures[scope]['vars_no'] = len(varTable[scope]) - dirProcedures[scope]['params_no']
+	dirProcedures[scope]['quad_start'] = Quadruples.cont
+
+def is_valid_func(p):
+	varid = p[-1]
+	line = p.lineno(0)
+	if varid not in dirProcedures:
+		print '%s in line %s is not a valid function' % (varid, line)
+		#sys.exit()
 
 # QUAD GENERATION FUNCTIONS
 # ===========================================================================
@@ -52,32 +63,33 @@ def pop_false_bottom():
 
 def to_pilaOp(var, line, p):
 	if type(var) is int:
-		#print var, "is int in line %s" %(line)
+		print var, "is int in line %s" %(line)
 		pilaOp.push(var)
 		pTypes.push('int')
 	elif type(var) is float:
-		#print var, "is double in line %s" %(line)
+		print var, "is double in line %s" %(line)
 		pilaOp.push(var)
 		pTypes.push('double')
 	elif var == "true" or var == "false":
-		#print var, "is bool in line %s" %(line)
+		print var, "is bool in line %s" %(line)
 		pilaOp.push(var)
 		pTypes.push('bool')
-	elif var in dirProcedures:
-		#print var, "is function of type %s in line %s" % (dirProcedures[var]['func_type'], line)
+	elif var in dirProcedures and var in varTable['global']:
+		print var, "is function of type %s in line %s" % (dirProcedures[var]['func_type'], line)
+		pass
 		pilaOp.push(var)
 		pTypes.push(dirProcedures[var]['func_type'])
 	elif var in varTable[scope[len(scope)-1]]:
-		#print p[-1], "is %s in line %s" %(varTable[scope[len(scope)-1]][p[-1]], line)
+		print var, "is %s in line %s" %(varTable[scope[len(scope)-1]][var], line)
 		pilaOp.push(var)
 		pTypes.push(varTable[scope[len(scope)-1]][var])
 	elif var in varTable['global']:
-		#print p[-1], "is %s in line %s" %(varTable['global'][p[-1]], line)
+		print p[-1], "is %s in line %s" %(varTable['global'][p[-1]], line)
 		pilaOp.push(var)
 		pTypes.push(varTable['global'][var])
 	else:
 		print var, 'in line %s is not declared' % line
-		sys.exit()
+		#sys.exit()
 
 def check_type(p):
 	line = p.lineno(0)
@@ -245,6 +257,22 @@ def gen_exp_quad(line, qtype):
 	#	print "Not enough operands in stack in line %s" % line
 		#sys.exit()
 
+def gen_return_quad(scope, p):
+	line = p.lineno(0)
+	ret = pilaOp.peek()
+	pilaOp.pop()
+	retType = pTypes.peek()
+	pTypes.pop()
+	functype = dirProcedures[scope]['func_type']
+	if functype == retType:
+		quad = Quadruple(Quadruples.cont, 'return', '', '',ret)
+		quadruples.addQuad(quad)
+	else:
+		print "Type mismatch of return in line %s" % line
+
+def gen_endproc_quad():
+	quad = Quadruple(Quadruples.cont, 'Endproc', '', '','')
+	quadruples.addQuad(quad)
 
 def gen_end_quad():
 	quad = Quadruple(Quadruples.cont, 'END', '', '','')
@@ -281,10 +309,10 @@ def printOperationCodes():
 
 # DEsplegar las variables por motivos de debugging
 def printAll():
-	'''print "===\t\tVar Table\t\t==="
+	print "===\t\tVar Table\t\t==="
 	pprint.pprint(varTable)
 	print "===\t\tDir Proc\t\t==="
-	pprint.pprint(dirProcedures)'''
+	pprint.pprint(dirProcedures)
 	print "===\t\tPila Operadores\t\t==="
 	print 'size', pilaOptr.size()
 	printStack(pilaOptr)

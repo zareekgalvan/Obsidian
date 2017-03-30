@@ -17,7 +17,7 @@ operationCodes = {
 	'read' : 15,
 	'write' : 16,
 	'return' : 17,
-	'endproc' : 18,
+	'Endproc' : 18,
 	'gosub' : 19,
 	'era' : 20,
 	'GotoF' : 21,

@@ -93,11 +93,25 @@ def p_to_args(p):
 	to_args(varid, vartype, line, p)
 
 def p_func_block(p):
-	'''func_block : LBRACKET more_vars more_statement optional_return RBRACKET'''
+	'''func_block : LBRACKET more_vars actual_quad_no more_statement optional_return gen_endproc_quad RBRACKET'''
+
+def p_actual_quad_no(p):
+	'''actual_quad_no :'''
+	lastscope = scope[len(scope)-1]
+	actual_quad_no(lastscope)
+
+def p_gen_endproc_quad(p):
+	'''gen_endproc_quad :'''
+	gen_endproc_quad()
 
 def p_optional_return(p):
-	'''optional_return : RETURN exp SEMICOLON
+	'''optional_return : RETURN exp gen_return_quad SEMICOLON
 			|'''
+
+def p_gen_return_quad(p):
+	'''gen_return_quad :'''
+	lastscope = scope[len(scope)-1]
+	gen_return_quad(lastscope, p)
 
 def p_more_statement(p):
 	'''more_statement : statement more_statement
@@ -166,7 +180,7 @@ def p_gen_assignation_quad(p):
 	gen_est_quad(line, 'assignation')
 
 def p_func_call(p):
-	'''func_call : ID LPAR params RPAR gen_func_call_quad'''
+	'''func_call : ID is_valid_func LPAR params RPAR gen_func_call_quad'''
 
 def p_params(p):
 	'''params : exp more_params
@@ -175,6 +189,11 @@ def p_params(p):
 def p_more_params(p):
 	'''more_params : COMMA exp more_params
 			|'''
+
+
+def p_is_valid_fucn(p):
+	'''is_valid_func :'''
+	is_valid_func(p)
 
 def p_gen_func_call_quad(p):
 	'''gen_func_call_quad :'''
