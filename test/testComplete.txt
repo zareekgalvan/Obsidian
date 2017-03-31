@@ -21,59 +21,37 @@ double xuu = x[1][1][1][1];
 
 bool xz;
 
-func void x3()
-{
-	
-}
-
-func bool x4()
-{
-	
-}
-
-func int x5()
-{
-	
-}
-
-func double x6()
-{
-	
-}
 
 func int x7(int x8)
 {
 	int x9 = 5;
 	int x10, y11, x12, y12=x, y13;
+	return x8;
 }
 
 func double x14(int x15, double x16)
 {
-	int x17;
+	double x17;
 	int i = 1;
 	read(x);
-	return i;
+	return x17;
 }
 
 func int f2(int i)
 {
 	int xg = 5;
 	int fn, yg, gg, h=x, e;
+	return i;
 }
 
 func double c(int xj, double yf)
 {
-	int i;
+	double i;
 	int tt = 1;
 	read(x);
 	return i;
 }
 
-
-func bool s(int xts, double ax, bool hx, int vx)
-{
-	
-}
 
 main 
 {

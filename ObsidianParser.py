@@ -102,11 +102,13 @@ def p_actual_quad_no(p):
 
 def p_gen_endproc_quad(p):
 	'''gen_endproc_quad :'''
-	gen_endproc_quad()
+	gen_endproc_quad(p)
 
 def p_optional_return(p):
 	'''optional_return : RETURN exp gen_return_quad SEMICOLON
 			|'''
+	if len(p) > 1:
+		p[0] = p[2]
 
 def p_gen_return_quad(p):
 	'''gen_return_quad :'''

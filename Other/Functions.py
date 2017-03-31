@@ -84,7 +84,7 @@ def to_pilaOp(var, line, p):
 		pilaOp.push(var)
 		pTypes.push(varTable[scope[len(scope)-1]][var])
 	elif var in varTable['global']:
-		print p[-1], "is %s in line %s" %(varTable['global'][p[-1]], line)
+		print var, "is %s in line %s" %(varTable['global'][var], line)
 		pilaOp.push(var)
 		pTypes.push(varTable['global'][var])
 	else:
@@ -98,6 +98,7 @@ def check_type(p):
 	if expType == 'bool':
 		res = pilaOp.peek()
 		pilaOp.pop()
+		pTypes.pop()
 		gen_gotof_quad(res)
 	else:
 		print "Type mismatch in line %s with val %s" % (line, expType)
@@ -269,9 +270,14 @@ def gen_return_quad(scope, p):
 		quadruples.addQuad(quad)
 	else:
 		print "Type mismatch of return in line %s" % line
+		sys.exit()
 
-def gen_endproc_quad():
-	quad = Quadruple(Quadruples.cont, 'Endproc', '', '','')
+def gen_endproc_quad(p):
+	lastscope =scope[len(scope)-1]
+	if lastscope != 'void' and p[-1] == None:
+		print "Invalid syntax, function %s has no return" % lastscope
+		sys.exit()
+	quad = Quadruple(Quadruples.cont, 'EndP', '', '','')
 	quadruples.addQuad(quad)
 
 def gen_end_quad():
