@@ -1,10 +1,11 @@
 func int factorial (int n)
  {
+ 	int x;
  	return n * factorial(n - 1);
  }
 
  main 
  {
- 	int i = 5;
- 	write(factorial(5));
+ 	int i = factorial(5);
+ 	write(i);
  }

@@ -54,6 +54,16 @@ def is_valid_func(p):
 
 # QUAD GENERATION FUNCTIONS
 # ===========================================================================
+def gen_goto_main():
+	pSaltos.push(Quadruples.cont)
+	quad = Quadruple(Quadruples.cont, 'Goto', '', '', '')
+	quadruples.addQuad(quad)
+
+def fill_main_quad():
+	fill = pSaltos.peek()
+	pSaltos.pop()
+	quadruples.fillQuad(fill, Quadruples.cont)
+
 def pop_false_bottom():
 	if pilaOptr.peek() == '(':
 		pilaOptr.pop()
@@ -257,6 +267,12 @@ def gen_exp_quad(line, qtype):
 	#else:
 	#	print "Not enough operands in stack in line %s" % line
 		#sys.exit()
+
+def gen_era(p):
+	lastscope = p[-3]
+	quad = Quadruple(Quadruples.cont, 'era', '', '', lastscope)
+	quadruples.addQuad(quad)
+	paramCount = 0
 
 def gen_return_quad(scope, p):
 	line = p.lineno(0)

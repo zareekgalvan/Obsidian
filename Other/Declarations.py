@@ -30,6 +30,7 @@ mults = ['*', '/', '%']
 
 # Cuadruplos
 quadruples = Quadruples()
+paramCount = 0
 
 # Debbuging mode
 debug = 'on'

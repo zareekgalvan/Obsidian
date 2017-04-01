@@ -7,8 +7,12 @@ from Other.Functions import *
 
 # Definicion de las reglas
 def p_program(p):
-	'''program : more_vars more_func main'''
+	'''program : gen_goto_main more_vars more_func main'''
 	p[0] = "PROGRAM COMPILED"
+
+def p_gen_goto_main(p):
+	'''gen_goto_main :'''
+	gen_goto_main()
 
 def p_more_vars(p):
 	'''more_vars : vars
@@ -182,10 +186,10 @@ def p_gen_assignation_quad(p):
 	gen_est_quad(line, 'assignation')
 
 def p_func_call(p):
-	'''func_call : ID is_valid_func LPAR params RPAR gen_func_call_quad'''
+	'''func_call : ID is_valid_func LPAR gen_era params RPAR gen_func_call_quad'''
 
 def p_params(p):
-	'''params : exp more_params
+	'''params : exp  more_params
 			|'''
 
 def p_more_params(p):
@@ -193,9 +197,13 @@ def p_more_params(p):
 			|'''
 
 
-def p_is_valid_fucn(p):
+def p_is_valid_func(p):
 	'''is_valid_func :'''
 	is_valid_func(p)
+
+def p_gen_era(p):
+	'''gen_era :'''
+	gen_era(p)
 
 def p_gen_func_call_quad(p):
 	'''gen_func_call_quad :'''
@@ -315,6 +323,7 @@ def p_main_to_proc_dir(p):
 	procname = p[-1]
 	scope.append(procname)
 	varTable[procname] = {}
+	fill_main_quad()
 
 def p_main_block(p):
 	'''main_block : LBRACKET more_vars more_statement RBRACKET gen_end_quad'''
