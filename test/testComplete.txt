@@ -68,7 +68,7 @@ main
 			if(5 < 4)
 			{
 				x = 5;
-				s();
+				c(x, xt);
 				if(5==5)
 				{
 					write(x);

@@ -52,6 +52,7 @@ def is_valid_func(p):
 		print '%s in line %s is not a valid function' % (varid, line)
 		#sys.exit()
 
+
 # QUAD GENERATION FUNCTIONS
 # ===========================================================================
 def gen_goto_main():
@@ -268,11 +269,37 @@ def gen_exp_quad(line, qtype):
 	#	print "Not enough operands in stack in line %s" % line
 		#sys.exit()
 
+def check_args(p):
+	global paramCount
+	paramCount += 1
+	line = p.lineno(0)
+	arg = pilaOp.peek()
+	pilaOp.pop()
+	argType = pTypes.peek()
+	pTypes.pop()
+	lastType = dirProcedures[lastFuncCallScope]['args'][paramCount-1]
+	if argType != lastType:
+		print 'Type mismatch in argument #%s of function %s in line %s, expected %s but recieved %s instead' % (paramCount, lastFuncCallScope, line, lastType, argType)
+		sys.exit()
+	else:
+		quad = Quadruple(Quadruples.cont, 'param', arg, paramCount, '')
+		quadruples.addQuad(quad)
+
+def gen_go_sub(p):
+	paramsno = dirProcedures[lastFuncCallScope]['params_no']	
+	if paramCount != paramsno:
+		print 'Function "%s" requires %s parameters' % (lastFuncCallScope, paramsno)
+		sys.exit()
+	else:
+		quad = Quadruple(Quadruples.cont, 'gosub', lastFuncCallScope, dirProcedures[lastFuncCallScope]['quad_start'], '')
+		quadruples.addQuad(quad)
+
 def gen_era(p):
 	lastscope = p[-3]
+	global lastFuncCallScope
+	lastFuncCallScope = lastscope
 	quad = Quadruple(Quadruples.cont, 'era', '', '', lastscope)
 	quadruples.addQuad(quad)
-	paramCount = 0
 
 def gen_return_quad(scope, p):
 	line = p.lineno(0)
@@ -293,8 +320,10 @@ def gen_endproc_quad(p):
 	if lastscope != 'void' and p[-1] == None:
 		print "Invalid syntax, function %s has no return" % lastscope
 		sys.exit()
-	quad = Quadruple(Quadruples.cont, 'EndP', '', '','')
+	quad = Quadruple(Quadruples.cont, 'Endproc', '', '','')
 	quadruples.addQuad(quad)
+	global paramCount
+	paramCount = 0
 
 def gen_end_quad():
 	quad = Quadruple(Quadruples.cont, 'END', '', '','')

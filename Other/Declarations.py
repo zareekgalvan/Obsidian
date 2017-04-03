@@ -31,6 +31,7 @@ mults = ['*', '/', '%']
 # Cuadruplos
 quadruples = Quadruples()
 paramCount = 0
+lastFuncCallScope = ""
 
 # Debbuging mode
 debug = 'on'

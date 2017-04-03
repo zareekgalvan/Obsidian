@@ -17,11 +17,12 @@ operationCodes = {
 	'read' : 15,
 	'write' : 16,
 	'return' : 17,
-	'EndP' : 18,
+	'Endproc' : 18,
 	'gosub' : 19,
 	'era' : 20,
 	'GotoF' : 21,
 	'GotoT' : 22,
 	'Goto' : 23,
-	'END' : 24
+	'END' : 24,
+	'param' : 25
 }

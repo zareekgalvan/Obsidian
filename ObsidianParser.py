@@ -186,16 +186,19 @@ def p_gen_assignation_quad(p):
 	gen_est_quad(line, 'assignation')
 
 def p_func_call(p):
-	'''func_call : ID is_valid_func LPAR gen_era params RPAR gen_func_call_quad'''
+	'''func_call : ID is_valid_func LPAR gen_era params RPAR gen_go_sub'''
 
 def p_params(p):
-	'''params : exp  more_params
+	'''params : exp check_args more_params
 			|'''
 
 def p_more_params(p):
-	'''more_params : COMMA exp more_params
+	'''more_params : COMMA exp check_args more_params
 			|'''
 
+def p_check_args(p):
+	'''check_args :'''
+	check_args(p)
 
 def p_is_valid_func(p):
 	'''is_valid_func :'''
@@ -205,9 +208,9 @@ def p_gen_era(p):
 	'''gen_era :'''
 	gen_era(p)
 
-def p_gen_func_call_quad(p):
-	'''gen_func_call_quad :'''
-
+def p_gen_go_sub(p):
+	'''gen_go_sub :'''
+	gen_go_sub(p)
 
 def p_block(p):
 	'''block : LBRACKET more_statement RBRACKET'''
