@@ -3,19 +3,12 @@
 <head>
   <meta charset="utf-8">
   <title>Obsidian</title>
+
+  <link rel="stylesheet" type="text/css" href="obsidian.css">
+
   <script src="../dependencies/blockly/blockly_compressed.js"></script>
   <script src="../dependencies/blockly/blocks_compressed.js"></script>
   <script src="../dependencies/blockly/msg/js/en.js"></script>
-  <style>
-    body {
-      background-color: #fff;
-      font-family: sans-serif;
-    }
-    h1 {
-      font-weight: normal;
-      font-size: 140%;
-    }
-  </style>
 </head>
 <body>
   <h1><a href="https://developers.google.com/blockly/">Blockly</a> &gt;
@@ -37,11 +30,7 @@
     <block type="text_print"></block>
   </xml>
 
-  <script>
-    var workspace = Blockly.inject('blocklyDiv',
-        {media: '../dependencies/blockly/media/',
-         toolbox: document.getElementById('toolbox')});
-  </script>
+  <script src="obsidian.js"></script>
 
 </body>
 </html>
