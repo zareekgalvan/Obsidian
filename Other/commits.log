@@ -1,3 +1,9 @@
+* a34038c : Put blockly in dependencies folder, Add blockly demo to frontend folder
+* 9c89976 : Add blockly
+* 949f8da : Add DS_Store to gitignore
+* 34388e7 : Add validation for returns required in functions
+* 0b3bba6 : Define semantic rules for function definition Add generate quad for return Add generate quad for endproc Add params_no, vars_no and quad_start in dirProc
+* 34cb15c : Fourth Delivery: Correct Semantic Cube Add generate assignation quadruple Add generate declaration assign quadruple Modify Quadruple Class to have a quad number Add fillQuad in Quadruples Class Checks arr integrity type Add gen condition quads Add cycle quads Add gen func call quad function (implementation pending)
 * 7628510 : Generate Read and Write Quads Clean Parser file Generate new funtions in Functions file (result of cleaning Parser file)
 * 0b1c84d : Add Quadruples class Generate quad of statements declared, not implemented Missing while, condition and function quad declaration Add functions file Restructure add quad methods Restructure files again Add debug mode'
 * 5e0a054 : 3rd delivery: Generate quadruples for exps Vars and constants types implementation Reorganization of files Declarations file created Corrected test 6 Edit diagrams
