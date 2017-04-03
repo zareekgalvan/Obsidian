@@ -10,13 +10,15 @@
   <script src="../dependencies/blockly/blocks_compressed.js"></script>
   <script src="../dependencies/blockly/javascript_compressed.js"></script>
   <script src="../dependencies/blockly/msg/js/en.js"></script>
+  <script src="obsidian-blockly/obsidian-blocks.js"></script>
+  <script src="obsidian-blockly/obsidian-generators.js"></script>
 
 </head>
 <body>
   <p>Obsidian</p>
 
   <p>
-    <button onclick="showCode()">Show JavaScript</button>
+    <button onclick="showCode()">Obsidian Code</button>
   </p>
 
   <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
@@ -29,6 +31,12 @@
       <block type="logic_negate"></block>
       <block type="logic_boolean"></block>
     </category>
+
+  <category name="Variables" colour="330" custom="VARIABLE"></category>
+
+  <category name="Functions" colour="290" custom="PROCEDURE"></category>
+
+
     <category name="Loops">
       <block type="controls_repeat_ext">
         <value name="TIMES">
@@ -39,16 +47,23 @@
       </block>
       <block type="controls_whileUntil"></block>
     </category>
+
+    <category name="General">
+        <block type="main"></block>
+    </category>
+
     <category name="Math">
       <block type="math_number"></block>
       <block type="math_arithmetic"></block>
       <block type="math_single"></block>
     </category>
+
     <category name="Text">
       <block type="text"></block>
       <block type="text_length"></block>
       <block type="text_print"></block>
     </category>
+
   </xml>
 
   <xml id="startBlocks" style="display: none">
