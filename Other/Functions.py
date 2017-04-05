@@ -65,6 +65,9 @@ def fill_main_quad():
 	pSaltos.pop()
 	quadruples.fillQuad(fill, Quadruples.cont)
 
+def push_false_bottom():
+	pilaOptr.push('(')
+
 def pop_false_bottom():
 	if pilaOptr.peek() == '(':
 		pilaOptr.pop()

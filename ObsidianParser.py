@@ -186,7 +186,7 @@ def p_gen_assignation_quad(p):
 	gen_est_quad(line, 'assignation')
 
 def p_func_call(p):
-	'''func_call : ID is_valid_func LPAR gen_era params RPAR gen_go_sub'''
+	'''func_call : ID is_valid_func LPAR gen_era push_false_bottom params pop_false_bottom RPAR gen_go_sub'''
 	p[0] = p[1]
 
 def p_params(p):
@@ -308,6 +308,10 @@ def p_to_pilaOp(p):
 def p_add_to_pilaOptr(p):
 	'''add_to_pilaOptr :'''
 	pilaOptr.push(p[-1])
+
+def p_push_false_bottom(p):
+	'''push_false_bottom :'''
+	push_false_bottom()
 
 def p_pop_false_bottom(p):
 	'''pop_false_bottom :'''
