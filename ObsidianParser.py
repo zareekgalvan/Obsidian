@@ -187,6 +187,7 @@ def p_gen_assignation_quad(p):
 
 def p_func_call(p):
 	'''func_call : ID is_valid_func LPAR gen_era params RPAR gen_go_sub'''
+	p[0] = p[1]
 
 def p_params(p):
 	'''params : exp check_args more_params
