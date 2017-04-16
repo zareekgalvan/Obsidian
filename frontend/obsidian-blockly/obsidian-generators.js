@@ -16,3 +16,12 @@ Blockly.JavaScript['function'] = function(block) {
   var code = 'func '+ dropdownType + ' ' + textId + ' (' + valueParams +')' + '{\n' + statements + '\n}\n';
   return code;
 };
+
+// PARAMS IN FUNCTION
+Blockly.JavaScript['parameter'] = function(block) {
+  var nameParam = block.getFieldValue('name_param');
+  var dropdownType = block.getFieldValue('type');
+
+  var code = dropdownType + ' ' + nameParam;
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};

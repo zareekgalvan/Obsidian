@@ -27,3 +27,18 @@ Blockly.Blocks['function'] = {
     this.setTooltip('');
   }
 };
+
+// PARAMETERS IN FUNCTION
+Blockly.Blocks['parameter'] = {
+  init: function() {
+    this.appendDummyInput()
+         .appendField(new Blockly.FieldDropdown([ ["int", "int"], ["double", "double"], ["string", "string"], ["bool", "bool"]]), "type")
+        .appendField(new Blockly.FieldTextInput("'name'"), "name_param");
+    this.setOutput(true, null);
+    this.setColour(210);
+    this.setTooltip('');
+  }
+};
+
+// VARIABLES
+
