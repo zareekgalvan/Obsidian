@@ -32,3 +32,14 @@ Blockly.JavaScript['parameters'] = function(block) {
   var code = dropdownType + ' ' + nameParam + comma + otherParams;
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
+
+// RETURN IN FUNCTION
+Blockly.JavaScript['return'] = function(block) {
+  var val = Blockly.JavaScript.valueToCode(block, 'RETURN', Blockly.JavaScript.ORDER_ATOMIC);
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'return ' + val + ';\n';
+  code = code.replace(/[()]/g,'');
+  code = code.replace(/[¿]/g,'(');
+  code = code.replace(/[?]/g,')');
+  return code;
+};

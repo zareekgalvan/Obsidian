@@ -35,9 +35,21 @@ Blockly.Blocks['parameters'] = {
         .setCheck(null)
         .appendField(new Blockly.FieldDropdown([ ["int", "int"], ["double", "double"], ["string", "string"], ["bool", "bool"] ]), "type")
         .appendField(new Blockly.FieldTextInput("'name'"), "name_param")
-        .appendField(new Blockly.FieldDropdown([ [",", ","], [" ", ""] ]), "comma");
+        .appendField(new Blockly.FieldDropdown([ [",", ","], ["no comma", ""] ]), "comma");
     this.setOutput(true, null);
     this.setColour(210);
+    this.setTooltip('');
+  }
+};
+
+// RETURN IN FUNCTION
+Blockly.Blocks['return'] = {
+  init: function() {
+    this.appendValueInput("RETURN")
+        .setCheck(null)
+        .appendField("Return");
+    this.setPreviousStatement(true, null);
+    this.setColour(255);
     this.setTooltip('');
   }
 };
