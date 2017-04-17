@@ -17,7 +17,7 @@ Blockly.Blocks['function'] = {
     this.appendValueInput("params")
         .setCheck(null)
         .appendField("func")
-        .appendField(new Blockly.FieldDropdown([ ["int", "int"], ["double", "double"], ["string", "string"], ["void", "void"],["bool", "bool"]]), "type")
+        .appendField(new Blockly.FieldDropdown([ ["int", "int"], ["double", "double"], ["string", "string"], ["void", "void"],["bool", "bool"] ]), "type")
         .appendField(new Blockly.FieldTextInput("id"), "id");
     this.appendStatementInput("statement")
         .setCheck(null);
@@ -29,11 +29,13 @@ Blockly.Blocks['function'] = {
 };
 
 // PARAMETERS IN FUNCTION
-Blockly.Blocks['parameter'] = {
+Blockly.Blocks['parameters'] = {
   init: function() {
-    this.appendDummyInput()
-         .appendField(new Blockly.FieldDropdown([ ["int", "int"], ["double", "double"], ["string", "string"], ["bool", "bool"]]), "type")
-        .appendField(new Blockly.FieldTextInput("'name'"), "name_param");
+    this.appendValueInput('parameters_list')
+        .setCheck(null)
+        .appendField(new Blockly.FieldDropdown([ ["int", "int"], ["double", "double"], ["string", "string"], ["bool", "bool"] ]), "type")
+        .appendField(new Blockly.FieldTextInput("'name'"), "name_param")
+        .appendField(new Blockly.FieldDropdown([ [",", ","], [" ", ""] ]), "comma");
     this.setOutput(true, null);
     this.setColour(210);
     this.setTooltip('');

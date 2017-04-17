@@ -18,10 +18,17 @@ Blockly.JavaScript['function'] = function(block) {
 };
 
 // PARAMS IN FUNCTION
-Blockly.JavaScript['parameter'] = function(block) {
+Blockly.JavaScript['parameters'] = function(block) {
   var nameParam = block.getFieldValue('name_param');
   var dropdownType = block.getFieldValue('type');
 
-  var code = dropdownType + ' ' + nameParam;
+  var otherParams = Blockly.JavaScript.valueToCode(block, 'parameters_list', Blockly.JavaScript.ORDER_ATOMIC);
+
+  var comma = block.getFieldValue('comma');
+
+  otherParams = otherParams.replace(/[(]/g, " ");
+  otherParams = otherParams.replace(/[)]/g, "");
+
+  var code = dropdownType + ' ' + nameParam + comma + otherParams;
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
