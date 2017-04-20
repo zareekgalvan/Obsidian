@@ -1,7 +1,6 @@
 from Structs import *
 import pprint
 from SemanticCube import *
-from Quadruples import *
 
 # Tabla de Variables
 scope = ['global']
@@ -28,10 +27,16 @@ comps = ['<', '>', '>=', '<=', '==', '!=']
 sums = ['+', '-']
 mults = ['*', '/', '%']
 
+from Quadruples import *
+from Memory import *
+
 # Cuadruplos
 quadruples = Quadruples()
 paramCount = 0
 lastFuncCallScope = ""
+
+# Memoria
+mem = Memory()
 
 # Debbuging mode
 debug = 'on'

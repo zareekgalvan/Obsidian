@@ -41,6 +41,25 @@ func int f2(int i)
 {
 	int xg = 5;
 	int fn, yg, gg, h=x, e;
+	while(x < y)
+	{
+		while(5 > 3)
+		{
+			if(5 < 4)
+			{
+				x = 5;
+				if(5==5)
+				{
+					write(x);
+				}
+				else {
+					x = 4 * 6;
+					x = 5 * 5 *5 * 5;
+					read(x);
+				}
+			}
+		}
+	}
 	return i;
 }
 
@@ -49,6 +68,25 @@ func double c(int xj, double yf)
 	double i;
 	int tt = 1;
 	read(x);
+	while(x < y)
+	{
+		while(5 > 3)
+		{
+			if(5 < 4)
+			{
+				x = 5;
+				if(5==5)
+				{
+					write(x);
+				}
+				else {
+					x = 4 * 6;
+					x = 5 * 5 *5 * 5;
+					read(x);
+				}
+			}
+		}
+	}
 	return i;
 }
 

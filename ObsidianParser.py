@@ -12,6 +12,7 @@ def p_program(p):
 
 def p_gen_goto_main(p):
 	'''gen_goto_main :'''
+	varTable['constants'] = {}
 	gen_goto_main()
 
 def p_more_vars(p):
@@ -107,6 +108,7 @@ def p_actual_quad_no(p):
 def p_gen_endproc_quad(p):
 	'''gen_endproc_quad :'''
 	gen_endproc_quad(p)
+	mem.deleteMems()
 
 def p_optional_return(p):
 	'''optional_return : RETURN exp gen_return_quad SEMICOLON
@@ -302,7 +304,7 @@ def p_to_pilaOp(p):
 	'''to_pilaOp :'''
 	#hacer validaciones de tipo
 	line = p.lineno(0)
-	var = p[-1]
+	var = tryRegisterVar(p[-1])
 	to_pilaOp(var, line, p)
 
 def p_add_to_pilaOptr(p):

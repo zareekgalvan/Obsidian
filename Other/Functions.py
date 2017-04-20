@@ -1,4 +1,6 @@
 from Declarations import *
+import pprint
+
 
 # SEMANTIC AND SINTAX VALIDATION FUNCTIONS
 # ===========================================================================
@@ -12,9 +14,11 @@ def to_var_table(p):
 	varid = p[-2]
 	line = p.lineno(0)
 	if varid not in varTable['global'] and varid not in varTable[scope[len(scope)-1]]:
-		varTable[scope[len(scope)-1]][varid] =  lastType[len(lastType)-1]
+		varTable[scope[len(scope)-1]][varid] = {}
+		varTable[scope[len(scope)-1]][varid]['type'] =  lastType[len(lastType)-1]
+		varTable[scope[len(scope)-1]][varid]['address'] = mem.avail(lastType[len(lastType)-1])
 	else:
-		print('Variable "%s" in line %s already registered' % (varid, line))
+		print 'Variable "%s" in line %s already registered' % (varid, line)
 		sys.exit()
 
 def to_proc_dir(p):
@@ -23,21 +27,25 @@ def to_proc_dir(p):
 	line = p.lineno(0)
 	if procname not in scope and procname not in varTable['global']:
 		scope.append(procname)
-		varTable['global'][procname] = functype
+		varTable['global'][procname] = {}
+		varTable['global'][procname]['type'] = functype
+		varTable['global'][procname]['address'] = mem.avail(functype)
 		varTable[procname] = {}
 		dirProcedures[procname] = {}
 		dirProcedures[procname]['func_type'] = functype
 		dirProcedures[procname]['args'] = []
 	else:
-		print('Function "%s" already registered in line %s' % (procname, line))
+		print 'Function "%s" already registered in line %s' % (procname, line)
 		sys.exit()
 
 def to_args(varid, vartype, line, p):
-	dirProcedures[scope[len(scope)-1]]['args'].append(p[-2])
+	dirProcedures[scope[len(scope)-1]]['args'].append(vartype)
 	if varid not in varTable['global'] and varid not in varTable[scope[len(scope)-1]]:
-		varTable[scope[len(scope)-1]][varid] =  vartype
+		varTable[scope[len(scope)-1]][varid] =  {}
+		varTable[scope[len(scope)-1]][varid]['type'] = vartype
+		varTable[scope[len(scope)-1]][varid]['address'] = mem.availVar(vartype)
 	else:
-		print('Variable "%s" in line %s already registered' % (varid, line))
+		print 'Variable "%s" in line %s already registered' % (varid, line)
 		sys.exit() 
 
 def actual_quad_no(scope):
@@ -52,6 +60,34 @@ def is_valid_func(p):
 		print '%s in line %s is not a valid function' % (varid, line)
 		#sys.exit()
 
+def getConstType(p):
+	if type(p) is int:
+		return 'int'
+	elif type(p) is float:
+		return 'double'
+	elif p == 'true' or p == 'false':
+		return 'bool'
+
+def exitsInVarTable(var):
+	if var in varTable[scope[len(scope)-1]]:
+		return True
+	else:
+		return False
+
+def tryRegisterVar(var):
+	if var in varTable['constants']:
+		return varTable['constants'][var]
+
+	elif var in varTable[scope[len(scope)-1]]:
+		return varTable[scope[len(scope)-1]][var]
+	elif var in varTable['global']:
+		return varTable['global'][var]
+	else:
+		varTable['constants'][var] = {}
+		typee = getConstType(var)
+		varTable['constants'][var]['type'] = typee
+		varTable['constants'][var]['address'] = mem.availConst(typee)
+		return varTable['constants'][var]
 
 # QUAD GENERATION FUNCTIONS
 # ===========================================================================
@@ -76,34 +112,9 @@ def pop_false_bottom():
 		sys.exit()
 
 def to_pilaOp(var, line, p):
-	if type(var) is int:
-		print var, "is int in line %s" %(line)
-		pilaOp.push(var)
-		pTypes.push('int')
-	elif type(var) is float:
-		print var, "is double in line %s" %(line)
-		pilaOp.push(var)
-		pTypes.push('double')
-	elif var == "true" or var == "false":
-		print var, "is bool in line %s" %(line)
-		pilaOp.push(var)
-		pTypes.push('bool')
-	elif var in dirProcedures and var in varTable['global']:
-		print var, "is function of type %s in line %s" % (dirProcedures[var]['func_type'], line)
-		pass
-		pilaOp.push(var)
-		pTypes.push(dirProcedures[var]['func_type'])
-	elif var in varTable[scope[len(scope)-1]]:
-		print var, "is %s in line %s" %(varTable[scope[len(scope)-1]][var], line)
-		pilaOp.push(var)
-		pTypes.push(varTable[scope[len(scope)-1]][var])
-	elif var in varTable['global']:
-		print var, "is %s in line %s" %(varTable['global'][var], line)
-		pilaOp.push(var)
-		pTypes.push(varTable['global'][var])
-	else:
-		print var, 'in line %s is not declared' % line
-		#sys.exit()
+	pilaOp.push(var['address'])
+	pTypes.push(var['type'])
+	
 
 def check_type(p):
 	line = p.lineno(0)
@@ -175,11 +186,11 @@ def gen_write_quad(line):
 def var_assign(p):
 	if len(p) > 1:
 		line = p.lineno(0)
-		var = p[-3]
+		var = tryRegisterVar(p[-3])
 		to_pilaOp(var, line, p)
-		var = p[2]
+		var = tryRegisterVar(p[2])
 		to_pilaOp(var, line, p)
-		line = p.lineno(0)
+
 		gen_est_quad(line, 'declaration_assign')
 
 def gen_assignation_quad(line):
@@ -258,13 +269,11 @@ def gen_exp_quad(line, qtype):
 		pilaOptr.pop()
 		res = getType(lType, rType, oper)
 		if res != 'ERROR':
-			global iTempCount
-			temp = "t" + str(iTempCount)
-			iTempCount += 1 
-			quad = Quadruple(Quadruples.cont, oper, lOperand, rOperand, temp)
+			nextTemp = mem.avail(res)
+			quad = Quadruple(Quadruples.cont, oper, lOperand, rOperand, nextTemp)
 			quadruples.addQuad(quad)
 			pTypes.push(res)
-			pilaOp.push(temp)
+			pilaOp.push(nextTemp)
 		else:
 			print "Type mismatch in line %s" % line
 			sys.exit()
@@ -379,6 +388,8 @@ def printAll():
 	print "===\t\tPila Saltos\t\t==="
 	print 'size', pSaltos.size()
 	printStack(pSaltos)
+	print "===\t\tMemoria\t\t==="
+	mem.printMemory()
 	print "===\t\tCuadruplos\t\t==="
 	print 'size', quadruples.size()
 	quadruples.printQuadruples()
