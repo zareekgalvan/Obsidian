@@ -43,3 +43,45 @@ Blockly.JavaScript['return'] = function(block) {
   code = code.replace(/[?]/g,')');
   return code;
 };
+
+// CONDITION
+Blockly.JavaScript['condition_value'] = function(block) {
+  var val = block.getFieldValue('value_param');
+  return val;
+};
+
+
+// VARIABLES
+Blockly.JavaScript['variable_definition'] = function(block) {
+  var dropdownType = block.getFieldValue('TYPE');
+  var id = block.getFieldValue('ID');
+  var textVal = block.getFieldValue('VALUE');
+
+  var extraVars = Blockly.JavaScript.valueToCode(block, 'extra_vars', Blockly.JavaScript.ORDER_ATOMIC);
+
+  extraVars = extraVars.replace(/[()]/g,'');
+  extraVars = extraVars.replace(/[¿]/g,'(');
+  extraVars = extraVars.replace(/[?]/g,')');
+
+  console.log("var definition block");
+
+  console.log(extraVars)
+
+  var code = dropdownType + ' ' + id + '=' + textVal + extraVars + ';\n';
+  console.log("returning var definition block");
+  return code;
+};
+
+Blockly.JavaScript['extra_variable'] = function(block) {
+  var id = block.getFieldValue('ID');
+  var textVal = block.getFieldValue('VALUE');
+
+  var extraVars = Blockly.JavaScript.valueToCode(block, 'extra_vars', Blockly.JavaScript.ORDER_ATOMIC);
+
+  console.log("extra var block");
+
+  var code = ', ' + id + '=' + textVal + extraVars;
+
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
