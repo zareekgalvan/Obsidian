@@ -33,6 +33,7 @@ from Memory import *
 # Cuadruplos
 quadruples = Quadruples()
 paramCount = 0
+returnCount = 0
 lastFuncCallScope = ""
 
 # Memoria

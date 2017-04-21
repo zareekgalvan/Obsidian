@@ -314,6 +314,7 @@ def gen_era(p):
 	quadruples.addQuad(quad)
 
 def gen_return_quad(scope, p):
+	global returnCount
 	line = p.lineno(0)
 	ret = pilaOp.peek()
 	pilaOp.pop()
@@ -321,17 +322,24 @@ def gen_return_quad(scope, p):
 	pTypes.pop()
 	functype = dirProcedures[scope]['func_type']
 	if functype == retType:
-		quad = Quadruple(Quadruples.cont, 'return', '', '',ret)
+		quad = Quadruple(Quadruples.cont, 'return', '', '', ret)
 		quadruples.addQuad(quad)
+		pSaltos.push(Quadruples.cont)
+		quad = Quadruple(Quadruples.cont, 'Goto', '', '', '')
+		quadruples.addQuad(quad)
+		returnCount += 1
 	else:
 		print "Type mismatch of return in line %s" % line
 		sys.exit()
 
 def gen_endproc_quad(p):
-	lastscope =scope[len(scope)-1]
-	if lastscope != 'void' and p[-1] == None:
-		print "Invalid syntax, function %s has no return" % lastscope
-		sys.exit()
+	lastscope = scope[len(scope)-1]
+	global returnCount
+	while returnCount != 0:
+		fill = pSaltos.peek()
+		pSaltos.pop()
+		quadruples.fillQuad(fill, Quadruples.cont)
+		returnCount -= 1
 	quad = Quadruple(Quadruples.cont, 'Endproc', '', '','')
 	quadruples.addQuad(quad)
 	global paramCount

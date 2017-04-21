@@ -98,7 +98,7 @@ def p_to_args(p):
 	to_args(varid, vartype, line, p)
 
 def p_func_block(p):
-	'''func_block : LBRACKET more_vars actual_quad_no more_statement optional_return gen_endproc_quad RBRACKET'''
+	'''func_block : LBRACKET more_vars actual_quad_no more_statement gen_endproc_quad RBRACKET'''
 
 def p_actual_quad_no(p):
 	'''actual_quad_no :'''
@@ -110,17 +110,6 @@ def p_gen_endproc_quad(p):
 	gen_endproc_quad(p)
 	mem.deleteMems()
 
-def p_optional_return(p):
-	'''optional_return : RETURN exp gen_return_quad SEMICOLON
-			|'''
-	if len(p) > 1:
-		p[0] = p[2]
-
-def p_gen_return_quad(p):
-	'''gen_return_quad :'''
-	lastscope = scope[len(scope)-1]
-	gen_return_quad(lastscope, p)
-
 def p_more_statement(p):
 	'''more_statement : statement more_statement
 			|'''
@@ -128,6 +117,7 @@ def p_more_statement(p):
 def p_statement(p):
 	'''statement : read
 		| write
+		| return_stmt
 		| cycle
 		| condition
 		| assignation
@@ -148,6 +138,15 @@ def p_gen_write_quad(p):
 	'''gen_write_quad :'''
 	line = p.lineno(0)
 	gen_est_quad(line, 'write')
+
+def p_return_stmt(p):
+	'''return_stmt : RETURN exp gen_return_quad SEMICOLON'''
+
+def p_gen_return_quad(p):
+	'''gen_return_quad :'''
+	lastscope = scope[len(scope)-1]
+	gen_return_quad(lastscope, p)
+
 
 def p_cycle(p):
 	'''cycle : WHILE cycle_start LPAR expression RPAR check_type block cycle_end'''
