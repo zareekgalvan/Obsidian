@@ -361,14 +361,6 @@ def printSemanticCube():
 		for  key2 in semanticCube[key]:
 			print semanticCube[key][key2]
 
-# Hacer print de un stack
-def printStack(stack):
-    print "-------------------"
-    while not stack.isEmpty():
-        print stack.peek(), ",",
-        stack.pop()
-    print "\n-------------------"
-
 # Obtener el codigo de operacion
 def getOperationCode(oper):
 	return operationCodes[oper]
