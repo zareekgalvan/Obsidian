@@ -12,6 +12,7 @@ class MemSpace():
 		self.doublesActual = self.doublesBase
 		self.boolsBase = base + (self.long * 2) 
 		self.boolsActual = self.boolsBase
+		self.last = self.boolsBase + self.long - 1
 
 	def getNextInt(self):
 		if self.intsActual + 1 < self.doublesBase:
@@ -32,7 +33,7 @@ class MemSpace():
 			sys.exit()
 
 	def getNextBool(self):
-		if self.boolsActual + 1 < self.boolsBase + self.long:
+		if self.boolsActual + 1 <= self.last:
 			nextBool = self.boolsActual
 			self.boolsActual += 1
 			return nextBool
@@ -53,7 +54,8 @@ class MemSpace():
 		print "Base doubles:", self.doublesBase
 		print "Act doubles:", self.doublesActual
 		print "Base bools:", self.boolsBase
-		print "Act bools:", self.boolsActual, "\n"
+		print "Act bools:", self.boolsActual
+		print "Last direction:", self.last, "\n"
 
 
 class Memory():
@@ -64,6 +66,12 @@ class Memory():
 		self.variableMem = MemSpace('variables', self.globalMem.long + self.globalMem.boolsBase, 1000)
 		self.temporalMem = MemSpace('temporals', self.variableMem.long + self.variableMem.boolsBase, 1500)
 		self.constantMem = MemSpace('constants', self.temporalMem.long + self.temporalMem.boolsBase, 1000)
+		self.memory['global'] = {}
+		self.memory['variable'] = Stack()
+		self.memory['variable'].push(1)
+		self.memory['temporal'] = Stack()
+		self.memory['temporal'].push(1)
+		self.memory['constant'] = {}
 
 	def avail(self, typee):
 		nextTemp = None
@@ -109,9 +117,24 @@ class Memory():
 		self.temporalMem.deleteMemSpace()
 		#self.constantMem.deleteMemSpace()
 
+	def addToMem(self, dir, val = None):
+		if dir >= self.globalMem.base and dir <= self.globalMem.last:
+			self.memory['global'][dir] = val
+		elif dir >= self.variableMem.base and dir <= self.variableMem.last:
+			print 1
+		elif dir >= self.temporalMem.base and dir <= self.temporalMem.last:
+			print 2
+		elif dir >= self.constantMem.base and dir <= self.constantMem.last:
+			print 3
+
 	def printMemory(self):
 		self.globalMem.printMemSpace()
 		self.variableMem.printMemSpace()
 		self.temporalMem.printMemSpace()
 		self.constantMem.printMemSpace()
-		print self.memory
+		for key in self.memory:
+			if type(self.memory[key]) is dict:
+				print self.memory[key]
+			else:
+				printStack(self.memory[key])
+			

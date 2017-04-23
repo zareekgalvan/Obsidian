@@ -31,6 +31,8 @@ class Queue():
 
 class Stack():
 
+    def __class__(self):
+        return Stack
     # Constructor
     def __init__(self):
         self.items = []
@@ -62,3 +64,11 @@ class Stack():
     # Regresa el tamano ( numero de elementos) del stack
     def size(self):
         return len(self.items)
+
+# Hacer print de un stack
+def printStack(stack):
+    print "-------------------"
+    while not stack.isEmpty():
+        print stack.peek(), ",",
+        stack.pop()
+    print "\n-------------------"
