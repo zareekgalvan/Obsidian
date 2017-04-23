@@ -67,7 +67,13 @@ Blockly.JavaScript['variable_definition'] = function(block) {
 
   console.log(extraVars)
 
-  var code = dropdownType + ' ' + id + '=' + textVal + extraVars + ';\n';
+  if (textVal) {
+    var code = dropdownType + ' ' + id + '=' + textVal + extraVars + ';\n';
+  } else {
+    var code = dropdownType + ' ' + id + extraVars + ';\n';
+  }
+
+  
   console.log("returning var definition block");
   return code;
 };
@@ -80,8 +86,26 @@ Blockly.JavaScript['extra_variable'] = function(block) {
 
   console.log("extra var block");
 
-  var code = ', ' + id + '=' + textVal + extraVars;
-
+  if (textVal) {
+    var code = ', ' + id + '=' + textVal + extraVars;
+  } else {
+    var code = ', ' + id + extraVars;
+  }
+  
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
+
+//IO
+Blockly.JavaScript['read'] = function(block) {
+  var id = block.getFieldValue('ID');
+  var code = 'read (' + id + ');\n';
+  return code;
+};
+
+Blockly.JavaScript['write'] = function(block) {
+  var id = block.getFieldValue('ID');
+  var code = 'write (' + id + ');\n';
+  return code;
+};
+
 

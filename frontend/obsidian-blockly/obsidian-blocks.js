@@ -93,4 +93,31 @@ Blockly.Blocks['extra_variable'] = {
 };
 
 
+//IO
+Blockly.Blocks['read'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("read")
+        .appendField(new Blockly.FieldTextInput("id"), "ID")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(250);
+    this.setTooltip('');
+  }
+};
+
+Blockly.Blocks['write'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("write")
+        .appendField(new Blockly.FieldTextInput("id"), "ID")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(250);
+    this.setTooltip('');
+  }
+};
+
+
+
 
