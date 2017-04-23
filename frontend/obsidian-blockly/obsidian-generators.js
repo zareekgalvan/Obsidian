@@ -36,11 +36,11 @@ Blockly.JavaScript['parameters'] = function(block) {
 // RETURN IN FUNCTION
 Blockly.JavaScript['return'] = function(block) {
   var val = Blockly.JavaScript.valueToCode(block, 'RETURN', Blockly.JavaScript.ORDER_ATOMIC);
-  // TODO: Assemble JavaScript into code variable.
+
   var code = 'return ' + val + ';\n';
-  code = code.replace(/[()]/g,'');
-  code = code.replace(/[¿]/g,'(');
-  code = code.replace(/[?]/g,')');
+  // code = code.replace(/[()]/g,'');
+  // code = code.replace(/[¿]/g,'(');
+  // code = code.replace(/[?]/g,')');
   return code;
 };
 
@@ -54,18 +54,12 @@ Blockly.JavaScript['condition_value'] = function(block) {
 // VARIABLES
 Blockly.JavaScript['variable_definition'] = function(block) {
   var dropdownType = block.getFieldValue('TYPE');
-  var id = block.getFieldValue('ID');
+  var id = block.getFieldValue('id');
   var textVal = block.getFieldValue('VALUE');
 
   var extraVars = Blockly.JavaScript.valueToCode(block, 'extra_vars', Blockly.JavaScript.ORDER_ATOMIC);
 
   extraVars = extraVars.replace(/[()]/g,'');
-  extraVars = extraVars.replace(/[¿]/g,'(');
-  extraVars = extraVars.replace(/[?]/g,')');
-
-  console.log("var definition block");
-
-  console.log(extraVars)
 
   if (textVal) {
     var code = dropdownType + ' ' + id + '=' + textVal + extraVars + ';\n';
@@ -73,18 +67,14 @@ Blockly.JavaScript['variable_definition'] = function(block) {
     var code = dropdownType + ' ' + id + extraVars + ';\n';
   }
 
-  
-  console.log("returning var definition block");
   return code;
 };
 
 Blockly.JavaScript['extra_variable'] = function(block) {
-  var id = block.getFieldValue('ID');
+  var id = block.getFieldValue('id');
   var textVal = block.getFieldValue('VALUE');
 
   var extraVars = Blockly.JavaScript.valueToCode(block, 'extra_vars', Blockly.JavaScript.ORDER_ATOMIC);
-
-  console.log("extra var block");
 
   if (textVal) {
     var code = ', ' + id + '=' + textVal + extraVars;
@@ -95,17 +85,46 @@ Blockly.JavaScript['extra_variable'] = function(block) {
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
-//IO
+// IO
 Blockly.JavaScript['read'] = function(block) {
-  var id = block.getFieldValue('ID');
+  var id = block.getFieldValue('id');
   var code = 'read (' + id + ');\n';
   return code;
 };
 
 Blockly.JavaScript['write'] = function(block) {
-  var id = block.getFieldValue('ID');
+  var id = block.getFieldValue('id');
   var code = 'write (' + id + ');\n';
   return code;
+};
+
+// ARRAYS
+Blockly.JavaScript['array_def'] = function(block) {
+  var type = block.getFieldValue('type');
+  var id = block.getFieldValue('id');
+  var size = block.getFieldValue('size');
+  var val = Blockly.JavaScript.valueToCode(block, 'name', Blockly.JavaScript.ORDER_ATOMIC);
+
+  var code = type +' ' + id + '[' + size + '] = '+ val + ';\n';
+
+  return code;
+};
+
+Blockly.JavaScript['array_assign'] = function(block) {
+  var id = block.getFieldValue('id');
+  var pos = block.getFieldValue('pos');
+  var val = Blockly.JavaScript.valueToCode(block, 'name', Blockly.JavaScript.ORDER_ATOMIC);
+
+  var code = id + '[' + pos + '] = ' + val + ';\n';
+  return code;
+};
+
+Blockly.JavaScript['array_access'] = function(block) {
+  var id = block.getFieldValue('id');
+  var pos = block.getFieldValue('pos');
+  var code = id + '[' + pos + ']';
+  
+  return [code, Blockly.JavaScript.ORDER_ATOMIC];
 };
 
 

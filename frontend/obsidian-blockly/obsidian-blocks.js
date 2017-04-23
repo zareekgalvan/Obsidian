@@ -70,7 +70,7 @@ Blockly.Blocks['variable_definition'] = {
   init: function() {
     this.appendValueInput('extra_vars')
         .appendField(new Blockly.FieldDropdown([["bool", "bool"], ["int", "int"], ["double", "double"]]), "TYPE")
-        .appendField(new Blockly.FieldTextInput("id"), "ID")
+        .appendField(new Blockly.FieldTextInput("id"), "id")
         .appendField("=")
         .appendField(new Blockly.FieldTextInput("value"), "VALUE");
     this.setPreviousStatement(true, null);
@@ -83,7 +83,7 @@ Blockly.Blocks['variable_definition'] = {
 Blockly.Blocks['extra_variable'] = {
   init: function() {
     this.appendValueInput('extra_vars')
-        .appendField(new Blockly.FieldTextInput("id"), "ID")
+        .appendField(new Blockly.FieldTextInput("id"), "id")
         .appendField("=")
         .appendField(new Blockly.FieldTextInput("value"), "VALUE");
     this.setOutput(true, null);
@@ -98,7 +98,7 @@ Blockly.Blocks['read'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("read")
-        .appendField(new Blockly.FieldTextInput("id"), "ID")
+        .appendField(new Blockly.FieldTextInput("id"), "id")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(250);
@@ -110,11 +110,55 @@ Blockly.Blocks['write'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("write")
-        .appendField(new Blockly.FieldTextInput("id"), "ID")
+        .appendField(new Blockly.FieldTextInput("id"), "id")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(250);
     this.setTooltip('');
+  }
+};
+
+// ARRAYS
+Blockly.Blocks['array_def'] = {
+  init: function() {
+    this.appendValueInput("name")
+        .setCheck(null)
+        .appendField(new Blockly.FieldDropdown([["int", "int"], ["double", "double"], ["bool", "bool"]]), "type")
+        .appendField(new Blockly.FieldTextInput("id"), "id")
+        .appendField("[")
+        .appendField(new Blockly.FieldNumber(0, 1), "size")
+        .appendField("]")
+        .appendField("=");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(225);
+  }
+};
+
+Blockly.Blocks['array_assign'] = {
+  init: function() {
+    this.appendValueInput("name")
+        .setCheck(null)
+        .appendField(new Blockly.FieldTextInput("id"), "id")
+        .appendField("[")
+        .appendField(new Blockly.FieldTextInput("value"), "pos")
+        .appendField("]")
+        .appendField("=");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(225);
+  }
+};
+
+Blockly.Blocks['array_access'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldTextInput("id"), "id")
+        .appendField("[")
+        .appendField(new Blockly.FieldTextInput("value"), "pos")
+        .appendField("]");
+    this.setOutput(true, null);
+    this.setColour(225);
   }
 };
 
