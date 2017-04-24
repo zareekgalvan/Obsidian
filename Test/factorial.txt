@@ -1,15 +1,15 @@
-func int factorial (int n)
+func int fact (int n)
  {
  	int x;
  	if (n == 0)
  	{
  		return 1;
  	}
- 	return n * factorial(n - 1);
+ 	return n * fact(n - 1);
  }
 
  main 
  {
- 	int i = factorial(5);
+ 	int i = fact(5);
  	write(i);
  }

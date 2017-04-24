@@ -114,6 +114,7 @@ def pop_false_bottom():
 def to_pilaOp(var, line, p):
 	pilaOp.push(var['address'])
 	pTypes.push(var['type'])
+	#mem.addToMem(var['address'])
 	
 
 def check_type(p):
@@ -338,6 +339,7 @@ def gen_endproc_quad(p):
 	while returnCount != 0:
 		fill = pSaltos.peek()
 		pSaltos.pop()
+		print fill, Quadruples.cont
 		quadruples.fillQuad(fill, Quadruples.cont)
 		returnCount -= 1
 	quad = Quadruple(Quadruples.cont, 'Endproc', '', '','')
