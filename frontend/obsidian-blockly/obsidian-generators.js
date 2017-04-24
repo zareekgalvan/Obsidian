@@ -87,6 +87,14 @@ Blockly.JavaScript['extra_variable'] = function(block) {
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
+Blockly.JavaScript['variable_assign'] = function(block) {
+  var id = block.getFieldValue('id');
+  var val = Blockly.JavaScript.valueToCode(block, 'value', Blockly.JavaScript.ORDER_ATOMIC);
+
+  var code = id + ' = ' + val + ';\n';
+  return code;
+};
+
 // IO
 Blockly.JavaScript['read'] = function(block) {
   var id = block.getFieldValue('id');
