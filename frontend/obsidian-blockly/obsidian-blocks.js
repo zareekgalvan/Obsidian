@@ -24,7 +24,7 @@ Blockly.Blocks['function'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(230);
-    this.setTooltip('');
+    this.setTooltip('Function that takes zero or several parameters.');
   }
 };
 
@@ -58,7 +58,7 @@ Blockly.Blocks['return'] = {
 Blockly.Blocks['condition_value'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField(new Blockly.FieldTextInput("value"), "value_param")
+        .appendField(new Blockly.FieldTextInput("Value or condition"), "value_param")
     this.setOutput(true, null);
     this.setColour(210);
     this.setTooltip('');
@@ -161,7 +161,3 @@ Blockly.Blocks['array_access'] = {
     this.setColour(225);
   }
 };
-
-
-
-

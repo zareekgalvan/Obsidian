@@ -97,8 +97,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
         "type": "field_dropdown",
         "name": "MODE",
         "options": [
-          ["%{BKY_CONTROLS_WHILEUNTIL_OPERATOR_WHILE}", "WHILE"],
-          ["%{BKY_CONTROLS_WHILEUNTIL_OPERATOR_UNTIL}", "UNTIL"]
+          ["%{BKY_CONTROLS_WHILEUNTIL_OPERATOR_WHILE}", "WHILE"]
         ]
       },
       {

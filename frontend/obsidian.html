@@ -26,36 +26,29 @@
   <xml id="toolbox" style="display: none">
     <category name="Logic">
       <block type="controls_if"></block>
+      <block type="condition_value"></block>
       <block type="logic_compare"></block>
       <block type="logic_operation"></block>
       <block type="logic_negate"></block>
       <block type="logic_boolean"></block>
     </category>
 
-  <category name="Variables" colour="330" custom="VARIABLE"></category>
-
-  <category name="Functions" colour="290" custom="PROCEDURE"></category>
-
-
     <category name="Loops">
-      <block type="controls_repeat_ext">
-        <value name="TIMES">
-          <block type="math_number">
-            <field name="NUM">10</field>
-          </block>
-        </value>
-      </block>
       <block type="controls_whileUntil"></block>
+      <block type="condition_value"></block>
     </category>
 
-    <category name="General">
-        <block type="main"></block>
-        <block type="function"></block>
-        <block type="parameters"></block>
-        <block type="return"></block>
+    <category name="Functions">
+      <block type="main"></block>
+      <block type="function"></block>
+      <block type="parameters"></block>
+      <block type="return"></block>
+    </category>
+
+    <category name="Variables">
         <block type="variable_definition"></block>
         <block type="extra_variable"></block>
-        <block type="condition_value"></block>
+        <!-- variable assign -->
     </category>
 
     <category name="I/O">
@@ -67,12 +60,6 @@
       <block type="array_def"></block>
       <block type="array_assign"></block>
       <block type="array_access"></block>
-    </category>
-
-    <category name="Math">
-      <block type="math_number"></block>
-      <block type="math_arithmetic"></block>
-      <block type="math_single"></block>
     </category>
 
     <category name="Text">

@@ -37,6 +37,8 @@ Blockly.JavaScript['parameters'] = function(block) {
 Blockly.JavaScript['return'] = function(block) {
   var val = Blockly.JavaScript.valueToCode(block, 'RETURN', Blockly.JavaScript.ORDER_ATOMIC);
 
+  console.log(val)
+
   var code = 'return ' + val + ';\n';
   // code = code.replace(/[()]/g,'');
   // code = code.replace(/[¿]/g,'(');
@@ -47,7 +49,7 @@ Blockly.JavaScript['return'] = function(block) {
 // CONDITION
 Blockly.JavaScript['condition_value'] = function(block) {
   var val = block.getFieldValue('value_param');
-  return val;
+  return [val, Blockly.JavaScript.ORDER_ATOMIC];
 };
 
 
