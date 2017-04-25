@@ -13,6 +13,6 @@ func int fact (int n)
  	int i = 5;
  	int y;
  	int x = i;
- 	x = x + 10;
+ 	x = x + 15;
  	write(x);
  }

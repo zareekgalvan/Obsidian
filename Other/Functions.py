@@ -420,20 +420,20 @@ def printAll():
 	pprint.pprint(varTable)
 	print "===\t\tDir Proc\t\t==="
 	pprint.pprint(dirProcedures)
-	#print "===\t\tPila Operadores\t\t==="
-	#print 'size', pilaOptr.size()
-	#printStack(pilaOptr)
-	#print "===\t\tPila Operandos\t\t==="
-	#print 'size', pilaOp.size()
-	#printStack(pilaOp)
-	#print "===\t\tPila Tipos\t\t==="
-	#print 'size', pTypes.size()
-	#printStack(pTypes)
-	#print "===\t\tPila Saltos\t\t==="
-	#print 'size', pSaltos.size()
-	#printStack(pSaltos)
-	#print "===\t\tMemoria\t\t==="
-	#mem.printMemory()
+	'''print "===\t\tPila Operadores\t\t==="
+	print 'size', pilaOptr.size()
+	printStack(pilaOptr)
+	print "===\t\tPila Operandos\t\t==="
+	print 'size', pilaOp.size()
+	printStack(pilaOp)
+	print "===\t\tPila Tipos\t\t==="
+	print 'size', pTypes.size()
+	printStack(pTypes)
+	print "===\t\tPila Saltos\t\t==="
+	print 'size', pSaltos.size()
+	printStack(pSaltos)
+	print "===\t\tMemoria\t\t==="
+	mem.printMemory()'''
 	print "===\t\tCuadruplos\t\t==="
 	print 'size', quadruples.size()
 	quadruples.printQuadruples()

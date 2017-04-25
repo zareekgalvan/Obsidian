@@ -22,10 +22,10 @@ class VirtualMachine():
 				left = mem.getValFromMem(quad.opLeft)
 				right = mem.getValFromMem(quad.opRight)
 				if left == None:
-					print "No value in %s" % left
+					print "Variables must contain a value before can be used"
 					sys.exit()
 				if right == None:
-					print "No value in %s" % right
+					print "Variables must contain a value before can be used"
 					sys.exit()
 				self.instructionPointer += 1
 				toAssign = left + right
@@ -35,28 +35,63 @@ class VirtualMachine():
 				# -
 				left = mem.getValFromMem(quad.opLeft)
 				right = mem.getValFromMem(quad.opRight)
+				if left == None:
+					print "Variables must contain a value before can be used"
+					sys.exit()
+				if right == None:
+					print "Variables must contain a value before can be used"
+					sys.exit()
 				self.instructionPointer += 1
 				toAssign = left - right
 				mem.putValInMem(quad.result, toAssign)
 			# Multiplicacion
 			elif quad.optr == 3:
 				# *
+				left = mem.getValFromMem(quad.opLeft)
+				right = mem.getValFromMem(quad.opRight)
+				if left == None:
+					print "Variables must contain a value before can be used"
+					sys.exit()
+				if right == None:
+					print "Variables must contain a value before can be used"
+					sys.exit()
 				self.instructionPointer += 1
-				print "mult"
+				toAssign = left * right
+				mem.putValInMem(quad.result, toAssign)
 			# Division
 			elif quad.optr == 4:
 				# /
+				left = mem.getValFromMem(quad.opLeft)
+				right = mem.getValFromMem(quad.opRight)
+				if left == None:
+					print "Variables must contain a value before can be used"
+					sys.exit()
+				if right == None:
+					print "Variables must contain a value before can be used"
+					sys.exit()
 				self.instructionPointer += 1
-				print "div"
+				toAssign = left / right
+				mem.putValInMem(quad.result, toAssign)
+			# Mod
 			elif quad.optr == 5:
 				# %
+				left = mem.getValFromMem(quad.opLeft)
+				right = mem.getValFromMem(quad.opRight)
+				if left == None:
+					print "Variables must contain a value before can be used"
+					sys.exit()
+				if right == None:
+					print "Variables must contain a value before can be used"
+					sys.exit()
 				self.instructionPointer += 1
-				print "mod"
+				toAssign = left % right
+				mem.putValInMem(quad.result, toAssign)
+			# Equals
 			elif quad.optr == 6:
 				# =
 				toAssign = mem.getValFromMem(quad.opLeft)
 				if toAssign == None:
-					print "No value for %s address" % quad.opLeft
+					print "No value for %s address" % getID(quad.opLeft)
 					sys.exit()
 				mem.putValInMem(quad.result, toAssign)
 				self.instructionPointer += 1
@@ -129,7 +164,6 @@ class VirtualMachine():
 				print "gotot"
 			elif quad.optr == 23:
 				# Goto
-				print "goto"
 				self.jump(quad.result)
 			elif quad.optr == 24:
 				# END
