@@ -15,6 +15,7 @@ dirProcedures = {}
 pilaOp = Stack()
 pilaOptr = Stack()
 pSaltos = Stack()
+pReturnSaltos = Stack()
 pTypes = Stack()
 
 # Temporales
