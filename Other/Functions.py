@@ -10,6 +10,7 @@ def check_arr_param(p):
 		print 'Type mismatch in line %s with value %s' % (line, p[2])
 		sys.exit()
 
+
 def to_var_table(p):
 	varid = p[-2]
 	line = p.lineno(0)
@@ -20,6 +21,7 @@ def to_var_table(p):
 	else:
 		print 'Variable "%s" in line %s already registered' % (varid, line)
 		sys.exit()
+
 
 def to_proc_dir(p):
 	procname = p[-1]
@@ -38,6 +40,7 @@ def to_proc_dir(p):
 		print 'Function "%s" already registered in line %s' % (procname, line)
 		sys.exit()
 
+
 def to_args(varid, vartype, line, p):
 	dirProcedures[scope[len(scope)-1]]['args'].append(vartype)
 	if varid not in varTable['global'] and varid not in varTable[scope[len(scope)-1]]:
@@ -48,10 +51,12 @@ def to_args(varid, vartype, line, p):
 		print 'Variable "%s" in line %s already registered' % (varid, line)
 		sys.exit() 
 
+
 def actual_quad_no(scope):
 	dirProcedures[scope]['params_no'] = len(dirProcedures[scope]['args'])
 	dirProcedures[scope]['vars_no'] = len(varTable[scope]) - dirProcedures[scope]['params_no']
 	dirProcedures[scope]['quad_start'] = Quadruples.cont
+
 
 def is_valid_func(p):
 	varid = p[-1]
@@ -59,6 +64,7 @@ def is_valid_func(p):
 	if varid not in dirProcedures:
 		print '%s in line %s is not a valid function' % (varid, line)
 		#sys.exit()
+
 
 def getConstType(p):
 	if type(p) is int:
@@ -68,11 +74,13 @@ def getConstType(p):
 	elif p == 'true' or p == 'false':
 		return 'bool'
 
+
 def exitsInVarTable(var):
 	if var in varTable[scope[len(scope)-1]]:
 		return True
 	else:
 		return False
+
 
 def tryRegisterVar(var):
 	if var in varTable['constants']:
@@ -89,6 +97,7 @@ def tryRegisterVar(var):
 		varTable['constants'][var]['address'] = mem.availConst(typee)
 		return varTable['constants'][var]
 
+
 # QUAD GENERATION FUNCTIONS
 # ===========================================================================
 def gen_goto_main():
@@ -96,13 +105,16 @@ def gen_goto_main():
 	quad = Quadruple(Quadruples.cont, getOperationCode('Goto'), '', '', '')
 	quadruples.addQuad(quad)
 
+
 def fill_main_quad():
 	fill = pSaltos.peek()
 	pSaltos.pop()
 	quadruples.fillQuad(fill, Quadruples.cont)
 
+
 def push_false_bottom():
 	pilaOptr.push('(')
+
 
 def pop_false_bottom():
 	if pilaOptr.peek() == '(':
@@ -111,10 +123,11 @@ def pop_false_bottom():
 		print "No es un '(' al top de la pilaOptr"
 		sys.exit()
 
+
 def to_pilaOp(var, line, p):
 	pilaOp.push(var['address'])
 	pTypes.push(var['type'])
-	#mem.addToMem(var['address'])
+	mem.addToMem(var['address'])
 	
 
 def check_type(p):
@@ -130,6 +143,7 @@ def check_type(p):
 		print "Type mismatch in line %s with val %s" % (line, expType)
 		sys.exit()
 
+
 def gen_est_quad(line, qtype):
 	if qtype == 'read':
 		gen_read_quad(line)
@@ -144,6 +158,7 @@ def gen_est_quad(line, qtype):
 	else:
 		print 'Cant generate estatement quadruple in line %s' % line
 		sys.exit()
+
 
 def gen_declaration_assign_quad(line):
 	if pilaOp.size() > 1:
@@ -164,6 +179,7 @@ def gen_declaration_assign_quad(line):
 	else:
 		print 'Cant generate declaration assignation estatement quadruple in line %s' % line
 
+
 def gen_read_quad(line):
 	if pilaOp.size() > 0:
 		temp = pilaOp.peek()
@@ -173,6 +189,7 @@ def gen_read_quad(line):
 		quadruples.addQuad(quad)
 	else:
 		print 'Cant generate read estatement quadruple in line %s' % line
+
 
 def gen_write_quad(line):
 	if pilaOp.size() > 0:
@@ -184,6 +201,7 @@ def gen_write_quad(line):
 	else:
 		print 'Cant generate write estatement quadruple in line %s' % line
 
+
 def var_assign(p):
 	if len(p) > 1:
 		line = p.lineno(0)
@@ -193,6 +211,7 @@ def var_assign(p):
 		to_pilaOp(var, line, p)
 
 		gen_est_quad(line, 'declaration_assign')
+
 
 def gen_assignation_quad(line):
 	if pilaOp.size() > 1:
@@ -205,7 +224,7 @@ def gen_assignation_quad(line):
 		tempType = pTypes.peek()
 		pTypes.pop()
 		if getType(operType, tempType, '=') != 'ERROR':
-			quad = Quadruple(Quadruples.cont, '=', oper, '', temp)
+			quad = Quadruple(Quadruples.cont, getOperationCode('='), oper, '', temp)
 			quadruples.addQuad(quad)
 		else:
 			print "Type mismatch in line %s" % line
@@ -213,10 +232,12 @@ def gen_assignation_quad(line):
 	else:
 		print 'Cant generate assignation estatement quadruple in line %s' % line
 
+
 def gen_gotof_quad(res):
 	quad = Quadruple(Quadruples.cont, getOperationCode('GotoF'), res, '', '')
 	quadruples.addQuad(quad)
 	pSaltos.push(Quadruples.cont-1)
+
 
 def gen_goto():
 	false = pSaltos.peek()
@@ -224,13 +245,16 @@ def gen_goto():
 	pSaltos.push(Quadruples.cont-1)
 	quadruples.fillQuad(false, Quadruples.cont)
 
+
 def fill_end_condition():
 	end = pSaltos.peek()
 	pSaltos.pop()
 	quadruples.fillQuad(end, Quadruples.cont)
 
+
 def cycle_start():
 	pSaltos.push(Quadruples.cont)
+
 
 def cycle_end():
 	end = pSaltos.peek()
@@ -240,6 +264,7 @@ def cycle_end():
 	quad = Quadruple(Quadruples.cont, getOperationCode('Goto'), '', '', ret)
 	quadruples.addQuad(quad)
 	quadruples.fillQuad(end, Quadruples.cont)
+
 
 def gen_exp_quad(line, qtype):
 	optype = None
@@ -278,9 +303,7 @@ def gen_exp_quad(line, qtype):
 		else:
 			print "Type mismatch in line %s" % line
 			sys.exit()
-	#else:
-	#	print "Not enough operands in stack in line %s" % line
-		#sys.exit()
+
 
 def check_args(p):
 	global paramCount
@@ -298,14 +321,16 @@ def check_args(p):
 		quad = Quadruple(Quadruples.cont, getOperationCode('param'), arg, paramCount, '')
 		quadruples.addQuad(quad)
 
+
 def gen_go_sub(p):
 	paramsno = dirProcedures[lastFuncCallScope]['params_no']	
 	if paramCount != paramsno:
 		print 'Function "%s" requires %s parameters' % (lastFuncCallScope, paramsno)
 		sys.exit()
 	else:
-		quad = Quadruple(Quadruples.cont, getOperationCode('gosub'), lastFuncCallScope, dirProcedures[lastFuncCallScope]['quad_start'], '')
+		quad = Quadruple(Quadruples.cont, getOperationCode('gosub'), lastFuncCallScope, "", dirProcedures[lastFuncCallScope]['quad_start'])
 		quadruples.addQuad(quad)
+
 
 def gen_era(p):
 	lastscope = p[-3]
@@ -313,6 +338,7 @@ def gen_era(p):
 	lastFuncCallScope = lastscope
 	quad = Quadruple(Quadruples.cont, getOperationCode('era'), '', '', lastscope)
 	quadruples.addQuad(quad)
+
 
 def gen_return_quad(scope, p):
 	global returnCount
@@ -322,7 +348,7 @@ def gen_return_quad(scope, p):
 	retType = pTypes.peek()
 	pTypes.pop()
 	if scope == 'main':
-		print "Main cant have a return statement"
+		print "Main can't have a return statement"
 		sys.exit()
 	functype = dirProcedures[scope]['func_type']
 	if functype == retType:
@@ -336,13 +362,13 @@ def gen_return_quad(scope, p):
 		print "Type mismatch of return in line %s" % line
 		sys.exit()
 
+
 def gen_endproc_quad(p):
 	lastscope = scope[len(scope)-1]
 	global returnCount
 	while returnCount != 0:
 		fill = pReturnSaltos.peek()
 		pReturnSaltos.pop()
-		print fill, Quadruples.cont
 		quadruples.fillQuad(fill, Quadruples.cont)
 		returnCount -= 1
 	quad = Quadruple(Quadruples.cont, getOperationCode('Endproc'), '', '','')
@@ -350,9 +376,11 @@ def gen_endproc_quad(p):
 	global paramCount
 	paramCount = 0
 
+
 def gen_end_quad():
 	quad = Quadruple(Quadruples.cont, getOperationCode('END'), '', '','')
 	quadruples.addQuad(quad)
+
 
 # OTHER FUNCTIONS
 # ===========================================================================
@@ -360,20 +388,24 @@ def gen_end_quad():
 def getType(ltype, rtype, oper):
 	return semanticCube[ltype][rtype][oper]
 
+
 # Probar que este declarado correctamente el cubo semantico
 def printSemanticCube():
 	for key in semanticCube:
 		for  key2 in semanticCube[key]:
 			print semanticCube[key][key2]
 
+
 # Obtener el codigo de operacion
 def getOperationCode(oper):
 	return operationCodes[oper]
+
 
 # Probar que este declarado correctamente el diccionario de operaciones
 def printOperationCodes():
 	for key in operationCodes:
 		print operationCodes[key]
+
 
 # Desplegar las variables por motivos de debugging
 def printAll():
@@ -381,20 +413,20 @@ def printAll():
 	pprint.pprint(varTable)
 	print "===\t\tDir Proc\t\t==="
 	pprint.pprint(dirProcedures)
-	print "===\t\tPila Operadores\t\t==="
-	print 'size', pilaOptr.size()
-	printStack(pilaOptr)
-	print "===\t\tPila Operandos\t\t==="
-	print 'size', pilaOp.size()
-	printStack(pilaOp)
-	print "===\t\tPila Tipos\t\t==="
-	print 'size', pTypes.size()
-	printStack(pTypes)
-	print "===\t\tPila Saltos\t\t==="
-	print 'size', pSaltos.size()
-	printStack(pSaltos)
-	print "===\t\tMemoria\t\t==="
-	mem.printMemory()
+	#print "===\t\tPila Operadores\t\t==="
+	#print 'size', pilaOptr.size()
+	#printStack(pilaOptr)
+	#print "===\t\tPila Operandos\t\t==="
+	#print 'size', pilaOp.size()
+	#printStack(pilaOp)
+	#print "===\t\tPila Tipos\t\t==="
+	#print 'size', pTypes.size()
+	#printStack(pTypes)
+	#print "===\t\tPila Saltos\t\t==="
+	#print 'size', pSaltos.size()
+	#printStack(pSaltos)
+	#print "===\t\tMemoria\t\t==="
+	#mem.printMemory()
 	print "===\t\tCuadruplos\t\t==="
 	print 'size', quadruples.size()
 	quadruples.printQuadruples()

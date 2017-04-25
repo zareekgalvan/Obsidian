@@ -5,6 +5,9 @@ from ObsidianLex import tokens
 # Importar la clase cuadruplos y sus operaciones
 from Other.Functions import *
 
+
+from Other.VirtualMachine import *
+
 # Definicion de las reglas
 def p_program(p):
 	'''program : gen_goto_main more_vars more_func main'''
@@ -363,6 +366,7 @@ if __name__ == '__main__':
 					printAll()
 
 				print "Valid syntax"
+				virtualMachine = VirtualMachine()
 				virtualMachine.execute(quadruples.quadruples)
 
 		except EOFError:

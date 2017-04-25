@@ -127,6 +127,16 @@ class Memory():
 		elif dir >= self.constantMem.base and dir <= self.constantMem.last:
 			self.memory['constant'][dir] = val
 
+	def getValFromMem(self, dir):
+		if dir >= self.globalMem.base and dir <= self.globalMem.last:
+			return self.memory['global'][dir]
+		elif dir >= self.variableMem.base and dir <= self.variableMem.last:
+			return self.memory['variable'].peekFromDict(dir)
+		elif dir >= self.temporalMem.base and dir <= self.temporalMem.last:
+			return self.memory['temporal'].peekFromDict(dir)
+		elif dir >= self.constantMem.base and dir <= self.constantMem.last:
+			return self.memory['constant'][dir]
+
 	def printMemory(self):
 		self.globalMem.printMemSpace()
 		self.variableMem.printMemSpace()

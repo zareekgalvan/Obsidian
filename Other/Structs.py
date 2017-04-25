@@ -54,9 +54,8 @@ class Stack():
     def peek(self):
         return self.items[len(self.items)-1]
 
-    # Sirve para ver el segundo elemento superior del stack sin removerlo
-    def peekSecond(self):
-        return self.items[len(self.items)-1]
+    def peekFromDict(self, key): 
+        return self.items[len(self.items)-1][key]
 
     # Despliega todos los elementos del stack
     def getElements(self):
