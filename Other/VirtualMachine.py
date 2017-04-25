@@ -1,3 +1,5 @@
+from Quadruples import *
+
 class VirtualMachine():
 	
 	def __init__(self):
@@ -6,79 +8,81 @@ class VirtualMachine():
 
 	def execute(self, quads):
 		self.quads = quads
-		for x in self.quads:
-			if x.optr == 1:
+		while self.instructionPointer < Quadruples.cont-1:
+			if self.quads[self.instructionPointer].optr == 1:
 				# +
 				print "suma"
-			elif x.optr == 2:
+
+			elif self.quads[self.instructionPointer].optr == 2:
 				# -
 				print "resta"
-			elif x.optr == 3:
+			elif self.quads[self.instructionPointer].optr == 3:
 				# *
 				print "mult"
-			elif x.optr == 4:
+			elif self.quads[self.instructionPointer].optr == 4:
 				# /
 				print "div"
-			elif x.optr == 5:
+			elif self.quads[self.instructionPointer].optr == 5:
 				# %
 				print "mod"
-			elif x.optr == 6:
+			elif self.quads[self.instructionPointer].optr == 6:
 				# =
 				print "equal"
-			elif x.optr == 7:
+			elif self.quads[self.instructionPointer].optr == 7:
 				# ==
 				print "equal equals"
-			elif x.optr == 8:
+			elif self.quads[self.instructionPointer].optr == 8:
 				# !=
 				print "dif"
-			elif x.optr == 9:
+			elif self.quads[self.instructionPointer].optr == 9:
 				# <
 				print "less"
-			elif x.optr == 10:
+			elif self.quads[self.instructionPointer].optr == 10:
 				# >
 				print "greater"
-			elif x.optr == 11:
+			elif self.quads[self.instructionPointer].optr == 11:
 				# <=
 				print "lesser than"
-			elif x.optr == 12:
+			elif self.quads[self.instructionPointer].optr == 12:
 				# >=
 				print "greater than"
-			elif x.optr == 13:
+			elif self.quads[self.instructionPointer].optr == 13:
 				# &&
 				print "and"
-			elif x.optr == 14:
+			elif self.quads[self.instructionPointer].optr == 14:
 				# ||
 				print "or"
-			elif x.optr == 15:
+			elif self.quads[self.instructionPointer].optr == 15:
 				# read
 				print "read"
-			elif x.optr == 16:
+			elif self.quads[self.instructionPointer].optr == 16:
 				# write
 				print "write"
-			elif x.optr == 17:
+			elif self.quads[self.instructionPointer].optr == 17:
 				# return
 				print "return"
-			elif x.optr == 18:
+			elif self.quads[self.instructionPointer].optr == 18:
 				# Endproc
 				print "endproc"
-			elif x.optr == 19:
+			elif self.quads[self.instructionPointer].optr == 19:
 				# gosub
 				print "gosub"
-			elif x.optr == 20:
+			elif self.quads[self.instructionPointer].optr == 20:
 				# era
 				print "era"
-			elif x.optr == 21:
+			elif self.quads[self.instructionPointer].optr == 21:
 				# GotoF
 				print "gotof"
-			elif x.optr == 22:
+			elif self.quads[self.instructionPointer].optr == 22:
 				# GotoT
 				print "gotot"
-			elif x.optr == 23:
+			elif self.quads[self.instructionPointer].optr == 23:
 				# Goto
 				print "goto"
-			elif x.optr == 24:
+			elif self.quads[self.instructionPointer].optr == 24:
 				# END
 				print "END"
-			elif x.optr == 25:
+			elif self.quads[self.instructionPointer].optr == 25:
 				# param
 				print "param"
+			self.instructionPointer += 1

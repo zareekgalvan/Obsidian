@@ -12,4 +12,5 @@ func int fact (int n)
  {
  	int i = fact(5);
  	write(i);
+ 	return 1;
  }

@@ -321,6 +321,9 @@ def gen_return_quad(scope, p):
 	pilaOp.pop()
 	retType = pTypes.peek()
 	pTypes.pop()
+	if scope == 'main':
+		print "Main cant have a return statement"
+		sys.exit()
 	functype = dirProcedures[scope]['func_type']
 	if functype == retType:
 		quad = Quadruple(Quadruples.cont, getOperationCode('return'), '', '', ret)
