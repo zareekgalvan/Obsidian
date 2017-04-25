@@ -31,8 +31,6 @@ class Queue():
 
 class Stack():
 
-    def __class__(self):
-        return Stack
     # Constructor
     def __init__(self):
         self.items = []
@@ -44,6 +42,9 @@ class Stack():
     # Agrega un elemento al stack
     def push(self, item):
         return self.items.append(item)
+
+    def pushToDict(self, key, val):
+        self.items[len(self.items)-1][key] = val
 
     # Saca un elemento del stack
     def pop(self):

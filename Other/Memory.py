@@ -68,9 +68,9 @@ class Memory():
 		self.constantMem = MemSpace('constants', self.temporalMem.long + self.temporalMem.boolsBase, 1000)
 		self.memory['global'] = {}
 		self.memory['variable'] = Stack()
-		self.memory['variable'].push(1)
+		self.memory['variable'].push({})
 		self.memory['temporal'] = Stack()
-		self.memory['temporal'].push(1)
+		self.memory['temporal'].push({})
 		self.memory['constant'] = {}
 
 	def avail(self, typee):
@@ -121,11 +121,11 @@ class Memory():
 		if dir >= self.globalMem.base and dir <= self.globalMem.last:
 			self.memory['global'][dir] = val
 		elif dir >= self.variableMem.base and dir <= self.variableMem.last:
-			print 1
+			self.memory['variable'].pushToDict(dir, val)
 		elif dir >= self.temporalMem.base and dir <= self.temporalMem.last:
-			print 2
+			self.memory['temporal'].pushToDict(dir, val)
 		elif dir >= self.constantMem.base and dir <= self.constantMem.last:
-			print 3
+			self.memory['constant'][dir] = val
 
 	def printMemory(self):
 		self.globalMem.printMemSpace()

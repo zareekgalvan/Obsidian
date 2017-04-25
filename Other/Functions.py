@@ -114,6 +114,7 @@ def pop_false_bottom():
 def to_pilaOp(var, line, p):
 	pilaOp.push(var['address'])
 	pTypes.push(var['type'])
+	#mem.addToMem(var['address'])
 	
 
 def check_type(p):
@@ -324,7 +325,7 @@ def gen_return_quad(scope, p):
 	if functype == retType:
 		quad = Quadruple(Quadruples.cont, 'return', '', '', ret)
 		quadruples.addQuad(quad)
-		pSaltos.push(Quadruples.cont)
+		pReturnSaltos.push(Quadruples.cont)
 		quad = Quadruple(Quadruples.cont, 'Goto', '', '', '')
 		quadruples.addQuad(quad)
 		returnCount += 1
@@ -336,8 +337,9 @@ def gen_endproc_quad(p):
 	lastscope = scope[len(scope)-1]
 	global returnCount
 	while returnCount != 0:
-		fill = pSaltos.peek()
-		pSaltos.pop()
+		fill = pReturnSaltos.peek()
+		pReturnSaltos.pop()
+		print fill, Quadruples.cont
 		quadruples.fillQuad(fill, Quadruples.cont)
 		returnCount -= 1
 	quad = Quadruple(Quadruples.cont, 'Endproc', '', '','')
