@@ -98,12 +98,36 @@ class VirtualMachine():
 				
 			elif quad.optr == 7:
 				# ==
+				left = mem.getValFromMem(quad.opLeft)
+				right = mem.getValFromMem(quad.opRight)
+				if left == None:
+					print "Variables must contain a value before can be used"
+					sys.exit()
+				if right == None:
+					print "Variables must contain a value before can be used"
+					sys.exit()
 				self.instructionPointer += 1
-				print "equal equals"
+				toAssign = left == right
+				if toAssign:
+					mem.putValInMem(quad.result, 'true')
+				else:
+					mem.putValInMem(quad.result, 'false')
 			elif quad.optr == 8:
 				# !=
+				left = mem.getValFromMem(quad.opLeft)
+				right = mem.getValFromMem(quad.opRight)
+				if left == None:
+					print "Variables must contain a value before can be used"
+					sys.exit()
+				if right == None:
+					print "Variables must contain a value before can be used"
+					sys.exit()
 				self.instructionPointer += 1
-				print "dif"
+				toAssign = left != right
+				if toAssign:
+					mem.putValInMem(quad.result, 'true')
+				else:
+					mem.putValInMem(quad.result, 'false')
 			elif quad.optr == 9:
 				# <
 				self.instructionPointer += 1
@@ -157,11 +181,16 @@ class VirtualMachine():
 				self.instructionPointer += 1
 			elif quad.optr == 21:
 				# GotoF
-				print "gotof"
+				left = mem.getValFromMem(quad.opLeft)
+				if left == None:
+					print "Variables must contain a value before can be used"
+					sys.exit()
 				self.instructionPointer += 1
+				if left == 'false':
+					self.jump(quad.result)
 			elif quad.optr == 22:
 				# GotoT
-				print "gotot"
+				print "GotoT not suported in this language"
 			elif quad.optr == 23:
 				# Goto
 				self.jump(quad.result)

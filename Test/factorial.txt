@@ -14,5 +14,10 @@ func int fact (int n)
  	int y;
  	int x = i;
  	x = x + 15;
- 	write(x);
+ 	while (i != 2)
+ 	{
+ 		write(x);
+ 		i = i - 1;
+ 	}
+ 	write(i);
  }
