@@ -93,7 +93,7 @@ def tryRegisterVar(var):
 # ===========================================================================
 def gen_goto_main():
 	pSaltos.push(Quadruples.cont)
-	quad = Quadruple(Quadruples.cont, 'Goto', '', '', '')
+	quad = Quadruple(Quadruples.cont, getOperationCode('Goto'), '', '', '')
 	quadruples.addQuad(quad)
 
 def fill_main_quad():
@@ -156,7 +156,7 @@ def gen_declaration_assign_quad(line):
 		tempType = pTypes.peek()
 		pTypes.pop()
 		if getType(operType, tempType, '=') != 'ERROR':
-			quad = Quadruple(Quadruples.cont, '=', oper, '', temp)
+			quad = Quadruple(Quadruples.cont, getOperationCode('='), oper, '', temp)
 			quadruples.addQuad(quad)
 		else:
 			print "Type mismatch in line %s" % line
@@ -169,7 +169,7 @@ def gen_read_quad(line):
 		temp = pilaOp.peek()
 		pilaOp.pop()
 		pTypes.pop()
-		quad = Quadruple(Quadruples.cont, 'read', '', '', temp)
+		quad = Quadruple(Quadruples.cont, getOperationCode('read'), '', '', temp)
 		quadruples.addQuad(quad)
 	else:
 		print 'Cant generate read estatement quadruple in line %s' % line
@@ -179,7 +179,7 @@ def gen_write_quad(line):
 		temp = pilaOp.peek()
 		pilaOp.pop()
 		pTypes.pop()
-		quad = Quadruple(Quadruples.cont, 'write', '', '', temp)
+		quad = Quadruple(Quadruples.cont, getOperationCode('write'), '', '', temp)
 		quadruples.addQuad(quad)
 	else:
 		print 'Cant generate write estatement quadruple in line %s' % line
@@ -214,7 +214,7 @@ def gen_assignation_quad(line):
 		print 'Cant generate assignation estatement quadruple in line %s' % line
 
 def gen_gotof_quad(res):
-	quad = Quadruple(Quadruples.cont, 'GotoF', res, '', '')
+	quad = Quadruple(Quadruples.cont, getOperationCode('GotoF'), res, '', '')
 	quadruples.addQuad(quad)
 	pSaltos.push(Quadruples.cont-1)
 
@@ -237,7 +237,7 @@ def cycle_end():
 	pSaltos.pop()
 	ret = pSaltos.peek()
 	pSaltos.pop()
-	quad = Quadruple(Quadruples.cont, 'Goto', '', '', ret)
+	quad = Quadruple(Quadruples.cont, getOperationCode('Goto'), '', '', ret)
 	quadruples.addQuad(quad)
 	quadruples.fillQuad(end, Quadruples.cont)
 
@@ -271,7 +271,7 @@ def gen_exp_quad(line, qtype):
 		res = getType(lType, rType, oper)
 		if res != 'ERROR':
 			nextTemp = mem.avail(res)
-			quad = Quadruple(Quadruples.cont, oper, lOperand, rOperand, nextTemp)
+			quad = Quadruple(Quadruples.cont, getOperationCode(oper), lOperand, rOperand, nextTemp)
 			quadruples.addQuad(quad)
 			pTypes.push(res)
 			pilaOp.push(nextTemp)
@@ -295,7 +295,7 @@ def check_args(p):
 		print 'Type mismatch in argument #%s of function %s in line %s, expected %s but recieved %s instead' % (paramCount, lastFuncCallScope, line, lastType, argType)
 		sys.exit()
 	else:
-		quad = Quadruple(Quadruples.cont, 'param', arg, paramCount, '')
+		quad = Quadruple(Quadruples.cont, getOperationCode('param'), arg, paramCount, '')
 		quadruples.addQuad(quad)
 
 def gen_go_sub(p):
@@ -304,14 +304,14 @@ def gen_go_sub(p):
 		print 'Function "%s" requires %s parameters' % (lastFuncCallScope, paramsno)
 		sys.exit()
 	else:
-		quad = Quadruple(Quadruples.cont, 'gosub', lastFuncCallScope, dirProcedures[lastFuncCallScope]['quad_start'], '')
+		quad = Quadruple(Quadruples.cont, getOperationCode('gosub'), lastFuncCallScope, dirProcedures[lastFuncCallScope]['quad_start'], '')
 		quadruples.addQuad(quad)
 
 def gen_era(p):
 	lastscope = p[-3]
 	global lastFuncCallScope
 	lastFuncCallScope = lastscope
-	quad = Quadruple(Quadruples.cont, 'era', '', '', lastscope)
+	quad = Quadruple(Quadruples.cont, getOperationCode('era'), '', '', lastscope)
 	quadruples.addQuad(quad)
 
 def gen_return_quad(scope, p):
@@ -323,10 +323,10 @@ def gen_return_quad(scope, p):
 	pTypes.pop()
 	functype = dirProcedures[scope]['func_type']
 	if functype == retType:
-		quad = Quadruple(Quadruples.cont, 'return', '', '', ret)
+		quad = Quadruple(Quadruples.cont, getOperationCode('return'), '', '', ret)
 		quadruples.addQuad(quad)
 		pReturnSaltos.push(Quadruples.cont)
-		quad = Quadruple(Quadruples.cont, 'Goto', '', '', '')
+		quad = Quadruple(Quadruples.cont, getOperationCode('Goto'), '', '', '')
 		quadruples.addQuad(quad)
 		returnCount += 1
 	else:
@@ -342,13 +342,13 @@ def gen_endproc_quad(p):
 		print fill, Quadruples.cont
 		quadruples.fillQuad(fill, Quadruples.cont)
 		returnCount -= 1
-	quad = Quadruple(Quadruples.cont, 'Endproc', '', '','')
+	quad = Quadruple(Quadruples.cont, getOperationCode('Endproc'), '', '','')
 	quadruples.addQuad(quad)
 	global paramCount
 	paramCount = 0
 
 def gen_end_quad():
-	quad = Quadruple(Quadruples.cont, 'END', '', '','')
+	quad = Quadruple(Quadruples.cont, getOperationCode('END'), '', '','')
 	quadruples.addQuad(quad)
 
 # OTHER FUNCTIONS
@@ -372,7 +372,7 @@ def printOperationCodes():
 	for key in operationCodes:
 		print operationCodes[key]
 
-# DEsplegar las variables por motivos de debugging
+# Desplegar las variables por motivos de debugging
 def printAll():
 	print "===\t\tVar Table\t\t==="
 	pprint.pprint(varTable)

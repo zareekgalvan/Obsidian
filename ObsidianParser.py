@@ -363,6 +363,7 @@ if __name__ == '__main__':
 					printAll()
 
 				print "Valid syntax"
+				virtualMachine.execute(quadruples.quadruples)
 
 		except EOFError:
 	   		print(EOFError)

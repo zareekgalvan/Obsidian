@@ -1,6 +1,7 @@
 from Structs import *
 import pprint
 from SemanticCube import *
+from VirtualMachine import *
 
 # Tabla de Variables
 scope = ['global']
@@ -39,6 +40,9 @@ lastFuncCallScope = ""
 
 # Memoria
 mem = Memory()
+
+# VM
+virtualMachine = VirtualMachine()
 
 # Debbuging mode
 debug = 'on'
