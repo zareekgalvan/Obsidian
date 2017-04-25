@@ -32,7 +32,6 @@ class VirtualMachine():
 				mem.putValInMem(quad.result, toAssign)
 			# Resta
 			elif quad.optr == 2:
-				# -
 				left = mem.getValFromMem(quad.opLeft)
 				right = mem.getValFromMem(quad.opRight)
 				if left == None:
@@ -46,7 +45,6 @@ class VirtualMachine():
 				mem.putValInMem(quad.result, toAssign)
 			# Multiplicacion
 			elif quad.optr == 3:
-				# *
 				left = mem.getValFromMem(quad.opLeft)
 				right = mem.getValFromMem(quad.opRight)
 				if left == None:
@@ -60,7 +58,6 @@ class VirtualMachine():
 				mem.putValInMem(quad.result, toAssign)
 			# Division
 			elif quad.optr == 4:
-				# /
 				left = mem.getValFromMem(quad.opLeft)
 				right = mem.getValFromMem(quad.opRight)
 				if left == None:
@@ -74,7 +71,6 @@ class VirtualMachine():
 				mem.putValInMem(quad.result, toAssign)
 			# Mod
 			elif quad.optr == 5:
-				# %
 				left = mem.getValFromMem(quad.opLeft)
 				right = mem.getValFromMem(quad.opRight)
 				if left == None:
@@ -88,16 +84,14 @@ class VirtualMachine():
 				mem.putValInMem(quad.result, toAssign)
 			# Equals
 			elif quad.optr == 6:
-				# =
 				toAssign = mem.getValFromMem(quad.opLeft)
 				if toAssign == None:
 					print "No value for %s address" % getID(quad.opLeft)
 					sys.exit()
 				mem.putValInMem(quad.result, toAssign)
 				self.instructionPointer += 1
-				
+			# Equal equals	
 			elif quad.optr == 7:
-				# ==
 				left = mem.getValFromMem(quad.opLeft)
 				right = mem.getValFromMem(quad.opRight)
 				if left == None:
@@ -112,8 +106,8 @@ class VirtualMachine():
 					mem.putValInMem(quad.result, 'true')
 				else:
 					mem.putValInMem(quad.result, 'false')
+			# Different
 			elif quad.optr == 8:
-				# !=
 				left = mem.getValFromMem(quad.opLeft)
 				right = mem.getValFromMem(quad.opRight)
 				if left == None:
@@ -128,36 +122,129 @@ class VirtualMachine():
 					mem.putValInMem(quad.result, 'true')
 				else:
 					mem.putValInMem(quad.result, 'false')
+			# Less than
 			elif quad.optr == 9:
-				# <
+				left = mem.getValFromMem(quad.opLeft)
+				right = mem.getValFromMem(quad.opRight)
+				if left == None:
+					print "Variables must contain a value before can be used"
+					sys.exit()
+				if right == None:
+					print "Variables must contain a value before can be used"
+					sys.exit()
 				self.instructionPointer += 1
-				print "less"
+				toAssign = left < right
+				if toAssign:
+					mem.putValInMem(quad.result, 'true')
+				else:
+					mem.putValInMem(quad.result, 'false')
+			# Greater than
 			elif quad.optr == 10:
-				# >
+				left = mem.getValFromMem(quad.opLeft)
+				right = mem.getValFromMem(quad.opRight)
+				if left == None:
+					print "Variables must contain a value before can be used"
+					sys.exit()
+				if right == None:
+					print "Variables must contain a value before can be used"
+					sys.exit()
 				self.instructionPointer += 1
-				print "greater"
+				toAssign = left > right
+				if toAssign:
+					mem.putValInMem(quad.result, 'true')
+				else:
+					mem.putValInMem(quad.result, 'false')
+			# Less or equal than
 			elif quad.optr == 11:
-				# <=
+				left = mem.getValFromMem(quad.opLeft)
+				right = mem.getValFromMem(quad.opRight)
+				if left == None:
+					print "Variables must contain a value before can be used"
+					sys.exit()
+				if right == None:
+					print "Variables must contain a value before can be used"
+					sys.exit()
 				self.instructionPointer += 1
-				print "lesser than"
+				toAssign = left <= right
+				if toAssign:
+					mem.putValInMem(quad.result, 'true')
+				else:
+					mem.putValInMem(quad.result, 'false')
+			# Greater or equal than
 			elif quad.optr == 12:
-				# >=
+				left = mem.getValFromMem(quad.opLeft)
+				right = mem.getValFromMem(quad.opRight)
+				if left == None:
+					print "Variables must contain a value before can be used"
+					sys.exit()
+				if right == None:
+					print "Variables must contain a value before can be used"
+					sys.exit()
 				self.instructionPointer += 1
-				print "greater than"
+				toAssign = left >= right
+				if toAssign:
+					mem.putValInMem(quad.result, 'true')
+				else:
+					mem.putValInMem(quad.result, 'false')
+			# And
 			elif quad.optr == 13:
-				# &&
+				left = mem.getValFromMem(quad.opLeft)
+				right = mem.getValFromMem(quad.opRight)
+				if left == None:
+					print "Variables must contain a value before can be used"
+					sys.exit()
+				if right == None:
+					print "Variables must contain a value before can be used"
+					sys.exit()
 				self.instructionPointer += 1
-				print "and"
+				toAssign = left == 'true' and right == 'true'
+				if toAssign:
+					mem.putValInMem(quad.result, 'true')
+				else:
+					mem.putValInMem(quad.result, 'false')
+			# Or
 			elif quad.optr == 14:
-				# ||
+				left = mem.getValFromMem(quad.opLeft)
+				right = mem.getValFromMem(quad.opRight)
+				if left == None:
+					print "Variables must contain a value before can be used"
+					sys.exit()
+				if right == None:
+					print "Variables must contain a value before can be used"
+					sys.exit()
 				self.instructionPointer += 1
-				print "or"
+				toAssign = left == 'true' or right == 'true'
+				if toAssign:
+					mem.putValInMem(quad.result, 'true')
+				else:
+					mem.putValInMem(quad.result, 'false')
+			# Read
 			elif quad.optr == 15:
-				# read
+				inp = raw_input(">")
 				self.instructionPointer += 1
-				print "read"
+				if isInt(inp):
+					if mem.getTypeFromMem(quad.result) == 'int':
+						mem.putValInMem(quad.result, int(inp))
+					else:
+						print "Type mismatch in assignation from read"
+						sys.exit()
+				elif isDouble(inp):
+					if mem.getTypeFromMem(quad.result) == 'double':
+						mem.putValInMem(quad.result, float(inp))
+					else:
+						print "Type mismatch in assignation from read"
+						sys.exit()
+				elif inp == 'true' or inp == 'false':
+					if mem.getTypeFromMem(quad.result) == 'bool':
+						mem.putValInMem(quad.result, inp)
+					else:
+						print "Type mismatch in assignation from read"
+						sys.exit()
+				else:
+					print "String not supported in this language"
+					sys.exit() 
+			# Write
 			elif quad.optr == 16:
-				# write
 				self.instructionPointer += 1
 				print mem.getValFromMem(quad.result)
 			elif quad.optr == 17:

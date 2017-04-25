@@ -413,6 +413,18 @@ def printOperationCodes():
 	for key in operationCodes:
 		print operationCodes[key]
 
+def isInt(number):
+	try:
+		return type(int(number)) is int
+	except ValueError:
+		return False
+
+def isDouble(number):
+	try:
+		return type(float(number)) is float
+	except ValueError:
+		return False
+
 
 # Desplegar las variables por motivos de debugging
 def printAll():

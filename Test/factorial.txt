@@ -10,14 +10,15 @@ func int fact (int n)
 
  main 
  {
- 	int i = 5;
- 	int y;
- 	int x = i;
+ 	int i = 10;
+	int x = i;
+ 	read(i);
  	x = x + 15;
- 	while (i != 2)
+ 	while (i >= 1)
  	{
- 		write(x);
+ 		write(i);
  		i = i - 1;
  	}
+ 	read(i);
  	write(i);
  }

@@ -46,6 +46,14 @@ class MemSpace():
 		self.doublesActual = self.doublesBase
 		self.boolsActual = self.boolsBase
 
+	def getSpaceMemType(self, address):
+		if address >= self.base and address < self.doublesBase:
+			return 'int'
+		elif address >= self.doublesBase and address < self.boolsBase:
+			return 'double'
+		elif address >= self.boolsBase and address <= self.last:
+			return 'bool'
+
 	def printMemSpace(self):
 		print "Name:", self.name
 		print "Longitude:", self.long
@@ -145,6 +153,16 @@ class Memory():
 			self.memory['temporal'].pushToDict(dir, val)
 		elif dir >= self.constantMem.base and dir <= self.constantMem.last:
 			self.memory['constant'][dir] = val
+
+	def getTypeFromMem(self, dir):
+		if dir >= self.globalMem.base and dir <= self.globalMem.last:
+			return self.globalMem.getSpaceMemType(dir)
+		elif dir >= self.variableMem.base and dir <= self.variableMem.last:
+			return self.variableMem.getSpaceMemType(dir)
+		elif dir >= self.temporalMem.base and dir <= self.temporalMem.last:
+			return self.temporalMem.getSpaceMemType(dir)
+		elif dir >= self.constantMem.base and dir <= self.constantMem.last:
+			return self.constantMem.getSpaceMemType(dir)
 
 	def printMemory(self):
 		self.globalMem.printMemSpace()
