@@ -1,5 +1,7 @@
 from Quadruples import *
 from Declarations import *
+import sys
+from Functions import *
 
 class VirtualMachine():
 	
@@ -10,26 +12,38 @@ class VirtualMachine():
 
 	def execute(self, quads):
 		self.quads = quads
+		
 		while self.instructionPointer < Quadruples.cont-1:
+			
 			quad = self.quads[self.instructionPointer]
+			
+			# Suma
 			if quad.optr == 1:
-				# +
-				print "suma"
 				left = mem.getValFromMem(quad.opLeft)
 				right = mem.getValFromMem(quad.opRight)
+				if left == None:
+					print "No value in %s" % left
+					sys.exit()
+				if right == None:
+					print "No value in %s" % right
+					sys.exit()
 				self.instructionPointer += 1
-				print left, right
+				toAssign = left + right
+				mem.putValInMem(quad.result, toAssign)
+			# Resta
 			elif quad.optr == 2:
 				# -
-				print "resta"
 				left = mem.getValFromMem(quad.opLeft)
 				right = mem.getValFromMem(quad.opRight)
 				self.instructionPointer += 1
-				print ">>", left, right
+				toAssign = left - right
+				mem.putValInMem(quad.result, toAssign)
+			# Multiplicacion
 			elif quad.optr == 3:
 				# *
 				self.instructionPointer += 1
 				print "mult"
+			# Division
 			elif quad.optr == 4:
 				# /
 				self.instructionPointer += 1
@@ -40,8 +54,13 @@ class VirtualMachine():
 				print "mod"
 			elif quad.optr == 6:
 				# =
+				toAssign = mem.getValFromMem(quad.opLeft)
+				if toAssign == None:
+					print "No value for %s address" % quad.opLeft
+					sys.exit()
+				mem.putValInMem(quad.result, toAssign)
 				self.instructionPointer += 1
-				print "equal"
+				
 			elif quad.optr == 7:
 				# ==
 				self.instructionPointer += 1
@@ -81,7 +100,7 @@ class VirtualMachine():
 			elif quad.optr == 16:
 				# write
 				self.instructionPointer += 1
-				print "write"
+				print mem.getValFromMem(quad.result)
 			elif quad.optr == 17:
 				# return
 				self.instructionPointer += 1

@@ -124,10 +124,11 @@ def pop_false_bottom():
 		sys.exit()
 
 
-def to_pilaOp(var, line, p):
+def to_pilaOp(var, val, line, p):
 	pilaOp.push(var['address'])
 	pTypes.push(var['type'])
-	mem.addToMem(var['address'])
+	#validate if constant
+	mem.addToMem(var['address'], val)
 	
 
 def check_type(p):
@@ -206,9 +207,15 @@ def var_assign(p):
 	if len(p) > 1:
 		line = p.lineno(0)
 		var = tryRegisterVar(p[-3])
-		to_pilaOp(var, line, p)
+		val = None
+		if type(p[-3]) == int or type(p[-3]) == float or p[-3] == 'true' or p[-3] == 'false':
+			val = p[-3]
+		to_pilaOp(var, val, line, p)
 		var = tryRegisterVar(p[2])
-		to_pilaOp(var, line, p)
+		val = None
+		if type(p[2]) == int or type(p[2]) == float or p[2] == 'true' or p[2] == 'false':
+			val = p[2]
+		to_pilaOp(var, val, line, p)
 
 		gen_est_quad(line, 'declaration_assign')
 

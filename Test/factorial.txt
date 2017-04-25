@@ -10,6 +10,9 @@ func int fact (int n)
 
  main 
  {
- 	int i = fact(5);
- 	write(i);
+ 	int i = 5;
+ 	int y;
+ 	int x = i;
+ 	x = x + 10;
+ 	write(x);
  }

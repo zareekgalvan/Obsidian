@@ -54,7 +54,7 @@ class Stack():
     def peek(self):
         return self.items[len(self.items)-1]
 
-    def peekFromDict(self, key): 
+    def peekFromDict(self, key):
         return self.items[len(self.items)-1][key]
 
     # Despliega todos los elementos del stack

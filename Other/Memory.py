@@ -115,7 +115,6 @@ class Memory():
 	def deleteMems(self):
 		self.variableMem.deleteMemSpace()
 		self.temporalMem.deleteMemSpace()
-		#self.constantMem.deleteMemSpace()
 
 	def addToMem(self, dir, val = None):
 		if dir >= self.globalMem.base and dir <= self.globalMem.last:
@@ -136,6 +135,16 @@ class Memory():
 			return self.memory['temporal'].peekFromDict(dir)
 		elif dir >= self.constantMem.base and dir <= self.constantMem.last:
 			return self.memory['constant'][dir]
+
+	def putValInMem(self, dir, val):
+		if dir >= self.globalMem.base and dir <= self.globalMem.last:
+			self.memory['global'][dir] = val
+		elif dir >= self.variableMem.base and dir <= self.variableMem.last:
+			self.memory['variable'].pushToDict(dir, val)
+		elif dir >= self.temporalMem.base and dir <= self.temporalMem.last:
+			self.memory['temporal'].pushToDict(dir, val)
+		elif dir >= self.constantMem.base and dir <= self.constantMem.last:
+			self.memory['constant'][dir] = val
 
 	def printMemory(self):
 		self.globalMem.printMemSpace()

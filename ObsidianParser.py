@@ -307,7 +307,10 @@ def p_to_pilaOp(p):
 	#hacer validaciones de tipo
 	line = p.lineno(0)
 	var = tryRegisterVar(p[-1])
-	to_pilaOp(var, line, p)
+	val = None
+	if type(p[-1]) == int or type(p[-1]) == float or p[-1] == 'true' or p[-1] == 'false':
+		val = p[-1]
+	to_pilaOp(var, val, line, p)
 
 def p_add_to_pilaOptr(p):
 	'''add_to_pilaOptr :'''
