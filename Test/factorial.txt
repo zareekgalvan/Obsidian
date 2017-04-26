@@ -5,13 +5,12 @@ func int fact (int n)
  	{
  		return 1;
  	}
- 	return n * fact(n - 1) * fact(0);
+ 	return n * fact(n - 1);
  }
 
  main 
  {
- 	int i = 0;
- 	int x;
- 	i = fact(2);
+ 	int i = fact(5);
+ 	i = i * 2;
  	write(i);
  }

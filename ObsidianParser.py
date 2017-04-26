@@ -368,10 +368,10 @@ if __name__ == '__main__':
 				if debug == 'on':
 					printAll()
 
-				print "Valid syntax"
+				#print "Valid syntax"
 				virtualMachine = VirtualMachine()
 				virtualMachine.execute(quadruples.quadruples)
-				mem.printMemory()
+				#mem.printMemory()
 
 		except EOFError:
 	   		print(EOFError)
