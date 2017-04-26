@@ -81,23 +81,14 @@ class Memory():
 		self.memory['temporal'].push({})
 		self.memory['constant'] = {}
 
-	def avail(self, typee):
+	def availGlobal(self, typee):
 		nextTemp = None
-		global scope
-		if scope[len(scope)-1] == 'global':
-			if typee == 'bool':
-				nextTemp = self.globalMem.getNextBool()
-			elif typee == 'double':
-				nextTemp = self.globalMem.getNextDouble()
-			elif typee == 'int':
-				nextTemp = self.globalMem.getNextInt()
-		else:
-			if typee == 'bool':
-				nextTemp = self.temporalMem.getNextBool()
-			elif typee == 'double':
-				nextTemp = self.temporalMem.getNextDouble()
-			elif typee == 'int':
-				nextTemp = self.temporalMem.getNextInt()
+		if typee == 'bool':
+			nextTemp = self.globalMem.getNextBool()
+		elif typee == 'double':
+			nextTemp = self.globalMem.getNextDouble()
+		elif typee == 'int':
+			nextTemp = self.globalMem.getNextInt()
 		return nextTemp
 
 	def availVar(self, typee):
@@ -108,6 +99,16 @@ class Memory():
 			nextTemp = self.variableMem.getNextDouble()
 		elif typee == 'int':
 			nextTemp = self.variableMem.getNextInt()
+		return nextTemp
+
+	def availTemp(self, typee):
+		nextTemp = None
+		if typee == 'bool':
+			nextTemp = self.temporalMem.getNextBool()
+		elif typee == 'double':
+			nextTemp = self.temporalMem.getNextDouble()
+		elif typee == 'int':
+			nextTemp = self.temporalMem.getNextInt()
 		return nextTemp
 
 	def availConst(self, typee):
@@ -123,6 +124,10 @@ class Memory():
 	def deleteMems(self):
 		self.variableMem.deleteMemSpace()
 		self.temporalMem.deleteMemSpace()
+
+	def popMem(self):
+		self.memory['variable'].pop()
+		self.memory['temporal'].pop()
 
 	def addToMem(self, dir, val = None):
 		if dir >= self.globalMem.base and dir <= self.globalMem.last:
@@ -141,6 +146,16 @@ class Memory():
 			return self.memory['variable'].peekFromDict(dir)
 		elif dir >= self.temporalMem.base and dir <= self.temporalMem.last:
 			return self.memory['temporal'].peekFromDict(dir)
+		elif dir >= self.constantMem.base and dir <= self.constantMem.last:
+			return self.memory['constant'][dir]
+
+	def getValFromMemBefore(self, dir):
+		if dir >= self.globalMem.base and dir <= self.globalMem.last:
+			return self.memory['global'][dir]
+		elif dir >= self.variableMem.base and dir <= self.variableMem.last:
+			return self.memory['variable'].peekSecondFromDict(dir)
+		elif dir >= self.temporalMem.base and dir <= self.temporalMem.last:
+			return self.memory['temporal'].peekSecondFromDict(dir)
 		elif dir >= self.constantMem.base and dir <= self.constantMem.last:
 			return self.memory['constant'][dir]
 
@@ -164,14 +179,22 @@ class Memory():
 		elif dir >= self.constantMem.base and dir <= self.constantMem.last:
 			return self.constantMem.getSpaceMemType(dir)
 
+	def pushToVarStack(self, dirr):
+		self.memory['variable'].push(dirr)
+
+	def pushToTempStack(self, dirr):
+		self.memory['temporal'].push(dirr)
+
 	def printMemory(self):
-		self.globalMem.printMemSpace()
+		'''self.globalMem.printMemSpace()
 		self.variableMem.printMemSpace()
 		self.temporalMem.printMemSpace()
-		self.constantMem.printMemSpace()
+		self.constantMem.printMemSpace()'''
 		for key in self.memory:
 			if type(self.memory[key]) is dict:
+				print key
 				print self.memory[key]
 			else:
-				printStack(self.memory[key])
+				print key
+				self.memory[key].printStack()
 			

@@ -10,7 +10,7 @@ int xw = x[1];
 int xe = x[1][1];
 int xr = x[1][1][1][1];
 
-double xt;
+double xt = 8.0;
 double xu = 9;
 double xy = 9.0;
 double xi = 1;
@@ -93,30 +93,21 @@ func double c(int xj, double yf)
 
 main 
 {
-	bool xzs;
+	bool xzs = false;
 	bool xxsxx = false;
 	bool xsc = true;
 	bool xcsc = true;
 	bool xvsv = xzs;
-
+	int top;
+	int cont = 0;
+	top = x7(10);
+	y = 6;
+	write(top);
+	x = 5;
 	while(x < y)
 	{
-		while(5 > 3)
-		{
-			if(5 < 4)
-			{
-				x = 5;
-				xt = c(x, xt);
-				if(5==5)
-				{
-					write(x);
-				}
-				else {
-					x = 4 * 6;
-					x = 5 * 5 *5 * 5;
-					read(x);
-				}
-			}
-		}
+		write(cont);
+		cont = cont + 100;
+		xt = c(x, y);
 	}
 }

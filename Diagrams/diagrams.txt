@@ -10,9 +10,9 @@ FUNC ::= 'func' FUNC_TYPE id '(' ( VAR_TYPE 'id' (',' VAR_TYPE 'id')*)? ')' FUNC
 
 FUNC_TYPE ::= ('void' | 'bool' | ' int' | 'double')
 
-FUNC_BLOCK ::= '{' VARS* STATEMENT* ('return' EXP ';')? '}'
+FUNC_BLOCK ::= '{' VARS* STATEMENT* '}'
 
-STATEMENT ::= ( READ | WRITE | CYCLE | CONDITION | ASSIGNATION | FUNC_CALL )
+STATEMENT ::= ( READ | WRITE | CYCLE | CONDITION | ASSIGNATION | FUNC_CALL | RETURN)
 
 READ ::= 'read' '(' 'id' ('[' EXP ']')* ')' ';'
 
@@ -25,6 +25,8 @@ CONDITION ::= 'if' '(' EXPRESSION ')' BLOCK ("else" BLOCK)?
 ASSIGNATION ::= 'id' ('[' EXP ']')* '=' EXPRESSION ';'
 
 FUNC_CALL ::= 'id' '(' (EXP (',' EXP)*)? ')' ';'
+
+RETURN ::= 'return' EXP ';'
 
 BLOCK ::= '{' STATEMENT* '}'
 

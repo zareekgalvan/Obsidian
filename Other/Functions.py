@@ -17,7 +17,7 @@ def to_var_table(p):
 	if varid not in varTable['global'] and varid not in varTable[scope[len(scope)-1]]:
 		varTable[scope[len(scope)-1]][varid] = {}
 		varTable[scope[len(scope)-1]][varid]['type'] =  lastType[len(lastType)-1]
-		varTable[scope[len(scope)-1]][varid]['address'] = mem.avail(lastType[len(lastType)-1])
+		varTable[scope[len(scope)-1]][varid]['address'] = mem.availVar(lastType[len(lastType)-1])
 	else:
 		print 'Variable "%s" in line %s already registered' % (varid, line)
 		sys.exit()
@@ -31,11 +31,13 @@ def to_proc_dir(p):
 		scope.append(procname)
 		varTable['global'][procname] = {}
 		varTable['global'][procname]['type'] = functype
-		varTable['global'][procname]['address'] = mem.avail(functype)
+		varTable['global'][procname]['address'] = mem.availGlobal(functype)
 		varTable[procname] = {}
 		dirProcedures[procname] = {}
 		dirProcedures[procname]['func_type'] = functype
 		dirProcedures[procname]['args'] = []
+		#print procname, varTable['global'][procname]['address']
+		mem.addToMem(varTable['global'][procname]['address'])
 	else:
 		print 'Function "%s" already registered in line %s' % (procname, line)
 		sys.exit()
@@ -47,6 +49,7 @@ def to_args(varid, vartype, line, p):
 		varTable[scope[len(scope)-1]][varid] =  {}
 		varTable[scope[len(scope)-1]][varid]['type'] = vartype
 		varTable[scope[len(scope)-1]][varid]['address'] = mem.availVar(vartype)
+		varTable[scope[len(scope)-1]][varid]['param_no'] = len(dirProcedures[scope[len(scope)-1]]['args'])
 	else:
 		print 'Variable "%s" in line %s already registered' % (varid, line)
 		sys.exit() 
@@ -302,7 +305,10 @@ def gen_exp_quad(line, qtype):
 		pilaOptr.pop()
 		res = getType(lType, rType, oper)
 		if res != 'ERROR':
-			nextTemp = mem.avail(res)
+			nextTemp = mem.availTemp(res)
+			varTable[scope[len(scope)-1]][nextTemp] = {}
+			varTable[scope[len(scope)-1]][nextTemp]['address'] = nextTemp
+			varTable[scope[len(scope)-1]][nextTemp]['type'] = res
 			quad = Quadruple(Quadruples.cont, getOperationCode(oper), lOperand, rOperand, nextTemp)
 			quadruples.addQuad(quad)
 			pTypes.push(res)
@@ -425,6 +431,38 @@ def isDouble(number):
 	except ValueError:
 		return False
 
+def getVirtualVariblesFromVarTable(scope):
+	dirr = {}
+	for key in varTable:
+		if key == scope:
+			for val in varTable[key]:
+				if not isInt(val):
+					dirr[varTable[key][val]['address']] = None
+	return dirr
+
+def getVirtualTemporalsFromVarTable(scope):
+	dirr = {}
+	for key in varTable:
+		if key == scope:
+			for val in varTable[key]:
+				if isInt(val):
+					dirr[varTable[key][val]['address']] = None
+	return dirr
+
+def tryGetAddressFromParamNo(scope, paramNo):
+	for key in varTable:
+		if key == scope:
+			for val in varTable[key]:
+				if not isInt(val) and isParam(scope, val):
+					if varTable[key][val]['param_no'] == paramNo:
+						return varTable[key][val]['address']
+
+def isParam(scope, val):
+	try:
+		address = varTable[scope][val]['param_no']
+		return True
+	except KeyError:
+		return False
 
 # Desplegar las variables por motivos de debugging
 def printAll():

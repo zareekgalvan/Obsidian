@@ -5,20 +5,13 @@ func int fact (int n)
  	{
  		return 1;
  	}
- 	return n * fact(n - 1);
+ 	return n * fact(n - 1) * fact(0);
  }
 
  main 
  {
- 	int i = 10;
-	int x = i;
- 	read(i);
- 	x = x + 15;
- 	while (i >= 1)
- 	{
- 		write(i);
- 		i = i - 1;
- 	}
- 	read(i);
+ 	int i = 0;
+ 	int x;
+ 	i = fact(2);
  	write(i);
  }

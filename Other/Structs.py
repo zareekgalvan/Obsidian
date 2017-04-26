@@ -54,8 +54,14 @@ class Stack():
     def peek(self):
         return self.items[len(self.items)-1]
 
+    def peekSecond(self):
+        return self.items[len(self.items)-2]
+
     def peekFromDict(self, key):
         return self.items[len(self.items)-1][key]
+
+    def peekSecondFromDict(self, key):
+        return self.items[len(self.items)-2][key]
 
     # Despliega todos los elementos del stack
     def getElements(self):
@@ -65,10 +71,10 @@ class Stack():
     def size(self):
         return len(self.items)
 
-# Hacer print de un stack
-def printStack(stack):
-    print "-------------------"
-    while not stack.isEmpty():
-        print stack.peek(), ",",
-        stack.pop()
-    print "\n-------------------"
+    def printStack(self):
+        l = len(self.items) -1
+        print self.size()
+        while l != 0:
+            print self.items[l]
+            l -= 1
+        
