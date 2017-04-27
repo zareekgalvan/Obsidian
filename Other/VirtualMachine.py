@@ -21,15 +21,15 @@ class VirtualMachine():
 			# Suma
 			if quad.optr == 1:
 				
-				left = mem.getValFromMemBefore(quad.opLeft)
-				right = mem.getValFromMemBefore(quad.opRight)
+				left = mem.getValFromMem(quad.opLeft)
+				right = mem.getValFromMem(quad.opRight)
 				if left == None:
-					print "1.Variables must contain a value before can be used"
+					print "1.Variables must contain a value before can be used l"
 					print left
 					mem.printMemory()
 					sys.exit()
 				if right == None:
-					print "1.Variables must contain a value before can be used"
+					print "1.Variables must contain a value before can be used r"
 					print right
 					mem.printMemory()
 					sys.exit()
@@ -315,9 +315,10 @@ class VirtualMachine():
 			elif quad.optr == 16:
 				
 				self.nextQuad()
-				toPrint = mem.getValFromMemBefore(quad.result)
+				toPrint = mem.getValFromMem(quad.result)
 				if toPrint == None:
 					print "Cant print varriable because it has no value"
+					mem.printMemory()
 					sys.exit()
 				print "<<", toPrint
 			# Return

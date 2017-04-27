@@ -336,13 +336,15 @@ def check_args(p):
 
 
 def gen_go_sub(p):
-	paramsno = dirProcedures[lastFuncCallScope]['params_no']	
+	global paramCount
+	paramsno = dirProcedures[lastFuncCallScope]['params_no']
 	if paramCount != paramsno:
 		print 'Function "%s" requires %s parameters' % (lastFuncCallScope, paramsno)
 		sys.exit()
 	else:
 		quad = Quadruple(Quadruples.cont, getOperationCode('gosub'), lastFuncCallScope, "", dirProcedures[lastFuncCallScope]['quad_start'])
 		quadruples.addQuad(quad)
+	paramCount = 0
 
 
 def gen_era(p):

@@ -4,8 +4,6 @@ import ply.yacc as yacc
 from ObsidianLex import tokens
 # Importar la clase cuadruplos y sus operaciones
 from Other.Functions import *
-
-
 from Other.VirtualMachine import *
 
 # Definicion de las reglas
@@ -305,6 +303,8 @@ def p_pl(p):
 def p_to_pilaOp(p):
 	'''to_pilaOp :'''
 	#hacer validaciones de tipo
+	global paramCount
+	paramCount = 0
 	line = p.lineno(0)
 	var = tryRegisterVar(p[-1])
 	val = None
@@ -323,6 +323,8 @@ def p_push_false_bottom(p):
 def p_pop_false_bottom(p):
 	'''pop_false_bottom :'''
 	pop_false_bottom()
+	global paramCount
+	paramCount = 0
 
 def p_dm(p):
 	'''dm : MULTIPLICATION

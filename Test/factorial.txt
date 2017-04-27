@@ -1,3 +1,22 @@
+func int one(int t)
+{
+	return t;
+}
+
+func int fibo(int f)
+{
+	int x, y;
+	if (f <= 0)
+	{
+		return 0;
+	}
+	if (f == 1)
+	{
+		return 1;
+	}
+	return fibo(f - 1) + fibo(f - 2);
+}
+
 func int fact (int n)
  {
  	int x;
@@ -10,7 +29,10 @@ func int fact (int n)
 
  main 
  {
- 	int i = fact(5);
+ 	int i = 1;
  	i = i * 2;
+ 	i = fact(5) * one(2);
+ 	write(i);
+ 	i = fibo(8);
  	write(i);
  }
