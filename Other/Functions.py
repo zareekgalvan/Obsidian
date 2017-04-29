@@ -12,12 +12,13 @@ def check_arr_param(p):
 
 
 def to_var_table(p):
-	varid = p[-2]
+	varid = p[-1]
 	line = p.lineno(0)
 	if varid not in varTable['global'] and varid not in varTable[scope[len(scope)-1]]:
 		varTable[scope[len(scope)-1]][varid] = {}
 		varTable[scope[len(scope)-1]][varid]['type'] =  lastType[len(lastType)-1]
 		varTable[scope[len(scope)-1]][varid]['address'] = mem.availVar(lastType[len(lastType)-1])
+		varTable[scope[len(scope)-1]][varid]['dim'] = 0
 	else:
 		print 'Variable "%s" in line %s already registered' % (varid, line)
 		sys.exit()
@@ -100,6 +101,14 @@ def tryRegisterVar(var):
 		varTable['constants'][var]['address'] = mem.availConst(typee)
 		return varTable['constants'][var]
 
+
+def register_space(p):
+	print p[-4], p[-1], varTable
+	varid = p[-4]
+	varTable[scope[len(scope)-1]][varid]['dim'] = {}
+	varTable[scope[len(scope)-1]][varid]['dim']['liminf'] = 0
+	varTable[scope[len(scope)-1]][varid]['dim']['limsup'] = p[-1] - 1
+	print varTable
 
 # QUAD GENERATION FUNCTIONS
 # ===========================================================================
@@ -401,10 +410,7 @@ def gen_end_quad():
 # ===========================================================================
 # Obtener el tipo de la operacion realizada
 def getType(ltype, rtype, oper):
-	try:
-		return semanticCube[ltype][rtype][oper]
-	except KeyError:
-		print ltype, rtype, oper
+	return semanticCube[ltype][rtype][oper]
 
 
 # Probar que este declarado correctamente el cubo semantico
@@ -424,17 +430,20 @@ def printOperationCodes():
 	for key in operationCodes:
 		print operationCodes[key]
 
+
 def isInt(number):
 	try:
 		return type(int(number)) is int
 	except ValueError:
 		return False
 
+
 def isDouble(number):
 	try:
 		return type(float(number)) is float
 	except ValueError:
 		return False
+
 
 def getVirtualVariblesFromVarTable(scope):
 	dirr = {}
@@ -445,6 +454,7 @@ def getVirtualVariblesFromVarTable(scope):
 					dirr[varTable[key][val]['address']] = None
 	return dirr
 
+
 def getVirtualTemporalsFromVarTable(scope):
 	dirr = {}
 	for key in varTable:
@@ -454,6 +464,7 @@ def getVirtualTemporalsFromVarTable(scope):
 					dirr[varTable[key][val]['address']] = None
 	return dirr
 
+
 def tryGetAddressFromParamNo(scope, paramNo):
 	for key in varTable:
 		if key == scope:
@@ -462,12 +473,14 @@ def tryGetAddressFromParamNo(scope, paramNo):
 					if varTable[key][val]['param_no'] == paramNo:
 						return varTable[key][val]['address']
 
+
 def isParam(scope, val):
 	try:
 		address = varTable[scope][val]['param_no']
 		return True
 	except KeyError:
 		return False
+
 
 # Desplegar las variables por motivos de debugging
 def printAll():

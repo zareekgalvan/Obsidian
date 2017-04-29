@@ -31,7 +31,7 @@ def p_var_type(p):
 	lastType.append(p[1])
 
 def p_vars_aux(p):
-	'''vars_aux : ID arr to_var_table var_assign more_vars_aux'''
+	'''vars_aux : ID to_var_table arr var_assign more_vars_aux'''
 	p[0] = p[-1]
 
 def p_to_var_table(p):
@@ -48,10 +48,14 @@ def p_more_vars_aux(p):
 			|'''
 
 def p_arr(p):
-	'''arr : LSQRTBRACKET const RSQRTBRACKET arr
+	'''arr : LSQRTBRACKET const register_space RSQRTBRACKET
 			|'''
 
 	check_arr_param(p)
+
+def p_register_space(p):
+	'''register_space :'''
+	register_space(p)
 
 def p_var_cte(p):
 	'''var_cte : const
