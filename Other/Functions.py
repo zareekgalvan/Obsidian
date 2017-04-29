@@ -120,10 +120,12 @@ def register_space(p):
 			address = mem.availVar(varTable[scope[len(scope)-1]][varid]['type'])
 		else:
 			address = mem.availGlobal(varTable[scope[len(scope)-1]][varid]['type'])
-		mem.addToMem(address,0)
+		varTable[scope[len(scope)-1]][address] = {}
+		varTable[scope[len(scope)-1]][address]['type'] = varTable[scope[len(scope)-1]][varid]['type']
+		varTable[scope[len(scope)-1]][address]['address'] = address
+		mem.addToMem(address)
 		mem.putValInMem(address-1, 0)
 		i += 1
-
 
 # QUAD GENERATION FUNCTIONS
 # ===========================================================================
