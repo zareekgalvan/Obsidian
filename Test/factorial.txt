@@ -16,8 +16,12 @@ func int fibo(int f)
 	{
 		return 1;
 	}
-	return fibo(f - 1) + fibo(f - 2);
+	x = fibo(f - 1);
+	y= fibo(f - 2);
+	return x + y;
 }
+
+
 
 func int fact (int n)
  {

@@ -379,8 +379,8 @@ if __name__ == '__main__':
 				#print "Valid syntax"
 				virtualMachine = VirtualMachine()
 				virtualMachine.execute(quadruples.quadruples)
-				#mem.printMemory()
-				#print varTable
+				#
+				#print mem.memory['']
 
 		except EOFError:
 	   		print(EOFError)

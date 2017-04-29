@@ -17,8 +17,13 @@ def to_var_table(p):
 	if varid not in varTable['global'] and varid not in varTable[scope[len(scope)-1]]:
 		varTable[scope[len(scope)-1]][varid] = {}
 		varTable[scope[len(scope)-1]][varid]['type'] =  lastType[len(lastType)-1]
-		varTable[scope[len(scope)-1]][varid]['address'] = mem.availVar(lastType[len(lastType)-1])
+		if scope[len(scope)-1] != 'global':
+			address = mem.availVar(varTable[scope[len(scope)-1]][varid]['type'])
+		else:
+			address = mem.availGlobal(varTable[scope[len(scope)-1]][varid]['type'])
+		varTable[scope[len(scope)-1]][varid]['address'] = address
 		varTable[scope[len(scope)-1]][varid]['dim'] = 0
+		mem.addToMem(address)
 	else:
 		print 'Variable "%s" in line %s already registered' % (varid, line)
 		sys.exit()
@@ -33,6 +38,7 @@ def to_proc_dir(p):
 		varTable['global'][procname] = {}
 		varTable['global'][procname]['type'] = functype
 		varTable['global'][procname]['address'] = mem.availGlobal(functype)
+		varTable['global'][procname]['dim'] = 0
 		varTable[procname] = {}
 		dirProcedures[procname] = {}
 		dirProcedures[procname]['func_type'] = functype
@@ -51,6 +57,7 @@ def to_args(varid, vartype, line, p):
 		varTable[scope[len(scope)-1]][varid]['type'] = vartype
 		varTable[scope[len(scope)-1]][varid]['address'] = mem.availVar(vartype)
 		varTable[scope[len(scope)-1]][varid]['param_no'] = len(dirProcedures[scope[len(scope)-1]]['args'])
+		varTable[scope[len(scope)-1]][varid]['dim'] = 0
 	else:
 		print 'Variable "%s" in line %s already registered' % (varid, line)
 		sys.exit() 
@@ -103,12 +110,20 @@ def tryRegisterVar(var):
 
 
 def register_space(p):
-	print p[-4], p[-1], varTable
 	varid = p[-4]
 	varTable[scope[len(scope)-1]][varid]['dim'] = {}
 	varTable[scope[len(scope)-1]][varid]['dim']['liminf'] = 0
 	varTable[scope[len(scope)-1]][varid]['dim']['limsup'] = p[-1] - 1
-	print varTable
+	i = 0
+	while i < varTable[scope[len(scope)-1]][varid]['dim']['limsup']:
+		if scope[len(scope)-1] != 'global':
+			address = mem.availVar(varTable[scope[len(scope)-1]][varid]['type'])
+		else:
+			address = mem.availGlobal(varTable[scope[len(scope)-1]][varid]['type'])
+		mem.addToMem(address,0)
+		mem.putValInMem(address-1, 0)
+		i += 1
+
 
 # QUAD GENERATION FUNCTIONS
 # ===========================================================================
@@ -139,7 +154,6 @@ def pop_false_bottom():
 def to_pilaOp(var, val, line, p):
 	pilaOp.push(var['address'])
 	pTypes.push(var['type'])
-	#validate if constant
 	mem.addToMem(var['address'], val)
 	
 
