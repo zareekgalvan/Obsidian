@@ -342,6 +342,7 @@ class VirtualMachine():
 				jumpTo = quad.result
 				self.jump(jumpTo)
 				self.jumpStack.push(quad.number+1)
+				push_false_bottom()
 			# Era
 			elif quad.optr == 20:
 

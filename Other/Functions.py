@@ -374,7 +374,7 @@ def gen_return_quad(scope, p):
 		quadruples.addQuad(quad)
 		returnCount += 1
 	else:
-		print "Type mismatch of return in line %s" % line
+		print "Type mismatch of return in line %s: %s" % (line, retType)
 		sys.exit()
 
 
@@ -401,7 +401,10 @@ def gen_end_quad():
 # ===========================================================================
 # Obtener el tipo de la operacion realizada
 def getType(ltype, rtype, oper):
-	return semanticCube[ltype][rtype][oper]
+	try:
+		return semanticCube[ltype][rtype][oper]
+	except KeyError:
+		print ltype, rtype, oper
 
 
 # Probar que este declarado correctamente el cubo semantico

@@ -50,6 +50,7 @@ def p_more_vars_aux(p):
 def p_arr(p):
 	'''arr : LSQRTBRACKET const RSQRTBRACKET arr
 			|'''
+
 	check_arr_param(p)
 
 def p_var_cte(p):
@@ -125,7 +126,7 @@ def p_statement(p):
 		| func_call SEMICOLON'''
 
 def p_read(p):
-	'''read : READ LPAR ID to_pilaOp arr_par RPAR gen_read_quad SEMICOLON'''
+	'''read : READ LPAR ID arr_par to_pilaOp RPAR gen_read_quad SEMICOLON'''
 
 def p_gen_read_quad(p):
 	'''gen_read_quad :'''
@@ -180,7 +181,7 @@ def p_check_type(p):
 	check_type(p)
 
 def p_assignation(p):
-	'''assignation : ID to_pilaOp arr_par EQUALS expression gen_assignation_quad SEMICOLON'''
+	'''assignation : ID arr_par to_pilaOp EQUALS expression gen_assignation_quad SEMICOLON'''
 
 def p_gen_assignation_quad(p):
 	'''gen_assignation_quad :'''
@@ -303,10 +304,11 @@ def p_pl(p):
 def p_to_pilaOp(p):
 	'''to_pilaOp :'''
 	#hacer validaciones de tipo
-	global paramCount
-	paramCount = 0
 	line = p.lineno(0)
-	var = tryRegisterVar(p[-1])
+	var = p[-1]
+	if var == None:
+		var = p[-2]
+	var = tryRegisterVar(var)
 	val = None
 	if type(p[-1]) == int or type(p[-1]) == float or p[-1] == 'true' or p[-1] == 'false':
 		val = p[-1]
@@ -374,6 +376,7 @@ if __name__ == '__main__':
 				virtualMachine = VirtualMachine()
 				virtualMachine.execute(quadruples.quadruples)
 				#mem.printMemory()
+				#print varTable
 
 		except EOFError:
 	   		print(EOFError)

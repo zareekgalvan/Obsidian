@@ -31,8 +31,8 @@ func int fact (int n)
  {
  	int i = 1;
  	i = i * 2;
- 	i = fact(5) * one(2);
+ 	i = fact(5);
  	write(i);
- 	i = fibo(8);
+ 	i = fibo(5);
  	write(i);
  }
