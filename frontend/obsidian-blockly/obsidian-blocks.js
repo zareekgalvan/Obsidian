@@ -17,7 +17,7 @@ Blockly.Blocks['function'] = {
     this.appendValueInput("params")
         .setCheck(null)
         .appendField("func")
-        .appendField(new Blockly.FieldDropdown([ ["int", "int"], ["double", "double"], ["void", "void"],["bool", "bool"] ]), "type")
+        .appendField(new Blockly.FieldDropdown([ ["int", "int"], ["double", "double"], ["void", "void"] ]), "type")
         .appendField(new Blockly.FieldTextInput("id"), "id");
     this.appendStatementInput("statement")
         .setCheck(null);
