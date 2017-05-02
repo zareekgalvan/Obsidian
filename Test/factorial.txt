@@ -1,8 +1,13 @@
-int arr[5];
+int arr[10];
 
-func int one(int t)
+func void one()
 {
-	return t;
+	int i = 0;
+	while (i < 10)
+	{
+		arr[i - 1] = i;
+		i = i + 1;
+	}
 }
 
 func int fibo(int f)
@@ -21,7 +26,17 @@ func int fibo(int f)
 	return x + y;
 }
 
-
+func int fibo2(int f)
+{
+	//int fib[200];
+	int i = 0;
+	while(i < f && f < 200)
+	{
+		write(i);
+		i = i + 1;
+	}
+	return 1;
+}
 
 func int fact (int n)
  {
@@ -35,7 +50,12 @@ func int fact (int n)
 
  main 
  {
- 	int i = 1;
+ 	int i = 100;
+ 	int arr2[10];
+ 	one();
+ 	arr[3] = 3;
+ 	arr[7] = arr[3] + 3;
+ 	write(arr2[7]);
  	i = i * 2;
  	i = fact(5);
  	write(i);

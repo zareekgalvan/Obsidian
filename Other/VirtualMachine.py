@@ -25,7 +25,7 @@ class VirtualMachine():
 				right = mem.getValFromMem(quad.opRight)
 				if left == None:
 					print "1.Variables must contain a value before can be used l"
-					print left
+					print quad.opLeft, quad.number
 					mem.printMemory()
 					sys.exit()
 				if right == None:
@@ -114,6 +114,7 @@ class VirtualMachine():
 				toAssign = mem.getValFromMem(quad.opLeft)
 				if toAssign == None:
 					print "6.No value for address %s from quad %s" % (quad.opLeft, quad.number)
+					mem.printMemory()
 					sys.exit()
 				mem.putValInMem(quad.result, toAssign)
 				self.nextQuad()
@@ -165,13 +166,13 @@ class VirtualMachine():
 				left = mem.getValFromMem(quad.opLeft)
 				right = mem.getValFromMem(quad.opRight)
 				if left == None:
-					print "9.Variables must contain a value before can be used"
-					print left
+					print "9.Variables must contain a value before can be used l"
+					print quad.opLeft, quad.number
 					mem.printMemory()
 					sys.exit()
 				if right == None:
-					print "9.Variables must contain a value before can be used"
-					print right
+					print "9.Variables must contain a value before can be used r"
+					print quad.opRight, quad.number
 					mem.printMemory()
 					sys.exit()
 				self.nextQuad()
@@ -378,6 +379,21 @@ class VirtualMachine():
 				toAssign = mem.getValFromMem(quad.opLeft)
 				mem.putValInMem(address, toAssign)
 				#mem.printMemory()
+				self.nextQuad()
+			# Ver
+			elif quad.optr == 26:
+				ver = mem.getValFromMem(quad.opLeft)
+				if ver == None:
+					print "26.Variables must contain a value before can be used"
+					sys.exit()
+				if ver >= quad.opRight and ver < quad.result:
+					self.nextQuad()
+				else:
+					print "Array out of bounds with value %s" % ver
+					sys.exit()
+			# ERROR		
+			else:
+				print 'unrecognized optr %s' % quad.optr
 				self.nextQuad()
 
 	def jump(self, quadNo):

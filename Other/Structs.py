@@ -74,7 +74,7 @@ class Stack():
     def printStack(self):
         l = len(self.items) -1
         print self.size()
-        while l != 0:
+        while l >= 0:
             print self.items[l]
             l -= 1
         

@@ -115,6 +115,8 @@ def register_space(p):
 	varTable[scope[len(scope)-1]][varid]['dim']['liminf'] = 0
 	varTable[scope[len(scope)-1]][varid]['dim']['limsup'] = p[-1] - 1
 	i = 0
+	add = tryRegisterVar(p[-1])
+	mem.addToMem(add['address'], p[-1])
 	while i < varTable[scope[len(scope)-1]][varid]['dim']['limsup']:
 		if scope[len(scope)-1] != 'global':
 			address = mem.availVar(varTable[scope[len(scope)-1]][varid]['type'])
@@ -124,7 +126,6 @@ def register_space(p):
 		varTable[scope[len(scope)-1]][address]['type'] = varTable[scope[len(scope)-1]][varid]['type']
 		varTable[scope[len(scope)-1]][address]['address'] = address
 		mem.addToMem(address)
-		mem.putValInMem(address-1, 0)
 		i += 1
 
 # QUAD GENERATION FUNCTIONS
@@ -417,6 +418,38 @@ def gen_endproc_quad(p):
 	paramCount = 0
 
 
+def gen_ver_quad(p):
+	info = tryRegisterVar(p[2])
+	dim = None
+	if isArray(p[-2]):
+		dim = 1
+		pDim.push({p[-2] : dim})
+		dim = getDim(getScopeFromID(p[-2]), p[-2])
+		push_false_bottom()
+	else:
+		print "%s is not an array" % p[-2]
+		sys.exit()
+	pilaOp.pop()
+	quad = Quadruple(Quadruples.cont, getOperationCode('ver'), info['address'], dim['liminf'], dim['limsup'])
+	quadruples.addQuad(quad)
+
+	
+	var = pilaOp.peek()
+	pilaOp.pop()
+	typee = pTypes.peek()
+	pTypes.pop()
+	res = getType(typee, info['type'], '+')
+	if res != 'ERROR':
+		pTypes.push(info['type'])
+		pilaOp.push(info['address'])
+		pilaOptr.pop()
+		pDim.pop()
+	else:
+		print "Type mismatch in line %s" % p.lineno(0)
+		sys.exit()
+
+
+
 def gen_end_quad():
 	quad = Quadruple(Quadruples.cont, getOperationCode('END'), '', '','')
 	quadruples.addQuad(quad)
@@ -498,6 +531,49 @@ def isParam(scope, val):
 		return False
 
 
+def getID(address):
+	for key in varTable['global']:
+		if varTable['global'][key]['address'] == address:
+			return key
+	for key in varTable[scope[len(scope)-1]]:
+		if varTable[scope[len(scope)-1]][key]['address'] == address:
+			return key
+	for key in varTable['constants']:
+		if varTable['constants'][key]['address'] == address:
+			return key
+	return None
+
+
+def getScopeFromID(varid):
+	if varid in varTable['global']:
+		return 'global'
+	elif varid in varTable[scope[len(scope)-1]]:
+		return scope[len(scope)-1]
+	elif varid in varTable['constants']:
+		return 'constants'
+
+
+def getDim(scope, varid):
+	return varTable[scope][varid]['dim']
+
+
+def isArray(varid):
+	if varid in varTable['global']:
+		return verIfArray('global', varid)
+	elif varid in varTable[scope[len(scope)-1]]:
+		return verIfArray(scope[len(scope)-1], varid)
+	elif varid in varTable['constants']:
+		return verIfArray('constants', varid)
+
+
+def verIfArray(scope, varid):
+	try:
+		dim = varTable[scope][varid]['dim'] != 0
+		return dim
+	except KeyError:
+		return False
+
+
 # Desplegar las variables por motivos de debugging
 def printAll():
 	print "===\t\tVar Table\t\t==="
@@ -506,16 +582,16 @@ def printAll():
 	pprint.pprint(dirProcedures)
 	'''print "===\t\tPila Operadores\t\t==="
 	print 'size', pilaOptr.size()
-	printStack(pilaOptr)
+	pilaOptr.printStack()
 	print "===\t\tPila Operandos\t\t==="
 	print 'size', pilaOp.size()
-	printStack(pilaOp)
+	pilaOp.printStack()
 	print "===\t\tPila Tipos\t\t==="
 	print 'size', pTypes.size()
-	printStack(pTypes)
+	pTypes.printStack()
 	print "===\t\tPila Saltos\t\t==="
 	print 'size', pSaltos.size()
-	printStack(pSaltos)
+	pSaltos.printStack()
 	print "===\t\tMemoria\t\t==="
 	mem.printMemory()'''
 	print "===\t\tCuadruplos\t\t==="

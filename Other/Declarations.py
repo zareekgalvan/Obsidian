@@ -17,6 +17,7 @@ pilaOptr = Stack()
 pSaltos = Stack()
 pReturnSaltos = Stack()
 pTypes = Stack()
+pDim = Stack()
 
 # Temporales
 iTempCount = 1
@@ -41,4 +42,4 @@ lastFuncCallScope = ""
 mem = Memory()
 
 # Debbuging mode
-debug = 'off'
+debug = 'on'

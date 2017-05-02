@@ -58,9 +58,9 @@ def p_register_space(p):
 	register_space(p)
 
 def p_var_cte(p):
-	'''var_cte : const
-			| ID arr
-			| func_call'''
+	'''var_cte : const to_pilaOp
+			| ID to_pilaOp arr_par
+			| func_call to_pilaOp'''
 	p[0] = p[1]
 
 def p_const(p):
@@ -130,7 +130,7 @@ def p_statement(p):
 		| func_call SEMICOLON'''
 
 def p_read(p):
-	'''read : READ LPAR ID arr_par to_pilaOp RPAR gen_read_quad SEMICOLON'''
+	'''read : READ LPAR ID to_pilaOp arr_par RPAR gen_read_quad SEMICOLON'''
 
 def p_gen_read_quad(p):
 	'''gen_read_quad :'''
@@ -185,7 +185,7 @@ def p_check_type(p):
 	check_type(p)
 
 def p_assignation(p):
-	'''assignation : ID arr_par to_pilaOp EQUALS expression gen_assignation_quad SEMICOLON'''
+	'''assignation : ID to_pilaOp arr_par EQUALS expression gen_assignation_quad SEMICOLON'''
 
 def p_gen_assignation_quad(p):
 	'''gen_assignation_quad :'''
@@ -224,8 +224,10 @@ def p_block(p):
 	'''block : LBRACKET more_statement RBRACKET'''
 
 def p_arr_par(p):
-	'''arr_par : LSQRTBRACKET exp RSQRTBRACKET arr_par
+	'''arr_par : LSQRTBRACKET exp RSQRTBRACKET 
 			|'''
+	if len(p) > 1:
+		gen_ver_quad(p)
 
 def p_expression(p):
 	'''expression : conc gen_conc_quad expression_aux'''
@@ -280,7 +282,7 @@ def p_gen_factor_quad(p):
 
 def p_factor(p):
 	'''factor : LPAR add_to_pilaOptr expression RPAR pop_false_bottom
-			| var_cte to_pilaOp'''
+			| var_cte'''
 	if p[1] != '(':
 		p[0] = p[1]
 	else:
@@ -379,8 +381,12 @@ if __name__ == '__main__':
 				#print "Valid syntax"
 				virtualMachine = VirtualMachine()
 				virtualMachine.execute(quadruples.quadruples)
-				#
+				mem.printMemory()
+				#mem.memory['variable'].printStack()
+				#pprint.pprint(varTable)
 				#print mem.memory['']
+				#print pDim.peek()
+				print mem.getValFromMem(101500)
 
 		except EOFError:
 	   		print(EOFError)

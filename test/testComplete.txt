@@ -1,14 +1,14 @@
 //hii
 int x, y, z, k=x, f;
-int v = 9, xx = 9.0, xd[1][1][1][1];
+int v = 9, xx = 9.0, xd[1];
 int xs = 9.0;
 int xdd = 1;
 int xf = x;
 //hi
 int xa = x[1];
 int xw = x[1];
-int xe = x[1][1];
-int xr = x[1][1][1][1];
+int xe = x[1];
+int xr = x[1];
 
 double xt = 8.0;
 double xu = 9;
@@ -16,8 +16,8 @@ double xy = 9.0;
 double xi = 1;
 double xo = x;
 double xp = x[1];
-double xii = x[1][1];
-double xuu = x[1][1][1][1];
+double xii = x[1];
+double xuu = x[1];
 
 bool xz;
 
@@ -70,22 +70,7 @@ func double c(int xj, double yf)
 	read(x);
 	while(x < y)
 	{
-		while(5 > 3)
-		{
-			if(5 < 4)
-			{
-				x = 5;
-				if(5==5)
-				{
-					write(x);
-				}
-				else {
-					x = 4 * 6;
-					x = 5 * 5 *5 * 5;
-					read(x);
-				}
-			}
-		}
+		
 	}
 	return i;
 }
@@ -108,6 +93,6 @@ main
 	{
 		write(cont);
 		cont = cont + 100;
-		xt = c(x, y);
+		xt = c(x, xt);
 	}
 }

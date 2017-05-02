@@ -24,5 +24,6 @@ operationCodes = {
 	'GotoT' : 22,
 	'Goto' : 23,
 	'END' : 24,
-	'param' : 25
+	'param' : 25,
+	'ver' : 26
 }

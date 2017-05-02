@@ -20,7 +20,7 @@ class MemSpace():
 			self.intsActual += 1
 			return nextInt
 		else:
-			print "Memory exceeded"
+			print "Memory exceeded in %s space in ints" % self.name
 			sys.exit()
 
 	def getNextDouble(self):
@@ -29,7 +29,7 @@ class MemSpace():
 			self.doublesActual += 1
 			return nextDouble
 		else:
-			print "Memory exceeded"
+			print "Memory exceeded in %s space in doubles" % self.name
 			sys.exit()
 
 	def getNextBool(self):
@@ -38,7 +38,7 @@ class MemSpace():
 			self.boolsActual += 1
 			return nextBool
 		else:
-			print "Memory exceeded"
+			print "Memory exceeded in %s space in bools" % self.name
 			sys.exit()
 
 	def deleteMemSpace(self):
@@ -70,7 +70,7 @@ class Memory():
 
 	def __init__(self):
 		self.memory = {}
-		self.globalMem = MemSpace('global', 0, 500)
+		self.globalMem = MemSpace('global', 100000, 500)
 		self.variableMem = MemSpace('variables', self.globalMem.long + self.globalMem.boolsBase, 1000)
 		self.temporalMem = MemSpace('temporals', self.variableMem.long + self.variableMem.boolsBase, 1500)
 		self.constantMem = MemSpace('constants', self.temporalMem.long + self.temporalMem.boolsBase, 1000)
