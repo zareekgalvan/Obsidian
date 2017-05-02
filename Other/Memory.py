@@ -185,6 +185,29 @@ class Memory():
 	def pushToTempStack(self, dirr):
 		self.memory['temporal'].push(dirr)
 
+	def tryGetValFromMem(self, dirr):
+		try:
+
+			dirr = dirr[1:len(dirr)-1]
+			return self.getValFromMem(int(dirr))
+		except TypeError:
+			return self.getValFromMem(dirr)
+
+	def verIfDir(self, dirr):
+		try:
+
+			dirr = dirr[1:len(dirr)-1]
+			return int(dirr)
+		except TypeError:
+			return dirr
+
+	def isDirComposite(self, dirr):
+		try:
+			dirr = dirr[1:len(dirr)-1]
+			return True
+		except TypeError:
+			return False
+
 	def printMemory(self):
 		'''self.globalMem.printMemSpace()
 		self.variableMem.printMemSpace()

@@ -35,7 +35,8 @@ class VirtualMachine():
 					sys.exit()
 				self.nextQuad()
 				toAssign = left + right
-				mem.putValInMem(quad.result, toAssign)
+				#print 'assign:', toAssign, 'in:', mem.verIfDir(quad.result)
+				mem.putValInMem(mem.verIfDir(quad.result), toAssign)
 			# Resta
 			elif quad.optr == 2:
 				
@@ -110,13 +111,21 @@ class VirtualMachine():
 				mem.putValInMem(quad.result, toAssign)
 			# Equals
 			elif quad.optr == 6:
-				
+
 				toAssign = mem.getValFromMem(quad.opLeft)
 				if toAssign == None:
 					print "6.No value for address %s from quad %s" % (quad.opLeft, quad.number)
 					mem.printMemory()
 					sys.exit()
-				mem.putValInMem(quad.result, toAssign)
+			
+				if mem.isDirComposite(quad.result):
+					#print 'assigning:', toAssign, 'in:', mem.tryGetValFromMem(quad.result)
+					assign = mem.tryGetValFromMem(quad.result)
+				else:
+					#print 'assigning:', toAssign, 'in:', quad.result
+					assign = quad.result
+
+				mem.putValInMem(assign, toAssign)
 				self.nextQuad()
 			# Equal equals	
 			elif quad.optr == 7:
@@ -126,12 +135,12 @@ class VirtualMachine():
 				if left == None:
 					print "7.Variables must contain a value before can be used l"
 					print left, mem.getValFromMem(quad.opLeft)
-					mem.printMemory()
+					#mem.printMemory()
 					sys.exit()
 				if right == None:
 					print "7.Variables must contain a value before can be used"
 					print right, mem.getValFromMem(quad.opRight)
-					mem.printMemory()
+					#mem.printMemory()
 					sys.exit()
 				self.nextQuad()
 				toAssign = left == right
@@ -316,12 +325,18 @@ class VirtualMachine():
 			elif quad.optr == 16:
 				
 				self.nextQuad()
-				toPrint = mem.getValFromMem(quad.result)
+				toPrint = mem.tryGetValFromMem(quad.result)
 				if toPrint == None:
-					print "Cant print varriable because it has no value"
+					print "Cant print variable because it has no value"
 					mem.printMemory()
 					sys.exit()
-				print "<<", toPrint
+				if mem.isDirComposite(quad.result):
+					#print 'printing:', toPrint, 'in:', mem.tryGetValFromMem(toPrint)
+					toPrint = mem.tryGetValFromMem(quad.result)
+				else:
+					#print 'printing:', toPrint, 'in:', toPrint
+					toPrint = quad.result
+				print "<<", mem.tryGetValFromMem(toPrint)
 			# Return
 			elif quad.optr == 17:
 				
