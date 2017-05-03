@@ -2,18 +2,21 @@ func int fiboRecursivo(int f)
 {
 
 	int arr[200];
+	int x, y;
 	int i = 2;
 	if (f == 0 || f == 1)
 	{
 		return 1;
 	}
-	arr[0] = 1;
+	arr[0] = 0;
 	arr[1] = 1;
 
 	while (i <= f && f < 200)
 	{
 		write(i);
-		arr[i] = arr[i - 1] + arr[i - 2];
+		x = arr[i - 1];
+		y = arr[i - 2];
+		arr[i] = x + y;
 		i = i + 1;
 	}
 	return arr[i];

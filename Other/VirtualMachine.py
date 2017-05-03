@@ -22,6 +22,8 @@ class VirtualMachine():
 			if quad.optr == 1:
 				
 				left = mem.getValFromMem(quad.opLeft)
+				if left == None:
+					left = mem.getValFromMemBefore(quad.opLeft)
 				right = mem.getValFromMem(quad.opRight)
 				if left == None:
 					print "1.Variables must contain a value before can be used l"
@@ -114,7 +116,10 @@ class VirtualMachine():
 			# Equals
 			elif quad.optr == 6:
 
-				toAssign = mem.getValFromMem(quad.opLeft)
+				if mem.isDirComposite(quad.opLeft):
+					toAssign = mem.tryGetValFromMem(quad.opLeft)
+				else:
+					toAssign = mem.getValFromMem(quad.opLeft)
 				if toAssign == None:
 					print "6.No value for address %s from quad %s" % (quad.opLeft, quad.number)
 					mem.printMemory()
