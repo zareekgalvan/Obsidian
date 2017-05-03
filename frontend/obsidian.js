@@ -76,7 +76,27 @@ function reset() {
 
 function downloadXML() {
   var xml = Blockly.Xml.workspaceToDom(workspace);
-  console.log(xml);
+  var xmlPretty = Blockly.Xml.domToPrettyText(xml);
+
+  //Generate a file name
+  var fileName = "obsidian_block";
+
+    //Initialize file format you want csv or xls
+    var uri = 'data:text/xml;charset=utf-8,' + escape(xmlPretty);
+
+    //this trick will generate a temp <a /> tag
+    var link = document.createElement("a");
+    link.href = uri;
+
+    //set the visibility hidden so it will not effect on your web-layout
+    link.style = "visibility:hidden";
+    link.download = fileName + ".xml";
+
+    //this part will append the anchor tag and remove it after automatic click
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
 }
 
 function runCode() {
