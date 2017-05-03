@@ -37,8 +37,6 @@ Blockly.JavaScript['parameters'] = function(block) {
 Blockly.JavaScript['return'] = function(block) {
   var val = Blockly.JavaScript.valueToCode(block, 'RETURN', Blockly.JavaScript.ORDER_ATOMIC);
 
-  console.log(val)
-
   var code = 'return ' + val + ';\n';
   // code = code.replace(/[()]/g,'');
   // code = code.replace(/[¿]/g,'(');
@@ -140,7 +138,6 @@ Blockly.JavaScript['array_access'] = function(block) {
 Blockly.JavaScript['function_call_params'] = function(block) {
   var text_funcname = block.getFieldValue('FUNCNAME');
   var value_name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
-  // TODO: Assemble JavaScript into code variable.
   var code = text_funcname + '¿ ' + value_name + ' ?;\n';
   code = code.replace(/[()]/g,'');
   code = code.replace(/[¿]/g,'(');
@@ -151,7 +148,6 @@ Blockly.JavaScript['function_call_params'] = function(block) {
 // func ();
 Blockly.JavaScript['function_call_no_param'] = function(block) {
   var text_funcname = block.getFieldValue('FUNCNAME');
-  // TODO: Assemble JavaScript into code variable.
   var code = text_funcname + '();';
   return code;
 };

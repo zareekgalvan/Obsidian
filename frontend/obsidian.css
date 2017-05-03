@@ -70,4 +70,15 @@ h1 {
 	color: white;
 }
 
+.xml-button {
+	background-color: #378992;
+}
+
+.xml-button:hover {
+	background-color: #378992;
+	color: white;
+}
+
+
+
 

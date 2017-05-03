@@ -65,9 +65,9 @@ function downloadFile() {
     document.body.removeChild(link);
 }
 
-function changeCode() {
+function changeCode(block) {
   Blockly.mainWorkspace.clear();
-  Blockly.Xml.domToWorkspace(document.getElementById('fuckthis'),workspace);
+  Blockly.Xml.domToWorkspace(document.getElementById(block),workspace);
 }
 
 function reset() {
