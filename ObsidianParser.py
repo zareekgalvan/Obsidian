@@ -1,3 +1,4 @@
+#!/usr/local/bin/python
 import ply.yacc as yacc
 
 # Importar tokens del lexer

@@ -1,18 +1,11 @@
-// var workspace = Blockly.inject('blocklyDiv',
-//         {media: '../dependencies/blockly/media/',
-//          toolbox: document.getElementById('toolbox')});
-
-    // Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),
-    //                            workspace);
+// Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),
+//                            workspace);
 
 var blocklyArea = document.getElementById('blocklyArea');
-
 var blocklyDiv = document.getElementById('blocklyDiv');
-
 var workspace = Blockly.inject(blocklyDiv, {media: '../dependencies/blockly/media/', toolbox: document.getElementById('toolbox')});
 
 var onresize = function(e) {
-  console.log("RESISEZ");
   // Compute the absolute coordinates and dimensions of blocklyArea.
   var element = blocklyArea;
   var x = 0;
@@ -49,8 +42,18 @@ function printCode() {
   $("#obsidian-code").text(code).removeClass("prettyprinted");
 
   PR.prettyPrint();
+}
 
-  console.log(code);
+function runCode() {
+  var code = Blockly.JavaScript.workspaceToCode(workspace);
+
+  $.ajax({
+    url: "../ObsidianParser.py",
+    data: {code: code },
+    success: function(response){
+      console.log(response);
+    }
+  });
 }
 
 
