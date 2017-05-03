@@ -381,12 +381,13 @@ if __name__ == '__main__':
 				#print "Valid syntax"
 				virtualMachine = VirtualMachine()
 				virtualMachine.execute(quadruples.quadruples)
-				mem.printMemory()
+
+				#mem.printMemory()
 				#mem.memory['variable'].printStack()
 				#pprint.pprint(varTable)
 				#print mem.memory['']
 				#print pDim.peek()
-				print mem.getValFromMem(101500)
+				#print mem.getValFromMem(100003)
 
 		except EOFError:
 	   		print(EOFError)

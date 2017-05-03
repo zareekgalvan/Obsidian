@@ -1,41 +1,14 @@
-int arr[10];
+int arr[5];
 
-func void one()
+func void llena()
 {
 	int i = 0;
-	while (i < 10)
+	while(i < 5)
 	{
-		arr[i - 1] = i;
+		arr[i] = i + 1;
+		write(arr[i]);
 		i = i + 1;
 	}
-}
-
-func int fibo(int f)
-{
-	int x, y;
-	if (f <= 0)
-	{
-		return 0;
-	}
-	if (f == 1)
-	{
-		return 1;
-	}
-	x = fibo(f - 1);
-	y= fibo(f - 2);
-	return x + y;
-}
-
-func int fibo2(int f)
-{
-	//int fib[200];
-	int i = 0;
-	while(i < f && f < 200)
-	{
-		write(i);
-		i = i + 1;
-	}
-	return 1;
 }
 
 func int fact (int n)
@@ -51,14 +24,10 @@ func int fact (int n)
  main 
  {
  	int i = 100;
- 	int arr2[10];
- 	one();
  	arr[3] = 3;
- 	arr[7] = arr[3] + 3;
- 	write(arr2[7]);
- 	i = i * 2;
- 	i = fact(5);
- 	write(i);
- 	i = fibo(5);
+ 	write(arr[3]);
+ 	//i = i * 2;
+ 	llena();
+ 	i = fact(3);
  	write(i);
  }

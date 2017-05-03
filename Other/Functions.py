@@ -430,18 +430,30 @@ def gen_ver_quad(p):
 		print "%s is not an array" % p[-2]
 		sys.exit()
 	pilaOp.pop()
+	print info['address'], 'es la const'
 	quad = Quadruple(Quadruples.cont, getOperationCode('ver'), info['address'], dim['liminf'], dim['limsup'])
 	quadruples.addQuad(quad)
 
-	
+	print 11, pilaOp.peek(), getID(pilaOp.peek())
 	var = pilaOp.peek()
 	pilaOp.pop()
+	var2 = tryRegisterVar(var)
+	mem.addToMem(var2['address'], var)
 	typee = pTypes.peek()
 	pTypes.pop()
 	res = getType(typee, info['type'], '+')
 	if res != 'ERROR':
-		pTypes.push(info['type'])
-		pilaOp.push(info['address'])
+		nextTemp = mem.availTemp(res)
+		print nextTemp, "im avail in line %s" % p.lineno(0)
+		varTable[scope[len(scope)-1]][nextTemp] = {}
+		varTable[scope[len(scope)-1]][nextTemp]['address'] = nextTemp
+		varTable[scope[len(scope)-1]][nextTemp]['type'] = res
+		mem.addToMem(nextTemp)
+		nextTemp = '(' + str(nextTemp) + ')'
+		quad = Quadruple(Quadruples.cont, getOperationCode('+'), var2['address'], info['address'], nextTemp)
+		quadruples.addQuad(quad)
+		pTypes.push(res)
+		pilaOp.push(nextTemp)
 		pilaOptr.pop()
 		pDim.pop()
 	else:
@@ -576,11 +588,11 @@ def verIfArray(scope, varid):
 
 # Desplegar las variables por motivos de debugging
 def printAll():
-	print "===\t\tVar Table\t\t==="
+	'''print "===\t\tVar Table\t\t==="
 	pprint.pprint(varTable)
 	print "===\t\tDir Proc\t\t==="
 	pprint.pprint(dirProcedures)
-	'''print "===\t\tPila Operadores\t\t==="
+	print "===\t\tPila Operadores\t\t==="
 	print 'size', pilaOptr.size()
 	pilaOptr.printStack()
 	print "===\t\tPila Operandos\t\t==="
