@@ -375,6 +375,9 @@ def main(arg1):
 			# data = f.read()
 			# f.close()
 
+			# data = "int x = 1;\nmain{\n write(x);\n}"
+			# print data
+
 			data = arg1
 			
 			# Parsear el contenido
