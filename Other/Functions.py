@@ -43,6 +43,7 @@ def to_proc_dir(p):
 		dirProcedures[procname] = {}
 		dirProcedures[procname]['func_type'] = functype
 		dirProcedures[procname]['args'] = []
+		dirProcedures[procname]['quad_start'] = Quadruples.cont
 		#print procname, varTable['global'][procname]['address']
 		mem.addToMem(varTable['global'][procname]['address'])
 	else:
@@ -66,7 +67,6 @@ def to_args(varid, vartype, line, p):
 def actual_quad_no(scope):
 	dirProcedures[scope]['params_no'] = len(dirProcedures[scope]['args'])
 	dirProcedures[scope]['vars_no'] = len(varTable[scope]) - dirProcedures[scope]['params_no']
-	dirProcedures[scope]['quad_start'] = Quadruples.cont
 
 
 def is_valid_func(p):
@@ -126,6 +126,8 @@ def register_space(p):
 		varTable[scope[len(scope)-1]][address]['type'] = varTable[scope[len(scope)-1]][varid]['type']
 		varTable[scope[len(scope)-1]][address]['address'] = address
 		mem.addToMem(address)
+		mem.putValInMem(address, 0)
+		mem.putValInMem(address -1, 0)
 		i += 1
 
 # QUAD GENERATION FUNCTIONS
@@ -430,11 +432,11 @@ def gen_ver_quad(p):
 		print "%s is not an array" % p[-2]
 		sys.exit()
 	pilaOp.pop()
-	print info['address'], 'es la const'
+	#print info['address'], 'es la const'
 	quad = Quadruple(Quadruples.cont, getOperationCode('ver'), info['address'], dim['liminf'], dim['limsup'])
 	quadruples.addQuad(quad)
 
-	print 11, pilaOp.peek(), getID(pilaOp.peek())
+	#print 11, pilaOp.peek(), getID(pilaOp.peek())
 	var = pilaOp.peek()
 	pilaOp.pop()
 	var2 = tryRegisterVar(var)
@@ -444,7 +446,7 @@ def gen_ver_quad(p):
 	res = getType(typee, info['type'], '+')
 	if res != 'ERROR':
 		nextTemp = mem.availTemp(res)
-		print nextTemp, "im avail in line %s" % p.lineno(0)
+		#print nextTemp, "im avail in line %s" % p.lineno(0)
 		varTable[scope[len(scope)-1]][nextTemp] = {}
 		varTable[scope[len(scope)-1]][nextTemp]['address'] = nextTemp
 		varTable[scope[len(scope)-1]][nextTemp]['type'] = res
@@ -588,11 +590,11 @@ def verIfArray(scope, varid):
 
 # Desplegar las variables por motivos de debugging
 def printAll():
-	'''print "===\t\tVar Table\t\t==="
+	print "===\t\tVar Table\t\t==="
 	pprint.pprint(varTable)
 	print "===\t\tDir Proc\t\t==="
 	pprint.pprint(dirProcedures)
-	print "===\t\tPila Operadores\t\t==="
+	'''print "===\t\tPila Operadores\t\t==="
 	print 'size', pilaOptr.size()
 	pilaOptr.printStack()
 	print "===\t\tPila Operandos\t\t==="

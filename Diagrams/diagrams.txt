@@ -1,10 +1,10 @@
 PROGRAM  ::= VARS* FUNC* MAIN
 
-VARS ::= VAR_TYPE 'id' ('[' 'cte' ']')* (('=' VAR_CTE) | ) (',' 'id' ('[' 'cte' ']')* (('=' VAR_CTE) | ))* ';'
+VARS ::= VAR_TYPE 'id' ('[' 'cte' ']')? (('=' VAR_CTE) | ) (',' 'id' ('[' 'cte' ']')? (('=' VAR_CTE) | ))* ';'
 
 VAR_TYPE ::= ('bool' | ' int' | 'double')
 
-VAR_CTE ::= ('cte_int' | 'cte_double' | ' cte_bool' | 'id' ('[' 'cte' ']')* | FUNC_CALL)
+VAR_CTE ::= ('cte_int' | 'cte_double' | ' cte_bool' | 'id' ('[' 'cte' ']')? | FUNC_CALL)
 
 FUNC ::= 'func' FUNC_TYPE id '(' ( VAR_TYPE 'id' (',' VAR_TYPE 'id')*)? ')' FUNC_BLOCK
 
@@ -14,7 +14,7 @@ FUNC_BLOCK ::= '{' VARS* STATEMENT* '}'
 
 STATEMENT ::= ( READ | WRITE | CYCLE | CONDITION | ASSIGNATION | FUNC_CALL | RETURN)
 
-READ ::= 'read' '(' 'id' ('[' EXP ']')* ')' ';'
+READ ::= 'read' '(' 'id' ('[' EXP ']')? ')' ';'
 
 WRITE ::= 'write' '(' EXP ')' ';'
 

@@ -40,11 +40,13 @@ class VirtualMachine():
 			# Resta
 			elif quad.optr == 2:
 				
-				left = mem.getValFromMemBefore(quad.opLeft)
+				left = mem.getValFromMem(quad.opLeft)
+				if left == None:
+					left = mem.getValFromMemBefore(quad.opLeft)
 				right = mem.getValFromMem(quad.opRight)
 				if left == None:
 					print "2.Variables must contain a value before can be used l"
-					print left
+					print left, quad.number
 					mem.printMemory()
 					sys.exit()
 				if right == None:
@@ -131,6 +133,8 @@ class VirtualMachine():
 			elif quad.optr == 7:
 				
 				left = mem.getValFromMem(quad.opLeft)
+				if left == None:
+					left = mem.getValFromMemBefore(quad.opLeft)
 				right = mem.getValFromMem(quad.opRight)
 				if left == None:
 					print "7.Variables must contain a value before can be used l"
@@ -218,7 +222,7 @@ class VirtualMachine():
 				right = mem.getValFromMem(quad.opRight)
 				if left == None:
 					print "11.Variables must contain a value before can be used"
-					print left
+					print left, quad.number
 					mem.printMemory()
 					sys.exit()
 				if right == None:
@@ -392,7 +396,10 @@ class VirtualMachine():
 				
 				address = tryGetAddressFromParamNo(self.getScope(), quad.opRight)
 				toAssign = mem.getValFromMem(quad.opLeft)
+				if toAssign == None:
+					toAssign = mem.getValFromMemBefore(quad.opLeft)
 				mem.putValInMem(address, toAssign)
+				#print mem.getValFromMem(address)
 				#mem.printMemory()
 				self.nextQuad()
 			# Ver
@@ -401,7 +408,7 @@ class VirtualMachine():
 				if ver == None:
 					print "26.Variables must contain a value before can be used"
 					sys.exit()
-				if ver >= quad.opRight and ver < quad.result:
+				if ver >= quad.opRight and ver <= quad.result:
 					self.nextQuad()
 				else:
 					print "Array out of bounds with value %s" % ver

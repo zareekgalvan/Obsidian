@@ -1,33 +1,91 @@
-int arr[5];
+int arr[10];
 
-func void llena()
+func int fiboR(int f)
 {
-	int i = 0;
-	while(i < 5)
+	int x, y;
+	if (f <= 0)
 	{
-		arr[i] = i + 1;
-		write(arr[i]);
-		i = i + 1;
+		return 0;
 	}
+	if (f == 1)
+	{
+		return 1;
+	}
+	x = fiboR(f - 1);
+	y = fiboR(f - 2);
+	return x + y;
 }
 
-func int fact (int n)
+func int factR(int n)
  {
- 	int x;
  	if (n == 0)
  	{
  		return 1;
  	}
- 	return n * fact(n - 1);
+ 	return n * factR(n - 1);
  }
 
- main 
- {
- 	int i = 100;
- 	arr[3] = 3;
- 	write(arr[3]);
- 	//i = i * 2;
- 	llena();
- 	i = fact(3);
- 	write(i);
- }
+func int fibI(int n)
+{
+ 	int actual, ant1, ant2;
+ 	int i = 1;
+ 	ant1 = 0;
+ 	ant2 = 1;
+
+ 	if (n == 0 || n == 1)
+ 	{
+ 		actual = 1;
+ 	}
+ 	else
+ 	{
+ 		
+ 		while (i <= n) 
+ 		{
+ 			actual = ant1 + ant2;
+ 			ant2 = ant1;
+ 			ant1 = actual;
+ 			i = i + 1;
+ 		}
+ 	}
+ 	return actual;
+}
+
+func int factI(int n)
+{
+	int i = 2;
+	int res = 1;
+	if(n == 0 || n == 1)
+	{
+		return 1;
+	}
+	else
+	{
+		while (i <= n)
+		{
+			res = res * i;
+			i = i + 1;
+		}
+	}
+	return res;
+}
+
+func void rellena (int i)
+{
+	int ix = 0;
+	while(ix < 10)
+	{
+		arr[ix] = ix + 1;
+		write(ix + 1);
+		ix = ix + 1;
+	}
+}
+
+main 
+{
+ 	int num = 10;
+ 	rellena(num);
+ 	write(fiboR(num));
+ 	write(fibI(num));
+ 	write(factR(num));
+ 	write(factI(num));
+}
