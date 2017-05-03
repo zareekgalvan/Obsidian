@@ -1,0 +1,35 @@
+func bool x(int xx, double xxx, bool xs, int xxs)
+{
+	read(x);
+}
+
+func bool xz(int xy, double bx, bool hx, int jx)
+{
+	while(x + y)
+	{
+		while(5)
+		{
+			if(false)
+			{
+				x = 5.6;
+				y();
+			}
+		}
+	}
+}
+
+func bool x3(int x33, double d3x, bool f3x, int xf3)
+{
+	if(5%5)
+	{
+		write(x3);
+		y(8,y());
+	}
+	else {
+		x = 4 * 6;
+	}
+}
+
+main {
+	
+}

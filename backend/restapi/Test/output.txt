@@ -1,0 +1,271 @@
+----------------------------------------------
+1. Variables Test:
+k is int in line 2
+x is int in line 2
+v is int in line 3
+9 is int in line 3
+xx is int in line 3
+9.0 is double in line 3
+xs is int in line 4
+9.0 is double in line 4
+xdd is int in line 5
+true is bool in line 5
+Type mismatch in line 5
+----------------------------------------------
+2. Functions Test:
+Invalid syntax, function t has no return
+----------------------------------------------
+3. Statements Test:
+x is function of type bool in line 3
+Invalid syntax, function x has no return
+----------------------------------------------
+4. Expressions Test:
+x is function of type bool in line 3
+y in line 3 is not declared
+----------------------------------------------
+5. Main Test:
+k is int in line 2
+x is int in line 2
+v is int in line 3
+9 is int in line 3
+xx is int in line 3
+9.0 is double in line 3
+xs is int in line 4
+9.0 is double in line 4
+xdd is int in line 5
+true is bool in line 5
+Type mismatch in line 5
+----------------------------------------------
+6. Complete Test:
+k is int in line 2
+x is int in line 2
+v is int in line 3
+9 is int in line 3
+xx is int in line 3
+9.0 is double in line 3
+xs is int in line 4
+9.0 is double in line 4
+xdd is int in line 5
+1 is int in line 5
+xf is int in line 6
+x is int in line 6
+xa is int in line 8
+x is int in line 8
+xw is int in line 9
+x is int in line 9
+xe is int in line 10
+x is int in line 10
+xr is int in line 11
+x is int in line 11
+xu is double in line 14
+9 is int in line 14
+xy is double in line 15
+9.0 is double in line 15
+xi is double in line 16
+1 is int in line 16
+xo is double in line 17
+x is int in line 17
+xp is double in line 18
+x is int in line 18
+xii is double in line 19
+x is int in line 19
+xuu is double in line 20
+x is int in line 20
+x9 is int in line 27
+5 is int in line 27
+y12 is int in line 28
+x is int in line 28
+x8 is int in line 29
+i is int in line 35
+1 is int in line 35
+x is int in line 36
+x17 is double in line 37
+xg is int in line 42
+5 is int in line 42
+h is int in line 43
+x is int in line 43
+i is int in line 44
+tt is int in line 50
+1 is int in line 50
+x is int in line 51
+i is double in line 52
+xxsxx is bool in line 59
+false is bool in line 59
+xsc is bool in line 60
+true is bool in line 60
+xcsc is bool in line 61
+true is bool in line 61
+xvsv is bool in line 62
+xzs is bool in line 62
+x is int in line 64
+y is int in line 64
+5 is int in line 66
+3 is int in line 66
+5 is int in line 68
+4 is int in line 68
+x is int in line 70
+5 is int in line 70
+s in line 71 is not a valid function
+5 is int in line 72
+5 is int in line 72
+x is int in line 74
+x is int in line 77
+4 is int in line 77
+6 is int in line 77
+x is int in line 78
+5 is int in line 78
+5 is int in line 78
+5 is int in line 78
+5 is int in line 78
+x is int in line 79
+===		Var Table		===
+{'c': {'i': 'double', 'tt': 'int', 'xj': 'int', 'yf': 'double'},
+ 'f2': {'e': 'int',
+        'fn': 'int',
+        'gg': 'int',
+        'h': 'int',
+        'i': 'int',
+        'xg': 'int',
+        'yg': 'int'},
+ 'global': {'c': 'double',
+            'f': 'int',
+            'f2': 'int',
+            'k': 'int',
+            'v': 'int',
+            'x': 'int',
+            'x14': 'double',
+            'x7': 'int',
+            'xa': 'int',
+            'xd': 'int',
+            'xdd': 'int',
+            'xe': 'int',
+            'xf': 'int',
+            'xi': 'double',
+            'xii': 'double',
+            'xo': 'double',
+            'xp': 'double',
+            'xr': 'int',
+            'xs': 'int',
+            'xt': 'double',
+            'xu': 'double',
+            'xuu': 'double',
+            'xw': 'int',
+            'xx': 'int',
+            'xy': 'double',
+            'xz': 'bool',
+            'y': 'int',
+            'z': 'int'},
+ 'main': {'xcsc': 'bool',
+          'xsc': 'bool',
+          'xvsv': 'bool',
+          'xxsxx': 'bool',
+          'xzs': 'bool'},
+ 'x14': {'i': 'int', 'x15': 'int', 'x16': 'double', 'x17': 'double'},
+ 'x7': {'x10': 'int',
+        'x12': 'int',
+        'x8': 'int',
+        'x9': 'int',
+        'y11': 'int',
+        'y12': 'int',
+        'y13': 'int'}}
+===		Dir Proc		===
+{'c': {'args': ['int', 'double'],
+       'func_type': 'double',
+       'params_no': 2,
+       'quad_start': 31,
+       'vars_no': 2},
+ 'f2': {'args': ['int'],
+        'func_type': 'int',
+        'params_no': 1,
+        'quad_start': 28,
+        'vars_no': 6},
+ 'x14': {'args': ['int', 'double'],
+         'func_type': 'double',
+         'params_no': 2,
+         'quad_start': 23,
+         'vars_no': 2},
+ 'x7': {'args': ['int'],
+        'func_type': 'int',
+        'params_no': 1,
+        'quad_start': 20,
+        'vars_no': 6}}
+===		Pila Operadores		===
+size 0
+-------------------
+
+-------------------
+===		Pila Operandos		===
+size 0
+-------------------
+
+-------------------
+===		Pila Tipos		===
+size 0
+-------------------
+
+-------------------
+===		Pila Saltos		===
+size 0
+-------------------
+
+-------------------
+===		Cuadruplos		===
+size 57
+1 	[	= 	x 	 	k 	]
+2 	[	= 	9 	 	v 	]
+3 	[	= 	9.0 	 	xx 	]
+4 	[	= 	9.0 	 	xs 	]
+5 	[	= 	1 	 	xdd 	]
+6 	[	= 	x 	 	xf 	]
+7 	[	= 	x 	 	xa 	]
+8 	[	= 	x 	 	xw 	]
+9 	[	= 	x 	 	xe 	]
+10 	[	= 	x 	 	xr 	]
+11 	[	= 	9 	 	xu 	]
+12 	[	= 	9.0 	 	xy 	]
+13 	[	= 	1 	 	xi 	]
+14 	[	= 	x 	 	xo 	]
+15 	[	= 	x 	 	xp 	]
+16 	[	= 	x 	 	xii 	]
+17 	[	= 	x 	 	xuu 	]
+18 	[	= 	5 	 	x9 	]
+19 	[	= 	x 	 	y12 	]
+20 	[	return 	 	 	x8 	]
+21 	[	EndP 	 	 	 	]
+22 	[	= 	1 	 	i 	]
+23 	[	read 	 	 	x 	]
+24 	[	return 	 	 	x17 	]
+25 	[	EndP 	 	 	 	]
+26 	[	= 	5 	 	xg 	]
+27 	[	= 	x 	 	h 	]
+28 	[	return 	 	 	i 	]
+29 	[	EndP 	 	 	 	]
+30 	[	= 	1 	 	tt 	]
+31 	[	read 	 	 	x 	]
+32 	[	return 	 	 	i 	]
+33 	[	EndP 	 	 	 	]
+34 	[	= 	false 	 	xxsxx 	]
+35 	[	= 	true 	 	xsc 	]
+36 	[	= 	true 	 	xcsc 	]
+37 	[	= 	xzs 	 	xvsv 	]
+38 	[	< 	x 	y 	t1 	]
+39 	[	GotoF 	t1 	 	57 	]
+40 	[	> 	5 	3 	t2 	]
+41 	[	GotoF 	t2 	 	56 	]
+42 	[	< 	5 	4 	t3 	]
+43 	[	GotoF 	t3 	 	55 	]
+44 	[	= 	5 	 	x 	]
+45 	[	== 	5 	5 	t4 	]
+46 	[	GotoF 	t4 	 	48 	]
+47 	[	write 	 	 	55 	]
+48 	[	* 	4 	6 	t5 	]
+49 	[	= 	t5 	 	x 	]
+50 	[	* 	5 	5 	t6 	]
+51 	[	* 	t6 	5 	t7 	]
+52 	[	* 	t7 	5 	t8 	]
+53 	[	= 	t8 	 	x 	]
+54 	[	read 	 	 	x 	]
+55 	[	Goto 	 	 	40 	]
+56 	[	Goto 	 	 	38 	]
+57 	[	END 	 	 	 	]
+Valid syntax

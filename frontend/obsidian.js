@@ -48,8 +48,12 @@ function runCode() {
   var code = Blockly.JavaScript.workspaceToCode(workspace);
 
   $.ajax({
-    url: "../ObsidianParser.py",
+    url: "http://localhost:8000/archivos",
+    type: "POST",
     data: {code: code },
+    headers: {
+      'Access-Control-Allow-Origin': '*'
+    },
     success: function(response){
       console.log(response);
     }

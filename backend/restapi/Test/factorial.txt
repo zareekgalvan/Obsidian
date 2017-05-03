@@ -1,0 +1,91 @@
+int arr[10];
+
+func int fiboR(int f)
+{
+	int x, y;
+	if (f <= 0)
+	{
+		return 0;
+	}
+	if (f == 1)
+	{
+		return 1;
+	}
+	x = fiboR(f - 1);
+	y = fiboR(f - 2);
+	return x + y;
+}
+
+func int factR(int n)
+ {
+ 	if (n == 0)
+ 	{
+ 		return 1;
+ 	}
+ 	return n * factR(n - 1);
+ }
+
+func int fibI(int n)
+{
+ 	int actual, ant1, ant2;
+ 	int i = 1;
+ 	ant1 = 0;
+ 	ant2 = 1;
+
+ 	if (n == 0 || n == 1)
+ 	{
+ 		actual = 1;
+ 	}
+ 	else
+ 	{
+ 		
+ 		while (i <= n) 
+ 		{
+ 			actual = ant1 + ant2;
+ 			ant2 = ant1;
+ 			ant1 = actual;
+ 			i = i + 1;
+ 		}
+ 	}
+ 	return actual;
+}
+
+func int factI(int n)
+{
+	int i = 2;
+	int res = 1;
+	if(n == 0 || n == 1)
+	{
+		return 1;
+	}
+	else
+	{
+		while (i <= n)
+		{
+			res = res * i;
+			i = i + 1;
+		}
+	}
+	return res;
+}
+
+func void rellena (int i)
+{
+	int ix = 0;
+	while(ix < 10)
+	{
+		arr[ix] = ix + 1;
+		write(ix + 1);
+		ix = ix + 1;
+	}
+}
+
+main 
+{
+ 	int num = 10;
+ 	rellena(num);
+ 	write(fiboR(num));
+ 	write(fibI(num));
+ 	write(factR(num));
+ 	write(factI(num));
+}

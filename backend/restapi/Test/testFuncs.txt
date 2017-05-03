@@ -1,0 +1,49 @@
+int x;
+
+func void t()
+{
+	
+}
+
+func bool y()
+{
+	
+}
+
+func int z()
+{
+	
+}
+
+func double g()
+{
+	
+}
+
+func int f(int i)
+{
+	int xg = 5;
+	int fn, yg, gg, h=x, e;
+}
+
+func double c(int xj, double yf)
+{
+	int zp;
+	int tt = true;
+	read(x);
+	return i;
+}
+
+func void w(int dd, double dx, bool xs)
+{
+	return hi;
+}
+
+func bool s(int xt, double ax, bool hx, int vx)
+{
+	
+}
+
+main {
+	
+}

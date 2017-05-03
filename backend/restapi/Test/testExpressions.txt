@@ -1,0 +1,31 @@
+func bool x(int x2, double x3, bool x4, int x5)
+{
+	while(x + y)
+	{
+		while(5)
+		{
+			if(false)
+			{
+				x = 5;
+				y();
+			}
+		}
+	}
+}
+
+func bool x6(int x7, double x8, bool x9, int x10)
+{
+	if(5%5)
+	{
+		write(x);
+		y(8,y(x,x,x));
+	}
+	else {
+		x = 4 * 6;
+		x = (5+6+6)/8 - 6 > 6*e*(r/t/k)-r(i) && true;
+	}
+}
+
+main {
+	int x11;
+}

@@ -7,6 +7,7 @@ from .serializers import ArchivoSerializer
 from rest_framework.decorators import api_view
 from Tokenizer import Tokenizer
 from django.http import JsonResponse
+import ObsidianParser
 
 
 # Create your views here.
@@ -23,19 +24,26 @@ x = Tokenizer()
 def rutas(request):
     if request.method == 'POST':
         d = dict(request.data)
-        criteria = []
-        #print d['variables_criteria'][0]
-        criteria.append(d['declaracion_criteria'][0])
-        criteria.append(d['comentariosAntes_criteria'][0])
-        criteria.append(d['constantes_criteria'][0])
-        criteria.append(d['funciones_criteria'][0])
-        criteria.append(d['variables_criteria'][0])
-        criteria.append(d['nombre_criteria'][0])
-        resultados = []
-        for fileitem in d['archivos[]']:
-            resultados.append(x.evaluar(fileitem, criteria))
+        print "COMMING IN HOT WITH THE D"
+        # print d['code'][0]
 
-        return JsonResponse({"archivos": resultados})
+        ObsidianParser.main(d['code'][0])
+
+        # criteria = []
+        # #print d['variables_criteria'][0]
+        # criteria.append(d['declaracion_criteria'][0])
+        # criteria.append(d['comentariosAntes_criteria'][0])
+        # criteria.append(d['constantes_criteria'][0])
+        # criteria.append(d['funciones_criteria'][0])
+        # criteria.append(d['variables_criteria'][0])
+        # criteria.append(d['nombre_criteria'][0])
+        # resultados = []
+        # for fileitem in d['archivos[]']:
+        #     resultados.append(x.evaluar(fileitem, criteria))
+
+        # return JsonResponse({"archivos": resultados})
+
+        return JsonResponse({"archivos": "SOMETHING"})
 
     elif request.method == 'GET':
         return Response({"message": "Hello, world!"})
