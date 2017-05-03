@@ -1,28 +1,731 @@
-* a34038c : Put blockly in dependencies folder, Add blockly demo to frontend folder
-* 9c89976 : Add blockly
-* 949f8da : Add DS_Store to gitignore
-* 34388e7 : Add validation for returns required in functions
-* 0b3bba6 : Define semantic rules for function definition Add generate quad for return Add generate quad for endproc Add params_no, vars_no and quad_start in dirProc
-* 34cb15c : Fourth Delivery: Correct Semantic Cube Add generate assignation quadruple Add generate declaration assign quadruple Modify Quadruple Class to have a quad number Add fillQuad in Quadruples Class Checks arr integrity type Add gen condition quads Add cycle quads Add gen func call quad function (implementation pending)
-* 7628510 : Generate Read and Write Quads Clean Parser file Generate new funtions in Functions file (result of cleaning Parser file)
-* 0b1c84d : Add Quadruples class Generate quad of statements declared, not implemented Missing while, condition and function quad declaration Add functions file Restructure add quad methods Restructure files again Add debug mode'
-* 5e0a054 : 3rd delivery: Generate quadruples for exps Vars and constants types implementation Reorganization of files Declarations file created Corrected test 6 Edit diagrams
-* 75eb1b6 : 3rd delivery: Vars and Constants type verification implementation Add Declartion file Reorganization of files Edited RR Diagrams Test 6 correction
-* 3919fab : Add Structs Add more operation codes Add class quadruple and stacks items Verify test 1-5 (test 6 pending) Add operators to pilaOptr
-* 7548152 : Procedure name now in varTable[global] Add Semantic Cube Add Operation Codes Add validation for var types and constants Modify variable and function names error message
-* cab1392 : Comments now allowed in code Parser now tells when a variable is already declared
-* 062a859 : Add commit history Modify readme.md
-* 611dd9e : Add Var Table rules Add Procedure Directory rules Add Arguments to Var Table rules
-* 90e6d45 : Finish First Sprint Add missing test for main and expressions
-* 7423861 : Correct statement rules Add more tests Add main rules Missing testing full statement combinations and main rules
-* 95c2cd6 : mend
-* ccf206e : Changed diagrams code Added func and statement parser rules Added func and statement tests
-* 6961bc9 : mend
-* 2102562 : mend
-* b5e75a4 : mend
-* f83f0dc : Add test script and modify README.md
-* a0fc01c : Minor changes to lex and parser, test changed
-* d1b611e : Add regular expresions to use in the generation of diagrams in http://www.bottlecaps.de/rr/ui
-* d7fe314 : Add parser with rules for vars, missing func and main
-* 43a4e15 : Add lex file with tokens
-* 5cceb94 : Initial commit
+* commit cf372a27bfc6580338e14ba0b8463ab0cac040a5
+| Author:     Mario Diaz <mariodiar@gmail.com>
+| AuthorDate: Wed May 3 05:34:35 2017 -0500
+| Commit:     Mario Diaz <mariodiar@gmail.com>
+| CommitDate: Wed May 3 05:34:35 2017 -0500
+| 
+|     Add fibonacci tests to blockly
+|  
+* commit d4d47884cb2533d292c9a46891ce541dce9259c1
+| Author:     Mario Diaz <mariodiar@gmail.com>
+| AuthorDate: Wed May 3 04:59:09 2017 -0500
+| Commit:     Mario Diaz <mariodiar@gmail.com>
+| CommitDate: Wed May 3 04:59:09 2017 -0500
+| 
+|     Add func calls
+|  
+* commit ef3480047649614edb95be00234e36b3aa5a317e
+| Author:     Mario Diaz <mariodiar@gmail.com>
+| AuthorDate: Wed May 3 04:25:37 2017 -0500
+| Commit:     Mario Diaz <mariodiar@gmail.com>
+| CommitDate: Wed May 3 04:25:37 2017 -0500
+| 
+|     Download file option
+|  
+* commit 9311bd19f633c41f817b0df7e8726776aefe7b12
+| Author:     Mario Diaz <mariodiar@gmail.com>
+| AuthorDate: Wed May 3 03:54:07 2017 -0500
+| Commit:     Mario Diaz <mariodiar@gmail.com>
+| CommitDate: Wed May 3 03:54:07 2017 -0500
+| 
+|     Add compiler to backend and make calls from frontend
+|  
+* commit 850593b078c72ad3f2213eaac310b2a4248220bf
+| Author:     Mario Diaz <mariodiar@gmail.com>
+| AuthorDate: Wed May 3 02:45:06 2017 -0500
+| Commit:     Mario Diaz <mariodiar@gmail.com>
+| CommitDate: Wed May 3 02:45:06 2017 -0500
+| 
+|     Add backend folder with django restapi
+|  
+* commit 3b7cb7c77478d721dbe22ab73150d092e6d3803d
+| Author:     Mario Diaz <mariodiar@gmail.com>
+| AuthorDate: Wed May 3 02:11:04 2017 -0500
+| Commit:     Mario Diaz <mariodiar@gmail.com>
+| CommitDate: Wed May 3 02:11:04 2017 -0500
+| 
+|     Almost final version of documentation, missing final tests and commit logs
+|  
+* commit 100f8c0db15bad0a78dc22842d3e85688548fdc0
+| Author:     Mario Diaz <mariodiar@gmail.com>
+| AuthorDate: Wed May 3 01:16:11 2017 -0500
+| Commit:     Mario Diaz <mariodiar@gmail.com>
+| CommitDate: Wed May 3 01:16:11 2017 -0500
+| 
+|     Add runCode button
+|    
+*   commit 525790adc7865b71b10d44bd35d1d921419df350
+|\  Merge: 7646362 69e2229
+| | Author:     Armando Galván <armandocgv@gmail.com>
+| | AuthorDate: Tue May 2 23:12:20 2017 -0500
+| | Commit:     Armando Galván <armandocgv@gmail.com>
+| | CommitDate: Tue May 2 23:12:20 2017 -0500
+| | 
+| |     Merge branch 'master' of https://github.com/zareekgalvan/Obsidian
+| |   
+| * commit 69e2229a55e1872cbf1cdf0f4a3a0ac06ab33f1e
+| | Author:     Mario Diaz <mariodiar@gmail.com>
+| | AuthorDate: Tue May 2 19:51:13 2017 -0500
+| | Commit:     Mario Diaz <mariodiar@gmail.com>
+| | CommitDate: Tue May 2 19:51:13 2017 -0500
+| | 
+| |     Add code preview
+| |   
+* | commit 76463621f46492927af32eda13089a91264fd543
+|/  Author:     Armando Galván <armandocgv@gmail.com>
+|   AuthorDate: Tue May 2 23:12:14 2017 -0500
+|   Commit:     Armando Galván <armandocgv@gmail.com>
+|   CommitDate: Tue May 2 23:12:14 2017 -0500
+|   
+|       BASE STATE: working everything up to arrays(half)
+|    
+*   commit 46453b38ddd7093485394282a3cde3538686631a
+|\  Merge: 7b6500b 40610fc
+| | Author:     Mario Diaz <mariodiar@gmail.com>
+| | AuthorDate: Tue May 2 19:15:01 2017 -0500
+| | Commit:     Mario Diaz <mariodiar@gmail.com>
+| | CommitDate: Tue May 2 19:15:01 2017 -0500
+| | 
+| |     Merge branch 'master' of https://github.com/zareekgalvan/Obsidian
+| |   
+| * commit 40610fc401ddcf92e583c24350fd048e100a5c4c
+| | Author:     Armando Galván <armandocgv@gmail.com>
+| | AuthorDate: Tue May 2 16:41:05 2017 -0500
+| | Commit:     Armando Galván <armandocgv@gmail.com>
+| | CommitDate: Tue May 2 16:41:05 2017 -0500
+| | 
+| |     arrays now working with flaws
+| |   
+* | commit 7b6500b1f356da9c047605383c55e0a5ac26f519
+|/  Author:     Mario Diaz <mariodiar@gmail.com>
+|   AuthorDate: Tue May 2 19:14:57 2017 -0500
+|   Commit:     Mario Diaz <mariodiar@gmail.com>
+|   CommitDate: Tue May 2 19:14:57 2017 -0500
+|   
+|       Add preview and compiler layout to frontend
+|  
+* commit 769636b9c9eb426064e85e0001fe7cba2379b655
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Mon May 1 19:48:52 2017 -0500
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Mon May 1 19:48:52 2017 -0500
+| 
+|     arrays kind of working, needs revsion
+|  
+* commit 861c13de9d57e3b3c945e963eb3e5b1092552d67
+| Author:     Mario Diaz <mariodiar@gmail.com>
+| AuthorDate: Sun Apr 30 19:53:48 2017 -0500
+| Commit:     Mario Diaz <mariodiar@gmail.com>
+| CommitDate: Sun Apr 30 19:53:48 2017 -0500
+| 
+|     Remove flaot usage
+|  
+* commit 59b1878256075ad244969c048c3740445d7fe888
+| Author:     Mario Diaz <mariodiar@gmail.com>
+| AuthorDate: Sun Apr 30 19:37:05 2017 -0500
+| Commit:     Mario Diaz <mariodiar@gmail.com>
+| CommitDate: Sun Apr 30 19:37:05 2017 -0500
+| 
+|     Add second version of documentation
+|  
+* commit 6a574d5a45a80bf89b418b7d5075562c9a7a51a5
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Sat Apr 29 16:54:50 2017 -0500
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Sat Apr 29 16:54:50 2017 -0500
+| 
+|     Array delcaration also stores directions in var table
+|  
+* commit 3995d5598ad61a72d67fe0f5321c32ced152f023
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Sat Apr 29 16:50:29 2017 -0500
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Sat Apr 29 16:50:29 2017 -0500
+| 
+|     Array declaration now stores the directions in memory
+|  
+* commit 0bec6c24cf5006e79c1c9c2f451606b7a74422d3
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Sat Apr 29 13:50:36 2017 -0500
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Sat Apr 29 13:50:36 2017 -0500
+| 
+|     Parser register the liminf and limsup of arrays
+|  
+* commit 05204490ba3c02f153b2cb14f21235bf5b93dfdd
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Sat Apr 29 10:59:24 2017 -0500
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Sat Apr 29 10:59:24 2017 -0500
+| 
+|     Solve an issue with aray ids
+|  
+* commit d56a0afb5f0d86ba6715c518895838640d104f65
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Thu Apr 27 11:22:27 2017 -0500
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Thu Apr 27 11:22:27 2017 -0500
+| 
+|     Recursion now allows more than one function call
+|  
+* commit 9c2b1edeb2f6c3fcd093886e5f6ce5606b8af8d3
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Wed Apr 26 18:57:20 2017 -0500
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Wed Apr 26 18:57:20 2017 -0500
+| 
+|     VM does not support multiple recursion calls, dont know why
+|  
+* commit b0a26cb61803c98bff5554e95adab7779f7c25af
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Wed Apr 26 18:30:50 2017 -0500
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Wed Apr 26 18:30:50 2017 -0500
+| 
+|     VM semi functional, now supports recursion but needs more testing
+|  
+* commit d213a2b0d1c4d41e7fb0d7662f812214ce9f67b9
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Tue Apr 25 17:51:33 2017 -0500
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Tue Apr 25 17:51:33 2017 -0500
+| 
+|     VM can now successfully read from keyboard
+|  
+* commit 9ee36f2b835e84f1fb5340e3bd61749f2286edf5
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Tue Apr 25 16:41:22 2017 -0500
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Tue Apr 25 16:41:22 2017 -0500
+| 
+|     VM now supports cycles and conditions
+|  
+* commit a10f0b22a9ab1a037309788b14f66e7067c5949a
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Tue Apr 25 15:53:43 2017 -0500
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Tue Apr 25 15:53:43 2017 -0500
+| 
+|     VM now supports basic operations
+|  
+* commit b0ca181343a9d1b9ebbc1664342b30abd813b0ef
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Tue Apr 25 15:27:44 2017 -0500
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Tue Apr 25 15:27:44 2017 -0500
+| 
+|     Virtual machine can now make sums
+|  
+* commit 3cb47cb5b2f9f339b6681eb4d6508804873e3443
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Tue Apr 25 11:19:14 2017 -0500
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Tue Apr 25 11:19:14 2017 -0500
+| 
+|     Virtual machine sequence of reading now semi functional, not supporting cycles
+|  
+* commit 22c28114696e156308a803445accd37f35391510
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Tue Apr 25 07:56:34 2017 -0500
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Tue Apr 25 07:56:34 2017 -0500
+| 
+|     Fix returns in main
+|  
+* commit 9264535f5acad570a327e18019b443836a17a649
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Mon Apr 24 22:15:12 2017 -0500
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Mon Apr 24 22:15:12 2017 -0500
+| 
+|     Operation codes now in quadruples
+|     Reinvented memory skequleton
+|    
+*   commit 3a6f04f95883eb9dad339ed196237fbc3f26a962
+|\  Merge: f0943fd 68e3679
+| | Author:     Mario Diaz <mariodiar@gmail.com>
+| | AuthorDate: Mon Apr 24 21:54:25 2017 -0500
+| | Commit:     Mario Diaz <mariodiar@gmail.com>
+| | CommitDate: Mon Apr 24 21:54:25 2017 -0500
+| | 
+| |     Merge branch 'master' of https://github.com/zareekgalvan/Obsidian
+| |   
+| * commit 68e3679389028c72cb564e66077716ec247b75e3
+| | Author:     Armando Galván <armandocgv@gmail.com>
+| | AuthorDate: Mon Apr 24 19:24:15 2017 -0500
+| | Commit:     Armando Galván <armandocgv@gmail.com>
+| | CommitDate: Mon Apr 24 19:24:15 2017 -0500
+| | 
+| |     Fix in goto quad after return statement quad
+| |   
+| * commit 1d2d48c81c8a878b0abfa58a34582f3ff7287180
+| | Author:     Armando Galván <armandocgv@gmail.com>
+| | AuthorDate: Mon Apr 24 13:41:02 2017 -0500
+| | Commit:     Armando Galván <armandocgv@gmail.com>
+| | CommitDate: Mon Apr 24 13:41:02 2017 -0500
+| | 
+| |     Memory stack of variables and temporals
+| |   
+* | commit f0943fd2dda05a8c4dadd9fa7e91195bdc4518dd
+|/  Author:     Mario Diaz <mariodiar@gmail.com>
+|   AuthorDate: Mon Apr 24 21:54:20 2017 -0500
+|   Commit:     Mario Diaz <mariodiar@gmail.com>
+|   CommitDate: Mon Apr 24 21:54:20 2017 -0500
+|   
+|       Add first version of the documentation
+|  
+* commit 16a588ac602428252c28e08e02c5eba34c4cca40
+| Author:     Mario Diaz <mariodiar@gmail.com>
+| AuthorDate: Sun Apr 23 21:50:07 2017 -0500
+| Commit:     Mario Diaz <mariodiar@gmail.com>
+| CommitDate: Sun Apr 23 21:50:07 2017 -0500
+| 
+|     Clean user interface
+|  
+* commit c9060f336e49daba5c582865d41c66e3718b4480
+| Author:     Mario Diaz <mariodiar@gmail.com>
+| AuthorDate: Sun Apr 23 20:41:10 2017 -0500
+| Commit:     Mario Diaz <mariodiar@gmail.com>
+| CommitDate: Sun Apr 23 20:41:10 2017 -0500
+| 
+|     Add while
+|  
+* commit 3cd7518bf2f8f80e9578338b168da4ed234abfd7
+| Author:     Mario Diaz <mariodiar@gmail.com>
+| AuthorDate: Sun Apr 23 17:48:39 2017 -0500
+| Commit:     Mario Diaz <mariodiar@gmail.com>
+| CommitDate: Sun Apr 23 17:48:39 2017 -0500
+| 
+|     Add arrays blocks
+|    
+*   commit 33e68640c69ba44bec13107f26ceb044be0a2711
+|\  Merge: b954e46 193ee84
+| | Author:     Mario Diaz <mariodiar@gmail.com>
+| | AuthorDate: Sun Apr 23 16:05:53 2017 -0500
+| | Commit:     Mario Diaz <mariodiar@gmail.com>
+| | CommitDate: Sun Apr 23 16:05:53 2017 -0500
+| | 
+| |     Merge branch 'master' of https://github.com/zareekgalvan/Obsidian
+| |   
+| * commit 193ee84a7f97620013c4d8b4db51b037b7ef5b22
+| | Author:     Armando Galván <armandocgv@gmail.com>
+| | AuthorDate: Sun Apr 23 10:59:31 2017 -0500
+| | Commit:     Armando Galván <armandocgv@gmail.com>
+| | CommitDate: Sun Apr 23 10:59:31 2017 -0500
+| | 
+| |     Modify memory structure to include spaces of variables and value
+| |   
+* | commit b954e4657a4fb00f6f35fa0b313d3b6470187a39
+|/  Author:     Mario Diaz <mariodiar@gmail.com>
+|   AuthorDate: Sun Apr 23 16:05:47 2017 -0500
+|   Commit:     Mario Diaz <mariodiar@gmail.com>
+|   CommitDate: Sun Apr 23 16:05:47 2017 -0500
+|   
+|       Add I/O funcs'
+|       '
+|  
+* commit 5ac5565a9ede9736370f420b90cd279828474ec1
+| Author:     Mario Diaz <mariodiar@gmail.com>
+| AuthorDate: Fri Apr 21 18:09:34 2017 -0500
+| Commit:     Mario Diaz <mariodiar@gmail.com>
+| CommitDate: Fri Apr 21 18:09:34 2017 -0500
+| 
+|     Add variables declaration
+|  
+* commit aa2b329c5ac83f6f36c3721476ad04d7628c836d
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Fri Apr 21 07:37:30 2017 -0500
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Fri Apr 21 07:37:30 2017 -0500
+| 
+|     Change in statements, return is now a statement
+|     Minor changes in functios to generate quads
+|     Return now generates a Goto to Endproc
+|  
+* commit 3842c8366c2249a2ef22c2c8363d723fe9d22a5e
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Wed Apr 19 22:55:43 2017 -0500
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Wed Apr 19 22:55:43 2017 -0500
+| 
+|     Memory implemented correctly (I think) after a week of finding little errors
+|  
+* commit c7d9ed5a7530c3b6160072e49eefd9d02a12af28
+| Author:     Mario Diaz <mariodiar@gmail.com>
+| AuthorDate: Sun Apr 16 19:28:11 2017 -0500
+| Commit:     Mario Diaz <mariodiar@gmail.com>
+| CommitDate: Sun Apr 16 19:28:11 2017 -0500
+| 
+|     Add return block
+|  
+* commit 59f24eabed83869aeb73c0b83add0474206b6c55
+| Author:     Mario Diaz <mariodiar@gmail.com>
+| AuthorDate: Sun Apr 16 19:23:42 2017 -0500
+| Commit:     Mario Diaz <mariodiar@gmail.com>
+| CommitDate: Sun Apr 16 19:23:42 2017 -0500
+| 
+|     Allow multiple params in function, with only one block
+|  
+* commit 7082620af5339434b00e8a901cc36e8cdc3f250a
+| Author:     Mario Diaz <mariodiar@gmail.com>
+| AuthorDate: Sun Apr 16 18:38:34 2017 -0500
+| Commit:     Mario Diaz <mariodiar@gmail.com>
+| CommitDate: Sun Apr 16 18:38:34 2017 -0500
+| 
+|     Add params to blockly
+|  
+* commit 8e8e0c2d2e314451c1c41bf28ee2ee4693d42897
+| Author:     Mario Diaz <mariodiar@gmail.com>
+| AuthorDate: Wed Apr 5 17:11:17 2017 -0500
+| Commit:     Mario Diaz <mariodiar@gmail.com>
+| CommitDate: Wed Apr 5 17:11:17 2017 -0500
+| 
+|     Add virtual machine skeleton
+|  
+* commit 4250f04b13b7d8c436690a27678c69fdfc810b71
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Wed Apr 5 12:56:25 2017 -0500
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Wed Apr 5 12:56:25 2017 -0500
+| 
+|     Solved recursion in functions
+|  
+* commit 813c909435199bc54590778c31910e127d75ed9c
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Wed Apr 5 12:47:45 2017 -0500
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Wed Apr 5 12:47:45 2017 -0500
+| 
+|     functions call now detected
+|    
+*   commit 8b93c615d3dd5dbb91db8d7529253b8a777ab43e
+|\  Merge: 114325b aafab98
+| | Author:     Armando Galván <armandocgv@gmail.com>
+| | AuthorDate: Mon Apr 3 09:16:14 2017 -0500
+| | Commit:     Armando Galván <armandocgv@gmail.com>
+| | CommitDate: Mon Apr 3 09:16:14 2017 -0500
+| | 
+| |     Merge branch 'master' of https://github.com/zareekgalvan/Obsidian
+| |   
+| * commit aafab987911431a34dfcdc2624708f3eb6b7bd6b
+| | Author:     Mario Diaz <mariodiar@gmail.com>
+| | AuthorDate: Mon Apr 3 03:56:59 2017 -0500
+| | Commit:     Mario Diaz <mariodiar@gmail.com>
+| | CommitDate: Mon Apr 3 03:56:59 2017 -0500
+| | 
+| |     Add function block to blockly-obsidian
+| |   
+| * commit d73dc475f6c8a0e1598fc7d7486d88d312c67476
+| | Author:     Mario Diaz <mariodiar@gmail.com>
+| | AuthorDate: Mon Apr 3 03:22:08 2017 -0500
+| | Commit:     Mario Diaz <mariodiar@gmail.com>
+| | CommitDate: Mon Apr 3 03:22:08 2017 -0500
+| | 
+| |     Add main block & generator to obsidian-blockly
+| |   
+| * commit fa1767bb67b161f57d590f6aec89f9b1a70b7fdc
+| | Author:     Mario Diaz <mariodiar@gmail.com>
+| | AuthorDate: Mon Apr 3 02:33:33 2017 -0500
+| | Commit:     Mario Diaz <mariodiar@gmail.com>
+| | CommitDate: Mon Apr 3 02:33:33 2017 -0500
+| | 
+| |     Generate JS code with blockly
+| |   
+| * commit d92389525880948061ce61d0951b3628c910a360
+| | Author:     Mario Diaz <mariodiar@gmail.com>
+| | AuthorDate: Sun Apr 2 21:43:56 2017 -0500
+| | Commit:     Mario Diaz <mariodiar@gmail.com>
+| | CommitDate: Sun Apr 2 21:43:56 2017 -0500
+| | 
+| |     Separate files for JS and CSS
+| |   
+| * commit a34038ca2f18e8d035994089f974845b64a08921
+| | Author:     Mario Diaz <mariodiar@gmail.com>
+| | AuthorDate: Sun Apr 2 20:50:53 2017 -0500
+| | Commit:     Mario Diaz <mariodiar@gmail.com>
+| | CommitDate: Sun Apr 2 20:50:53 2017 -0500
+| | 
+| |     Put blockly in dependencies folder, Add blockly demo to frontend folder
+| |   
+| * commit 9c899769dd5e251385d5864a64eed5e2b0035ae1
+| | Author:     Mario Diaz <mariodiar@gmail.com>
+| | AuthorDate: Sun Apr 2 18:56:28 2017 -0500
+| | Commit:     Mario Diaz <mariodiar@gmail.com>
+| | CommitDate: Sun Apr 2 18:56:28 2017 -0500
+| | 
+| |     Add blockly
+| |   
+| * commit 949f8da308a3baa701b4847739e73e3d370e508f
+| | Author:     Mario Diaz <mariodiar@gmail.com>
+| | AuthorDate: Sun Apr 2 18:33:21 2017 -0500
+| | Commit:     Mario Diaz <mariodiar@gmail.com>
+| | CommitDate: Sun Apr 2 18:33:21 2017 -0500
+| | 
+| |     Add DS_Store to gitignore
+| |   
+* | commit 114325bd2f94fa01aff92284f26e89a307c6570b
+| | Author:     Armando Galván <armandocgv@gmail.com>
+| | AuthorDate: Mon Apr 3 09:16:03 2017 -0500
+| | Commit:     Armando Galván <armandocgv@gmail.com>
+| | CommitDate: Mon Apr 3 09:16:03 2017 -0500
+| | 
+| |     Implemented functions definition and calls
+| |   
+* | commit 1557c6e5fbc203525f6ca1b0c386a5f5843184fc
+|/  Author:     Armando Galván <armandocgv@gmail.com>
+|   AuthorDate: Fri Mar 31 19:17:02 2017 -0600
+|   Commit:     Armando Galván <armandocgv@gmail.com>
+|   CommitDate: Fri Mar 31 19:17:02 2017 -0600
+|   
+|       Add Goto main quad
+|       Add fill main quad
+|       Add generation of era quad
+|  
+* commit 34388e7dad477d4536b144aa5e78c0174ce74ae8
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Thu Mar 30 22:19:54 2017 -0600
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Thu Mar 30 22:19:54 2017 -0600
+| 
+|     Add validation for returns required in functions
+|  
+* commit 0b3bba60cb089d88501602b1cec0c8ed25b4c8c6
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Wed Mar 29 18:10:59 2017 -0600
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Wed Mar 29 18:10:59 2017 -0600
+| 
+|     Define semantic rules for function definition
+|     Add generate quad for return
+|     Add generate quad for endproc
+|     Add params_no, vars_no and quad_start in dirProc
+|  
+* commit 34cb15cc7816d2d666040e49fc92133574667770
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Sun Mar 26 14:45:16 2017 -0600
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Sun Mar 26 14:45:16 2017 -0600
+| 
+|     Fourth Delivery:
+|     Correct Semantic Cube
+|     Add generate assignation quadruple
+|     Add generate declaration assign quadruple
+|     Modify Quadruple Class to have a quad number
+|     Add fillQuad in Quadruples Class
+|     Checks arr integrity type
+|     Add gen condition quads
+|     Add cycle quads
+|     Add gen func call quad function (implementation pending)
+|  
+* commit 76285107bc34989ef5e138ed2d8d60c2175a6423
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Thu Mar 23 14:47:18 2017 -0600
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Thu Mar 23 14:47:18 2017 -0600
+| 
+|     Generate Read and Write Quads
+|     Clean Parser file
+|     Generate new funtions in Functions file (result of cleaning Parser file)
+|  
+* commit 0b1c84dd068ec4923284a48e7a3db984cbd15297
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Thu Mar 23 10:44:54 2017 -0600
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Thu Mar 23 10:44:54 2017 -0600
+| 
+|     Add Quadruples class
+|     Generate quad of statements declared, not implemented
+|     Missing while, condition and function quad declaration
+|     Add functions file
+|     Restructure add quad methods
+|     Restructure files again
+|     Add debug mode'
+|  
+* commit 5e0a054da65f95d325b6af4b0c92c3170876b953
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Sun Mar 19 20:13:00 2017 -0600
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Sun Mar 19 20:13:00 2017 -0600
+| 
+|     3rd delivery:
+|     Generate quadruples for exps
+|     Vars and constants types implementation
+|     Reorganization of files
+|     Declarations file created
+|     Corrected test 6
+|     Edit diagrams
+|  
+* commit 75eb1b6c19230bf43990fdb629368143ce7692c4
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Thu Mar 16 16:50:46 2017 -0600
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Thu Mar 16 16:50:46 2017 -0600
+| 
+|     3rd delivery:
+|     Vars and Constants type verification implementation
+|     Add Declartion file
+|     Reorganization of files
+|     Edited RR Diagrams
+|     Test 6 correction
+|  
+* commit 3919fabdb639d733b512da18ad080861525b9cb0
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Tue Mar 14 12:27:25 2017 -0600
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Tue Mar 14 12:27:25 2017 -0600
+| 
+|     Add Structs
+|     Add more operation codes
+|     Add class quadruple and stacks items
+|     Verify test 1-5 (test 6 pending)
+|     Add operators to pilaOptr
+|  
+* commit 7548152f49a93aaac7ab37a573ec96dbb5ec8751
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Fri Mar 10 12:23:44 2017 -0600
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Fri Mar 10 12:23:44 2017 -0600
+| 
+|     Procedure name now in varTable[global]
+|     Add Semantic Cube
+|     Add Operation Codes
+|     Add validation for var types and constants
+|     Modify variable and function names error message
+|  
+* commit cab1392a1d63abe24cb151682e17102e17993078
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Fri Mar 10 09:59:45 2017 -0600
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Fri Mar 10 09:59:45 2017 -0600
+| 
+|     Comments now allowed in code
+|     Parser now tells when a variable is already declared
+|  
+* commit 062a8597f9bb713cf3dc59a110c2a2808b11ae32
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Fri Mar 10 09:19:31 2017 -0600
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Fri Mar 10 09:19:31 2017 -0600
+| 
+|     Add commit history
+|     Modify readme.md
+|  
+* commit 611dd9e5b61ba133834d6c44d5a6ef88b47012e5
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Wed Mar 8 09:13:32 2017 -0600
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Wed Mar 8 09:13:32 2017 -0600
+| 
+|     Add Var Table rules
+|     Add Procedure Directory rules
+|     Add Arguments to Var Table rules
+|  
+* commit 90e6d45f7b749b3c98f8b9490b6666e9378037ff
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Sat Mar 4 23:53:20 2017 -0600
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Sat Mar 4 23:53:20 2017 -0600
+| 
+|     Finish First Sprint
+|     Add missing test for main and expressions
+|  
+* commit 7423861b4dc1025c86cf051bce79e7166d951ee0
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Fri Mar 3 19:15:43 2017 -0600
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Fri Mar 3 19:15:43 2017 -0600
+| 
+|     Correct statement rules
+|     Add more tests
+|     Add main rules
+|     Missing testing full statement combinations and main rules
+|  
+* commit 95c2cd6a159ce49935bfe82cedc6b9d221204537
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Fri Mar 3 11:43:08 2017 -0600
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Fri Mar 3 11:43:08 2017 -0600
+| 
+|     mend
+|  
+* commit ccf206ee1f276d30a12e5a434d6e5d1d6011e62c
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Fri Mar 3 11:41:02 2017 -0600
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Fri Mar 3 11:41:02 2017 -0600
+| 
+|     Changed diagrams code
+|     Added func and statement parser rules
+|     Added func and statement tests
+|  
+* commit 6961bc93dfb390c914eac32169a92a8a11132049
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Fri Mar 3 09:06:57 2017 -0600
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Fri Mar 3 09:06:57 2017 -0600
+| 
+|     mend
+|  
+* commit 2102562e8e43554328a5afa460954d0d6a8037c1
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Thu Mar 2 13:53:34 2017 -0600
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Thu Mar 2 13:53:34 2017 -0600
+| 
+|     mend
+|  
+* commit b5e75a490bcb8e433fa0fdba08480c01f5fb319e
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Thu Mar 2 12:59:30 2017 -0600
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Thu Mar 2 12:59:30 2017 -0600
+| 
+|     mend
+|  
+* commit f83f0dc9a70ab2acc7f3d1f39be7a0e060d5f95e
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Thu Mar 2 12:54:17 2017 -0600
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Thu Mar 2 12:54:17 2017 -0600
+| 
+|     Add test script and modify README.md
+|  
+* commit a0fc01c607357360cf64ca8cd28c20c8cd96946d
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Tue Feb 28 08:44:59 2017 -0600
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Tue Feb 28 08:44:59 2017 -0600
+| 
+|     Minor changes to lex and parser, test changed
+|  
+* commit d1b611e6148294072be612e6d7503cb338706f8f
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Mon Feb 27 18:55:35 2017 -0600
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Mon Feb 27 18:55:35 2017 -0600
+| 
+|     Add regular expresions to use in the generation of diagrams in http://www.bottlecaps.de/rr/ui
+|  
+* commit d7fe314d5059b95a56967bd5111f8dbebe5a63b5
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Mon Feb 27 18:17:14 2017 -0600
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Mon Feb 27 18:17:14 2017 -0600
+| 
+|     Add parser with rules for vars, missing func and main
+|  
+* commit 43a4e15c67b62ecb80fd9f59bf067b817373cc3f
+| Author:     Armando Galván <armandocgv@gmail.com>
+| AuthorDate: Mon Feb 27 17:26:39 2017 -0600
+| Commit:     Armando Galván <armandocgv@gmail.com>
+| CommitDate: Mon Feb 27 17:26:39 2017 -0600
+| 
+|     Add lex file with tokens
+|  
+* commit 5cceb9486ca611875eb1d9dfb57b68c01054bf3e
+  Author:     Mario Diaz <mariodiar@gmail.com>
+  AuthorDate: Mon Feb 27 16:52:48 2017 -0600
+  Commit:     Mario Diaz <mariodiar@gmail.com>
+  CommitDate: Mon Feb 27 16:52:48 2017 -0600
+  
+      Initial commit
