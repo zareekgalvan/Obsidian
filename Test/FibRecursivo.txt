@@ -1,0 +1,21 @@
+int arr[10] = 0;
+
+func int fiboR (int f){
+  int x, y;
+  if (f <= 0) {
+    return 0;
+  }
+  if (f == 1) {
+    return 1;
+  }
+  x = fiboR(f - 1);
+  y = fiboR(f - 2);
+  return (x + y);
+
+}
+
+main {
+  int num=10;
+  write (fiboR(num));
+
+}

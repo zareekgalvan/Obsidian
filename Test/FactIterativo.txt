@@ -1,0 +1,18 @@
+func int factI (int n){
+  int i=2, res=1;
+  if (n == 0 || n == 1) {
+    return 1;
+  } else {
+    while (i <= n) {
+      res = (res * i);
+      i = (i + 1);
+    }
+  }
+  return res;
+
+}
+main {
+  int num=10;
+  write (factI(num));
+
+}

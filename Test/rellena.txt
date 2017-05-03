@@ -1,0 +1,14 @@
+int arr[10] = 0;
+func void rellena (){
+  int i=0;
+  while (i < 10) {
+    arr[i] = (i + 1);
+    write (i);
+    i = (i + 1);
+  }
+
+}
+main {
+  int num=10;
+  rellena();
+}

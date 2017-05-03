@@ -1,4 +1,4 @@
-int arr[10];
+int arr[10] = 0;
 
 func int fiboR(int f)
 {
@@ -13,7 +13,7 @@ func int fiboR(int f)
 	}
 	x = fiboR(f - 1);
 	y = fiboR(f - 2);
-	return x + y;
+	return (x + y);
 }
 
 func int factR(int n)
@@ -75,10 +75,11 @@ func void rellena (int i)
 	while(ix < 10)
 	{
 		arr[ix] = ix + 1;
-		write(ix + 1);
+		write(arr[ix]);
 		ix = ix + 1;
 	}
 }
+
 
 main 
 {
