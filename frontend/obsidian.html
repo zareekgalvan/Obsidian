@@ -20,10 +20,6 @@
 </head>
 <body>
 
-  <!-- <p>
-    <button onclick="showCode()">Obsidian Code</button>
-  </p> -->
-
   <div class="container-fluid" style="height: 100%;">
     <div class="row" style="height: 100%;">
       <div class="col-xs-12 no-padding" style="height: 50%;">
@@ -37,8 +33,10 @@
       <div class="col-xs-2 no-padding" style="height: 100%;">
         <div class="buttons-box">
           <div class="btn-group-vertical" style="width: 100%">
-            <button type="button" class="btn btn-default obsi-button" onclick="changeCode('fibRec')">Fibo. Rec</button>
-            <button type="button" class="btn btn-default obsi-button" onclick="changeCode('fibIter')">Fibo. Iter</button>
+            <button type="button" class="btn btn-default obsi-button" onclick="changeCode('fibRec')">Fibonacci Recursivo</button>
+            <button type="button" class="btn btn-default obsi-button" onclick="changeCode('factRec')">Factorial Recursivo</button>
+            <button type="button" class="btn btn-default obsi-button" onclick="changeCode('fibIter')">Fibonacci Iterativo</button>
+            <button type="button" class="btn btn-default obsi-button" onclick="changeCode('llenarArreglo')">Llenar Arreglo</button>
             <button type="button" class="btn btn-default obsi-button xml-button" onclick="downloadXML()">Download XML</button>
             <button type="button" class="btn btn-default obsi-button run-button" onclick="downloadFile()">Download Text File</button>
             <button type="button" class="btn btn-default obsi-button reset-button" onclick="reset()">Reset</button>
@@ -112,54 +110,181 @@
 <!-- FIBONACCI ITERATIVO -->
 <xml id="fibIter" style="display: none"><block type="array_def" id="%Gwj1CTLxKR`XcUgr$|V" x="30" y="29"><field name="type">int</field><field name="id">arr</field><field name="size">10</field><value name="name"><block type="condition_value" id="IeDAO9-Va0Y8Q5Y$e49@"><field name="value_param">0</field></block></value></block><block type="function" id="dj6Ego=6Q/l|7U@6Thj)" x="186" y="74"><field name="type">int</field><field name="id">fiboI</field><value name="params"><block type="parameters" id="@Z%uBTUJz75r:yjb)OAS"><field name="type">int</field><field name="name_param">n</field><field name="comma"></field></block></value><statement name="statement"><block type="variable_definition" id="I:fhPmjp@YZe}M9=WANE"><field name="TYPE">int</field><field name="id">actual</field><field name="VALUE"></field><value name="extra_vars"><block type="extra_variable" id="]%KIctWt5zne5X0!6`h7"><field name="id">ant1</field><field name="VALUE"></field><value name="extra_vars"><block type="extra_variable" id="Z.DK6^VM3Mit=$GezzMR"><field name="id">ant2</field><field name="VALUE"></field></block></value></block></value><next><block type="variable_definition" id="0:t+l{j{dXAG-RbLd;E!"><field name="TYPE">int</field><field name="id">i</field><field name="VALUE">1</field><next><block type="variable_assign" id="x+UYWwo}eZ]4vYs9$HjJ"><field name="id">ant1</field><value name="value"><block type="math_number" id="G-w@i$0;l(?]l57P5B74"><field name="NUM">0</field></block></value><next><block type="variable_assign" id="#P=lGFQ:@v|g}v+M6YQF"><field name="id">ant2</field><value name="value"><block type="math_number" id="xs4PG|gU2X;_trD%SaqY"><field name="NUM">1</field></block></value><next><block type="controls_if" id="7!C/q6_8PBZNS{+D-4(w"><mutation else="1"></mutation><value name="IF0"><block type="logic_operation" id=")jH?Gsqck:A.1.@!p{IV"><field name="OP">OR</field><value name="A"><block type="logic_compare" id="`R:lv6Q|v{^H`U+G}XiY"><field name="OP">EQ</field><value name="A"><block type="condition_value" id="HTMrS,TmoE{!wOr(np|F"><field name="value_param">n</field></block></value><value name="B"><block type="math_number" id="JswJ+aPcA!3NoP.-U5$~"><field name="NUM">0</field></block></value></block></value><value name="B"><block type="logic_compare" id="Q3]--9KB9(wQd9T9xLj("><field name="OP">EQ</field><value name="A"><block type="condition_value" id="Eg0yl!B.v^wOE-QFdy4j"><field name="value_param">n</field></block></value><value name="B"><block type="math_number" id="y}i{vu?n!bSB;ERH~t_]"><field name="NUM">1</field></block></value></block></value></block></value><statement name="DO0"><block type="variable_assign" id="k=K=)+xSiggxm3[$.MYh"><field name="id">actual</field><value name="value"><block type="math_number" id="|#8DLM:Kb_O`d;Q9,FGT"><field name="NUM">1</field></block></value></block></statement><statement name="ELSE"><block type="controls_whileUntil" id="Su|mZ{|}6H[)]Dcs=dxe"><field name="MODE">WHILE</field><value name="BOOL"><block type="logic_compare" id="KT]xMA]];vMgU,.SPN-#"><field name="OP">LTE</field><value name="A"><block type="condition_value" id="`Pih%exZ,~r~X_1iKuMF"><field name="value_param">i</field></block></value><value name="B"><block type="condition_value" id="vmd]LG$pnVUvf|NMp)KC"><field name="value_param">n</field></block></value></block></value><statement name="DO"><block type="variable_assign" id="!Cv6?urx5]BMZ-Ej[gXT"><field name="id">actual</field><value name="value"><block type="math_arithmetic" id="=f!mK3V%J=)(uC2)Xx.Y"><field name="OP">ADD</field><value name="A"><block type="condition_value" id="5XB1gWFGN9Cv2[X1:)j["><field name="value_param">ant1</field></block></value><value name="B"><block type="condition_value" id="4WVFim$LUiFPQcz]H;3C"><field name="value_param">ant2</field></block></value></block></value><next><block type="variable_assign" id="--OOUW/!zfbAqR-)[*I`"><field name="id">ant2</field><value name="value"><block type="condition_value" id="7BL91py]#5`#NBzo9+%T"><field name="value_param">ant1</field></block></value><next><block type="variable_assign" id="L+e~$WX!Tx3u.EQ3`:)Y"><field name="id">ant1</field><value name="value"><block type="condition_value" id="Mi:+pimA.,`pilok2gv0"><field name="value_param">actual</field></block></value><next><block type="variable_assign" id="WiChZcZDNVfs8kaAUL)u"><field name="id">i</field><value name="value"><block type="math_arithmetic" id="AWL|s3yt2IF.EgYkD[C1"><field name="OP">ADD</field><value name="A"><block type="condition_value" id="0DgLXk5E,^-y:KoI({lB"><field name="value_param">i</field></block></value><value name="B"><block type="condition_value" id="tp_+W9dc~1Q)D|(=l/i_"><field name="value_param">1</field></block></value></block></value></block></next></block></next></block></next></block></statement></block></statement><next><block type="return" id="{4v_mom2h#Lf:p7Fh1yk"><value name="RETURN"><block type="condition_value" id="SrgSp8msU;~sy#b-5|AO"><field name="value_param">actual</field></block></value></block></next></block></next></block></next></block></next></block></next></block></statement></block><block type="main" id="+}inZ%hY`^4mCKT+*U**" x="125" y="529"><statement name="main_method"><block type="variable_definition" id="rBaV/=K:rsH=058*Dk{4"><field name="TYPE">int</field><field name="id">num</field><field name="VALUE">10</field><next><block type="write" id="C)3OcdPT*PXp)H7C|zEY"><field name="id">fiboI(num)</field></block></next></block></statement></block></xml>
 
-  <xml id="startBlocks" style="display: none">
-    <block type="controls_if" inline="false" x="20" y="20">
-      <mutation else="1"></mutation>
-      <value name="IF0">
-        <block type="logic_compare" inline="true">
-          <field name="OP">EQ</field>
-          <value name="A">
-            <block type="math_arithmetic" inline="true">
-              <field name="OP">MULTIPLY</field>
-              <value name="A">
-                <block type="math_number">
-                  <field name="NUM">6</field>
-                </block>
-              </value>
-              <value name="B">
-                <block type="math_number">
-                  <field name="NUM">7</field>
-                </block>
-              </value>
-            </block>
-          </value>
-          <value name="B">
-            <block type="math_number">
-              <field name="NUM">42</field>
-            </block>
-          </value>
-        </block>
-      </value>
-      <statement name="DO0">
-        <block type="text_print" inline="false">
-          <value name="TEXT">
-            <block type="text">
-              <field name="TEXT">Don't panic</field>
-            </block>
-          </value>
-        </block>
-      </statement>
-      <statement name="ELSE">
-        <block type="text_print" inline="false">
-          <value name="TEXT">
-            <block type="text">
-              <field name="TEXT">Panic</field>
-            </block>
-          </value>
-        </block>
-      </statement>
-    </block>
-  </xml>
+<xml id="factRec" style="display: none" xmlns="http://www.w3.org/1999/xhtml">
+  <block type="function" id="]ZG~w2w?W|I@Y,BmplZ@" x="89" y="75">
+    <field name="type">int</field>
+    <field name="id">factR</field>
+    <value name="params">
+      <block type="parameters" id="BPZyhbQOOlOQ|hKClyMc">
+        <field name="type">int</field>
+        <field name="name_param">n</field>
+        <field name="comma"></field>
+      </block>
+    </value>
+    <statement name="statement">
+      <block type="controls_if" id="q8A6aK3Tshbf~;jQpDO/">
+        <value name="IF0">
+          <block type="logic_compare" id=":#@g}c?~pfp=BX3L)sQy">
+            <field name="OP">EQ</field>
+            <value name="A">
+              <block type="condition_value" id="`:9|@J!y!cN2Q,i,}=pB">
+                <field name="value_param">n</field>
+              </block>
+            </value>
+            <value name="B">
+              <block type="math_number" id="AFqFKQ`/Ihr#~5;s4n;n">
+                <field name="NUM">0</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="return" id="9gta!Pv|?Q0v}ZobMAqc">
+            <value name="RETURN">
+              <block type="math_number" id="m|vPr@~~,w7JJJXe!D?,">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <next>
+          <block type="return" id="4c{+GeC),}IZv]yrL)qv">
+            <value name="RETURN">
+              <block type="math_arithmetic" id="O?z5fNT!WkJ#LrXbkHD!">
+                <field name="OP">MULTIPLY</field>
+                <value name="A">
+                  <block type="condition_value" id="aaB1RyPDHIchi%32qFS`">
+                    <field name="value_param">n</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="condition_value" id="IEO=-l{Dfa]0Mx1x?Ez9">
+                    <field name="value_param">factR(n - 1)</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="main" id="kLs+G|]BAH%3FV%Z2J;m" x="97" y="275">
+    <statement name="main_method">
+      <block type="variable_definition" id="EJ`s*bB[#|}a_kll(u$P">
+        <field name="TYPE">int</field>
+        <field name="id">num</field>
+        <field name="VALUE">10</field>
+        <next>
+          <block type="write" id="%.ds%x+JNvEC52Rbhg{u">
+            <field name="id">factR(num)</field>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
+
+<xml id="llenarArreglo" style="display: none" xmlns="http://www.w3.org/1999/xhtml">
+  <block type="array_def" id="%Gwj1CTLxKR`XcUgr$|V" x="30" y="29">
+    <field name="type">int</field>
+    <field name="id">arr</field>
+    <field name="size">10</field>
+    <value name="name">
+      <block type="condition_value" id="IeDAO9-Va0Y8Q5Y$e49@">
+        <field name="value_param">0</field>
+      </block>
+    </value>
+    <next>
+      <block type="function" id="dj6Ego=6Q/l|7U@6Thj)">
+        <field name="type">void</field>
+        <field name="id">rellena</field>
+        <statement name="statement">
+          <block type="variable_definition" id="0:t+l{j{dXAG-RbLd;E!">
+            <field name="TYPE">int</field>
+            <field name="id">i</field>
+            <field name="VALUE">0</field>
+            <next>
+              <block type="controls_whileUntil" id="Su|mZ{|}6H[)]Dcs=dxe">
+                <field name="MODE">WHILE</field>
+                <value name="BOOL">
+                  <block type="logic_compare" id="KT]xMA]];vMgU,.SPN-#">
+                    <field name="OP">LT</field>
+                    <value name="A">
+                      <block type="condition_value" id="`Pih%exZ,~r~X_1iKuMF">
+                        <field name="value_param">i</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="condition_value" id="vmd]LG$pnVUvf|NMp)KC">
+                        <field name="value_param">10</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO">
+                  <block type="array_assign" id="_:tm{h.l2_IYdyKxUxSp">
+                    <field name="id">arr</field>
+                    <field name="pos">value</field>
+                    <value name="name">
+                      <block type="math_arithmetic" id="m!_,XSx8qC?e-~I-InlT">
+                        <field name="OP">ADD</field>
+                        <value name="A">
+                          <block type="condition_value" id="`#SP(YE;HttT#*Xf3:vb">
+                            <field name="value_param">i</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="condition_value" id="LgXu`~k8`YTc*L1!Q7(?">
+                            <field name="value_param">1</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="variable_assign" id="WiChZcZDNVfs8kaAUL)u">
+                        <field name="id">i</field>
+                        <value name="value">
+                          <block type="math_arithmetic" id="AWL|s3yt2IF.EgYkD[C1">
+                            <field name="OP">ADD</field>
+                            <value name="A">
+                              <block type="condition_value" id="0DgLXk5E,^-y:KoI({lB">
+                                <field name="value_param">i</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="condition_value" id="tp_+W9dc~1Q)D|(=l/i_">
+                                <field name="value_param">1</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="write" id="G:aD_gtcw8+p(20Nqr76">
+                            <field name="id">i</field>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <next>
+          <block type="main" id="+}inZ%hY`^4mCKT+*U**">
+            <statement name="main_method">
+              <block type="function_call_no_param" id="=y#ES-BQ^yR*j*-k$0jt">
+                <field name="FUNCNAME">rellena</field>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
 
   <script> 
     $.support.cors = true;
