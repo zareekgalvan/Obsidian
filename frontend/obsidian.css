@@ -1,9 +1,30 @@
+html {
+	height: 100%
+}
+
 body {
 	background-color: #fff;
 	font-family: sans-serif;
+	height: 100%;
 }
 
 h1 {
 	font-weight: normal;
 	font-size: 140%;
+}
+
+.no-padding {
+	padding: 0px;
+}
+
+.preview{
+	height: 50%;
+	width: 100%;
+	background-color: #333333;		
+}
+
+.compiler {
+	height: 50%;
+	width: 100%;
+	background-color: #333333;
 }
