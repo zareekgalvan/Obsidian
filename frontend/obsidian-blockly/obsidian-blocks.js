@@ -173,3 +173,27 @@ Blockly.Blocks['array_access'] = {
     this.setColour(225);
   }
 };
+
+Blockly.Blocks['function_call_params'] = {
+  init: function() {
+    this.appendValueInput("NAME")
+        .setCheck(null)
+        .appendField(new Blockly.FieldTextInput("function Name"), "FUNCNAME");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setTooltip('');
+  }
+};
+
+
+Blockly.Blocks['function_call_no_param'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldTextInput("function Name"), "FUNCNAME");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setTooltip('');
+  }
+};

@@ -1,6 +1,3 @@
-// Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),
-//                            workspace);
-
 var blocklyArea = document.getElementById('blocklyArea');
 var blocklyDiv = document.getElementById('blocklyDiv');
 var workspace = Blockly.inject(blocklyDiv, {media: '../dependencies/blockly/media/', toolbox: document.getElementById('toolbox')});
@@ -42,6 +39,44 @@ function printCode() {
   $("#obsidian-code").text(code).removeClass("prettyprinted");
 
   PR.prettyPrint();
+}
+
+function downloadFile() {
+  Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+  var code = Blockly.JavaScript.workspaceToCode(workspace);
+
+  //Generate a file name
+    var fileName = "obsidian_code";
+
+    //Initialize file format you want csv or xls
+    var uri = 'data:text/csv;charset=utf-8,' + escape(code);
+
+    //this trick will generate a temp <a /> tag
+    var link = document.createElement("a");
+    link.href = uri;
+
+    //set the visibility hidden so it will not effect on your web-layout
+    link.style = "visibility:hidden";
+    link.download = fileName + ".txt";
+
+    //this part will append the anchor tag and remove it after automatic click
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+function changeCode() {
+  Blockly.mainWorkspace.clear();
+  Blockly.Xml.domToWorkspace(document.getElementById('fuckthis'),workspace);
+}
+
+function reset() {
+  Blockly.mainWorkspace.clear();
+}
+
+function downloadXML() {
+  var xml = Blockly.Xml.workspaceToDom(workspace);
+  console.log(xml);
 }
 
 function runCode() {

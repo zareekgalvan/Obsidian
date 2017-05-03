@@ -29,24 +29,25 @@
       <div class="col-xs-12 no-padding" style="height: 50%;">
         <div id="blocklyArea" style="height: 100%; width: 100%;"> </div>
       </div>
-      <div class="col-xs-5 no-padding" style="height: 100%;">
+      <div class="col-xs-10 no-padding" style="height: 100%;">
         <div class="preview">
           <pre id="obsidian-code" class="prettyprint lang-cpp" style="border: none;"></pre>
         </div>
       </div>
-      <div class="col-xs-1 no-padding" style="height: 100%;">
+      <div class="col-xs-2 no-padding" style="height: 100%;">
         <div class="buttons-box">
           <div class="btn-group-vertical" style="width: 100%">
-            <button type="button" class="btn btn-default obsi-button">Fibo. Rec</button>
-            <button type="button" class="btn btn-default obsi-button">Fibo. Iter</button>
-            <button type="button" class="btn btn-default obsi-button run-button" onclick="runCode()">Run</button>
+            <button type="button" class="btn btn-default obsi-button" onclick="changeCode()">Fibo. Rec</button>
+            <button type="button" class="btn btn-default obsi-button" onclick="downloadXML()">Download XML</button>
+            <button type="button" class="btn btn-default obsi-button run-button" onclick="downloadFile()">Download Text File</button>
+            <button type="button" class="btn btn-default obsi-button reset-button" onclick="reset()">Reset</button>
           </div>
         </div>
       </div>
-      <div class="col-xs-6 no-padding" style="height: 100%;">
+      <!-- <div class="col-xs-6 no-padding" style="height: 100%;">
         <div class="compiler">
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 
@@ -71,6 +72,8 @@
     <category name="Functions">
       <block type="main"></block>
       <block type="function"></block>
+      <block type="function_call_params"></block>
+      <block type="function_call_no_param"></block>
       <block type="parameters"></block>
       <block type="return"></block>
     </category>
@@ -95,7 +98,10 @@
     </category>
   </xml>
 
-  <!-- <xml id="startBlocks" style="display: none">
+
+  <xml><block type="array_def" id="%Gwj1CTLxKR`XcUgr$|V" x="30" y="29"><field name="type">int</field><field name="id">arr</field><field name="size">10</field><value name="name"><block type="condition_value" id="IeDAO9-Va0Y8Q5Y$e49@"><field name="value_param">0</field></block></value></block><block type="function" id="dj6Ego=6Q/l|7U@6Thj)" x="27" y="96"><field name="type">int</field><field name="id">fiboR</field><value name="params"><block type="parameters" id="@Z%uBTUJz75r:yjb)OAS"><field name="type">int</field><field name="name_param">f</field><field name="comma"></field></block></value><statement name="statement"><block type="variable_definition" id="I:fhPmjp@YZe}M9=WANE"><field name="TYPE">int</field><field name="id">x</field><field name="VALUE"></field><value name="extra_vars"><block type="extra_variable" id="]%KIctWt5zne5X0!6`h7"><field name="id">y</field><field name="VALUE"></field></block></value><next><block type="controls_if" id="7!C/q6_8PBZNS{+D-4(w"><value name="IF0"><block type="logic_compare" id="%ude$:0Tq:kyf++~qG@~"><field name="OP">LTE</field><value name="A"><block type="condition_value" id="rB[8@VEY=RTY+FE=9(x+"><field name="value_param">f</field></block></value><value name="B"><block type="condition_value" id="go_$Y=Gft^R|Eld*#|d2"><field name="value_param">0</field></block></value></block></value><statement name="DO0"><block type="return" id="Hw$7/y^-_BmM15aZx?Fo"><value name="RETURN"><block type="condition_value" id="Hg{uPxFdT3S%SJ?hAyo="><field name="value_param">0</field></block></value></block></statement></block></next></block></statement></block></xml>
+
+  <xml id="startBlocks" style="display: none">
     <block type="controls_if" inline="false" x="20" y="20">
       <mutation else="1"></mutation>
       <value name="IF0">
@@ -142,7 +148,7 @@
         </block>
       </statement>
     </block>
-  </xml> -->
+  </xml>
 
   <script> 
     $.support.cors = true;

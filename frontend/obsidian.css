@@ -52,11 +52,22 @@ h1 {
 	color: whitesmoke;
 }
 
-.run-button {
+.reset-button {
 	background-color: #923737;
 }
 
-.run-button:hover {
+.reset-button:hover {
 	background-color: #923737;
 	color: white;
 }
+
+.run-button {
+	background-color: #559237;
+}
+
+.run-button:hover {
+	background-color: #559237;
+	color: white;
+}
+
+
