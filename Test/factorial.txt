@@ -80,13 +80,33 @@ func void rellena (int i)
 	}
 }
 
+func int find(int f)
+{
+	int i = 0;
+	int x;
+	while (i < 10)
+	{	
+		x = arr[i];
+		write(x);
+		if (x == f)
+		{
+			return i;
+		}
+		i = i + 1;
+	}
+	return -1;
+}
+
 
 main 
 {
  	int num = 10;
- 	rellena(num);
+ 	//rellena(num);
  	write(fiboR(num));
- 	write(fibI(num));
- 	write(factR(num));
- 	write(factI(num));
+ 	//write(fibI(num));
+ 	//write(factR(num));
+ 	//write(factI(num));
+ 	//write(find(3));
+ 	num = arr[2];
+ 	//write(num);
 }

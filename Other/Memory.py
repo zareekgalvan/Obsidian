@@ -12,7 +12,9 @@ class MemSpace():
 		self.doublesActual = self.doublesBase
 		self.boolsBase = base + (self.long * 2) 
 		self.boolsActual = self.boolsBase
-		self.last = self.boolsBase + self.long - 1
+		self.pointerBase = base + (self.long * 3)
+		self.pointerActual = self.pointerBase
+		self.last = self.pointerBase + self.long - 1
 
 	def getNextInt(self):
 		if self.intsActual + 1 < self.doublesBase:
@@ -33,7 +35,7 @@ class MemSpace():
 			sys.exit()
 
 	def getNextBool(self):
-		if self.boolsActual + 1 <= self.last:
+		if self.boolsActual + 1 <= self.pointerBase:
 			nextBool = self.boolsActual
 			self.boolsActual += 1
 			return nextBool
@@ -41,18 +43,36 @@ class MemSpace():
 			print "Memory exceeded in %s space in bools" % self.name
 			sys.exit()
 
+	def getNextPointer(self):
+		if self.pointerActual + 1 <= self.last:
+			nextPointer = self.pointerActual
+			self.pointerActual += 1
+			return nextPointer
+		else:
+			print "Memory exceeded in %s space in pointer" % self.name
+			sys.exit()
+
+	def isPointer(self, address):
+		if address >= self.pointerBase and address <= self.last:
+			return True
+		else:
+			return False
+
 	def deleteMemSpace(self):
 		self.intsActual = self.intsBase
 		self.doublesActual = self.doublesBase
 		self.boolsActual = self.boolsBase
+		self.pointerActual = self.pointerBase
 
 	def getSpaceMemType(self, address):
 		if address >= self.base and address < self.doublesBase:
 			return 'int'
 		elif address >= self.doublesBase and address < self.boolsBase:
 			return 'double'
-		elif address >= self.boolsBase and address <= self.last:
+		elif address >= self.boolsBase and address <= self.pointerBase:
 			return 'bool'
+		elif address >= self.pointerBase and address <= self.last:
+			return 'pointer'
 
 	def printMemSpace(self):
 		print "Name:", self.name
@@ -63,6 +83,8 @@ class MemSpace():
 		print "Act doubles:", self.doublesActual
 		print "Base bools:", self.boolsBase
 		print "Act bools:", self.boolsActual
+		print "Base pointers:", self.pointerBase
+		print "Act pointers:", self.pointerActual
 		print "Last direction:", self.last, "\n"
 
 
@@ -71,9 +93,9 @@ class Memory():
 	def __init__(self):
 		self.memory = {}
 		self.globalMem = MemSpace('global', 100000, 500)
-		self.variableMem = MemSpace('variables', self.globalMem.long + self.globalMem.boolsBase, 1000)
-		self.temporalMem = MemSpace('temporals', self.variableMem.long + self.variableMem.boolsBase, 1500)
-		self.constantMem = MemSpace('constants', self.temporalMem.long + self.temporalMem.boolsBase, 1000)
+		self.variableMem = MemSpace('variables', self.globalMem.last + 1, 1000)
+		self.temporalMem = MemSpace('temporals', self.variableMem.last + 1, 1500)
+		self.constantMem = MemSpace('constants', self.temporalMem.last + 1, 1000)
 		self.memory['global'] = {}
 		self.memory['variable'] = Stack()
 		self.memory['variable'].push({})
@@ -187,7 +209,6 @@ class Memory():
 
 	def tryGetValFromMem(self, dirr):
 		try:
-
 			dirr = dirr[1:len(dirr)-1]
 			return self.getValFromMem(int(dirr))
 		except TypeError:
@@ -195,11 +216,21 @@ class Memory():
 
 	def verIfDir(self, dirr):
 		try:
-
 			dirr = dirr[1:len(dirr)-1]
 			return int(dirr)
 		except TypeError:
 			return dirr
+
+	def isDir(self, dirr):
+		if dirr in self.memory['global']:
+			return True 
+		elif dirr in self.memory['variable'].peek():
+			return True
+		elif dirr in self.memory['temporal'].peek():
+			return True
+		elif dirr in self.memory['constant']:
+			return True
+		return False
 
 	def isDirComposite(self, dirr):
 		try:
@@ -209,10 +240,10 @@ class Memory():
 			return False
 
 	def printMemory(self):
-		'''self.globalMem.printMemSpace()
+		self.globalMem.printMemSpace()
 		self.variableMem.printMemSpace()
 		self.temporalMem.printMemSpace()
-		self.constantMem.printMemSpace()'''
+		self.constantMem.printMemSpace()
 		for key in self.memory:
 			if type(self.memory[key]) is dict:
 				print key

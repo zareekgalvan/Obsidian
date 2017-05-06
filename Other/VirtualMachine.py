@@ -224,7 +224,7 @@ class VirtualMachine():
 			elif quad.optr == 11:
 				
 				left = mem.getValFromMem(quad.opLeft)
-				right = mem.getValFromMem(quad.opRight)
+				right = mem.getValFromMemBefore(quad.opRight)
 				if left == None:
 					print "11.Variables must contain a value before can be used"
 					print left, quad.number

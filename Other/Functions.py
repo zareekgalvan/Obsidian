@@ -594,7 +594,7 @@ def printAll():
 	pprint.pprint(varTable)
 	print "===\t\tDir Proc\t\t==="
 	pprint.pprint(dirProcedures)
-	'''print "===\t\tPila Operadores\t\t==="
+	print "===\t\tPila Operadores\t\t==="
 	print 'size', pilaOptr.size()
 	pilaOptr.printStack()
 	print "===\t\tPila Operandos\t\t==="
@@ -607,7 +607,7 @@ def printAll():
 	print 'size', pSaltos.size()
 	pSaltos.printStack()
 	print "===\t\tMemoria\t\t==="
-	mem.printMemory()'''
+	mem.printMemory()
 	print "===\t\tCuadruplos\t\t==="
 	print 'size', quadruples.size()
 	quadruples.printQuadruples()

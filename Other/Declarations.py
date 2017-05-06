@@ -42,4 +42,4 @@ lastFuncCallScope = ""
 mem = Memory()
 
 # Debbuging mode
-debug = 'off'
+debug = 'on'
