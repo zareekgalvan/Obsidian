@@ -38,8 +38,10 @@
             <button type="button" class="btn btn-default obsi-button" onclick="changeCode('fibIter')">Fibonacci Iterativo</button>
             <button type="button" class="btn btn-default obsi-button" onclick="changeCode('llenarArreglo')">Llenar Arreglo</button>
             <button type="button" class="btn btn-default obsi-button xml-button" onclick="downloadXML()">Download XML</button>
+            <button type="button" class="btn btn-default obsi-button run-button" onclick="clickXML()">Load XML</button>
             <button type="button" class="btn btn-default obsi-button run-button" onclick="downloadFile()">Download Text File</button>
             <button type="button" class="btn btn-default obsi-button reset-button" onclick="reset()">Reset</button>
+            <input type="file" id="file" name="file" style="display: none;">
           </div>
         </div>
       </div>
@@ -51,6 +53,8 @@
   </div>
 
   <div id="blocklyDiv" style="position: absolute;"></div>
+
+
 
   <xml id="toolbox" style="display: none">
     <category name="Logic">
