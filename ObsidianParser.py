@@ -383,7 +383,7 @@ if __name__ == '__main__':
 				virtualMachine = VirtualMachine()
 				virtualMachine.execute(quadruples.quadruples)
 
-				#mem.printMemory()
+				mem.printMemory()
 				#mem.memory['variable'].printStack()
 				#pprint.pprint(varTable)
 				#print mem.memory['']

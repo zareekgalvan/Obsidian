@@ -115,19 +115,24 @@ def register_space(p):
 	varTable[scope[len(scope)-1]][varid]['dim']['liminf'] = 0
 	varTable[scope[len(scope)-1]][varid]['dim']['limsup'] = p[-1] - 1
 	i = 0
+	mem.delLastAssignedAddress(varTable[scope[len(scope)-1]][varid]['type'])
+	if scope[len(scope)-1] != 'global':
+		varTable[scope[len(scope)-1]][varid]['address'] = mem.availVar('pointer')
+	else:
+		varTable[scope[len(scope)-1]][varid]['address'] = mem.availGlobal('pointer')
 	add = tryRegisterVar(p[-1])
 	mem.addToMem(add['address'], p[-1])
 	while i < varTable[scope[len(scope)-1]][varid]['dim']['limsup']:
 		if scope[len(scope)-1] != 'global':
-			address = mem.availVar(varTable[scope[len(scope)-1]][varid]['type'])
+			address = mem.availVar('pointer')
 		else:
-			address = mem.availGlobal(varTable[scope[len(scope)-1]][varid]['type'])
+			address = mem.availGlobal('pointer')
 		varTable[scope[len(scope)-1]][address] = {}
 		varTable[scope[len(scope)-1]][address]['type'] = varTable[scope[len(scope)-1]][varid]['type']
 		varTable[scope[len(scope)-1]][address]['address'] = address
 		mem.addToMem(address)
-		mem.putValInMem(address, 0)
-		mem.putValInMem(address -1, 0)
+		#mem.putValInMem(address, 0)
+		#mem.putValInMem(address -1, 0)
 		i += 1
 
 # QUAD GENERATION FUNCTIONS
@@ -445,13 +450,13 @@ def gen_ver_quad(p):
 	pTypes.pop()
 	res = getType(typee, info['type'], '+')
 	if res != 'ERROR':
-		nextTemp = mem.availTemp(res)
+		nextTemp = mem.availTemp('pointer')
 		#print nextTemp, "im avail in line %s" % p.lineno(0)
 		varTable[scope[len(scope)-1]][nextTemp] = {}
 		varTable[scope[len(scope)-1]][nextTemp]['address'] = nextTemp
 		varTable[scope[len(scope)-1]][nextTemp]['type'] = res
 		mem.addToMem(nextTemp)
-		nextTemp = '(' + str(nextTemp) + ')'
+		#nextTemp = '(' + str(nextTemp) + ')'
 		quad = Quadruple(Quadruples.cont, getOperationCode('+'), var2['address'], info['address'], nextTemp)
 		quadruples.addQuad(quad)
 		pTypes.push(res)
